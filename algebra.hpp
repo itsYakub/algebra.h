@@ -5,5 +5,6 @@
 # include "vec3.hpp"
 # include "vec4.hpp"
 # include "mat2.hpp"
+# include "mat3.hpp"
 #
 # endif /* _algebra_hpp_ */
