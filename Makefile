@@ -9,6 +9,10 @@ MODULES		= $(MK_ROOT)algebra.h 	\
 			  $(MK_ROOT)algebra.hpp \
 			  $(MK_ROOT)vec2.h 		\
 			  $(MK_ROOT)vec2.hpp 	\
+			  $(MK_ROOT)vec3.h 		\
+			  $(MK_ROOT)vec3.hpp 	\
+			  $(MK_ROOT)vec4.h 		\
+			  $(MK_ROOT)vec4.hpp
 
 # ========
 
