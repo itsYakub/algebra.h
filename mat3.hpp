@@ -4,17 +4,17 @@
 struct mat3 {
     union {
         struct {
-            double m00, m10, m20,
-                   m01, m11, m21,
-                   m02, m12, m22;
+            float m00, m10, m20,
+                  m01, m11, m21,
+                  m02, m12, m22;
         };
 
-        double ptr[3][3];
+        float ptr[3][3];
     };
 
     mat3(void);
 
-    mat3(const double);
+    mat3(const float);
 
     mat3(const mat3 &);
 
@@ -26,9 +26,9 @@ struct mat3 {
 
     mat3 operator * (const mat3 &);
     
-    mat3 operator * (double);
+    mat3 operator * (float);
 
-    double det(void);
+    float det(void);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -38,7 +38,7 @@ mat3::mat3(void) :
     m01(0.0), m11(0.0), m21(0.0),
     m02(0.0), m12(0.0), m22(0.0) { }
 
-mat3::mat3(const double s) :
+mat3::mat3(const float s) :
     m00(1.0 * s), m10(0.0),     m20(0.0),
     m01(0.0),     m11(1.0 * s), m21(0.0),
     m02(0.0),     m12(0.0),     m22(1.0 * s) { }
@@ -111,7 +111,7 @@ mat3 mat3::operator * (const mat3 &other) {
     return (result);
 }
 
-mat3 mat3::operator * (const double f) {
+mat3 mat3::operator * (const float f) {
     mat3 result = mat3();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -127,7 +127,7 @@ mat3 mat3::operator * (const double f) {
     return (result);
 }
 
-double mat3::det(void) {
+float mat3::det(void) {
     return (this->m00 * this->m11 * this->m22 +
             this->m01 * this->m12 * this->m20 +
             this->m02 * this->m10 * this->m21 -

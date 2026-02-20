@@ -4,25 +4,25 @@
 struct vec3 {
     union {
         struct {
-            double x;
-            double y;
-            double z;
+            float x;
+            float y;
+            float z;
         };
 
         struct {
-            double r;
-            double g;
-            double b;
+            float r;
+            float g;
+            float b;
         };
 
-        double ptr[3];
+        float ptr[3];
     };
 
     vec3(void);
 
-    vec3(const double);
+    vec3(const float);
 
-    vec3(const double, const double, const double);
+    vec3(const float, const float, const float);
 
     vec3(const vec3 &);
 
@@ -41,9 +41,9 @@ struct vec3 {
 
 vec3::vec3(void) : x(0.0), y(0.0), z(0.0) { }
 
-vec3::vec3(const double v) : x(v), y(v), z(v) { }
+vec3::vec3(const float v) : x(v), y(v), z(v) { }
 
-vec3::vec3(const double x, const double y, const double z) : x(x), y(y), z(z) { }
+vec3::vec3(const float x, const float y, const float z) : x(x), y(y), z(z) { }
 
 vec3::vec3(const vec3 &other) : x(other.x), y(other.y), z(other.z) { }
 

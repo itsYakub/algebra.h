@@ -5,16 +5,16 @@ typedef union u_vec2 vec2;
 
 union u_vec2 {
     struct {
-        double x;
-        double y;
+        float x;
+        float y;
     };
 
     struct {
-        double w;
-        double h;
+        float w;
+        float h;
     };
 
-    double ptr[2];
+    float ptr[2];
 };
 
 extern vec2 vec2Add(const vec2, const vec2);

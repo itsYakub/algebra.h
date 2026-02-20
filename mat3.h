@@ -5,17 +5,17 @@ typedef union u_mat3 mat3;
 
 union u_mat3 {
     struct {
-        double m00, m10, m20,
-               m01, m11, m21,
-               m02, m12, m22;
+        float m00, m10, m20,
+              m01, m11, m21,
+              m02, m12, m22;
     };
 
-    double ptr[3][3];
+    float ptr[3][3];
 };
 
 extern mat3 mat3Zero(void);
 
-extern mat3 mat3Init(const double);
+extern mat3 mat3Init(const float);
 
 extern mat3 mat3Add(const mat3, const mat3);
 
@@ -23,9 +23,9 @@ extern mat3 mat3Sub(const mat3, const mat3);
 
 extern mat3 mat3Mul(const mat3, const mat3);
 
-extern mat3 mat3Mulf(const mat3, const double);
+extern mat3 mat3Mulf(const mat3, const float);
 
-extern double mat3Det(const mat3);
+extern float mat3Det(const mat3);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
@@ -35,7 +35,7 @@ extern mat3 mat3Zero(void) {
                       0.0, 0.0, 0.0 }} );
 }
 
-extern mat3 mat3Init(const double s) {
+extern mat3 mat3Init(const float s) {
     return ((mat3) {{ 1.0 * s, 0.0,     0.0,
                       0.0,     1.0 * s, 0.0,
                       0.0,     0.0,     1.0 * s }} );

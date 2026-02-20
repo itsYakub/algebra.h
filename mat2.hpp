@@ -4,16 +4,16 @@
 struct mat2 {
     union {
         struct {
-            double m00, m10,
-                   m01, m11;
+            float m00, m10,
+                  m01, m11;
         };
 
-        double ptr[2][2];
+        float ptr[2][2];
     };
 
     mat2(void);
 
-    mat2(const double);
+    mat2(const float);
 
     mat2(const mat2 &);
 
@@ -25,9 +25,9 @@ struct mat2 {
 
     mat2 operator * (const mat2 &);
     
-    mat2 operator * (double);
+    mat2 operator * (float);
 
-    double det(void);
+    float det(void);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -36,7 +36,7 @@ mat2::mat2(void) :
     m00(0.0), m10(0.0),
     m01(0.0), m11(0.0) { }
 
-mat2::mat2(const double s) :
+mat2::mat2(const float s) :
     m00(1.0 * s), m10(0.0),
     m01(0.0),     m11(1.0 * s) { }
 
@@ -79,7 +79,7 @@ mat2 mat2::operator * (const mat2 &other) {
     return (result);
 }
 
-mat2 mat2::operator * (const double f) {
+mat2 mat2::operator * (const float f) {
     mat2 result = mat2();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -88,7 +88,7 @@ mat2 mat2::operator * (const double f) {
     return (result);
 }
 
-double mat2::det(void) {
+float mat2::det(void) {
     return (this->m00 * this->m11 - this->m10 * this->m01);
 }
 

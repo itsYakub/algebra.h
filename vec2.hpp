@@ -4,23 +4,23 @@
 struct vec2 {
     union {
         struct {
-            double x;
-            double y;
+            float x;
+            float y;
         };
 
         struct {
-            double w;
-            double h;
+            float w;
+            float h;
         };
 
-        double ptr[2];
+        float ptr[2];
     };
 
     vec2(void);
 
-    vec2(const double);
+    vec2(const float);
 
-    vec2(const double, const double);
+    vec2(const float, const float);
 
     vec2(const vec2 &);
 
@@ -39,9 +39,9 @@ struct vec2 {
 
 vec2::vec2(void) : x(0.0), y(0.0) { }
 
-vec2::vec2(const double v) : x(v), y(v) { }
+vec2::vec2(const float v) : x(v), y(v) { }
 
-vec2::vec2(const double x, const double y) : x(x), y(y) { }
+vec2::vec2(const float x, const float y) : x(x), y(y) { }
 
 vec2::vec2(const vec2 &other) : x(other.x), y(other.y) { }
 

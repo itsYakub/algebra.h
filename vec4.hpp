@@ -4,27 +4,27 @@
 struct vec4 {
     union {
         struct {
-            double x;
-            double y;
-            double z;
-            double w;
+            float x;
+            float y;
+            float z;
+            float w;
         };
 
         struct {
-            double r;
-            double g;
-            double b;
-            double a;
+            float r;
+            float g;
+            float b;
+            float a;
         };
 
-        double ptr[4];
+        float ptr[4];
     };
 
     vec4(void);
 
-    vec4(const double);
+    vec4(const float);
 
-    vec4(const double, const double, const double, const double);
+    vec4(const float, const float, const float, const float);
 
     vec4(const vec4 &);
 
@@ -43,9 +43,9 @@ struct vec4 {
 
 vec4::vec4(void) : x(0.0), y(0.0), z(0.0), w(0.0) { }
 
-vec4::vec4(const double v) : x(v), y(v), z(v), w(v) { }
+vec4::vec4(const float v) : x(v), y(v), z(v), w(v) { }
 
-vec4::vec4(const double x, const double y, const double z, const double w) : x(x), y(y), z(z), w(w) { }
+vec4::vec4(const float x, const float y, const float z, const float w) : x(x), y(y), z(z), w(w) { }
 
 vec4::vec4(const vec4 &other) : x(other.x), y(other.y), z(other.z), w(other.w) { }
 

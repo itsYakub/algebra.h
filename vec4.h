@@ -5,18 +5,18 @@ typedef union u_vec3 vec3;
 
 union u_vec3 {
     struct {
-        double x;
-        double y;
-        double z;
+        float x;
+        float y;
+        float z;
     };
 
     struct {
-        double r;
-        double g;
-        double b;
+        float r;
+        float g;
+        float b;
     };
 
-    double ptr[3];
+    float ptr[3];
 };
 
 extern vec3 vec3Add(const vec3, const vec3);

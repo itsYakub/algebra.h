@@ -8,18 +8,18 @@
 struct mat4 {
     union {
         struct {
-            double m00, m10, m20, m30,
-                   m01, m11, m21, m31,
-                   m02, m12, m22, m32,
-                   m03, m13, m23, m33;
+            float m00, m10, m20, m30,
+                  m01, m11, m21, m31,
+                  m02, m12, m22, m32,
+                  m03, m13, m23, m33;
         };
 
-        double ptr[4][4];
+        float ptr[4][4];
     };
 
     mat4(void);
 
-    mat4(const double);
+    mat4(const float);
 
     mat4(const mat4 &);
 
@@ -31,15 +31,15 @@ struct mat4 {
 
     mat4 operator * (const mat4 &);
     
-    mat4 operator * (double);
+    mat4 operator * (float);
 
-    double det(void);
+    float det(void);
     
-    static mat4 frust(const double, const double, const double, const double, const double, const double);
+    static mat4 frust(const float, const float, const float, const float, const float, const float);
 
-    static mat4 ortho(const double, const double, const double, const double, const double, const double);
+    static mat4 ortho(const float, const float, const float, const float, const float, const float);
     
-    static mat4 persp(const double, const double, const double, const double);
+    static mat4 persp(const float, const float, const float, const float);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -50,7 +50,7 @@ mat4::mat4(void) :
     m02(0.0), m12(0.0), m22(0.0), m32(0.0),
     m03(0.0), m13(0.0), m23(0.0), m33(0.0) { }
 
-mat4::mat4(const double s) :
+mat4::mat4(const float s) :
     m00(1.0 * s), m10(0.0),     m20(0.0),     m30(0.0),
     m01(0.0),     m11(1.0 * s), m21(0.0),     m31(0.0),
     m02(0.0),     m12(0.0),     m22(1.0 * s), m32(0.0),
@@ -157,7 +157,7 @@ mat4 mat4::operator * (const mat4 &other) {
     return (result);
 }
 
-mat4 mat4::operator * (const double f) {
+mat4 mat4::operator * (const float f) {
     mat4 result = mat4();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -181,8 +181,8 @@ mat4 mat4::operator * (const double f) {
     return (result);
 }
 
-double mat4::det(void) {
-    double result = 0.0;
+float mat4::det(void) {
+    float result = 0.0;
     mat3 mat = mat3();
    
     mat.m00 = this->m11; mat.m01 = this->m12; mat.m02 = this->m13;
@@ -208,7 +208,7 @@ double mat4::det(void) {
     return (result);
 }
 
-mat4 mat4::frust(const double left, const double right, const double top, const double down, const double near, const double far) {
+mat4 mat4::frust(const float left, const float right, const float top, const float down, const float near, const float far) {
     mat4 mat = mat4();
     mat.m00  = (near * 2.0) / (right - left);
     mat.m11  = (near * 2.0) / (top   - down);
@@ -220,7 +220,7 @@ mat4 mat4::frust(const double left, const double right, const double top, const 
     return (mat);
 }
 
-mat4 mat4::ortho(const double left, const double right, const double top, const double down, const double near, const double far) {
+mat4 mat4::ortho(const float left, const float right, const float top, const float down, const float near, const float far) {
     mat4 mat = mat4();
     mat.m00 =  2.0 / (right - left);
     mat.m11 = -2.0 / (top   - down);
@@ -232,9 +232,9 @@ mat4 mat4::ortho(const double left, const double right, const double top, const 
     return (mat);
 }
 
-mat4 mat4::persp(const double fieldOfView, const double aspect, const double near, const double far) {
-    double top   = near * tan(fieldOfView * 0.5);
-    double right = top * aspect;
+mat4 mat4::persp(const float fieldOfView, const float aspect, const float near, const float far) {
+    float top   = near * tan(fieldOfView * 0.5);
+    float right = top * aspect;
     return (mat4::frust(-right, right, top, -top, near, far));
 }
 
