@@ -34,19 +34,19 @@ struct mat3 {
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 mat3::mat3(void) :
-    m00(0.0), m01(0.0), m02(0.0),
-    m10(0.0), m11(0.0), m12(0.0),
-    m20(0.0), m21(0.0), m22(0.0) { }
+    m00(0.0), m10(0.0), m20(0.0),
+    m01(0.0), m11(0.0), m21(0.0),
+    m02(0.0), m12(0.0), m22(0.0) { }
 
 mat3::mat3(const double s) :
-    m00(1.0 * s), m01(0.0),     m02(0.0),
-    m10(0.0),     m11(1.0 * s), m12(0.0),
-    m20(0.0),     m21(0.0),     m22(1.0 * s) { }
+    m00(1.0 * s), m10(0.0),     m20(0.0),
+    m01(0.0),     m11(1.0 * s), m21(0.0),
+    m02(0.0),     m12(0.0),     m22(1.0 * s) { }
 
 mat3::mat3(const mat3 &other) :
-    m00(other.m00), m01(other.m01), m02(other.m02),
-    m10(other.m10), m11(other.m11), m12(other.m12),
-    m20(other.m20), m21(other.m21), m22(other.m22) { }
+    m00(other.m00), m10(other.m01), m20(other.m02),
+    m01(other.m10), m11(other.m11), m21(other.m12),
+    m02(other.m20), m12(other.m21), m22(other.m22) { }
 
 const mat3 &mat3::operator = (const mat3 &other) {
     this->m00 = other.m00; 

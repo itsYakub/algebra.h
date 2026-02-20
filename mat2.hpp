@@ -33,16 +33,16 @@ struct mat2 {
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 mat2::mat2(void) :
-    m00(0.0), m01(0.0),
-    m10(0.0), m11(0.0) { }
+    m00(0.0), m10(0.0),
+    m01(0.0), m11(0.0) { }
 
 mat2::mat2(const double s) :
-    m00(1.0 * s), m01(0.0),
-    m10(0.0),     m11(1.0 * s) { }
+    m00(1.0 * s), m10(0.0),
+    m01(0.0),     m11(1.0 * s) { }
 
 mat2::mat2(const mat2 &other) :
-    m00(other.m00), m01(other.m01),
-    m10(other.m10), m11(other.m11) { }
+    m00(other.m00), m10(other.m01),
+    m01(other.m10), m11(other.m11) { }
 
 const mat2 &mat2::operator = (const mat2 &other) {
     this->m00 = other.m00; 

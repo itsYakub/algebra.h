@@ -45,22 +45,22 @@ struct mat4 {
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 mat4::mat4(void) :
-    m00(0.0), m01(0.0), m02(0.0), m03(0.0),
-    m10(0.0), m11(0.0), m12(0.0), m13(0.0),
-    m20(0.0), m21(0.0), m22(0.0), m23(0.0),
-    m30(0.0), m31(0.0), m32(0.0), m33(0.0) { }
+    m00(0.0), m10(0.0), m20(0.0), m30(0.0),
+    m01(0.0), m11(0.0), m21(0.0), m31(0.0),
+    m02(0.0), m12(0.0), m22(0.0), m32(0.0),
+    m03(0.0), m13(0.0), m23(0.0), m33(0.0) { }
 
 mat4::mat4(const double s) :
-    m00(1.0 * s), m01(0.0),     m02(0.0),     m03(0.0),
-    m10(0.0),     m11(1.0 * s), m12(0.0),     m13(0.0),
-    m20(0.0),     m21(0.0),     m22(1.0 * s), m23(0.0),
-    m30(0.0),     m31(0.0),     m32(0.0),     m33(1.0 * s) { }
+    m00(1.0 * s), m10(0.0),     m20(0.0),     m30(0.0),
+    m01(0.0),     m11(1.0 * s), m21(0.0),     m31(0.0),
+    m02(0.0),     m12(0.0),     m22(1.0 * s), m32(0.0),
+    m03(0.0),     m13(0.0),     m23(0.0),     m33(1.0 * s) { }
 
 mat4::mat4(const mat4 &other) :
-    m00(other.m00), m01(other.m01), m02(other.m02), m03(other.m03),
-    m10(other.m10), m11(other.m11), m12(other.m12), m13(other.m13),
-    m20(other.m20), m21(other.m21), m22(other.m22), m23(other.m23),
-    m30(other.m30), m31(other.m31), m32(other.m32), m33(other.m33) { }
+    m00(other.m00), m10(other.m01), m20(other.m02), m30(other.m03),
+    m01(other.m10), m11(other.m11), m21(other.m12), m31(other.m13),
+    m02(other.m20), m12(other.m21), m22(other.m22), m32(other.m23),
+    m03(other.m30), m13(other.m31), m23(other.m32), m33(other.m33) { }
 
 const mat4 &mat4::operator = (const mat4 &other) {
     this->m00 = other.m00; 
