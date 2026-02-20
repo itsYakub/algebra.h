@@ -221,7 +221,7 @@ mat4 mat4::frust(const double left, const double right, const double top, const 
 }
 
 mat4 mat4::ortho(const double left, const double right, const double top, const double down, const double near, const double far) {
-    mat4 mat = mat4Zero();
+    mat4 mat = mat4();
     mat.m00 =  2.0 / (right - left);
     mat.m11 =  2.0 / (top   - down);
     mat.m22 = -2.0 / (far   - near);
