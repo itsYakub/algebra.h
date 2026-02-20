@@ -97,10 +97,17 @@ mat3 mat3::operator - (const mat3 &other) {
 
 mat3 mat3::operator * (const mat3 &other) {
     mat3 result = mat3();
-    result.m00 = this->m00 * other.m00 + this->m10 * other.m01; 
-    result.m01 = this->m01 * other.m00 + this->m11 * other.m01; 
-    result.m10 = this->m00 * other.m10 + this->m10 * other.m11; 
-    result.m11 = this->m01 * other.m10 + this->m11 * other.m11; 
+    result.m00 = this->m00 * other.m00 + this->m10 * other.m01 + this->m20 * other.m02;
+    result.m01 = this->m01 * other.m00 + this->m11 * other.m01 + this->m21 * other.m02;
+    result.m02 = this->m02 * other.m00 + this->m12 * other.m01 + this->m22 * other.m02;
+
+    result.m10 = this->m00 * other.m10 + this->m10 * other.m11 + this->m20 * other.m12;
+    result.m11 = this->m01 * other.m10 + this->m11 * other.m11 + this->m21 * other.m12;
+    result.m12 = this->m02 * other.m10 + this->m12 * other.m11 + this->m22 * other.m12;
+
+    result.m20 = this->m00 * other.m20 + this->m10 * other.m21 + this->m20 * other.m22;
+    result.m21 = this->m01 * other.m20 + this->m11 * other.m21 + this->m21 * other.m22;
+    result.m22 = this->m02 * other.m20 + this->m12 * other.m21 + this->m22 * other.m22;
     return (result);
 }
 
