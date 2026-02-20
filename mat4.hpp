@@ -1,13 +1,17 @@
 #if !defined (_mat4_hpp_)
 # define _mat4_hpp_ 1
+#
+# include <cmath>
+#
+# include "./mat3.hpp"
 
 struct mat4 {
     union {
         struct {
-            double m00, m01, m02, m03,
-                   m10, m11, m12, m13,
-                   m20, m21, m22, m23,
-                   m30, m31, m32, m33;
+            double m00, m10, m20, m30,
+                   m01, m11, m21, m31,
+                   m02, m12, m22, m32,
+                   m03, m13, m23, m33;
         };
 
         double ptr[4][4];
@@ -30,6 +34,12 @@ struct mat4 {
     mat4 operator * (double);
 
     double det(void);
+    
+    static mat4 frust(const double, const double, const double, const double, const double, const double);
+
+    static mat4 ortho(const double, const double, const double, const double, const double, const double);
+    
+    static mat4 persp(const double, const double, const double, const double);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -196,6 +206,36 @@ double mat4::det(void) {
     result -= m03 * mat.det();
 
     return (result);
+}
+
+mat4 mat4::frust(const double left, const double right, const double top, const double down, const double near, const double far) {
+    mat4 mat = mat4();
+    mat.m00  = (near * 2.0) / (right - left);
+    mat.m11  = (near * 2.0) / (top   - down);
+    mat.m20  = (left + right) / (right - left);
+    mat.m21  = (top + down) / (top - down);
+    mat.m22  = -(far + near) / (far - near);
+    mat.m23  = -1.0;
+    mat.m32  = -(far * near * 2.0) / (far - near);
+    return (mat);
+}
+
+mat4 mat4::ortho(const double left, const double right, const double top, const double down, const double near, const double far) {
+    mat4 mat = mat4();
+    mat.m00  =  2.0 / (right - left);
+    mat.m11  =  2.0 / (top   - down);
+    mat.m22  = -2.0 / (far   - near);
+    mat.m30  = -(left + right) / (right - left);
+    mat.m31  = -(top + down) / (top - down);
+    mat.m32  = -(far + near) / (far - near);
+    mat.m33  =  1.0;
+    return (mat);
+}
+
+mat4 mat4::persp(const double fieldOfView, const double aspect, const double near, const double far) {
+    float top   = near * tan(fieldOfView * 0.5);
+    float right = top * aspect;
+    return (mat4::frust(-right, right, top, -top, near, far));
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */

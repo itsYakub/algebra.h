@@ -5,9 +5,9 @@ typedef union u_mat3 mat3;
 
 union u_mat3 {
     struct {
-        double m00, m01, m02,
-               m10, m11, m12,
-               m20, m21, m22;
+        double m00, m10, m20,
+               m01, m11, m21,
+               m02, m12, m22;
     };
 
     double ptr[3][3];

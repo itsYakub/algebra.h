@@ -1,16 +1,18 @@
 #if !defined (_mat4_h_)
 # define _mat4_h_ 1
 #
+# include <math.h>
+#
 # include "./mat3.h"
 
 typedef union u_mat4 mat4;
 
 union u_mat4 {
     struct {
-        double m00, m01, m02, m03,
-               m10, m11, m12, m13,
-               m20, m21, m22, m23,
-               m30, m31, m32, m33;
+        double m00, m10, m20, m30,
+               m01, m11, m21, m31,
+               m02, m12, m22, m32,
+               m03, m13, m23, m33;
     };
 
     double ptr[4][4];
@@ -29,6 +31,12 @@ extern mat4 mat4Mul(const mat4, const mat4);
 extern mat4 mat4Mulf(const mat4, const double);
 
 extern double mat4Det(const mat4);
+
+extern mat4 mat4Frust(const double, const double, const double, const double, const double, const double);
+
+extern mat4 mat4Ortho(const double, const double, const double, const double, const double, const double);
+
+extern mat4 mat4Persp(const double, const double, const double, const double);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
@@ -109,6 +117,36 @@ extern double mat4Det(const mat4 a) {
                                         a.m30, a.m31, a.m32  }} );
 
     return (result);
+}
+
+extern mat4 mat4Frust(const double left, const double right, const double top, const double down, const double near, const double far) {
+    mat4 mat = mat4Zero();
+    mat.m00  = (near * 2.0) / (right - left);
+    mat.m11  = (near * 2.0) / (top   - down);
+    mat.m20  = (left + right) / (right - left);
+    mat.m21  = (top + down) / (top - down);
+    mat.m22  = -(far + near) / (far - near);
+    mat.m23  = -1.0;
+    mat.m32  = -(far * near * 2.0) / (far - near);
+    return (mat);
+}
+
+extern mat4 mat4Ortho(const double left, const double right, const double top, const double down, const double near, const double far) {
+    mat4 mat = mat4Zero();
+    mat.m00  = 2.0 / (right - left);
+    mat.m11  = 2.0 / (top   - down);
+    mat.m22  = 2.0 / (far   - near);
+    mat.m30  = -(left + right) / (right - left);
+    mat.m31  = -(top + down) / (top - down);
+    mat.m32  = -(far + near) / (far - near);
+    mat.m33  = 1.0;
+    return (mat);
+}
+
+extern mat4 mat4Persp(const double fieldOfView, const double aspect, const double near, const double far) {
+    float top   = near * tan(fieldOfView * 0.5);
+    float right = top * aspect;
+    return (mat4Frustum(-right, right, top, -top, near, far));
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */

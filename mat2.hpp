@@ -4,8 +4,8 @@
 struct mat2 {
     union {
         struct {
-            double m00, m01,
-                   m10, m11;
+            double m00, m10,
+                   m01, m11;
         };
 
         double ptr[2][2];
