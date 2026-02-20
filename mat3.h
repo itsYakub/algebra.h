@@ -54,17 +54,17 @@ extern mat3 mat3Sub(const mat3 a, const mat3 b) {
 }
 
 extern mat3 mat3Mul(const mat3 a, const mat3 b) {
-    return ((mat3) {{ m0.m00 * m1.m00 + m0.m10 * m1.m01 + m0.m20 * m1.m02,
-                      m0.m01 * m1.m00 + m0.m11 * m1.m01 + m0.m21 * m1.m02,
-                      m0.m02 * m1.m00 + m0.m12 * m1.m01 + m0.m22 * m1.m02,
+    return ((mat3) {{ a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02,
+                      a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02,
+                      a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02,
 
-                      m0.m00 * m1.m10 + m0.m10 * m1.m11 + m0.m20 * m1.m12,
-                      m0.m01 * m1.m10 + m0.m11 * m1.m11 + m0.m21 * m1.m12,
-                      m0.m02 * m1.m10 + m0.m12 * m1.m11 + m0.m22 * m1.m12,
+                      a.m00 * b.m10 + a.m10 * b.m11 + a.m20 * b.m12,
+                      a.m01 * b.m10 + a.m11 * b.m11 + a.m21 * b.m12,
+                      a.m02 * b.m10 + a.m12 * b.m11 + a.m22 * b.m12,
 
-                      m0.m00 * m1.m20 + m0.m10 * m1.m21 + m0.m20 * m1.m22,
-                      m0.m01 * m1.m20 + m0.m11 * m1.m21 + m0.m21 * m1.m22,
-                      m0.m02 * m1.m20 + m0.m12 * m1.m21 + m0.m22 * m1.m22 }} );
+                      a.m00 * b.m20 + a.m10 * b.m21 + a.m20 * b.m22,
+                      a.m01 * b.m20 + a.m11 * b.m21 + a.m21 * b.m22,
+                      a.m02 * b.m20 + a.m12 * b.m21 + a.m22 * b.m22 }} );
 }
 
 extern mat3 mat3Mulf(const mat3 a, const float f) {

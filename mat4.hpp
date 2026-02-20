@@ -233,8 +233,8 @@ mat4 mat4::ortho(const double left, const double right, const double top, const 
 }
 
 mat4 mat4::persp(const double fieldOfView, const double aspect, const double near, const double far) {
-    float top   = near * tan(fieldOfView * 0.5);
-    float right = top * aspect;
+    double top   = near * tan(fieldOfView * 0.5);
+    double right = top * aspect;
     return (mat4::frust(-right, right, top, -top, near, far));
 }
 
