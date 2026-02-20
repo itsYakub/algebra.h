@@ -134,7 +134,7 @@ extern mat4 mat4Frust(const float left, const float right, const float top, cons
 extern mat4 mat4Ortho(const float left, const float right, const float top, const float down, const float near, const float far) {
     mat4 mat = mat4Zero();
     mat.m00 =  2.0 / (right - left);
-    mat.m11 = -2.0 / (top   - down);
+    mat.m11 =  2.0 / (top   - down);
     mat.m22 = -2.0 / (far   - near);
     mat.m03 = -(left  + right) / (right - left);
     mat.m13 = -(top   + down)  / (top   - down);
