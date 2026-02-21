@@ -23,17 +23,17 @@ struct mat4 {
 
     mat4(const mat4 &);
 
-    const mat4 &operator = (const mat4 &);
+    mat4 &operator = (const mat4 &);
 
-    mat4 operator + (const mat4 &);
+    mat4 operator + (const mat4 &) const;
 
-    mat4 operator - (const mat4 &);
+    mat4 operator - (const mat4 &) const;
 
-    mat4 operator * (const mat4 &);
+    mat4 operator * (const mat4 &) const;
     
-    mat4 operator * (float);
+    mat4 operator * (float) const;
 
-    float det(void);
+    float det(void) const;
     
     static mat4 frust(const float, const float, const float, const float, const float, const float);
 
@@ -57,12 +57,12 @@ mat4::mat4(const float s) :
     m03(0.0),     m13(0.0),     m23(0.0),     m33(1.0 * s) { }
 
 mat4::mat4(const mat4 &other) :
-    m00(other.m00), m10(other.m01), m20(other.m02), m30(other.m03),
-    m01(other.m10), m11(other.m11), m21(other.m12), m31(other.m13),
-    m02(other.m20), m12(other.m21), m22(other.m22), m32(other.m23),
-    m03(other.m30), m13(other.m31), m23(other.m32), m33(other.m33) { }
+    m00(other.m00), m10(other.m10), m20(other.m20), m30(other.m30),
+    m01(other.m01), m11(other.m11), m21(other.m21), m31(other.m31),
+    m02(other.m02), m12(other.m12), m22(other.m22), m32(other.m32),
+    m03(other.m03), m13(other.m13), m23(other.m23), m33(other.m33) { }
 
-const mat4 &mat4::operator = (const mat4 &other) {
+mat4 &mat4::operator = (const mat4 &other) {
     this->m00 = other.m00; 
     this->m01 = other.m01; 
     this->m02 = other.m02;
@@ -85,7 +85,7 @@ const mat4 &mat4::operator = (const mat4 &other) {
     return (*this);
 }
 
-mat4 mat4::operator + (const mat4 &other) {
+mat4 mat4::operator + (const mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 + other.m00; 
     result.m01 = this->m01 + other.m01; 
@@ -109,7 +109,7 @@ mat4 mat4::operator + (const mat4 &other) {
     return (result);
 }
 
-mat4 mat4::operator - (const mat4 &other) {
+mat4 mat4::operator - (const mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 - other.m00; 
     result.m01 = this->m01 - other.m01; 
@@ -133,7 +133,7 @@ mat4 mat4::operator - (const mat4 &other) {
     return (result);
 }
 
-mat4 mat4::operator * (const mat4 &other) {
+mat4 mat4::operator * (const mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 * other.m00 + this->m10 * other.m01 + this->m20 * other.m02 + this->m30 * other.m03;
     result.m01 = this->m01 * other.m00 + this->m11 * other.m01 + this->m21 * other.m02 + this->m31 * other.m03;
@@ -157,7 +157,7 @@ mat4 mat4::operator * (const mat4 &other) {
     return (result);
 }
 
-mat4 mat4::operator * (const float f) {
+mat4 mat4::operator * (const float f) const {
     mat4 result = mat4();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -181,29 +181,29 @@ mat4 mat4::operator * (const float f) {
     return (result);
 }
 
-float mat4::det(void) {
+float mat4::det(void) const {
     float result = 0.0;
     mat3 mat = mat3();
    
     mat.m00 = this->m11; mat.m01 = this->m12; mat.m02 = this->m13;
     mat.m10 = this->m21; mat.m11 = this->m22; mat.m12 = this->m23;
     mat.m20 = this->m31; mat.m21 = this->m32; mat.m22 = this->m33;
-    result += m00 * mat.det();
+    result += this->m00 * mat.det();
 
     mat.m00 = this->m10; mat.m01 = this->m12; mat.m02 = this->m13;
     mat.m10 = this->m20; mat.m11 = this->m22; mat.m12 = this->m23;
     mat.m20 = this->m30; mat.m21 = this->m32; mat.m22 = this->m33;
-    result -= m01 * mat.det();
+    result -= this->m01 * mat.det();
 
     mat.m00 = this->m10; mat.m01 = this->m11; mat.m02 = this->m13;
     mat.m10 = this->m20; mat.m11 = this->m21; mat.m12 = this->m23;
     mat.m20 = this->m30; mat.m21 = this->m31; mat.m22 = this->m33;
-    result += m02 * mat.det();
+    result += this->m02 * mat.det();
 
     mat.m00 = this->m10; mat.m01 = this->m11; mat.m02 = this->m12;
     mat.m10 = this->m20; mat.m11 = this->m21; mat.m12 = this->m22;
     mat.m20 = this->m30; mat.m21 = this->m31; mat.m22 = this->m32;
-    result -= m03 * mat.det();
+    result -= this->m03 * mat.det();
 
     return (result);
 }
