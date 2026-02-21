@@ -18,17 +18,17 @@ struct mat3 {
 
     mat3(const mat3 &);
 
-    const mat3 &operator = (const mat3 &);
+    mat3 &operator = (const mat3 &);
 
-    mat3 operator + (const mat3 &);
+    mat3 operator + (const mat3 &) const;
 
-    mat3 operator - (const mat3 &);
+    mat3 operator - (const mat3 &) const;
 
-    mat3 operator * (const mat3 &);
+    mat3 operator * (const mat3 &) const;
     
-    mat3 operator * (float);
+    mat3 operator * (float) const;
 
-    float det(void);
+    float det(void) const;
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -44,11 +44,11 @@ mat3::mat3(const float s) :
     m02(0.0),     m12(0.0),     m22(1.0 * s) { }
 
 mat3::mat3(const mat3 &other) :
-    m00(other.m00), m10(other.m01), m20(other.m02),
-    m01(other.m10), m11(other.m11), m21(other.m12),
-    m02(other.m20), m12(other.m21), m22(other.m22) { }
+    m00(other.m00), m10(other.m10), m20(other.m20),
+    m01(other.m01), m11(other.m11), m21(other.m21),
+    m02(other.m02), m12(other.m12), m22(other.m22) { }
 
-const mat3 &mat3::operator = (const mat3 &other) {
+mat3 &mat3::operator = (const mat3 &other) {
     this->m00 = other.m00; 
     this->m01 = other.m01; 
     this->m02 = other.m02;
@@ -63,7 +63,7 @@ const mat3 &mat3::operator = (const mat3 &other) {
     return (*this);
 }
 
-mat3 mat3::operator + (const mat3 &other) {
+mat3 mat3::operator + (const mat3 &other) const {
     mat3 result = mat3();
     result.m00 = this->m00 + other.m00; 
     result.m01 = this->m01 + other.m01; 
@@ -79,7 +79,7 @@ mat3 mat3::operator + (const mat3 &other) {
     return (result);
 }
 
-mat3 mat3::operator - (const mat3 &other) {
+mat3 mat3::operator - (const mat3 &other) const {
     mat3 result = mat3();
     result.m00 = this->m00 - other.m00; 
     result.m01 = this->m01 - other.m01; 
@@ -95,7 +95,7 @@ mat3 mat3::operator - (const mat3 &other) {
     return (result);
 }
 
-mat3 mat3::operator * (const mat3 &other) {
+mat3 mat3::operator * (const mat3 &other) const {
     mat3 result = mat3();
     result.m00 = this->m00 * other.m00 + this->m10 * other.m01 + this->m20 * other.m02;
     result.m01 = this->m01 * other.m00 + this->m11 * other.m01 + this->m21 * other.m02;
@@ -111,7 +111,7 @@ mat3 mat3::operator * (const mat3 &other) {
     return (result);
 }
 
-mat3 mat3::operator * (const float f) {
+mat3 mat3::operator * (const float f) const {
     mat3 result = mat3();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -127,7 +127,7 @@ mat3 mat3::operator * (const float f) {
     return (result);
 }
 
-float mat3::det(void) {
+float mat3::det(void) const {
     return (this->m00 * this->m11 * this->m22 +
             this->m01 * this->m12 * this->m20 +
             this->m02 * this->m10 * this->m21 -

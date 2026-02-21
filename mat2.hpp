@@ -17,17 +17,17 @@ struct mat2 {
 
     mat2(const mat2 &);
 
-    const mat2 &operator = (const mat2 &);
+    mat2 &operator = (const mat2 &);
 
-    mat2 operator + (const mat2 &);
+    mat2 operator + (const mat2 &) const;
 
-    mat2 operator - (const mat2 &);
+    mat2 operator - (const mat2 &) const;
 
-    mat2 operator * (const mat2 &);
+    mat2 operator * (const mat2 &) const;
     
-    mat2 operator * (float);
+    mat2 operator * (float) const;
 
-    float det(void);
+    float det(void) const;
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -41,10 +41,10 @@ mat2::mat2(const float s) :
     m01(0.0),     m11(1.0 * s) { }
 
 mat2::mat2(const mat2 &other) :
-    m00(other.m00), m10(other.m01),
-    m01(other.m10), m11(other.m11) { }
+    m00(other.m00), m10(other.m10),
+    m01(other.m01), m11(other.m11) { }
 
-const mat2 &mat2::operator = (const mat2 &other) {
+mat2 &mat2::operator = (const mat2 &other) {
     this->m00 = other.m00; 
     this->m01 = other.m01; 
     this->m10 = other.m10; 
@@ -52,7 +52,7 @@ const mat2 &mat2::operator = (const mat2 &other) {
     return (*this);
 }
 
-mat2 mat2::operator + (const mat2 &other) {
+mat2 mat2::operator + (const mat2 &other) const {
     mat2 result = mat2();
     result.m00 = this->m00 + other.m00; 
     result.m01 = this->m01 + other.m01; 
@@ -61,7 +61,7 @@ mat2 mat2::operator + (const mat2 &other) {
     return (result);
 }
 
-mat2 mat2::operator - (const mat2 &other) {
+mat2 mat2::operator - (const mat2 &other) const {
     mat2 result = mat2();
     result.m00 = this->m00 - other.m00; 
     result.m01 = this->m01 - other.m01; 
@@ -70,7 +70,7 @@ mat2 mat2::operator - (const mat2 &other) {
     return (result);
 }
 
-mat2 mat2::operator * (const mat2 &other) {
+mat2 mat2::operator * (const mat2 &other) const {
     mat2 result = mat2();
     result.m00 = this->m00 * other.m00 + this->m10 * other.m01; 
     result.m01 = this->m01 * other.m00 + this->m11 * other.m01; 
@@ -79,7 +79,7 @@ mat2 mat2::operator * (const mat2 &other) {
     return (result);
 }
 
-mat2 mat2::operator * (const float f) {
+mat2 mat2::operator * (const float f) const {
     mat2 result = mat2();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -88,7 +88,7 @@ mat2 mat2::operator * (const float f) {
     return (result);
 }
 
-float mat2::det(void) {
+float mat2::det(void) const {
     return (this->m00 * this->m11 - this->m10 * this->m01);
 }
 
