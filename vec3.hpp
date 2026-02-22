@@ -51,6 +51,8 @@ struct vec3 {
     vec3 operator /= (const vec3 &) const;
    
     /* public methods... */
+    
+    float dot(const vec3 &);
 
     float length(void);
 
@@ -114,6 +116,10 @@ vec3 vec3::operator / (const vec3 &other) const {
 
 vec3 vec3::operator /= (const vec3 &other) const {
     return (*this / other);
+}
+
+float vec3::dot(const vec3 &other) {
+    return (this->x * other.x + this->y * other.y + this->z * other.z);
 }
 
 float vec3::length(void) {

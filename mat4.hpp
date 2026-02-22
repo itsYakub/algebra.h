@@ -64,6 +64,8 @@ struct mat4 {
     
     static mat4 rotateZ(const float);
     
+    static mat4 lookAt(vec3 &, vec3 &, vec3 &);
+    
     static mat4 scale(const vec3 &);
     
     static mat4 frust(const float, const float, const float, const float, const float, const float);
@@ -329,6 +331,25 @@ mat4 mat4::rotateZ(const float f) {
     mat.m10  = sinres;
     mat.m01  = -sinres;
     mat.m11  = cosres;
+    return (mat);
+}
+
+mat4 mat4::lookAt(vec3 &eye, vec3 &center, vec3 &up) {
+    vec3 f, u, s;
+    f = center - eye;
+    f.normalize();
+
+    s = up;
+    s.cross(f).normalize(); 
+
+    u = f;
+    u.cross(s);
+
+    mat4 mat = mat4();
+    mat.m00 = s.x, mat.m10 = u.x, mat.m20 = f.x;
+    mat.m01 = s.x, mat.m11 = u.x, mat.m21 = f.x;
+    mat.m02 = s.x, mat.m12 = u.x, mat.m22 = f.x;
+    mat.m03 = -s.dot(eye), mat.m13 = -u.dot(eye), mat.m23 = -f.dot(eye);
     return (mat);
 }
 
