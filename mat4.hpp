@@ -337,12 +337,8 @@ mat4 mat4::rotateZ(const float f) {
 mat4 mat4::lookAt(vec3 &eye, vec3 &center, vec3 &up) {
     vec3 f, u, s;
     f = (center - eye).normalize();
-
-    s = f;
-    s.cross(up).normalize(); 
-
-    u = s;
-    u.cross(f);
+    s = f.cross(up).normalize();
+    u = s.cross(f);
 
     mat4 mat = mat4(1.0);
     mat.m00 = s.x;  mat.m10 = s.y;  mat.m20 = s.z;

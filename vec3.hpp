@@ -56,9 +56,9 @@ struct vec3 {
 
     float length(void);
 
-    vec3 &cross(const vec3 &);
+    vec3 cross(const vec3 &);
 
-    vec3 &normalize(void);
+    vec3 normalize(void);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -126,22 +126,22 @@ float vec3::length(void) {
     return (sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2)));
 }
 
-vec3 &vec3::cross(const vec3 &other) {
+vec3 vec3::cross(const vec3 &other) {
     vec3 vec;
 
     vec.x = this->y * other.z - this->z * other.y;
     vec.y = this->z * other.x - this->x * other.z;
     vec.z = this->x * other.y - this->y * other.x;
-    *this = vec;
-    return (*this);
+    return (vec);
 }
 
-vec3 &vec3::normalize(void) {
-    float len  = this->length();
+vec3 vec3::normalize(void) {
+    vec3 vec = *this;
+    float len = vec.length();
     if (len > 0.0) {
-        *this *= 1.0 / len;
+        vec *= 1.0 / len;
     }
-    return (*this);
+    return (vec);
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */
