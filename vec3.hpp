@@ -130,14 +130,13 @@ vec3 &vec3::cross(const vec3 &other) {
     vec3 vec;
 
     vec.x = this->y * other.z - this->z * other.y;
-    vec.y = this->x * other.z - this->z * other.x;
-    vec.z = this->x * other.y - this->x * other.y;
+    vec.y = this->z * other.x - this->x * other.z;
+    vec.z = this->x * other.y - this->y * other.x;
     *this = vec;
     return (*this);
 }
 
 vec3 &vec3::normalize(void) {
-    *this = vec3();
     float len  = this->length();
     if (len > 0.0) {
         *this *= 1.0 / len;
