@@ -52,11 +52,11 @@ struct mat4 {
    
     /* projection matrices... */
 
-    static mat4 translate(const vec3 &);
+    static mat4 translate(const vec3);
     
-    static mat4 rotate(vec3 &, float);
+    static mat4 rotate(vec3, float);
     
-    static mat4 rotateAt(const vec3 &, vec3 &, float);
+    static mat4 rotateAt(const vec3, vec3, float);
     
     static mat4 rotateX(const float);
     
@@ -64,9 +64,9 @@ struct mat4 {
     
     static mat4 rotateZ(const float);
     
-    static mat4 lookAt(vec3 &, vec3 &, vec3 &);
+    static mat4 lookAt(vec3, vec3, vec3);
     
-    static mat4 scale(const vec3 &);
+    static mat4 scale(const vec3);
     
     static mat4 frust(const float, const float, const float, const float, const float, const float);
     
@@ -257,7 +257,7 @@ float mat4::det(void) const {
     return (result);
 }
 
-mat4 mat4::translate(const vec3 &v) {
+mat4 mat4::translate(const vec3 v) {
     mat4 mat = mat4(1.0);
     mat.m03 = v.x;
     mat.m13 = v.y;
@@ -265,7 +265,7 @@ mat4 mat4::translate(const vec3 &v) {
     return (mat);
 }
 
-mat4 mat4::rotate(vec3 &axis, float angle) {
+mat4 mat4::rotate(vec3 axis, float angle) {
     float c = cos(angle);
     float s = sin(angle);
     float t = 1.0f - c;
@@ -290,7 +290,7 @@ mat4 mat4::rotate(vec3 &axis, float angle) {
     return (mat);
 }
 
-mat4 mat4::rotateAt(const vec3 &pivot, vec3 &axis, float angle) {
+mat4 mat4::rotateAt(const vec3 pivot, vec3 axis, float angle) {
     mat4 mat = mat4(1.0);
          mat *= mat4::translate(pivot);
          mat *= mat4::rotate(axis, angle);
@@ -334,7 +334,7 @@ mat4 mat4::rotateZ(const float f) {
     return (mat);
 }
 
-mat4 mat4::lookAt(vec3 &eye, vec3 &center, vec3 &up) {
+mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
     vec3 f, u, s;
     f = (center - eye).normalize();
     s = f.cross(up).normalize();
@@ -350,7 +350,7 @@ mat4 mat4::lookAt(vec3 &eye, vec3 &center, vec3 &up) {
     return (mat);
 }
 
-mat4 mat4::scale(const vec3 &v) {
+mat4 mat4::scale(const vec3 v) {
     mat4 mat = mat4(1.0);
     mat.m00 = v.x;
     mat.m11 = v.y;
