@@ -3,6 +3,7 @@
 #
 # include <cmath>
 #
+# include "./vec3.hpp"
 # include "./mat3.hpp"
 
 struct mat4 {
@@ -16,27 +17,57 @@ struct mat4 {
 
         float ptr[4][4];
     };
+   
+    /* constructors... */
 
     mat4(void);
 
     mat4(const float);
 
     mat4(const mat4 &);
+   
+    /* operator overloading... */
 
     mat4 &operator = (const mat4 &);
 
     mat4 operator + (const mat4 &) const;
+    
+    mat4 operator += (const mat4 &) const;
 
     mat4 operator - (const mat4 &) const;
+    
+    mat4 operator -= (const mat4 &) const;
 
     mat4 operator * (const mat4 &) const;
     
+    mat4 operator *= (const mat4 &) const;
+    
     mat4 operator * (float) const;
+    
+    mat4 operator *= (float) const;
+   
+    /* public methods... */
 
     float det(void) const;
+   
+    /* projection matrices... */
+
+    static mat4 translate(const vec3 &);
+    
+    static mat4 rotate(vec3 &, float);
+    
+    static mat4 rotateAt(const vec3 &, vec3 &, float);
+    
+    static mat4 rotateX(const float);
+    
+    static mat4 rotateY(const float);
+    
+    static mat4 rotateZ(const float);
+    
+    static mat4 scale(const vec3 &);
     
     static mat4 frust(const float, const float, const float, const float, const float, const float);
-
+    
     static mat4 ortho(const float, const float, const float, const float, const float, const float);
     
     static mat4 persp(const float, const float, const float, const float);
@@ -109,6 +140,10 @@ mat4 mat4::operator + (const mat4 &other) const {
     return (result);
 }
 
+mat4 mat4::operator += (const mat4 &other) const {
+    return (*this + other);
+}
+
 mat4 mat4::operator - (const mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 - other.m00; 
@@ -131,6 +166,10 @@ mat4 mat4::operator - (const mat4 &other) const {
     result.m32 = this->m32 - other.m32; 
     result.m33 = this->m33 - other.m33; 
     return (result);
+}
+
+mat4 mat4::operator -= (const mat4 &other) const {
+    return (*this - other);
 }
 
 mat4 mat4::operator * (const mat4 &other) const {
@@ -157,6 +196,10 @@ mat4 mat4::operator * (const mat4 &other) const {
     return (result);
 }
 
+mat4 mat4::operator *= (const mat4 &other) const {
+    return (*this * other);
+}
+
 mat4 mat4::operator * (const float f) const {
     mat4 result = mat4();
     result.m00 = this->m00 * f; 
@@ -179,6 +222,10 @@ mat4 mat4::operator * (const float f) const {
     result.m32 = this->m32 * f; 
     result.m33 = this->m33 * f; 
     return (result);
+}
+
+mat4 mat4::operator *= (const float f) const {
+    return (*this * f);
 }
 
 float mat4::det(void) const {
@@ -206,6 +253,91 @@ float mat4::det(void) const {
     result -= this->m03 * mat.det();
 
     return (result);
+}
+
+mat4 mat4::translate(const vec3 &v) {
+    mat4 mat = mat4(1.0);
+    mat.m03 = v.x;
+    mat.m13 = v.y;
+    mat.m23 = v.z;
+    return (mat);
+}
+
+mat4 mat4::rotate(vec3 &axis, float angle) {
+    float c = cos(angle);
+    float s = sin(angle);
+    float t = 1.0f - c;
+
+    vec3 axisn = axis.normalize();
+    float x = axisn.x,
+          y = axisn.y,
+          z = axisn.z;
+
+    mat4 mat = mat4(1.0);
+    mat.m00 = t*x*x + c;
+    mat.m01 = t*y*x + s*z;
+    mat.m02 = t*z*x - s*y;
+
+    mat.m10 = t*x*y - s*z;
+    mat.m11 = t*y*y + c;
+    mat.m12 = t*z*y + s*x;
+
+    mat.m20 = t*x*z + s*y;
+    mat.m21 = t*y*z - s*x;
+    mat.m22 = t*z*z + c;
+    return (mat);
+}
+
+mat4 mat4::rotateAt(const vec3 &pivot, vec3 &axis, float angle) {
+    mat4 mat = mat4(1.0);
+         mat *= mat4::translate(pivot);
+         mat *= mat4::rotate(axis, angle);
+         mat *= mat4::translate(pivot * -1.0);
+    return (mat);
+}
+
+mat4 mat4::rotateX(const float f) {
+    float sinres = sin(f),
+          cosres = cos(f);
+
+    mat4 mat = mat4(1.0);
+    mat.m11  = cosres;
+    mat.m21  = sinres;
+    mat.m12  = -sinres;
+    mat.m22  = cosres;
+    return (mat);
+}
+
+mat4 mat4::rotateY(const float f) {
+    float sinres = sin(f),
+          cosres = cos(f);
+
+    mat4 mat = mat4(1.0);
+    mat.m00  = cosres;
+    mat.m20  = -sinres;
+    mat.m02  = sinres;
+    mat.m22  = cosres;
+    return (mat);
+}
+
+mat4 mat4::rotateZ(const float f) {
+    float sinres = sin(f),
+          cosres = cos(f);
+
+    mat4 mat = mat4(1.0);
+    mat.m00  = cosres;
+    mat.m10  = sinres;
+    mat.m01  = -sinres;
+    mat.m11  = cosres;
+    return (mat);
+}
+
+mat4 mat4::scale(const vec3 &v) {
+    mat4 mat = mat4(1.0);
+    mat.m00 = v.x;
+    mat.m11 = v.y;
+    mat.m22 = v.z;
+    return (mat);
 }
 
 mat4 mat4::frust(const float left, const float right, const float top, const float down, const float near, const float far) {
