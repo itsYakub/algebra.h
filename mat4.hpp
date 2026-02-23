@@ -22,7 +22,7 @@ struct mat4 {
 
     mat4(void);
 
-    mat4(const float);
+    mat4(float);
 
     mat4(const mat4 &);
    
@@ -50,29 +50,29 @@ struct mat4 {
 
     float det(void) const;
    
-    /* projection matrices... */
+    /* static methods... */
 
-    static mat4 translate(const vec3);
+    static mat4 translate(vec3);
     
     static mat4 rotate(vec3, float);
     
-    static mat4 rotateAt(const vec3, vec3, float);
+    static mat4 rotateAt(vec3, vec3, float);
     
-    static mat4 rotateX(const float);
+    static mat4 rotateX(float);
     
-    static mat4 rotateY(const float);
+    static mat4 rotateY(float);
     
-    static mat4 rotateZ(const float);
+    static mat4 rotateZ(float);
     
     static mat4 lookAt(vec3, vec3, vec3);
     
-    static mat4 scale(const vec3);
+    static mat4 scale(vec3);
     
-    static mat4 frust(const float, const float, const float, const float, const float, const float);
+    static mat4 frust(float, float, float, float, float, float);
     
-    static mat4 ortho(const float, const float, const float, const float, const float, const float);
+    static mat4 ortho(float, float, float, float, float, float);
     
-    static mat4 persp(const float, const float, const float, const float);
+    static mat4 persp(float, float, float, float);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -83,7 +83,7 @@ mat4::mat4(void) :
     m02(0.0), m12(0.0), m22(0.0), m32(0.0),
     m03(0.0), m13(0.0), m23(0.0), m33(0.0) { }
 
-mat4::mat4(const float s) :
+mat4::mat4(float s) :
     m00(1.0 * s), m10(0.0),     m20(0.0),     m30(0.0),
     m01(0.0),     m11(1.0 * s), m21(0.0),     m31(0.0),
     m02(0.0),     m12(0.0),     m22(1.0 * s), m32(0.0),
@@ -202,7 +202,7 @@ mat4 mat4::operator *= (const mat4 &other) const {
     return (*this * other);
 }
 
-mat4 mat4::operator * (const float f) const {
+mat4 mat4::operator * (float f) const {
     mat4 result = mat4();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -226,7 +226,7 @@ mat4 mat4::operator * (const float f) const {
     return (result);
 }
 
-mat4 mat4::operator *= (const float f) const {
+mat4 mat4::operator *= (float f) const {
     return (*this * f);
 }
 
@@ -257,7 +257,7 @@ float mat4::det(void) const {
     return (result);
 }
 
-mat4 mat4::translate(const vec3 v) {
+mat4 mat4::translate(vec3 v) {
     mat4 mat = mat4(1.0);
     mat.m03 = v.x;
     mat.m13 = v.y;
@@ -290,7 +290,7 @@ mat4 mat4::rotate(vec3 axis, float angle) {
     return (mat);
 }
 
-mat4 mat4::rotateAt(const vec3 pivot, vec3 axis, float angle) {
+mat4 mat4::rotateAt(vec3 pivot, vec3 axis, float angle) {
     mat4 mat = mat4(1.0);
          mat *= mat4::translate(pivot);
          mat *= mat4::rotate(axis, angle);
@@ -298,7 +298,7 @@ mat4 mat4::rotateAt(const vec3 pivot, vec3 axis, float angle) {
     return (mat);
 }
 
-mat4 mat4::rotateX(const float f) {
+mat4 mat4::rotateX(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
@@ -310,7 +310,7 @@ mat4 mat4::rotateX(const float f) {
     return (mat);
 }
 
-mat4 mat4::rotateY(const float f) {
+mat4 mat4::rotateY(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
@@ -322,7 +322,7 @@ mat4 mat4::rotateY(const float f) {
     return (mat);
 }
 
-mat4 mat4::rotateZ(const float f) {
+mat4 mat4::rotateZ(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
@@ -350,7 +350,7 @@ mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
     return (mat);
 }
 
-mat4 mat4::scale(const vec3 v) {
+mat4 mat4::scale(vec3 v) {
     mat4 mat = mat4(1.0);
     mat.m00 = v.x;
     mat.m11 = v.y;
@@ -358,7 +358,7 @@ mat4 mat4::scale(const vec3 v) {
     return (mat);
 }
 
-mat4 mat4::frust(const float left, const float right, const float top, const float down, const float near, const float far) {
+mat4 mat4::frust(float left, float right, float top, float down, float near, float far) {
     mat4 mat = mat4();
     mat.m00  = (near * 2.0) / (right - left);
     mat.m11  = (near * 2.0) / (top   - down);
@@ -370,7 +370,7 @@ mat4 mat4::frust(const float left, const float right, const float top, const flo
     return (mat);
 }
 
-mat4 mat4::ortho(const float left, const float right, const float top, const float down, const float near, const float far) {
+mat4 mat4::ortho(float left, float right, float top, float down, float near, float far) {
     mat4 mat = mat4();
     mat.m00 =  2.0 / (right - left);
     mat.m11 =  2.0 / (top   - down);
@@ -382,7 +382,7 @@ mat4 mat4::ortho(const float left, const float right, const float top, const flo
     return (mat);
 }
 
-mat4 mat4::persp(const float fieldOfView, const float aspect, const float near, const float far) {
+mat4 mat4::persp(float fieldOfView, float aspect, float near, float far) {
     float top   = near * tan(fieldOfView * 0.5);
     float right = top * aspect;
     return (mat4::frust(-right, right, top, -top, near, far));

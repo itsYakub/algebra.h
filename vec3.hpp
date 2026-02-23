@@ -24,9 +24,9 @@ struct vec3 {
 
     vec3(void);
 
-    vec3(const float);
+    vec3(float);
 
-    vec3(const float, const float, const float);
+    vec3(float, float, float);
 
     vec3(const vec3 &);
    
@@ -52,11 +52,11 @@ struct vec3 {
    
     /* public methods... */
     
-    float dot(const vec3 &);
+    float dot(vec3);
 
     float length(void);
 
-    vec3 cross(const vec3 &);
+    vec3 cross(vec3);
 
     vec3 normalize(void);
 };
@@ -65,9 +65,9 @@ struct vec3 {
 
 vec3::vec3(void) : x(0.0), y(0.0), z(0.0) { }
 
-vec3::vec3(const float v) : x(v), y(v), z(v) { }
+vec3::vec3(float v) : x(v), y(v), z(v) { }
 
-vec3::vec3(const float x, const float y, const float z) : x(x), y(y), z(z) { }
+vec3::vec3(float x, float y, float z) : x(x), y(y), z(z) { }
 
 vec3::vec3(const vec3 &other) : x(other.x), y(other.y), z(other.z) { }
 
@@ -118,7 +118,7 @@ vec3 vec3::operator /= (const vec3 &other) const {
     return (*this / other);
 }
 
-float vec3::dot(const vec3 &other) {
+float vec3::dot(vec3 other) {
     return (this->x * other.x + this->y * other.y + this->z * other.z);
 }
 
@@ -126,7 +126,7 @@ float vec3::length(void) {
     return (sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2)));
 }
 
-vec3 vec3::cross(const vec3 &other) {
+vec3 vec3::cross(vec3 other) {
     vec3 vec;
 
     vec.x = this->y * other.z - this->z * other.y;

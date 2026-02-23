@@ -15,33 +15,45 @@ struct vec2 {
 
         float ptr[2];
     };
+   
+    /* constructors... */
 
     vec2(void);
 
-    vec2(const float);
+    vec2(float);
 
-    vec2(const float, const float);
+    vec2(float, float);
 
     vec2(const vec2 &);
+   
+    /* operator overloading... */
 
     vec2 &operator = (const vec2 &);
 
     vec2 operator + (const vec2 &) const;
+    
+    vec2 operator += (const vec2 &) const;
 
     vec2 operator - (const vec2 &) const;
+    
+    vec2 operator -= (const vec2 &) const;
 
     vec2 operator * (const vec2 &) const;
+    
+    vec2 operator *= (const vec2 &) const;
 
     vec2 operator / (const vec2 &) const;
+    
+    vec2 operator /= (const vec2 &) const;
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 vec2::vec2(void) : x(0.0), y(0.0) { }
 
-vec2::vec2(const float v) : x(v), y(v) { }
+vec2::vec2(float v) : x(v), y(v) { }
 
-vec2::vec2(const float x, const float y) : x(x), y(y) { }
+vec2::vec2(float x, float y) : x(x), y(y) { }
 
 vec2::vec2(const vec2 &other) : x(other.x), y(other.y) { }
 
@@ -56,9 +68,17 @@ vec2 vec2::operator + (const vec2 &other) const {
                  this->y + other.y));
 }
 
+vec2 vec2::operator += (const vec2 &other) const {
+    return (*this + other);
+}
+
 vec2 vec2::operator - (const vec2 &other) const {
     return (vec2(this->x - other.x,
                  this->y - other.y));
+}
+
+vec2 vec2::operator -= (const vec2 &other) const {
+    return (*this - other);
 }
 
 vec2 vec2::operator * (const vec2 &other) const {
@@ -66,9 +86,17 @@ vec2 vec2::operator * (const vec2 &other) const {
                  this->y * other.y));
 }
 
+vec2 vec2::operator *= (const vec2 &other) const {
+    return (*this * other);
+}
+
 vec2 vec2::operator / (const vec2 &other) const {
     return (vec2(other.x > 0.0 ? this->x / other.x : 0.0,
                  other.y > 0.0 ? this->y / other.y : 0.0));
+}
+
+vec2 vec2::operator /= (const vec2 &other) const {
+    return (*this / other);
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */

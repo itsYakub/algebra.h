@@ -10,22 +10,34 @@ struct mat2 {
 
         float ptr[2][2];
     };
+   
+    /* constructors... */
 
     mat2(void);
 
-    mat2(const float);
+    mat2(float);
 
     mat2(const mat2 &);
+   
+    /* operator overloading... */
 
     mat2 &operator = (const mat2 &);
 
     mat2 operator + (const mat2 &) const;
+    
+    mat2 operator += (const mat2 &) const;
 
     mat2 operator - (const mat2 &) const;
+    
+    mat2 operator -= (const mat2 &) const;
 
     mat2 operator * (const mat2 &) const;
     
+    mat2 operator *= (const mat2 &) const;
+    
     mat2 operator * (float) const;
+    
+    mat2 operator *= (float) const;
 
     float det(void) const;
 };
@@ -36,7 +48,7 @@ mat2::mat2(void) :
     m00(0.0), m10(0.0),
     m01(0.0), m11(0.0) { }
 
-mat2::mat2(const float s) :
+mat2::mat2(float s) :
     m00(1.0 * s), m10(0.0),
     m01(0.0),     m11(1.0 * s) { }
 
@@ -61,6 +73,10 @@ mat2 mat2::operator + (const mat2 &other) const {
     return (result);
 }
 
+mat2 mat2::operator += (const mat2 &other) const {
+    return (*this + other);
+}
+
 mat2 mat2::operator - (const mat2 &other) const {
     mat2 result = mat2();
     result.m00 = this->m00 - other.m00; 
@@ -68,6 +84,10 @@ mat2 mat2::operator - (const mat2 &other) const {
     result.m10 = this->m10 - other.m10; 
     result.m11 = this->m11 - other.m11; 
     return (result);
+}
+
+mat2 mat2::operator -= (const mat2 &other) const {
+    return (*this - other);
 }
 
 mat2 mat2::operator * (const mat2 &other) const {
@@ -79,13 +99,21 @@ mat2 mat2::operator * (const mat2 &other) const {
     return (result);
 }
 
-mat2 mat2::operator * (const float f) const {
+mat2 mat2::operator *= (const mat2 &other) const {
+    return (*this * other);
+}
+
+mat2 mat2::operator * (float f) const {
     mat2 result = mat2();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
     result.m10 = this->m10 * f; 
     result.m11 = this->m11 * f; 
     return (result);
+}
+
+mat2 mat2::operator *= (float f) const {
+    return (*this * f);
 }
 
 float mat2::det(void) const {

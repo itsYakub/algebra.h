@@ -11,22 +11,36 @@ struct mat3 {
 
         float ptr[3][3];
     };
+   
+    /* constructors... */
 
     mat3(void);
 
-    mat3(const float);
+    mat3(float);
 
     mat3(const mat3 &);
+   
+    /* operator overloading... */
 
     mat3 &operator = (const mat3 &);
 
     mat3 operator + (const mat3 &) const;
+    
+    mat3 operator += (const mat3 &) const;
 
     mat3 operator - (const mat3 &) const;
+    
+    mat3 operator -= (const mat3 &) const;
 
     mat3 operator * (const mat3 &) const;
     
+    mat3 operator *= (const mat3 &) const;
+    
     mat3 operator * (float) const;
+    
+    mat3 operator *= (float) const;
+   
+    /* public methods... */
 
     float det(void) const;
 };
@@ -38,7 +52,7 @@ mat3::mat3(void) :
     m01(0.0), m11(0.0), m21(0.0),
     m02(0.0), m12(0.0), m22(0.0) { }
 
-mat3::mat3(const float s) :
+mat3::mat3(float s) :
     m00(1.0 * s), m10(0.0),     m20(0.0),
     m01(0.0),     m11(1.0 * s), m21(0.0),
     m02(0.0),     m12(0.0),     m22(1.0 * s) { }
@@ -79,6 +93,10 @@ mat3 mat3::operator + (const mat3 &other) const {
     return (result);
 }
 
+mat3 mat3::operator += (const mat3 &other) const {
+    return (*this + other);
+}
+
 mat3 mat3::operator - (const mat3 &other) const {
     mat3 result = mat3();
     result.m00 = this->m00 - other.m00; 
@@ -93,6 +111,10 @@ mat3 mat3::operator - (const mat3 &other) const {
     result.m21 = this->m21 - other.m21; 
     result.m22 = this->m22 - other.m22; 
     return (result);
+}
+
+mat3 mat3::operator -= (const mat3 &other) const {
+    return (*this - other);
 }
 
 mat3 mat3::operator * (const mat3 &other) const {
@@ -111,7 +133,11 @@ mat3 mat3::operator * (const mat3 &other) const {
     return (result);
 }
 
-mat3 mat3::operator * (const float f) const {
+mat3 mat3::operator *= (const mat3 &other) const {
+    return (*this * other);
+}
+
+mat3 mat3::operator * (float f) const {
     mat3 result = mat3();
     result.m00 = this->m00 * f; 
     result.m01 = this->m01 * f; 
@@ -125,6 +151,10 @@ mat3 mat3::operator * (const float f) const {
     result.m21 = this->m21 * f; 
     result.m22 = this->m22 * f; 
     return (result);
+}
+
+mat3 mat3::operator *= (float f) const {
+    return (*this * f);
 }
 
 float mat3::det(void) const {
