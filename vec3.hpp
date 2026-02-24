@@ -85,7 +85,8 @@ vec3 vec3::operator + (const vec3 &other) const {
 }
 
 vec3 vec3::operator += (const vec3 &other) const {
-    return (*this + other);
+    *this = *this + other;
+    return (*this);
 }
 
 vec3 vec3::operator - (const vec3 &other) const {
@@ -95,7 +96,8 @@ vec3 vec3::operator - (const vec3 &other) const {
 }
 
 vec3 vec3::operator -= (const vec3 &other) const {
-    return (*this - other);
+    *this = *this - other;
+    return (*this);
 }
 
 vec3 vec3::operator * (const vec3 &other) const {
@@ -105,7 +107,8 @@ vec3 vec3::operator * (const vec3 &other) const {
 }
 
 vec3 vec3::operator *= (const vec3 &other) const {
-    return (*this * other);
+    *this = *this * other;
+    return (*this);
 }
 
 vec3 vec3::operator / (const vec3 &other) const {
@@ -115,7 +118,8 @@ vec3 vec3::operator / (const vec3 &other) const {
 }
 
 vec3 vec3::operator /= (const vec3 &other) const {
-    return (*this / other);
+    *this = *this / other;
+    return (*this);
 }
 
 float vec3::dot(vec3 other) {
