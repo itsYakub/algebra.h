@@ -34,21 +34,37 @@ struct vec3 {
 
     vec3 &operator = (const vec3 &);
 
-    vec3 operator + (const vec3 &) const;
+    vec3 operator + (vec3 &) const;
     
-    vec3 operator += (const vec3 &) const;
+    vec3 operator - (vec3 &) const;
+    
+    vec3 operator * (vec3 &) const;
+    
+    vec3 operator / (vec3 &) const;
+    
+    vec3 operator + (float) const;
+    
+    vec3 operator - (float) const;
+    
+    vec3 operator * (float) const;
+    
+    vec3 operator / (float) const;
+    
+    vec3 &operator += (vec3 &);
 
-    vec3 operator - (const vec3 &) const;
-    
-    vec3 operator -= (const vec3 &) const;
+    vec3 &operator -= (vec3 &);
 
-    vec3 operator * (const vec3 &) const;
-    
-    vec3 operator *= (const vec3 &) const;
+    vec3 &operator *= (vec3 &);
 
-    vec3 operator / (const vec3 &) const;
+    vec3 &operator /= (vec3 &);
     
-    vec3 operator /= (const vec3 &) const;
+    vec3 &operator += (float);
+
+    vec3 &operator -= (float);
+
+    vec3 &operator *= (float);
+
+    vec3 &operator /= (float);
    
     /* public methods... */
     
@@ -78,47 +94,107 @@ vec3 &vec3::operator = (const vec3 &other) {
     return (*this);
 }
 
-vec3 vec3::operator + (const vec3 &other) const {
+vec3 vec3::operator + (vec3 &other) const {
     return (vec3(this->x + other.x,
                  this->y + other.y,
                  this->z + other.z));
 }
 
-vec3 vec3::operator += (const vec3 &other) const {
-    *this = *this + other;
-    return (*this);
-}
-
-vec3 vec3::operator - (const vec3 &other) const {
+vec3 vec3::operator - (vec3 &other) const {
     return (vec3(this->x - other.x,
                  this->y - other.y,
                  this->z - other.z));
 }
 
-vec3 vec3::operator -= (const vec3 &other) const {
-    *this = *this - other;
-    return (*this);
-}
-
-vec3 vec3::operator * (const vec3 &other) const {
+vec3 vec3::operator * (vec3 &other) const {
     return (vec3(this->x * other.x,
                  this->y * other.y,
                  this->z * other.z));
 }
 
-vec3 vec3::operator *= (const vec3 &other) const {
-    *this = *this * other;
-    return (*this);
-}
-
-vec3 vec3::operator / (const vec3 &other) const {
+vec3 vec3::operator / (vec3 &other) const {
     return (vec3(other.x > 0.0 ? this->x / other.x : 0.0,
                  other.y > 0.0 ? this->y / other.y : 0.0,
                  other.z > 0.0 ? this->z / other.z : 0.0));
 }
 
-vec3 vec3::operator /= (const vec3 &other) const {
-    *this = *this / other;
+vec3 vec3::operator + (float f) const {
+    return (vec3(this->x + f,
+                 this->y + f,
+                 this->z + f));
+}
+
+vec3 vec3::operator - (float f) const {
+    return (vec3(this->x - f,
+                 this->y - f,
+                 this->z - f));
+}
+
+vec3 vec3::operator * (float f) const {
+    return (vec3(this->x * f,
+                 this->y * f,
+                 this->z * f));
+}
+
+vec3 vec3::operator / (float f) const {
+    return (vec3(f > 0.0 ? this->x / f : 0.0,
+                 f > 0.0 ? this->y / f : 0.0,
+                 f > 0.0 ? this->z / f : 0.0));
+}
+
+vec3 &vec3::operator += (vec3 &other) {
+    this->x += other.x;
+    this->y += other.y;
+    this->z += other.z;
+    return (*this);
+}
+
+vec3 &vec3::operator -= (vec3 &other) {
+    this->x -= other.x;
+    this->y -= other.y;
+    this->z -= other.z;
+    return (*this);
+}
+
+vec3 &vec3::operator *= (vec3 &other) {
+    this->x *= other.x;
+    this->y *= other.y;
+    this->z *= other.z;
+    return (*this);
+}
+
+vec3 &vec3::operator /= (vec3 &other) {
+    this->x /= other.x > 0.0 ? this->x / other.x : 0.0;
+    this->y /= other.y > 0.0 ? this->y / other.y : 0.0;
+    this->z /= other.z > 0.0 ? this->z / other.z : 0.0;
+    return (*this);
+}
+
+vec3 &vec3::operator += (float f) {
+    this->x += f;
+    this->y += f;
+    this->z += f;
+    return (*this);
+}
+
+vec3 &vec3::operator -= (float f) {
+    this->x -= f;
+    this->y -= f;
+    this->z -= f;
+    return (*this);
+}
+
+vec3 &vec3::operator *= (float f) {
+    this->x *= f;
+    this->y *= f;
+    this->z *= f;
+    return (*this);
+}
+
+vec3 &vec3::operator /= (float f) {
+    this->x /= f > 0.0 ? this->x / f : 0.0;
+    this->y /= f > 0.0 ? this->y / f : 0.0;
+    this->z /= f > 0.0 ? this->z / f : 0.0;
     return (*this);
 }
 
