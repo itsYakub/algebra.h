@@ -344,14 +344,14 @@ mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
     vec3 u = vec3::cross(r, d);                     /* u - up */
 
     mat4 mat = mat4(1.0);
-    mat.m00 =  r.x; mat.m10 =  r.y; mat.m20 =  r.z;
-    mat.m01 =  u.x; mat.m11 =  u.y; mat.m21 =  u.z;
-    mat.m02 = -d.x; mat.m12 = -d.y; mat.m22 = -d.z;
+    mat.m00 = r.x; mat.m10 = r.y; mat.m20 = r.z;
+    mat.m01 = u.x; mat.m11 = u.y; mat.m21 = u.z;
+    mat.m02 = d.x; mat.m12 = d.y; mat.m22 = d.z;
 
     vec3 vec = vec3();
-    vec.x = -vec3::dot(r, eye);
-    vec.y = -vec3::dot(u, eye);
-    vec.z =  vec3::dot(d, eye);
+    vec.x = vec3::dot(r, eye);
+    vec.y = vec3::dot(u, eye);
+    vec.z = vec3::dot(d, eye);
 
     mat *= mat4::translate(vec);
     return (mat);
