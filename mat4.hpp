@@ -30,11 +30,11 @@ struct mat4 {
 
     mat4 &operator = (const mat4 &);
 
-    mat4 operator + (mat4 &) const;
+    mat4 operator + (mat4) const;
 
-    mat4 operator - (mat4 &) const;
+    mat4 operator - (mat4) const;
 
-    mat4 operator * (mat4 &) const;
+    mat4 operator * (mat4) const;
     
     mat4 operator * (float) const;
     
@@ -118,7 +118,7 @@ mat4 &mat4::operator = (const mat4 &other) {
     return (*this);
 }
 
-mat4 mat4::operator + (mat4 &other) const {
+mat4 mat4::operator + (mat4 other) const {
     mat4 result = mat4();
     result.m00 = this->m00 + other.m00; 
     result.m01 = this->m01 + other.m01; 
@@ -142,7 +142,7 @@ mat4 mat4::operator + (mat4 &other) const {
     return (result);
 }
 
-mat4 mat4::operator - (mat4 &other) const {
+mat4 mat4::operator - (mat4 other) const {
     mat4 result = mat4();
     result.m00 = this->m00 - other.m00; 
     result.m01 = this->m01 - other.m01; 
@@ -166,7 +166,7 @@ mat4 mat4::operator - (mat4 &other) const {
     return (result);
 }
 
-mat4 mat4::operator * (mat4 &other) const {
+mat4 mat4::operator * (mat4 other) const {
     mat4 result = mat4();
     result.m00 = this->m00 * other.m00 + this->m10 * other.m01 + this->m20 * other.m02 + this->m30 * other.m03;
     result.m01 = this->m01 * other.m00 + this->m11 * other.m01 + this->m21 * other.m02 + this->m31 * other.m03;

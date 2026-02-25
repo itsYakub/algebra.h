@@ -91,8 +91,8 @@ vec2 vec2::operator *= (const vec2 &other) const {
 }
 
 vec2 vec2::operator / (const vec2 &other) const {
-    return (vec2(other.x > 0.0 ? this->x / other.x : 0.0,
-                 other.y > 0.0 ? this->y / other.y : 0.0));
+    return (vec2(other.x != 0.0 ? this->x / other.x : 0.0,
+                 other.y != 0.0 ? this->y / other.y : 0.0));
 }
 
 vec2 vec2::operator /= (const vec2 &other) const {

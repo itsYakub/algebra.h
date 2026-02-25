@@ -103,10 +103,10 @@ vec4 vec4::operator *= (const vec4 &other) const {
 }
 
 vec4 vec4::operator / (const vec4 &other) const {
-    return (vec4(other.x > 0.0 ? this->x / other.x : 0.0,
-                 other.y > 0.0 ? this->y / other.y : 0.0,
-                 other.z > 0.0 ? this->z / other.z : 0.0,
-                 other.w > 0.0 ? this->w / other.w : 0.0));
+    return (vec4(other.x != 0.0 ? this->x / other.x : 0.0,
+                 other.y != 0.0 ? this->y / other.y : 0.0,
+                 other.z != 0.0 ? this->z / other.z : 0.0,
+                 other.w != 0.0 ? this->w / other.w : 0.0));
 }
 
 vec4 vec4::operator /= (const vec4 &other) const {
