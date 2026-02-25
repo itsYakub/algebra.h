@@ -219,10 +219,11 @@ vec3 vec3::normalize(vec3 a) {
     float len = vec3::length(a);
 
     vec3 vec = a;
-    if (len != 0.0) {
-        vec *= 1.0 / len;
+    if (len == 0.0) {
+        len = 1.0;
     }
-    return (vec);
+    
+    return (vec * (1.0 / len));
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */
