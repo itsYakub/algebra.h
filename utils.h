@@ -31,8 +31,8 @@ static inline float deg2rad(float);
 static inline float rad2deg(float);
 
 
-static inline float deg2rad(float f) { return (f * (PI / 180.0); }
+static inline float deg2rad(float f) { return (f * (PI / 180.0)); }
 
-static inline float rad2deg(float f) { return (f * (180.0 / PI); }
+static inline float rad2deg(float f) { return (f * (180.0 / PI)); }
 
 #endif /* _utils_h_ */
