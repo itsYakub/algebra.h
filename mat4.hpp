@@ -30,21 +30,21 @@ struct mat4 {
 
     mat4 &operator = (const mat4 &);
 
-    mat4 operator + (const mat4 &) const;
-    
-    mat4 operator += (const mat4 &) const;
+    mat4 operator + (mat4 &) const;
 
-    mat4 operator - (const mat4 &) const;
-    
-    mat4 operator -= (const mat4 &) const;
+    mat4 operator - (mat4 &) const;
 
-    mat4 operator * (const mat4 &) const;
-    
-    mat4 operator *= (const mat4 &) const;
+    mat4 operator * (mat4 &) const;
     
     mat4 operator * (float) const;
     
-    mat4 operator *= (float) const;
+    mat4 &operator += (mat4);
+    
+    mat4 &operator -= (mat4);
+    
+    mat4 &operator *= (mat4);
+    
+    mat4 &operator *= (float);
    
     /* public methods... */
 
@@ -118,7 +118,7 @@ mat4 &mat4::operator = (const mat4 &other) {
     return (*this);
 }
 
-mat4 mat4::operator + (const mat4 &other) const {
+mat4 mat4::operator + (mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 + other.m00; 
     result.m01 = this->m01 + other.m01; 
@@ -142,11 +142,7 @@ mat4 mat4::operator + (const mat4 &other) const {
     return (result);
 }
 
-mat4 mat4::operator += (const mat4 &other) const {
-    return (*this + other);
-}
-
-mat4 mat4::operator - (const mat4 &other) const {
+mat4 mat4::operator - (mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 - other.m00; 
     result.m01 = this->m01 - other.m01; 
@@ -170,11 +166,7 @@ mat4 mat4::operator - (const mat4 &other) const {
     return (result);
 }
 
-mat4 mat4::operator -= (const mat4 &other) const {
-    return (*this - other);
-}
-
-mat4 mat4::operator * (const mat4 &other) const {
+mat4 mat4::operator * (mat4 &other) const {
     mat4 result = mat4();
     result.m00 = this->m00 * other.m00 + this->m10 * other.m01 + this->m20 * other.m02 + this->m30 * other.m03;
     result.m01 = this->m01 * other.m00 + this->m11 * other.m01 + this->m21 * other.m02 + this->m31 * other.m03;
@@ -196,10 +188,6 @@ mat4 mat4::operator * (const mat4 &other) const {
     result.m32 = this->m02 * other.m30 + this->m12 * other.m31 + this->m22 * other.m32 + this->m32 * other.m33;
     result.m33 = this->m03 * other.m30 + this->m13 * other.m31 + this->m23 * other.m32 + this->m33 * other.m33;
     return (result);
-}
-
-mat4 mat4::operator *= (const mat4 &other) const {
-    return (*this * other);
 }
 
 mat4 mat4::operator * (float f) const {
@@ -226,8 +214,24 @@ mat4 mat4::operator * (float f) const {
     return (result);
 }
 
-mat4 mat4::operator *= (float f) const {
-    return (*this * f);
+mat4 &mat4::operator += (mat4 other) {
+    *this = *this + other;
+    return (*this);
+}
+
+mat4 &mat4::operator -= (mat4 other) {
+    *this = *this - other;
+    return (*this);
+}
+
+mat4 &mat4::operator *= (mat4 other) {
+    *this = *this * other;
+    return (*this);
+}
+
+mat4 &mat4::operator *= (float f) {
+    *this = *this * f;
+    return (*this);
 }
 
 float mat4::det(void) const {
