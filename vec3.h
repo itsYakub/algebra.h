@@ -116,7 +116,7 @@ extern vec3 vec3Normalize(vec3 a) {
     float len = vec3Length(a);
 
     vec3 vec = a;
-    if (len > 0.0) {
+    if (len != 0.0) {
         vec = vec3Mulf(vec, 1.0 / len);
     }
     return (vec);

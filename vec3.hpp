@@ -66,15 +66,15 @@ struct vec3 {
 
     vec3 &operator /= (float);
    
-    /* public methods... */
+    /* static methods... */
     
-    float dot(vec3);
+    static float dot(vec3, vec3);
+    
+    static float length(vec3);
 
-    float length(void);
-
-    vec3 cross(vec3);
-
-    vec3 normalize(void);
+    static vec3 cross(vec3, vec3);
+    
+    static vec3 normalize(vec3);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -198,27 +198,28 @@ vec3 &vec3::operator /= (float f) {
     return (*this);
 }
 
-float vec3::dot(vec3 other) {
-    return (this->x * other.x + this->y * other.y + this->z * other.z);
+float vec3::dot(vec3 a, vec3 b) {
+    return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-float vec3::length(void) {
-    return (sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2)));
+float vec3::length(vec3 a) {
+    return (sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }
 
-vec3 vec3::cross(vec3 other) {
+vec3 vec3::cross(vec3 a, vec3 b) {
     vec3 vec;
 
-    vec.x = this->y * other.z - this->z * other.y;
-    vec.y = this->z * other.x - this->x * other.z;
-    vec.z = this->x * other.y - this->y * other.x;
+    vec.x = a.y * b.z - a.z * b.y;
+    vec.y = a.z * b.x - a.x * b.z;
+    vec.z = a.x * b.y - a.y * b.x;
     return (vec);
 }
 
-vec3 vec3::normalize(void) {
-    vec3 vec = *this;
-    float len = vec.length();
-    if (len > 0.0) {
+vec3 vec3::normalize(vec3 a) {
+    float len = vec3::length(a);
+
+    vec3 vec = a;
+    if (len != 0.0) {
         vec *= 1.0 / len;
     }
     return (vec);
