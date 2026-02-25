@@ -346,7 +346,7 @@ mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
     mat.m02 = -f.x; mat.m12 = -f.y; mat.m22 = -f.z;
     mat.m03 = -s.dot(eye);
     mat.m13 = -u.dot(eye);
-    mat.m23 =  f.dot(eye);
+    mat.m23 = -f.dot(eye);
     return (mat);
 }
 
