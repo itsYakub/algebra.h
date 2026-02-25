@@ -339,21 +339,17 @@ mat4 mat4::rotateZ(float f) {
 }
 
 mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
-    vec3 d = vec3::normalize(center - eye);         /* d - direction*/
-    vec3 r = vec3::normalize(vec3::cross(d, up));   /* r - right */
-    vec3 u = vec3::cross(r, d);                     /* u - up */
+    vec3 f = vec3::normalize(eye - center);
+    vec3 s = vec3::normalize(vec3::cross(up, f));
+    vec3 u = vec3::cross(f, s);
 
     mat4 mat = mat4(1.0);
-    mat.m00 = r.x; mat.m10 = r.y; mat.m20 = r.z;
-    mat.m01 = u.x; mat.m11 = u.y; mat.m21 = u.z;
-    mat.m02 = d.x; mat.m12 = d.y; mat.m22 = d.z;
-
-    vec3 vec = vec3();
-    vec.x = vec3::dot(r, eye);
-    vec.y = vec3::dot(u, eye);
-    vec.z = vec3::dot(d, eye);
-
-    mat *= mat4::translate(vec);
+    mat.m00 = s.x;  mat.m10 = s.y;  mat.m20 = s.z;
+    mat.m01 = u.x;  mat.m11 = u.y;  mat.m21 = u.z;
+    mat.m02 = f.x;  mat.m12 = f.y;  mat.m22 = f.z;
+    mat.m30 = -vec3::dot(s, eye);
+    mat.m31 = -vec3::dot(u, eye);
+    mat.m32 = -vec3::dot(f, eye);
     return (mat);
 }
 
