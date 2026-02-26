@@ -34,21 +34,37 @@ struct vec4 {
 
     vec4 &operator = (const vec4 &);
 
-    vec4 operator + (const vec4 &) const;
+    vec4 operator + (vec4) const;
     
-    vec4 operator += (const vec4 &) const;
+    vec4 operator - (vec4) const;
+    
+    vec4 operator * (vec4) const;
+    
+    vec4 operator / (vec4) const;
+    
+    vec4 operator + (float) const;
+    
+    vec4 operator - (float) const;
+    
+    vec4 operator * (float) const;
+    
+    vec4 operator / (float) const;
+    
+    vec4 &operator += (vec4);
 
-    vec4 operator - (const vec4 &) const;
-    
-    vec4 operator -= (const vec4 &) const;
+    vec4 &operator -= (vec4);
 
-    vec4 operator * (const vec4 &) const;
-    
-    vec4 operator *= (const vec4 &) const;
+    vec4 &operator *= (vec4);
 
-    vec4 operator / (const vec4 &) const;
+    vec4 &operator /= (vec4);
     
-    vec4 operator /= (const vec4 &) const;
+    vec4 &operator += (float);
+
+    vec4 &operator -= (float);
+
+    vec4 &operator *= (float);
+
+    vec4 &operator /= (float);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -69,48 +85,124 @@ vec4 &vec4::operator = (const vec4 &other) {
     return (*this);
 }
 
-vec4 vec4::operator + (const vec4 &other) const {
+vec4 vec4::operator + (vec4 other) const {
     return (vec4(this->x + other.x,
                  this->y + other.y,
                  this->z + other.z,
                  this->w + other.w));
 }
 
-vec4 vec4::operator += (const vec4 &other) const {
-    return (*this + other);
-}
-
-vec4 vec4::operator - (const vec4 &other) const {
+vec4 vec4::operator - (vec4 other) const {
     return (vec4(this->x - other.x,
                  this->y - other.y,
                  this->z - other.z,
                  this->w - other.w));
 }
 
-vec4 vec4::operator -= (const vec4 &other) const {
-    return (*this - other);
-}
-
-vec4 vec4::operator * (const vec4 &other) const {
+vec4 vec4::operator * (vec4 other) const {
     return (vec4(this->x * other.x,
                  this->y * other.y,
                  this->z * other.z,
                  this->w * other.w));
 }
 
-vec4 vec4::operator *= (const vec4 &other) const {
-    return (*this * other);
-}
-
-vec4 vec4::operator / (const vec4 &other) const {
+vec4 vec4::operator / (vec4 other) const {
     return (vec4(other.x != 0.0 ? this->x / other.x : 0.0,
                  other.y != 0.0 ? this->y / other.y : 0.0,
                  other.z != 0.0 ? this->z / other.z : 0.0,
                  other.w != 0.0 ? this->w / other.w : 0.0));
 }
 
-vec4 vec4::operator /= (const vec4 &other) const {
-    return (*this / other);
+vec4 vec4::operator + (float f) const {
+    return (vec4(this->x + f,
+                 this->y + f,
+                 this->z + f,
+                 this->w + f));
+}
+
+vec4 vec4::operator - (float f) const {
+    return (vec4(this->x - f,
+                 this->y - f,
+                 this->z - f,
+                 this->w - f));
+}
+
+vec4 vec4::operator * (float f) const {
+    return (vec4(this->x * f,
+                 this->y * f,
+                 this->z * f,
+                 this->w * f));
+}
+
+vec4 vec4::operator / (float f) const {
+    return (vec4(f != 0.0 ? this->x / f : 0.0,
+                 f != 0.0 ? this->y / f : 0.0,
+                 f != 0.0 ? this->z / f : 0.0,
+                 f != 0.0 ? this->w / f : 0.0));
+}
+
+vec4 &vec4::operator += (vec4 other) {
+    this->x += other.x;
+    this->y += other.y;
+    this->z += other.z;
+    this->w += other.w;
+    return (*this);
+}
+
+vec4 &vec4::operator -= (vec4 other) {
+    this->x -= other.x;
+    this->y -= other.y;
+    this->z -= other.z;
+    this->w -= other.w;
+    return (*this);
+}
+
+vec4 &vec4::operator *= (vec4 other) {
+    this->x *= other.x;
+    this->y *= other.y;
+    this->z *= other.z;
+    this->w *= other.w;
+    return (*this);
+}
+
+vec4 &vec4::operator /= (vec4 other) {
+    this->x = other.x != 0.0 ? this->x / other.x : 0.0;
+    this->y = other.y != 0.0 ? this->y / other.y : 0.0;
+    this->z = other.z != 0.0 ? this->z / other.z : 0.0;
+    this->w = other.w != 0.0 ? this->w / other.w : 0.0;
+    return (*this);
+}
+
+vec4 &vec4::operator += (float f) {
+    this->x += f;
+    this->y += f;
+    this->z += f;
+    this->w += f;
+    return (*this);
+}
+
+vec4 &vec4::operator -= (float f) {
+    this->x -= f;
+    this->y -= f;
+    this->z -= f;
+    this->w -= f;
+    return (*this);
+}
+
+vec4 &vec4::operator *= (float f) {
+    this->x *= f;
+    this->y *= f;
+    this->z *= f;
+    this->w *= f;
+    return (*this);
+}
+
+vec4 &vec4::operator /= (float f) {
+    this->x = f != 0.0 ? this->x / f : 0.0;
+    this->y = f != 0.0 ? this->y / f : 0.0;
+    this->z = f != 0.0 ? this->z / f : 0.0;
+    this->w = f != 0.0 ? this->w / f : 0.0;
+    return (*this);
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */

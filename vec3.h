@@ -23,17 +23,17 @@ union u_vec3 {
 
 extern vec3 vec3Add(vec3, vec3);
 
-extern vec3 vec3Addf(vec3, float);
-
 extern vec3 vec3Sub(vec3, vec3);
-
-extern vec3 vec3Subf(vec3, float);
 
 extern vec3 vec3Mul(vec3, vec3);
 
-extern vec3 vec3Mulf(vec3, float);
-
 extern vec3 vec3Div(vec3, vec3);
+
+extern vec3 vec3Addf(vec3, float);
+
+extern vec3 vec3Subf(vec3, float);
+
+extern vec3 vec3Mulf(vec3, float);
 
 extern vec3 vec3Divf(vec3, float);
 
@@ -53,22 +53,10 @@ extern vec3 vec3Add(vec3 a, vec3 b) {
                      .z = a.z + b.z } );
 }
 
-extern vec3 vec3Addf(vec3 a, float f) {
-    return ((vec3) { .x = a.x + f,
-                     .y = a.y + f,
-                     .z = a.z + f } );
-}
-
 extern vec3 vec3Sub(vec3 a, vec3 b) {
     return ((vec3) { .x = a.x - b.x,
                      .y = a.y - b.y,
                      .z = a.z - b.z } );
-}
-
-extern vec3 vec3Subf(vec3 a, float f) {
-    return ((vec3) { .x = a.x - f,
-                     .y = a.y - f,
-                     .z = a.z - f } );
 }
 
 extern vec3 vec3Mul(vec3 a, vec3 b) {
@@ -77,22 +65,34 @@ extern vec3 vec3Mul(vec3 a, vec3 b) {
                      .z = a.z * b.z } );
 }
 
+extern vec3 vec3Div(vec3 a, vec3 b) {
+    return ((vec3) { .x = b.x != 0.0 ? a.x / b.x : 0.0,
+                     .y = b.y != 0.0 ? a.y / b.y : 0.0,
+                     .z = b.z != 0.0 ? a.z / b.z : 0.0 } );
+}
+
+extern vec3 vec3Addf(vec3 a, float f) {
+    return ((vec3) { .x = a.x + f,
+                     .y = a.y + f,
+                     .z = a.z + f } );
+}
+
+extern vec3 vec3Subf(vec3 a, float f) {
+    return ((vec3) { .x = a.x - f,
+                     .y = a.y - f,
+                     .z = a.z - f } );
+}
+
 extern vec3 vec3Mulf(vec3 a, float f) {
     return ((vec3) { .x = a.x * f,
                      .y = a.y * f,
                      .z = a.z * f } );
 }
 
-extern vec3 vec3Div(vec3 a, vec3 b) {
-    return ((vec3) { .x = b.x > 0.0 ? a.x / b.x : 0.0,
-                     .y = b.y > 0.0 ? a.y / b.y : 0.0,
-                     .z = b.z > 0.0 ? a.z / b.z : 0.0 } );
-}
-
 extern vec3 vec3Divf(vec3 a, float f) {
-    return ((vec3) { .x = f > 0.0 ? a.x / f : 0.0,
-                     .y = f > 0.0 ? a.y / f : 0.0,
-                     .z = f > 0.0 ? a.z / f : 0.0 } );
+    return ((vec3) { .x = f != 0.0 ? a.x / f : 0.0,
+                     .y = f != 0.0 ? a.y / f : 0.0,
+                     .z = f != 0.0 ? a.z / f : 0.0 } );
 }
 
 extern float vec3Dot(vec3 a, vec3 b) {

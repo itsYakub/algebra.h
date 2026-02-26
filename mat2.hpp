@@ -23,21 +23,23 @@ struct mat2 {
 
     mat2 &operator = (const mat2 &);
 
-    mat2 operator + (const mat2 &) const;
-    
-    mat2 operator += (const mat2 &) const;
+    mat2 operator + (mat2) const;
 
-    mat2 operator - (const mat2 &) const;
-    
-    mat2 operator -= (const mat2 &) const;
+    mat2 operator - (mat2) const;
 
-    mat2 operator * (const mat2 &) const;
-    
-    mat2 operator *= (const mat2 &) const;
+    mat2 operator * (mat2) const;
     
     mat2 operator * (float) const;
     
-    mat2 operator *= (float) const;
+    mat2 &operator += (mat2);
+    
+    mat2 &operator -= (mat2);
+    
+    mat2 &operator *= (mat2);
+    
+    mat2 &operator *= (float);
+   
+    /* public methods... */
 
     float det(void) const;
 };
@@ -64,7 +66,7 @@ mat2 &mat2::operator = (const mat2 &other) {
     return (*this);
 }
 
-mat2 mat2::operator + (const mat2 &other) const {
+mat2 mat2::operator + (mat2 other) const {
     mat2 result = mat2();
     result.m00 = this->m00 + other.m00; 
     result.m01 = this->m01 + other.m01; 
@@ -73,11 +75,7 @@ mat2 mat2::operator + (const mat2 &other) const {
     return (result);
 }
 
-mat2 mat2::operator += (const mat2 &other) const {
-    return (*this + other);
-}
-
-mat2 mat2::operator - (const mat2 &other) const {
+mat2 mat2::operator - (mat2 other) const {
     mat2 result = mat2();
     result.m00 = this->m00 - other.m00; 
     result.m01 = this->m01 - other.m01; 
@@ -86,21 +84,13 @@ mat2 mat2::operator - (const mat2 &other) const {
     return (result);
 }
 
-mat2 mat2::operator -= (const mat2 &other) const {
-    return (*this - other);
-}
-
-mat2 mat2::operator * (const mat2 &other) const {
+mat2 mat2::operator * (mat2 other) const {
     mat2 result = mat2();
     result.m00 = this->m00 * other.m00 + this->m10 * other.m01; 
     result.m01 = this->m01 * other.m00 + this->m11 * other.m01; 
     result.m10 = this->m00 * other.m10 + this->m10 * other.m11; 
     result.m11 = this->m01 * other.m10 + this->m11 * other.m11; 
     return (result);
-}
-
-mat2 mat2::operator *= (const mat2 &other) const {
-    return (*this * other);
 }
 
 mat2 mat2::operator * (float f) const {
@@ -112,8 +102,24 @@ mat2 mat2::operator * (float f) const {
     return (result);
 }
 
-mat2 mat2::operator *= (float f) const {
-    return (*this * f);
+mat2 &mat2::operator += (mat2 other) {
+    *this = *this + other;
+    return (*this);
+}
+
+mat2 &mat2::operator -= (mat2 other) {
+    *this = *this - other;
+    return (*this);
+}
+
+mat2 &mat2::operator *= (mat2 other) {
+    *this = *this * other;
+    return (*this);
+}
+
+mat2 &mat2::operator *= (float f) {
+    *this = *this * f;
+    return (*this);
 }
 
 float mat2::det(void) const {
