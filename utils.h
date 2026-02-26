@@ -21,18 +21,15 @@
 #  define INFINITY (1e100)
 # endif /* EPSILON */
 
-/* NOTE:
- *  Static-inlining those functions because the cost of binary-size is cheaper then cost of context switch.
- *  Like, cmon, these functions could be macro - functions as well...
- * */
+extern inline float deg2rad(float);
 
-static inline float deg2rad(float);
+extern inline float rad2deg(float);
 
-static inline float rad2deg(float);
+# if defined (ALGEBRA_IMPLEMENTATION)
 
+extern inline float deg2rad(float f) { return (f * (PI / 180.0)); }
 
-static inline float deg2rad(float f) { return (f * (PI / 180.0)); }
+extern inline float rad2deg(float f) { return (f * (180.0 / PI)); }
 
-static inline float rad2deg(float f) { return (f * (180.0 / PI)); }
-
+# endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _utils_h_ */
