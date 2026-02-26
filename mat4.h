@@ -238,13 +238,13 @@ extern mat4 mat4Scale(vec3 v) {
 
 extern mat4 mat4Frust(float left, float right, float top, float down, float near, float far) {
     mat4 mat = mat4Zero();
-    mat.m00  = (near * 2.0) / (right - left);
-    mat.m11  = (near * 2.0) / (top   - down);
-    mat.m02  = (left + right) / (right - left);
-    mat.m12  = (top + down) / (top - down);
+    mat.m00  =  (near * 2.0) / (right - left);
+    mat.m11  =  (near * 2.0) / (top   - down);
+    mat.m20  =  (right + left) / (right - left);
+    mat.m21  =  (top + down) / (top - down);
     mat.m22  = -(far + near) / (far - near);
-    mat.m32  = -1.0;
-    mat.m23  = -(far * near * 2.0) / (far - near);
+    mat.m23  = -(1.0);
+    mat.m32  = -(2 * far * near) / (far - near);
     return (mat);
 }
 

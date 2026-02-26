@@ -362,14 +362,14 @@ mat4 mat4::scale(vec3 v) {
 }
 
 mat4 mat4::frust(float left, float right, float top, float down, float near, float far) {
-    mat4 mat = mat4();
-    mat.m00  = (near * 2.0) / (right - left);
-    mat.m11  = (near * 2.0) / (top   - down);
-    mat.m02  = (left + right) / (right - left);
-    mat.m12  = (top + down) / (top - down);
+    mat4 mat =   mat4();
+    mat.m00  =  (near * 2.0) / (right - left);
+    mat.m11  =  (near * 2.0) / (top   - down);
+    mat.m20  =  (right + left) / (right - left);
+    mat.m21  =  (top + down) / (top - down);
     mat.m22  = -(far + near) / (far - near);
-    mat.m32  = -1.0;
-    mat.m23  = -(far * near * 2.0) / (far - near);
+    mat.m23  = -(1.0);
+    mat.m32  = -(2 * far * near) / (far - near);
     return (mat);
 }
 
@@ -378,9 +378,9 @@ mat4 mat4::ortho(float left, float right, float top, float down, float near, flo
     mat.m00 =  2.0 / (right - left);
     mat.m11 =  2.0 / (top   - down);
     mat.m22 = -2.0 / (far   - near);
-    mat.m03 = -(left  + right) / (right - left);
-    mat.m13 = -(top   + down)  / (top   - down);
-    mat.m23 = -(far   + near)  / (far   - near);
+    mat.m30 = -(left  + right) / (right - left);
+    mat.m31 = -(top   + down)  / (top   - down);
+    mat.m32 = -(far   + near)  / (far   - near);
     mat.m33 =  1.0;
     return (mat);
 }
