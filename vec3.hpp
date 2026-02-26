@@ -113,9 +113,9 @@ vec3 vec3::operator * (vec3 other) const {
 }
 
 vec3 vec3::operator / (vec3 other) const {
-    return (vec3(other.x > 0.0 ? this->x / other.x : 0.0,
-                 other.y > 0.0 ? this->y / other.y : 0.0,
-                 other.z > 0.0 ? this->z / other.z : 0.0));
+    return (vec3(other.x != 0.0 ? this->x / other.x : 0.0,
+                 other.y != 0.0 ? this->y / other.y : 0.0,
+                 other.z != 0.0 ? this->z / other.z : 0.0));
 }
 
 vec3 vec3::operator + (float f) const {
@@ -137,9 +137,9 @@ vec3 vec3::operator * (float f) const {
 }
 
 vec3 vec3::operator / (float f) const {
-    return (vec3(f > 0.0 ? this->x / f : 0.0,
-                 f > 0.0 ? this->y / f : 0.0,
-                 f > 0.0 ? this->z / f : 0.0));
+    return (vec3(f != 0.0 ? this->x / f : 0.0,
+                 f != 0.0 ? this->y / f : 0.0,
+                 f != 0.0 ? this->z / f : 0.0));
 }
 
 vec3 &vec3::operator += (vec3 other) {
@@ -164,9 +164,9 @@ vec3 &vec3::operator *= (vec3 other) {
 }
 
 vec3 &vec3::operator /= (vec3 other) {
-    this->x = other.x > 0.0 ? this->x / other.x : 0.0;
-    this->y = other.y > 0.0 ? this->y / other.y : 0.0;
-    this->z = other.z > 0.0 ? this->z / other.z : 0.0;
+    this->x = other.x != 0.0 ? this->x / other.x : 0.0;
+    this->y = other.y != 0.0 ? this->y / other.y : 0.0;
+    this->z = other.z != 0.0 ? this->z / other.z : 0.0;
     return (*this);
 }
 

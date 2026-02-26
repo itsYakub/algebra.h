@@ -15,7 +15,7 @@ struct mat4 {
                   m03, m13, m23, m33;
         };
 
-        float ptr[4][4];
+        float ptr[16];
     };
    
     /* constructors... */
@@ -263,9 +263,9 @@ float mat4::det(void) const {
 
 mat4 mat4::translate(vec3 v) {
     mat4 mat = mat4(1.0);
-    mat.m03 = v.x;
-    mat.m13 = v.y;
-    mat.m23 = v.z;
+    mat.m30 = v.x;
+    mat.m31 = v.y;
+    mat.m32 = v.z;
     return (mat);
 }
 
@@ -339,17 +339,17 @@ mat4 mat4::rotateZ(float f) {
 }
 
 mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
-    vec3 f = vec3::normalize(eye - center);
-    vec3 s = vec3::normalize(vec3::cross(up, f));
-    vec3 u = vec3::cross(f, s);
+    vec3 f = vec3::normalize(center - eye);
+    vec3 s = vec3::normalize(vec3::cross(f, up));
+    vec3 u = vec3::cross(s, f);
 
-    mat4 mat = mat4(1.0);
-    mat.m00 = s.x;  mat.m10 = s.y;  mat.m20 = s.z;
-    mat.m01 = u.x;  mat.m11 = u.y;  mat.m21 = u.z;
-    mat.m02 = f.x;  mat.m12 = f.y;  mat.m22 = f.z;
-    mat.m30 = -vec3::dot(s, eye);
-    mat.m31 = -vec3::dot(u, eye);
-    mat.m32 = -vec3::dot(f, eye);
+    mat4 mat =  mat4(1.0);
+    mat.m00  =  s.x; mat.m10 =  s.y; mat.m20 =  s.z;
+    mat.m01  =  u.x; mat.m11 =  u.y; mat.m21 =  u.z;
+    mat.m02  = -f.x; mat.m12 = -f.y; mat.m22 = -f.z;
+    mat.m30  = -vec3::dot(s, eye);
+    mat.m31  = -vec3::dot(u, eye);
+    mat.m32  =  vec3::dot(f, eye);
     return (mat);
 }
 

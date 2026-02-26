@@ -16,7 +16,7 @@ union u_mat4 {
               m03, m13, m23, m33;
     };
 
-    float ptr[4][4];
+    float ptr[16];
 };
 
 extern mat4 mat4Zero(void);
@@ -138,9 +138,9 @@ extern float mat4Det(mat4 a) {
 
 extern mat4 mat4Translate(vec3 v) {
     mat4 mat = mat4Init(1.0);
-    mat.m03 = v.x;
-    mat.m13 = v.y;
-    mat.m23 = v.z;
+    mat.m30 = v.x;
+    mat.m31 = v.y;
+    mat.m32 = v.z;
     return (mat);
 }
 
@@ -214,17 +214,17 @@ extern mat4 mat4RotateZ(float f) {
 }
 
 extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
-    vec3 f = vec3Normalize(vec3Sub(eye, center));
-    vec3 s = vec3Normalize(vec3Cross(up, f));
-    vec3 u = vec3Cross(f, s);
+    vec3 f = vec3Normalize(vec3Sub(center, eye));
+    vec3 s = vec3Normalize(vec3Cross(f, up));
+    vec3 u = vec3Cross(s, f);
 
-    mat4 mat = mat4Init(1.0);
-    mat.m00 = s.x;  mat.m10 = s.y;  mat.m20 = s.z;
-    mat.m01 = u.x;  mat.m11 = u.y;  mat.m21 = u.z;
-    mat.m02 = f.x;  mat.m12 = f.y;  mat.m22 = f.z;
-    mat.m30 = -vec3Dot(s, eye);
-    mat.m31 = -vec3Dot(u, eye);
-    mat.m32 = -vec3Dot(f, eye);
+    mat4 mat =  mat4Init(1.0);
+    mat.m00  =  s.x; mat.m10 =  s.y; mat.m20 =  s.z;
+    mat.m01  =  u.x; mat.m11 =  u.y; mat.m21 =  u.z;
+    mat.m02  = -f.x; mat.m12 = -f.y; mat.m22 = -f.z;
+    mat.m30  = -vec3Dot(s, eye);
+    mat.m31  = -vec3Dot(u, eye);
+    mat.m32  =  vec3Dot(f, eye);
     return (mat);
 }
 
