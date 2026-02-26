@@ -21,35 +21,18 @@
 #  define INFINITY (1e100)
 # endif /* EPSILON */
 
-extern inline float deg2rad(float);
+static inline float deg2rad(float f) { return (f * (PI / 180.0)); }
 
-extern inline float rad2deg(float);
+static inline float rad2deg(float f) { return (f * (180.0 / PI)); }
 
-extern inline float min(float, float);
+static inline float min(float a, float b) { return (a < b ? a : b); }
 
-extern inline float max(float, float);
+static inline float max(float a, float b) { return (a > b ? a : b); }
 
-extern inline float clamp(float, float, float);
+static inline float clamp(float f, float a, float b) { return (min(max(f, a), b)); }
 
-extern inline float clamp01(float);
+static inline float clamp01(float f) { return (min(max(f, 0), 1)); }
 
-extern inline float lerp(float, float, float);
+static inline float lerp(float a, float b, float t) { return ((b - a) * t + a); }
 
-# if defined (ALGEBRA_IMPLEMENTATION)
-
-extern inline float deg2rad(float f) { return (f * (PI / 180.0)); }
-
-extern inline float rad2deg(float f) { return (f * (180.0 / PI)); }
-
-extern inline float min(float a, float b) { return (a < b ? a : b); }
-
-extern inline float max(float a, float b) { return (a > b ? a : b); }
-
-extern inline float clamp(float f, float a, float b) { return (min(max(f, a), b)); }
-
-extern inline float clamp01(float f) { return (min(max(f, 0), 1)); }
-
-extern inline float lerp(float a, float b, float t) { return ((b - a) * t + a); }
-
-# endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _utils_h_ */
