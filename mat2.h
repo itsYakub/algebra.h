@@ -5,11 +5,11 @@ typedef union u_mat2 mat2;
 
 union u_mat2 {
     struct {
-        float m00, m10,
-              m01, m11;
+        float m00, m01,
+              m10, m11;
     };
 
-    float ptr[2][2];
+    float ptr[4];
 };
 
 extern mat2 mat2Zero(void);
