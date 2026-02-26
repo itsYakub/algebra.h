@@ -10,10 +10,10 @@ typedef union u_mat4 mat4;
 
 union u_mat4 {
     struct {
-        float m00, m10, m20, m30,
-              m01, m11, m21, m31,
-              m02, m12, m22, m32,
-              m03, m13, m23, m33;
+        float m00, m01, m02, m03,
+              m10, m11, m12, m13,
+              m20, m21, m22, m23,
+              m30, m31, m32, m33;
     };
 
     float ptr[16];
@@ -222,9 +222,9 @@ extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
     mat.m00  =  s.x; mat.m10 =  s.y; mat.m20 =  s.z;
     mat.m01  =  u.x; mat.m11 =  u.y; mat.m21 =  u.z;
     mat.m02  = -f.x; mat.m12 = -f.y; mat.m22 = -f.z;
-    mat.m30  = -vec3Dot(s, eye);
-    mat.m31  = -vec3Dot(u, eye);
-    mat.m32  =  vec3Dot(f, eye);
+    mat.m03  = -vec3Dot(s, eye);
+    mat.m13  = -vec3Dot(u, eye);
+    mat.m23  =  vec3Dot(f, eye);
     return (mat);
 }
 
