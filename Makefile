@@ -12,7 +12,15 @@ MODULES		= $(MK_ROOT)algebra.h 	\
 			  $(MK_ROOT)vec3.h 		\
 			  $(MK_ROOT)vec3.hpp 	\
 			  $(MK_ROOT)vec4.h 		\
-			  $(MK_ROOT)vec4.hpp
+			  $(MK_ROOT)vec4.hpp	\
+			  $(MK_ROOT)mat2.h 		\
+			  $(MK_ROOT)mat2.hpp 	\
+			  $(MK_ROOT)mat3.h 		\
+			  $(MK_ROOT)mat3.hpp 	\
+			  $(MK_ROOT)mat4.h 		\
+			  $(MK_ROOT)mat4.hpp	\
+			  $(MK_ROOT)utils.h 	\
+			  $(MK_ROOT)utils.hpp
 
 # ========
 
