@@ -116,22 +116,27 @@ extern mat4 mat4Mulf(mat4 a, float f) {
 
 extern float mat4Det(mat4 a) {
     float result = 0.0;
+    mat3 mat = mat3();
+   
+    mat.m00 = a.m11; mat.m01 = a.m12; mat.m02 = a.m13;
+    mat.m10 = a.m21; mat.m11 = a.m22; mat.m12 = a.m23;
+    mat.m20 = a.m31; mat.m21 = a.m32; mat.m22 = a.m33;
+    result += a.m00 * mat3Det(mat);
 
-    result += a.m00 * mat3Det((mat3) {{ a.m11, a.m12, a.m13,
-                                        a.m21, a.m22, a.m23,
-                                        a.m31, a.m32, a.m33  }} );
+    mat.m00 = a.m10; mat.m01 = a.m12; mat.m02 = a.m13;
+    mat.m10 = a.m20; mat.m11 = a.m22; mat.m12 = a.m23;
+    mat.m20 = a.m30; mat.m21 = a.m32; mat.m22 = a.m33;
+    result -= a.m01 * mat3Det(mat);
 
-    result -= a.m01 * mat3Det((mat3) {{ a.m10, a.m12, a.m13,
-                                        a.m20, a.m22, a.m23,
-                                        a.m30, a.m32, a.m33  }} );
+    mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m13;
+    mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m23;
+    mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m33;
+    result += a.m02 * matDet(mat);
 
-    result += a.m02 * mat3Det((mat3) {{ a.m10, a.m11, a.m13,
-                                        a.m20, a.m21, a.m23,
-                                        a.m30, a.m31, a.m33  }} );
-
-    result -= a.m03 * mat3Det((mat3) {{ a.m10, a.m11, a.m12,
-                                        a.m20, a.m21, a.m22,
-                                        a.m30, a.m31, a.m32  }} );
+    mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m12;
+    mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m22;
+    mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m32;
+    result -= a.m03 * mat3Det(mat);
 
     return (result);
 }

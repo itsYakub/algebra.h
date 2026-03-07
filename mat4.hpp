@@ -25,6 +25,14 @@ struct mat4 {
     mat4(float);
 
     mat4(const mat4 &);
+    
+    /* properties... */
+
+    static const mat4 zero;
+
+    static const mat4 one;
+
+    static const mat4 identity;
    
     /* operator overloading... */
 
@@ -46,11 +54,11 @@ struct mat4 {
     
     mat4 &operator *= (float);
    
-    /* public methods... */
-
-    float det(void) const;
-   
     /* static methods... */
+
+    static float det(mat4);
+
+    static float trace(mat4);
 
     static mat4 translate(vec3);
     
@@ -73,9 +81,13 @@ struct mat4 {
     static mat4 ortho(float, float, float, float, float, float);
     
     static mat4 persp(float, float, float, float);
+
+    static mat4 transpose(mat4);
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+
+/* constructors... */
 
 mat4::mat4(void) :
     m00(0.0), m01(0.0), m02(0.0), m03(0.0),
@@ -83,17 +95,31 @@ mat4::mat4(void) :
     m20(0.0), m21(0.0), m22(0.0), m23(0.0),
     m30(0.0), m31(0.0), m32(0.0), m33(0.0) { }
 
+
 mat4::mat4(float s) :
     m00(1.0 * s), m01(0.0),     m02(0.0),     m03(0.0),
     m10(0.0),     m11(1.0 * s), m12(0.0),     m13(0.0),
     m20(0.0),     m21(0.0),     m22(1.0 * s), m23(0.0),
     m30(0.0),     m31(0.0),     m32(0.0),     m33(1.0 * s) { }
 
+
 mat4::mat4(const mat4 &other) :
     m00(other.m00), m01(other.m01), m02(other.m02), m03(other.m03),
     m10(other.m10), m11(other.m11), m12(other.m12), m13(other.m13),
     m20(other.m20), m21(other.m21), m22(other.m22), m23(other.m23),
     m30(other.m30), m31(other.m31), m32(other.m32), m33(other.m33) { }
+
+/* properties... */
+
+const mat4 mat4::zero = mat4(0.0);
+
+
+const mat4 mat4::one = mat4(1.0); /* TODO: make every field equal to '1.0' */
+
+
+const mat4 mat4::identity = mat4(1.0);
+
+/* operator overloading... */
 
 mat4 &mat4::operator = (const mat4 &other) {
     this->m00 = other.m00; 
@@ -117,6 +143,7 @@ mat4 &mat4::operator = (const mat4 &other) {
     this->m33 = other.m33;
     return (*this);
 }
+
 
 mat4 mat4::operator + (mat4 other) const {
     mat4 result = mat4();
@@ -142,6 +169,7 @@ mat4 mat4::operator + (mat4 other) const {
     return (result);
 }
 
+
 mat4 mat4::operator - (mat4 other) const {
     mat4 result = mat4();
     result.m00 = this->m00 - other.m00; 
@@ -165,6 +193,7 @@ mat4 mat4::operator - (mat4 other) const {
     result.m33 = this->m33 - other.m33; 
     return (result);
 }
+
 
 mat4 mat4::operator * (mat4 other) const {
     mat4 result = mat4();
@@ -190,6 +219,7 @@ mat4 mat4::operator * (mat4 other) const {
     return (result);
 }
 
+
 mat4 mat4::operator * (float f) const {
     mat4 result = mat4();
     result.m00 = this->m00 * f; 
@@ -214,52 +244,64 @@ mat4 mat4::operator * (float f) const {
     return (result);
 }
 
+
 mat4 &mat4::operator += (mat4 other) {
     *this = *this + other;
     return (*this);
 }
+
 
 mat4 &mat4::operator -= (mat4 other) {
     *this = *this - other;
     return (*this);
 }
 
+
 mat4 &mat4::operator *= (mat4 other) {
     *this = *this * other;
     return (*this);
 }
+
 
 mat4 &mat4::operator *= (float f) {
     *this = *this * f;
     return (*this);
 }
 
-float mat4::det(void) const {
+/* static methods... */
+
+float mat4::det(mat4 a) {
     float result = 0.0;
     mat3 mat = mat3();
    
-    mat.m00 = this->m11; mat.m01 = this->m12; mat.m02 = this->m13;
-    mat.m10 = this->m21; mat.m11 = this->m22; mat.m12 = this->m23;
-    mat.m20 = this->m31; mat.m21 = this->m32; mat.m22 = this->m33;
-    result += this->m00 * mat.det();
+    mat.m00 = a.m11; mat.m01 = a.m12; mat.m02 = a.m13;
+    mat.m10 = a.m21; mat.m11 = a.m22; mat.m12 = a.m23;
+    mat.m20 = a.m31; mat.m21 = a.m32; mat.m22 = a.m33;
+    result += a.m00 * mat.det();
 
-    mat.m00 = this->m10; mat.m01 = this->m12; mat.m02 = this->m13;
-    mat.m10 = this->m20; mat.m11 = this->m22; mat.m12 = this->m23;
-    mat.m20 = this->m30; mat.m21 = this->m32; mat.m22 = this->m33;
-    result -= this->m01 * mat.det();
+    mat.m00 = a.m10; mat.m01 = a.m12; mat.m02 = a.m13;
+    mat.m10 = a.m20; mat.m11 = a.m22; mat.m12 = a.m23;
+    mat.m20 = a.m30; mat.m21 = a.m32; mat.m22 = a.m33;
+    result -= a.m01 * mat.det();
 
-    mat.m00 = this->m10; mat.m01 = this->m11; mat.m02 = this->m13;
-    mat.m10 = this->m20; mat.m11 = this->m21; mat.m12 = this->m23;
-    mat.m20 = this->m30; mat.m21 = this->m31; mat.m22 = this->m33;
-    result += this->m02 * mat.det();
+    mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m13;
+    mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m23;
+    mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m33;
+    result += a.m02 * mat.det();
 
-    mat.m00 = this->m10; mat.m01 = this->m11; mat.m02 = this->m12;
-    mat.m10 = this->m20; mat.m11 = this->m21; mat.m12 = this->m22;
-    mat.m20 = this->m30; mat.m21 = this->m31; mat.m22 = this->m32;
-    result -= this->m03 * mat.det();
+    mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m12;
+    mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m22;
+    mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m32;
+    result -= a.m03 * mat.det();
 
     return (result);
 }
+
+
+float mat4::trace(mat4 a) {
+    return (a.m00 + a.m11 + a.m22 + a.m33);
+}
+
 
 mat4 mat4::translate(vec3 v) {
     mat4 mat = mat4(1.0);
@@ -268,6 +310,7 @@ mat4 mat4::translate(vec3 v) {
     mat.m32 = v.z;
     return (mat);
 }
+
 
 mat4 mat4::rotate(vec3 axis, float angle) {
     float c = cos(angle);
@@ -294,6 +337,7 @@ mat4 mat4::rotate(vec3 axis, float angle) {
     return (mat);
 }
 
+
 mat4 mat4::rotateAt(vec3 pivot, vec3 axis, float angle) {
     mat4 mat = mat4(1.0);
          mat *= mat4::translate(pivot);
@@ -301,6 +345,7 @@ mat4 mat4::rotateAt(vec3 pivot, vec3 axis, float angle) {
          mat *= mat4::translate(pivot * -1.0);
     return (mat);
 }
+
 
 mat4 mat4::rotateX(float f) {
     float sinres = sin(f),
@@ -314,6 +359,7 @@ mat4 mat4::rotateX(float f) {
     return (mat);
 }
 
+
 mat4 mat4::rotateY(float f) {
     float sinres = sin(f),
           cosres = cos(f);
@@ -326,6 +372,7 @@ mat4 mat4::rotateY(float f) {
     return (mat);
 }
 
+
 mat4 mat4::rotateZ(float f) {
     float sinres = sin(f),
           cosres = cos(f);
@@ -337,6 +384,7 @@ mat4 mat4::rotateZ(float f) {
     mat.m11  = cosres;
     return (mat);
 }
+
 
 mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
     vec3 f = vec3::normalize(center - eye);
@@ -353,6 +401,7 @@ mat4 mat4::lookAt(vec3 eye, vec3 center, vec3 up) {
     return (mat);
 }
 
+
 mat4 mat4::scale(vec3 v) {
     mat4 mat = mat4(1.0);
     mat.m00 = v.x;
@@ -360,6 +409,7 @@ mat4 mat4::scale(vec3 v) {
     mat.m22 = v.z;
     return (mat);
 }
+
 
 mat4 mat4::frust(float left, float right, float top, float down, float near, float far) {
     mat4 mat =   mat4();
@@ -373,6 +423,7 @@ mat4 mat4::frust(float left, float right, float top, float down, float near, flo
     return (mat);
 }
 
+
 mat4 mat4::ortho(float left, float right, float top, float down, float near, float far) {
     mat4 mat = mat4();
     mat.m00 =  2.0 / (right - left);
@@ -385,10 +436,20 @@ mat4 mat4::ortho(float left, float right, float top, float down, float near, flo
     return (mat);
 }
 
+
 mat4 mat4::persp(float fieldOfView, float aspect, float near, float far) {
     float top   = near * tan(fieldOfView * 0.5);
     float right = top * aspect;
     return (mat4::frust(-right, right, top, -top, near, far));
+}
+    
+mat4 mat4::transpose(mat4 a) {
+    mat4 mat = mat4(0.0);
+    mat.m00  = a.m00; mat.m01 = a.m10; mat.m02 = a.m20; mat.m03 = a.m30;
+    mat.m10  = a.m10; mat.m11 = a.m11; mat.m12 = a.m21; mat.m13 = a.m31;
+    mat.m20  = a.m20; mat.m21 = a.m12; mat.m22 = a.m22; mat.m23 = a.m32;
+    mat.m30  = a.m30; mat.m31 = a.m13; mat.m32 = a.m23; mat.m33 = a.m33;
+    return (mat);
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */
