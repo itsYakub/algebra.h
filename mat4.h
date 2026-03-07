@@ -116,7 +116,7 @@ extern mat4 mat4Mulf(mat4 a, float f) {
 
 extern float mat4Det(mat4 a) {
     float result = 0.0;
-    mat3 mat = mat3();
+    mat3 mat = mat3Init(1.0);
    
     mat.m00 = a.m11; mat.m01 = a.m12; mat.m02 = a.m13;
     mat.m10 = a.m21; mat.m11 = a.m22; mat.m12 = a.m23;
@@ -131,7 +131,7 @@ extern float mat4Det(mat4 a) {
     mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m13;
     mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m23;
     mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m33;
-    result += a.m02 * matDet(mat);
+    result += a.m02 * mat3Det(mat);
 
     mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m12;
     mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m22;
