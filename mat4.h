@@ -19,7 +19,9 @@ union u_mat4 {
     float ptr[16];
 };
 
-extern mat4 mat4Zero(void);
+extern const mat4 mat4Zero(void);
+
+extern const mat4 mat4Identity(void);
 
 extern mat4 mat4Init(float);
 
@@ -32,6 +34,8 @@ extern mat4 mat4Mul(mat4, mat4);
 extern mat4 mat4Mulf(mat4, float);
 
 extern float mat4Det(mat4);
+
+extern float mat4Trace(mat4);
 
 extern mat4 mat4Translate(vec3);
 
@@ -55,14 +59,19 @@ extern mat4 mat4Ortho(float, float, float, float, float, float);
 
 extern mat4 mat4Persp(float, float, float, float);
 
+extern mat4 mat4Transpose(mat4);
+
 # if defined (ALGEBRA_IMPLEMENTATION)
 
-extern mat4 mat4Zero(void) {
-    return ((mat4) {{ 0.0, 0.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0, 0.0 }} );
+extern const mat4 mat4Zero(void) {
+    return (mat4Init(0.0));
 }
+
+
+extern const mat4 mat4Identity(void) {
+    return (mat4Init(1.0));
+}
+
 
 extern mat4 mat4Init(float s) {
     return ((mat4) {{ 1.0 * s, 0.0,     0.0,     0.0,
@@ -71,6 +80,7 @@ extern mat4 mat4Init(float s) {
                       0.0,     0.0,     0.0,     1.0 * s }} );
 }
 
+
 extern mat4 mat4Add(mat4 a, mat4 b) {
     return ((mat4) {{ a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02, a.m03 + b.m03,
                       a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12, a.m13 + b.m13,
@@ -78,12 +88,14 @@ extern mat4 mat4Add(mat4 a, mat4 b) {
                       a.m30 + b.m30, a.m31 + b.m31, a.m32 + b.m32, a.m33 + b.m33 }} );
 }
 
+
 extern mat4 mat4Sub(mat4 a, mat4 b) {
     return ((mat4) {{ a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02, a.m03 - b.m03,
                       a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12, a.m13 - b.m13,
                       a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22, a.m23 - b.m23,
                       a.m30 - b.m30, a.m31 - b.m31, a.m32 - b.m32, a.m33 - b.m33 }} );
 }
+
 
 extern mat4 mat4Mul(mat4 a, mat4 b) {
     return ((mat4) {{ a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02 + a.m30 * b.m03,
@@ -107,12 +119,14 @@ extern mat4 mat4Mul(mat4 a, mat4 b) {
                       a.m03 * b.m30 + a.m13 * b.m31 + a.m23 * b.m32 + a.m33 * b.m33 }} );
 }
 
+
 extern mat4 mat4Mulf(mat4 a, float f) {
     return ((mat4) {{ a.m00 * f, a.m01 * f, a.m02 * f, a.m03 * f,
                       a.m10 * f, a.m11 * f, a.m12 * f, a.m13 * f,
                       a.m20 * f, a.m21 * f, a.m22 * f, a.m23 * f,
                       a.m30 * f, a.m31 * f, a.m32 * f, a.m33 * f }} );
 }
+
 
 extern float mat4Det(mat4 a) {
     float result = 0.0;
@@ -141,6 +155,12 @@ extern float mat4Det(mat4 a) {
     return (result);
 }
 
+
+extern float mat4Trace(mat4 a) {
+    return (a.m00 + a.m11 + a.m22 + a.m33);
+}
+
+
 extern mat4 mat4Translate(vec3 v) {
     mat4 mat = mat4Init(1.0);
     mat.m30 = v.x;
@@ -148,6 +168,7 @@ extern mat4 mat4Translate(vec3 v) {
     mat.m32 = v.z;
     return (mat);
 }
+
 
 extern mat4 mat4Rotate(vec3 axis, float angle) {
     float c = cos(angle);
@@ -174,6 +195,7 @@ extern mat4 mat4Rotate(vec3 axis, float angle) {
     return (mat);
 }
 
+
 extern mat4 mat4RotateAt(vec3 pivot, vec3 axis, float angle) {
     mat4 mat = mat4Init(1.0);
          mat = mat4Mul(mat4Translate(pivot), mat);
@@ -181,6 +203,7 @@ extern mat4 mat4RotateAt(vec3 pivot, vec3 axis, float angle) {
          mat = mat4Mul(mat4Translate(vec3Mulf(pivot, -1.0)), mat);
     return (mat);
 }
+
 
 extern mat4 mat4RotateX(float f) {
     float sinres = sin(f),
@@ -194,6 +217,7 @@ extern mat4 mat4RotateX(float f) {
     return (mat);
 }
 
+
 extern mat4 mat4RotateY(float f) {
     float sinres = sin(f),
           cosres = cos(f);
@@ -206,6 +230,7 @@ extern mat4 mat4RotateY(float f) {
     return (mat);
 }
 
+
 extern mat4 mat4RotateZ(float f) {
     float sinres = sin(f),
           cosres = cos(f);
@@ -217,6 +242,7 @@ extern mat4 mat4RotateZ(float f) {
     mat.m11  = cosres;
     return (mat);
 }
+
 
 extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
     vec3 f = vec3Normalize(vec3Sub(center, eye));
@@ -233,6 +259,7 @@ extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
     return (mat);
 }
 
+
 extern mat4 mat4Scale(vec3 v) {
     mat4 mat = mat4Init(1.0);
     mat.m00 = v.x;
@@ -240,6 +267,7 @@ extern mat4 mat4Scale(vec3 v) {
     mat.m22 = v.z;
     return (mat);
 }
+
 
 extern mat4 mat4Frust(float left, float right, float top, float down, float near, float far) {
     mat4 mat = mat4Zero();
@@ -253,6 +281,7 @@ extern mat4 mat4Frust(float left, float right, float top, float down, float near
     return (mat);
 }
 
+
 extern mat4 mat4Ortho(float left, float right, float top, float down, float near, float far) {
     mat4 mat = mat4Zero();
     mat.m00 =  2.0 / (right - left);
@@ -265,10 +294,21 @@ extern mat4 mat4Ortho(float left, float right, float top, float down, float near
     return (mat);
 }
 
+
 extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
     float top   = near * tan(fieldOfView * 0.5);
     float right = top * aspect;
     return (mat4Frust(-right, right, top, -top, near, far));
+}
+
+
+extern mat4 mat4Transpose(mat4 a) {
+    mat4 mat = mat4(0.0);
+    mat.m00  = a.m00; mat.m01 = a.m10; mat.m02 = a.m20; mat.m03 = a.m30;
+    mat.m10  = a.m10; mat.m11 = a.m11; mat.m12 = a.m21; mat.m13 = a.m31;
+    mat.m20  = a.m20; mat.m21 = a.m12; mat.m22 = a.m22; mat.m23 = a.m32;
+    mat.m30  = a.m30; mat.m31 = a.m13; mat.m32 = a.m23; mat.m33 = a.m33;
+    return (mat);
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */

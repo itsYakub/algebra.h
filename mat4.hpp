@@ -30,8 +30,6 @@ struct mat4 {
 
     static const mat4 zero;
 
-    static const mat4 one;
-
     static const mat4 identity;
    
     /* operator overloading... */
@@ -112,9 +110,6 @@ mat4::mat4(const mat4 &other) :
 /* properties... */
 
 const mat4 mat4::zero = mat4(0.0);
-
-
-const mat4 mat4::one = mat4(1.0); /* TODO: make every field equal to '1.0' */
 
 
 const mat4 mat4::identity = mat4(1.0);
