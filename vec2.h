@@ -1,6 +1,8 @@
 #if !defined (_vec2_h_)
 # define _vec2_h_ 1
 #
+# include <stdbool.h>
+#
 # include <math.h>
 
 typedef union u_vec2 vec2;

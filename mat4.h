@@ -1,6 +1,8 @@
 #if !defined (_mat4_h_)
 # define _mat4_h_ 1
 #
+# include <stdbool.h>
+#
 # include <math.h>
 #
 # include "./vec3.h"
