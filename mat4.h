@@ -65,12 +65,12 @@ extern mat4 mat4Transpose(mat4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
-extern const mat4 mat4Zero(void) {
+extern mat4 mat4Zero(void) {
     return (mat4Init(0.0));
 }
 
 
-extern const mat4 mat4Identity(void) {
+extern mat4 mat4Identity(void) {
     return (mat4Init(1.0));
 }
 

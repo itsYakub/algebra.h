@@ -23,21 +23,21 @@ union u_vec3 {
     float ptr[3];
 };
 
-extern const vec3 vec3Zero(void);
+extern vec3 vec3Zero(void);
 
-extern const vec3 vec3One(void);
+extern vec3 vec3One(void);
 
-extern const vec3 vec3Right(void);
+extern vec3 vec3Right(void);
 
-extern const vec3 vec3Left(void);
+extern vec3 vec3Left(void);
 
-extern const vec3 vec3Up(void);
+extern vec3 vec3Up(void);
 
-extern const vec3 vec3Down(void);
+extern vec3 vec3Down(void);
 
-extern const vec3 vec3Front(void);
+extern vec3 vec3Front(void);
 
-extern const vec3 vec3Back(void);
+extern vec3 vec3Back(void);
 
 extern vec3 vec3Add(vec3, vec3);
 

@@ -21,17 +21,17 @@ union u_vec2 {
     float ptr[2];
 };
 
-extern const vec2 vec2Zero(void);
+extern vec2 vec2Zero(void);
 
-extern const vec2 vec2One(void);
+extern vec2 vec2One(void);
 
-extern const vec2 vec2Right(void);
+extern vec2 vec2Right(void);
 
-extern const vec2 vec2Left(void);
+extern vec2 vec2Left(void);
 
-extern const vec2 vec2Up(void);
+extern vec2 vec2Up(void);
 
-extern const vec2 vec2Down(void);
+extern vec2 vec2Down(void);
 
 extern vec2 vec2Add(vec2, vec2);
 
