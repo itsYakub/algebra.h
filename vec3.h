@@ -79,43 +79,43 @@ extern vec3 vec3Normalize(vec3);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
-extern const vec3 vec3Zero(void) {
-    return ((vec3) { 0.0, 0.0, 0.0 } );
+extern vec3 vec3Zero(void) {
+    return ((vec3) { .x = 0.0, .y = 0.0, .z = 0.0 } );
 }
 
 
-extern const vec3 vec3One(void) {
-    return ((vec3) { 1.0, 1.0, 1.0 } );
+extern vec3 vec3One(void) {
+    return ((vec3) { .x = 1.0, .y = 1.0, .z = 1.0 } );
 }
 
 
-extern const vec3 vec3Right(void) {
-    return ((vec3) { 1.0, 0.0, 0.0 } );
+extern vec3 vec3Right(void) {
+    return ((vec3) { .x = 1.0, .y = 0.0, .z = 0.0 } );
 }
 
 
-extern const vec3 vec3Left(void) {
-    return ((vec3) { -1.0, 0.0, 0.0 } );
+extern vec3 vec3Left(void) {
+    return ((vec3) { .x = -1.0, .y = 0.0, .z = 0.0 } );
 }
 
 
-extern const vec3 vec3Up(void) {
-    return ((vec3) { 0.0, 1.0, 0.0 } );
+extern vec3 vec3Up(void) {
+    return ((vec3) { .x = 0.0, .y = 1.0, .z = 0.0 } );
 }
 
 
-extern const vec3 vec3Down(void) {
-    return ((vec3) { 0.0, -1.0, 0.0 } );
+extern vec3 vec3Down(void) {
+    return ((vec3) { .x = 0.0, .y = -1.0, .z = 0.0 } );
 }
 
 
-extern const vec3 vec3Front(void) {
-    return ((vec3) { 0.0, 0.0, 1.0 } );
+extern vec3 vec3Front(void) {
+    return ((vec3) { .x = 0.0, .y = 0.0, .z = 1.0 } );
 }
 
 
-extern const vec3 vec3Back(void) {
-    return ((vec3) { 0.0, 0.0, -1.0 } );
+extern vec3 vec3Back(void) {
+    return ((vec3) { .x = 0.0, .y = 0.0, .z = -1.0 } );
 }
 
 

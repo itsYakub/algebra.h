@@ -73,33 +73,33 @@ extern vec2 vec2Normalize(vec2);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
-extern const vec2 vec2Zero(void) {
-    return ((vec2) { 0.0, 0.0 } );
+extern vec2 vec2Zero(void) {
+    return ((vec2) { .x = 0.0, .y = 0.0 } );
 }
 
 
-extern const vec2 vec2One(void) {
-    return ((vec2) { 1.0, 1.0 } );
+extern vec2 vec2One(void) {
+    return ((vec2) { .x = 1.0, .y = 1.0 } );
 }
 
 
-extern const vec2 vec2Right(void) {
-    return ((vec2) { 1.0, 0.0 } );
+extern vec2 vec2Right(void) {
+    return ((vec2) { .x = 1.0, .y = 0.0 } );
 }
 
 
-extern const vec2 vec2Left(void) {
-    return ((vec2) { -1.0, 0.0 } );
+extern vec2 vec2Left(void) {
+    return ((vec2) { .x = -1.0, .y = 0.0 } );
 }
 
 
-extern const vec2 vec2Up(void) {
-    return ((vec2) { 0.0, 1.0 } );
+extern vec2 vec2Up(void) {
+    return ((vec2) { .x = 0.0, .y = 1.0 } );
 }
 
 
-extern const vec2 vec2Down(void) {
-    return ((vec2) { 0.0, -1.0 } );
+extern vec2 vec2Down(void) {
+    return ((vec2) { .x = 0.0, .y = -1.0 } );
 }
 
 

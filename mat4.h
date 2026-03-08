@@ -21,9 +21,9 @@ union u_mat4 {
     float ptr[16];
 };
 
-extern const mat4 mat4Zero(void);
+extern mat4 mat4Zero(void);
 
-extern const mat4 mat4Identity(void);
+extern mat4 mat4Identity(void);
 
 extern mat4 mat4Init(float);
 
@@ -305,7 +305,7 @@ extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
 
 
 extern mat4 mat4Transpose(mat4 a) {
-    mat4 mat = mat4(0.0);
+    mat4 mat = mat4Zero();
     mat.m00  = a.m00; mat.m01 = a.m10; mat.m02 = a.m20; mat.m03 = a.m30;
     mat.m10  = a.m10; mat.m11 = a.m11; mat.m12 = a.m21; mat.m13 = a.m31;
     mat.m20  = a.m20; mat.m21 = a.m12; mat.m22 = a.m22; mat.m23 = a.m32;

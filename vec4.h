@@ -25,21 +25,21 @@ union u_vec4 {
     float ptr[4];
 };
 
-extern const vec4 vec4Zero(void);
+extern vec4 vec4Zero(void);
 
-extern const vec4 vec4One(void);
+extern vec4 vec4One(void);
 
-extern const vec4 vec4Right(void);
+extern vec4 vec4Right(void);
 
-extern const vec4 vec4Left(void);
+extern vec4 vec4Left(void);
 
-extern const vec4 vec4Up(void);
+extern vec4 vec4Up(void);
 
-extern const vec4 vec4Down(void);
+extern vec4 vec4Down(void);
 
-extern const vec4 vec4Front(void);
+extern vec4 vec4Front(void);
 
-extern const vec4 vec4Back(void);
+extern vec4 vec4Back(void);
 
 extern vec4 vec4Add(vec4, vec4);
 
@@ -79,43 +79,43 @@ extern vec4 vec4Normalize(vec4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 
-extern const vec4 vec4Zero(void) {
-    return ((vec4) { 0.0, 0.0, 0.0, 0.0 } );
+extern vec4 vec4Zero(void) {
+    return ((vec4) { .x = 0.0, .y = 0.0, .z = 0.0, .w = 0.0 } );
 }
 
 
-extern const vec4 vec4One(void) {
-    return ((vec4) { 1.0, 1.0, 1.0, 1.0 } );
+extern vec4 vec4One(void) {
+    return ((vec4) { .x = 1.0, .y = 1.0, .z = 1.0, .w = 1.0 } );
 }
 
 
-extern const vec4 vec4Right(void) {
-    return ((vec4) { 1.0, 0.0, 0.0, 0.0 } );
+extern vec4 vec4Right(void) {
+    return ((vec4) { .x = 1.0, .y = 0.0, .z = 0.0, .w = 0.0 } );
 }
 
 
-extern const vec4 vec4Left(void) {
-    return ((vec4) { -1.0, 0.0, 0.0, 0.0 } );
+extern vec4 vec4Left(void) {
+    return ((vec4) { .x = -1.0, .y = 0.0, .z = 0.0, .w = 0.0 } );
 }
 
 
-extern const vec4 vec4Up(void) {
-    return ((vec4) { 0.0, 1.0, 0.0, 0.0 } );
+extern vec4 vec4Up(void) {
+    return ((vec4) { .x = 0.0, .y = 1.0, .z = 0.0, .w = 0.0 } );
 }
 
 
-extern const vec4 vec4Down(void) {
-    return ((vec4) { 0.0, -1.0, 0.0, 0.0 } );
+extern vec4 vec4Down(void) {
+    return ((vec4) { .x = 0.0, .y = -1.0, .z = 0.0, .w = 0.0 } );
 }
 
 
-extern const vec4 vec4Front(void) {
-    return ((vec4) { 0.0, 0.0, 1.0, 0.0 } );
+extern vec4 vec4Front(void) {
+    return ((vec4) { .x = 0.0, .y = 0.0, .z = 1.0, .w = 0.0 } );
 }
 
 
-extern const vec4 vec4Back(void) {
-    return ((vec4) { 0.0, 0.0, -1.0, 0.0 } );
+extern vec4 vec4Back(void) {
+    return ((vec4) { .x = 0.0, .y = 0.0, .z = -1.0, .w = 0.0 } );
 }
 
 
