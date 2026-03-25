@@ -2,6 +2,8 @@
 # define _vec2_hpp_ 1
 #
 # include <cmath>
+#
+# include "./mat2.hpp"
 
 struct vec2 {
     union {
@@ -62,6 +64,8 @@ struct vec2 {
     
     vec2 operator / (float) const;
     
+    vec2 operator * (mat2) const;
+    
     vec2 &operator += (vec2);
 
     vec2 &operator -= (vec2);
@@ -77,6 +81,8 @@ struct vec2 {
     vec2 &operator *= (float);
 
     vec2 &operator /= (float);
+    
+    vec2 &operator *= (mat2);
 
     bool operator == (vec2) const;
     
@@ -191,6 +197,12 @@ vec2 vec2::operator * (float f) const {
 vec2 vec2::operator / (float f) const {
     return (vec2(f != 0.0 ? this->x / f : 0.0,
                  f != 0.0 ? this->y / f : 0.0));
+}
+
+
+vec2 vec2::operator * (mat2 m) const {
+    return (vec2(m.m00 * this->x + m.m01 * this->y,
+                 m.m10 * this->x + m.m11 * this->y));
 }
 
 

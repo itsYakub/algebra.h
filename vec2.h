@@ -4,6 +4,8 @@
 # include <stdbool.h>
 #
 # include <math.h>
+#
+# include "./mat2.h"
 
 typedef union u_vec2 vec2;
 
@@ -48,6 +50,8 @@ extern vec2 vec2Subf(vec2, float);
 extern vec2 vec2Mulf(vec2, float);
 
 extern vec2 vec2Divf(vec2, float);
+
+extern vec2 vec2Mulm(vec2, mat2);
 
 extern bool vec2Equal(vec2, vec2);
 
@@ -148,6 +152,12 @@ extern vec2 vec2Mulf(vec2 a, float f) {
 extern vec2 vec2Divf(vec2 a, float f) {
     return ((vec2) { .x = f != 0.0 ? a.x / f : 0.0,
                      .y = f != 0.0 ? a.y / f : 0.0 } );
+}
+
+
+extern vec2 vec2Mulm(vec2 v, mat2 m) {
+    return ((vec2) { .x = m.m00 * v.x + m.m01 * v.y,
+                     .y = m.m10 * v.x + m.m11 * v.y } );
 }
 
 
