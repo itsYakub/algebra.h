@@ -1,5 +1,9 @@
 #if !defined (_vec4_hpp_)
 # define _vec4_hpp_ 1
+#
+# include <cmath>
+#
+# include "./mat4.hpp"
 
 struct vec4 {
     union {
@@ -68,6 +72,8 @@ struct vec4 {
     
     vec4 operator / (float) const;
     
+    vec4 operator * (mat4) const;
+    
     vec4 &operator += (vec4);
 
     vec4 &operator -= (vec4);
@@ -83,6 +89,8 @@ struct vec4 {
     vec4 &operator *= (float);
 
     vec4 &operator /= (float);
+    
+    vec4 &operator *= (mat4);
 
     bool operator == (vec4) const;
     
@@ -222,6 +230,14 @@ vec4 vec4::operator / (float f) const {
 }
 
 
+vec4 vec4::operator * (mat4 m) const {
+    return (vec4(m.m00 * this->x + m.m01 * this->y + m.m02 * this->z + m.m03 * this->w,
+                 m.m10 * this->x + m.m11 * this->y + m.m12 * this->z + m.m13 * this->w,
+                 m.m20 * this->x + m.m21 * this->y + m.m22 * this->z + m.m23 * this->w,
+                 m.m30 * this->x + m.m31 * this->y + m.m32 * this->z + m.m33 * this->w));
+}
+
+
 vec4 &vec4::operator += (vec4 other) {
     this->x += other.x;
     this->y += other.y;
@@ -290,6 +306,17 @@ vec4 &vec4::operator /= (float f) {
     this->y = f != 0.0 ? this->y / f : 0.0;
     this->z = f != 0.0 ? this->z / f : 0.0;
     this->w = f != 0.0 ? this->w / f : 0.0;
+    return (*this);
+}
+
+
+vec4 &vec4::operator *= (mat4 m) {
+    vec4 v = vec4(m.m00 * this->x + m.m01 * this->y + m.m02 * this->z + m.m03 * this->w,
+                  m.m10 * this->x + m.m11 * this->y + m.m12 * this->z + m.m13 * this->w,
+                  m.m20 * this->x + m.m21 * this->y + m.m22 * this->z + m.m23 * this->w,
+                  m.m30 * this->x + m.m31 * this->y + m.m32 * this->z + m.m33 * this->w);
+
+    *this = v;
     return (*this);
 }
 

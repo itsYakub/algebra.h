@@ -17,6 +17,8 @@ struct mat2 {
 
     mat2(float);
 
+    mat2(float, float, float, float);
+
     mat2(const mat2 &);
    
     /* operator overloading... */
@@ -50,13 +52,21 @@ mat2::mat2(void) :
     m00(0.0), m01(0.0),
     m10(0.0), m11(0.0) { }
 
+
 mat2::mat2(float s) :
     m00(1.0 * s), m01(0.0),
     m10(0.0),     m11(1.0 * s) { }
 
+
+mat2::mat2(float m00, float m01, float m10, float m11) :
+    m00(m00), m01(m01),
+    m10(m10), m11(m11) { }
+
+
 mat2::mat2(const mat2 &other) :
     m00(other.m00), m01(other.m01),
     m10(other.m10), m11(other.m11) { }
+
 
 mat2 &mat2::operator = (const mat2 &other) {
     this->m00 = other.m00; 
@@ -65,6 +75,7 @@ mat2 &mat2::operator = (const mat2 &other) {
     this->m11 = other.m11; 
     return (*this);
 }
+
 
 mat2 mat2::operator + (mat2 other) const {
     mat2 result = mat2();
@@ -75,6 +86,7 @@ mat2 mat2::operator + (mat2 other) const {
     return (result);
 }
 
+
 mat2 mat2::operator - (mat2 other) const {
     mat2 result = mat2();
     result.m00 = this->m00 - other.m00; 
@@ -83,6 +95,7 @@ mat2 mat2::operator - (mat2 other) const {
     result.m11 = this->m11 - other.m11; 
     return (result);
 }
+
 
 mat2 mat2::operator * (mat2 other) const {
     mat2 result = mat2();
@@ -93,6 +106,7 @@ mat2 mat2::operator * (mat2 other) const {
     return (result);
 }
 
+
 mat2 mat2::operator * (float f) const {
     mat2 result = mat2();
     result.m00 = this->m00 * f; 
@@ -102,25 +116,30 @@ mat2 mat2::operator * (float f) const {
     return (result);
 }
 
+
 mat2 &mat2::operator += (mat2 other) {
     *this = *this + other;
     return (*this);
 }
+
 
 mat2 &mat2::operator -= (mat2 other) {
     *this = *this - other;
     return (*this);
 }
 
+
 mat2 &mat2::operator *= (mat2 other) {
     *this = *this * other;
     return (*this);
 }
 
+
 mat2 &mat2::operator *= (float f) {
     *this = *this * f;
     return (*this);
 }
+
 
 float mat2::det(void) const {
     return (this->m00 * this->m11 - this->m10 * this->m01);

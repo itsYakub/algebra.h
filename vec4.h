@@ -4,6 +4,8 @@
 # include <stdbool.h>
 #
 # include <math.h>
+#
+# include "./mat4.h"
 
 typedef union u_vec4 vec4;
 
@@ -56,6 +58,8 @@ extern vec4 vec4Subf(vec4, float);
 extern vec4 vec4Mulf(vec4, float);
 
 extern vec4 vec4Divf(vec4, float);
+
+extern vec4 vec4Mulm(vec4, mat4);
 
 extern bool vec4Equal(vec4, vec4);
 
@@ -179,6 +183,14 @@ extern vec4 vec4Divf(vec4 a, float f) {
                      .y = f != 0.0 ? a.y / f : 0.0,
                      .z = f != 0.0 ? a.z / f : 0.0,
                      .w = f != 0.0 ? a.w / f : 0.0 } );
+}
+
+
+extern vec4 vec4Mulm(vec4 v, mat4 m) {
+    return ((vec4) { .x = m.m00 * v.x + m.m01 * v.y + m.m02 * v.z + m.m03 * v.w,
+                     .y = m.m10 * v.x + m.m11 * v.y + m.m12 * v.z + m.m13 * v.w,
+                     .z = m.m20 * v.x + m.m21 * v.y + m.m22 * v.z + m.m23 * v.w,
+                     .w = m.m30 * v.x + m.m31 * v.y + m.m32 * v.z + m.m33 * v.w } );
 }
 
 

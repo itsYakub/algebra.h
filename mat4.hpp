@@ -23,6 +23,11 @@ struct mat4 {
     mat4(void);
 
     mat4(float);
+    
+    mat4(float, float, float, float,
+         float, float, float, float,
+         float, float, float, float,
+         float, float, float, float);
 
     mat4(const mat4 &);
     
@@ -99,6 +104,13 @@ mat4::mat4(float s) :
     m10(0.0),     m11(1.0 * s), m12(0.0),     m13(0.0),
     m20(0.0),     m21(0.0),     m22(1.0 * s), m23(0.0),
     m30(0.0),     m31(0.0),     m32(0.0),     m33(1.0 * s) { }
+
+    
+mat4::mat4(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33) :
+    m00(m00), m01(m01), m02(m02), m03(m03),
+    m10(m10), m11(m11), m12(m12), m13(m13),
+    m20(m20), m21(m21), m22(m22), m23(m23),
+    m30(m30), m31(m31), m32(m32), m33(m33) { }
 
 
 mat4::mat4(const mat4 &other) :

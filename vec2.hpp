@@ -262,6 +262,15 @@ vec2 &vec2::operator /= (float f) {
 }
 
 
+vec2 &vec2::operator *= (mat2 m) {
+    vec2 v = vec2(m.m00 * this->x + m.m01 * this->y,
+                  m.m10 * this->x + m.m11 * this->y);
+
+    *this = v;
+    return (*this);
+}
+
+
 bool vec2::operator == (vec2 other) const {
     return (this->x == other.x &&
             this->y == other.y);

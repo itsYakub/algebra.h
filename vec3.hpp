@@ -2,6 +2,8 @@
 # define _vec3_hpp_ 1
 #
 # include <cmath>
+#
+# include "./mat3.hpp"
 
 struct vec3 {
     union {
@@ -68,6 +70,8 @@ struct vec3 {
     
     vec3 operator / (float) const;
     
+    vec3 operator * (mat3) const;
+    
     vec3 &operator += (vec3);
 
     vec3 &operator -= (vec3);
@@ -83,6 +87,8 @@ struct vec3 {
     vec3 &operator *= (float);
 
     vec3 &operator /= (float);
+    
+    vec3 &operator *= (mat3);
 
     bool operator == (vec3) const;
     
@@ -215,6 +221,13 @@ vec3 vec3::operator / (float f) const {
 }
 
 
+vec3 vec3::operator * (mat3 m) const {
+    return (vec3(m.m00 * this->x + m.m01 * this->y + m.m02 * this->z,
+                 m.m10 * this->x + m.m11 * this->y + m.m12 * this->z,
+                 m.m20 * this->x + m.m21 * this->y + m.m22 * this->z));
+}
+
+
 vec3 &vec3::operator += (vec3 other) {
     this->x += other.x;
     this->y += other.y;
@@ -275,6 +288,16 @@ vec3 &vec3::operator /= (float f) {
     this->x = f != 0.0 ? this->x / f : 0.0;
     this->y = f != 0.0 ? this->y / f : 0.0;
     this->z = f != 0.0 ? this->z / f : 0.0;
+    return (*this);
+}
+
+
+vec3 &vec3::operator *= (mat3 m) {
+    vec3 v = vec3(m.m00 * this->x + m.m01 * this->y + m.m02 * this->z,
+                  m.m10 * this->x + m.m11 * this->y + m.m12 * this->z,
+                  m.m20 * this->x + m.m21 * this->y + m.m22 * this->z);
+
+    *this = v;
     return (*this);
 }
 
