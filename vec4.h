@@ -21,8 +21,6 @@ union u_vec4 {
         float b;
         float a;
     };
-
-    float ptr[4];
 };
 
 extern vec4 vec4Zero(void);

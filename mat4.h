@@ -16,8 +16,6 @@ union u_mat4 {
               m20, m21, m22, m23,
               m30, m31, m32, m33;
     };
-
-    float ptr[16];
 };
 
 extern mat4 mat4Zero(void);
@@ -82,57 +80,57 @@ extern mat4 mat4Identity(void) {
 
 
 extern mat4 mat4Init(float s) {
-    return ((mat4) {{ 1.0f * s, 0.0f,     0.0f,     0.0f,
-                      0.0f,     1.0f * s, 0.0f,     0.0f,
-                      0.0f,     0.0f,     1.0f * s, 0.0f,
-                      0.0f,     0.0f,     0.0f,     1.0f * s }} );
+    return ((mat4) { 1.0f * s, 0.0f,     0.0f,     0.0f,
+                     0.0f,     1.0f * s, 0.0f,     0.0f,
+                     0.0f,     0.0f,     1.0f * s, 0.0f,
+                     0.0f,     0.0f,     0.0f,     1.0f * s } );
 }
 
 
 extern mat4 mat4Add(mat4 a, mat4 b) {
-    return ((mat4) {{ a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02, a.m03 + b.m03,
-                      a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12, a.m13 + b.m13,
-                      a.m20 + b.m20, a.m21 + b.m21, a.m22 + b.m22, a.m23 + b.m23,
-                      a.m30 + b.m30, a.m31 + b.m31, a.m32 + b.m32, a.m33 + b.m33 }} );
+    return ((mat4) { a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02, a.m03 + b.m03,
+                     a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12, a.m13 + b.m13,
+                     a.m20 + b.m20, a.m21 + b.m21, a.m22 + b.m22, a.m23 + b.m23,
+                     a.m30 + b.m30, a.m31 + b.m31, a.m32 + b.m32, a.m33 + b.m33 } );
 }
 
 
 extern mat4 mat4Sub(mat4 a, mat4 b) {
-    return ((mat4) {{ a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02, a.m03 - b.m03,
-                      a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12, a.m13 - b.m13,
-                      a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22, a.m23 - b.m23,
-                      a.m30 - b.m30, a.m31 - b.m31, a.m32 - b.m32, a.m33 - b.m33 }} );
+    return ((mat4) { a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02, a.m03 - b.m03,
+                     a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12, a.m13 - b.m13,
+                     a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22, a.m23 - b.m23,
+                     a.m30 - b.m30, a.m31 - b.m31, a.m32 - b.m32, a.m33 - b.m33 } );
 }
 
 
 extern mat4 mat4Mul(mat4 a, mat4 b) {
-    return ((mat4) {{ a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02 + a.m30 * b.m03,
-                      a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02 + a.m31 * b.m03,
-                      a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02 + a.m32 * b.m03,
-                      a.m03 * b.m00 + a.m13 * b.m01 + a.m23 * b.m02 + a.m33 * b.m03,
+    return ((mat4) { a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02 + a.m30 * b.m03,
+                     a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02 + a.m31 * b.m03,
+                     a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02 + a.m32 * b.m03,
+                     a.m03 * b.m00 + a.m13 * b.m01 + a.m23 * b.m02 + a.m33 * b.m03,
 
-                      a.m00 * b.m10 + a.m10 * b.m11 + a.m20 * b.m12 + a.m30 * b.m13,
-                      a.m01 * b.m10 + a.m11 * b.m11 + a.m21 * b.m12 + a.m31 * b.m13,
-                      a.m02 * b.m10 + a.m12 * b.m11 + a.m22 * b.m12 + a.m32 * b.m13,
-                      a.m03 * b.m10 + a.m13 * b.m11 + a.m23 * b.m12 + a.m33 * b.m13,
+                     a.m00 * b.m10 + a.m10 * b.m11 + a.m20 * b.m12 + a.m30 * b.m13,
+                     a.m01 * b.m10 + a.m11 * b.m11 + a.m21 * b.m12 + a.m31 * b.m13,
+                     a.m02 * b.m10 + a.m12 * b.m11 + a.m22 * b.m12 + a.m32 * b.m13,
+                     a.m03 * b.m10 + a.m13 * b.m11 + a.m23 * b.m12 + a.m33 * b.m13,
 
-                      a.m00 * b.m20 + a.m10 * b.m21 + a.m20 * b.m22 + a.m30 * b.m23,
-                      a.m01 * b.m20 + a.m11 * b.m21 + a.m21 * b.m22 + a.m31 * b.m23,
-                      a.m02 * b.m20 + a.m12 * b.m21 + a.m22 * b.m22 + a.m32 * b.m23,
-                      a.m03 * b.m20 + a.m13 * b.m21 + a.m23 * b.m22 + a.m33 * b.m23,
+                     a.m00 * b.m20 + a.m10 * b.m21 + a.m20 * b.m22 + a.m30 * b.m23,
+                     a.m01 * b.m20 + a.m11 * b.m21 + a.m21 * b.m22 + a.m31 * b.m23,
+                     a.m02 * b.m20 + a.m12 * b.m21 + a.m22 * b.m22 + a.m32 * b.m23,
+                     a.m03 * b.m20 + a.m13 * b.m21 + a.m23 * b.m22 + a.m33 * b.m23,
 
-                      a.m00 * b.m30 + a.m10 * b.m31 + a.m20 * b.m32 + a.m30 * b.m33,
-                      a.m01 * b.m30 + a.m11 * b.m31 + a.m21 * b.m32 + a.m31 * b.m33,
-                      a.m02 * b.m30 + a.m12 * b.m31 + a.m22 * b.m32 + a.m32 * b.m33,
-                      a.m03 * b.m30 + a.m13 * b.m31 + a.m23 * b.m32 + a.m33 * b.m33 }} );
+                     a.m00 * b.m30 + a.m10 * b.m31 + a.m20 * b.m32 + a.m30 * b.m33,
+                     a.m01 * b.m30 + a.m11 * b.m31 + a.m21 * b.m32 + a.m31 * b.m33,
+                     a.m02 * b.m30 + a.m12 * b.m31 + a.m22 * b.m32 + a.m32 * b.m33,
+                     a.m03 * b.m30 + a.m13 * b.m31 + a.m23 * b.m32 + a.m33 * b.m33 } );
 }
 
 
 extern mat4 mat4Mulf(mat4 a, float f) {
-    return ((mat4) {{ a.m00 * f, a.m01 * f, a.m02 * f, a.m03 * f,
-                      a.m10 * f, a.m11 * f, a.m12 * f, a.m13 * f,
-                      a.m20 * f, a.m21 * f, a.m22 * f, a.m23 * f,
-                      a.m30 * f, a.m31 * f, a.m32 * f, a.m33 * f }} );
+    return ((mat4) { a.m00 * f, a.m01 * f, a.m02 * f, a.m03 * f,
+                     a.m10 * f, a.m11 * f, a.m12 * f, a.m13 * f,
+                     a.m20 * f, a.m21 * f, a.m22 * f, a.m23 * f,
+                     a.m30 * f, a.m31 * f, a.m32 * f, a.m33 * f } );
 }
 
 

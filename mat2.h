@@ -10,8 +10,6 @@ union u_mat2 {
         float m00, m01,
               m10, m11;
     };
-
-    float ptr[4];
 };
 
 extern mat2 mat2Zero(void);
@@ -37,40 +35,40 @@ extern mat2 mat2Trans(mat2);
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 extern mat2 mat2Zero(void) {
-    return ((mat2) {{ 0.0f, 0.0f,
-                      0.0f, 0.0f }} );
+    return ((mat2) { 0.0f, 0.0f,
+                     0.0f, 0.0f } );
 }
 
 
 extern mat2 mat2Init(float s) {
-    return ((mat2) {{ 1.0f * s, 0.0f,
-                      0.0f,     1.0f * s }} );
+    return ((mat2) { 1.0f * s, 0.0f,
+                     0.0f,     1.0f * s } );
 }
 
 
 extern mat2 mat2Add(mat2 a, mat2 b) {
-    return ((mat2) {{ a.m00 + b.m00, a.m01 + b.m01,
-                      a.m10 + b.m10, a.m11 + b.m11 }} );
+    return ((mat2) { a.m00 + b.m00, a.m01 + b.m01,
+                     a.m10 + b.m10, a.m11 + b.m11 } );
 }
 
 
 extern mat2 mat2Sub(mat2 a, mat2 b) {
-    return ((mat2) {{ a.m00 - b.m00, a.m01 - b.m01,
-                      a.m10 - b.m10, a.m11 - b.m11 }} );
+    return ((mat2) { a.m00 - b.m00, a.m01 - b.m01,
+                     a.m10 - b.m10, a.m11 - b.m11 } );
 }
 
 
 extern mat2 mat2Mul(mat2 a, mat2 b) {
-    return ((mat2) {{ a.m00 * b.m00 + a.m10 * b.m01,
-                      a.m01 * b.m00 + a.m11 * b.m01,
-                      a.m00 * b.m10 + a.m10 * b.m11,
-                      a.m01 * b.m10 + a.m11 * b.m11 }} );
+    return ((mat2) { a.m00 * b.m00 + a.m10 * b.m01,
+                     a.m01 * b.m00 + a.m11 * b.m01,
+                     a.m00 * b.m10 + a.m10 * b.m11,
+                     a.m01 * b.m10 + a.m11 * b.m11 } );
 }
 
 
 extern mat2 mat2Mulf(mat2 a, float f) {
-    return ((mat2) {{ a.m00 * f, a.m01 * f,
-                      a.m10 * f, a.m11 * f }} );
+    return ((mat2) { a.m00 * f, a.m01 * f,
+                     a.m10 * f, a.m11 * f } );
 }
 
 

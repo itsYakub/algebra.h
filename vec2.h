@@ -17,8 +17,6 @@ union u_vec2 {
         float w;
         float h;
     };
-
-    float ptr[2];
 };
 
 extern vec2 vec2Zero(void);

@@ -19,8 +19,6 @@ union u_vec3 {
         float g;
         float b;
     };
-
-    float ptr[3];
 };
 
 extern vec3 vec3Zero(void);
