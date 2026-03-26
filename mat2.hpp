@@ -1,157 +1,59 @@
 #if !defined (_mat2_hpp_)
 # define _mat2_hpp_ 1
+#
+# if defined (__cplusplus)
 
-struct mat2 {
-    union {
-        struct {
-            float m00, m01,
-                  m10, m11;
-        };
+extern "C" {
 
-        float ptr[4];
-    };
-   
-    /* constructors... */
+# endif
+#
+# include "./mat2.h"
+#
+# if defined (__cplusplus)
 
-    mat2(void);
+}
 
-    mat2(float);
-
-    mat2(float, float, float, float);
-
-    mat2(const mat2 &);
-   
-    /* operator overloading... */
-
-    mat2 &operator = (const mat2 &);
-
-    mat2 operator + (mat2) const;
-
-    mat2 operator - (mat2) const;
-
-    mat2 operator * (mat2) const;
-    
-    mat2 operator * (float) const;
-    
-    vec2 operator * (vec2) const;
-    
-    mat2 &operator += (mat2);
-    
-    mat2 &operator -= (mat2);
-    
-    mat2 &operator *= (mat2);
-    
-    mat2 &operator *= (float);
-   
-    /* public methods... */
-
-    float det(void) const;
-};
-
-# if defined (ALGEBRA_IMPLEMENTATION)
-
-mat2::mat2(void) :
-    m00(0.0), m01(0.0),
-    m10(0.0), m11(0.0) { }
-
-
-mat2::mat2(float s) :
-    m00(1.0 * s), m01(0.0),
-    m10(0.0),     m11(1.0 * s) { }
-
-
-mat2::mat2(float m00, float m01, float m10, float m11) :
-    m00(m00), m01(m01),
-    m10(m10), m11(m11) { }
-
-
-mat2::mat2(const mat2 &other) :
-    m00(other.m00), m01(other.m01),
-    m10(other.m10), m11(other.m11) { }
-
-
-mat2 &mat2::operator = (const mat2 &other) {
-    this->m00 = other.m00; 
-    this->m01 = other.m01; 
-    this->m10 = other.m10; 
-    this->m11 = other.m11; 
-    return (*this);
+inline mat2 operator + (mat2 a, mat2 b) {
+    return (mat2Add(a, b));
 }
 
 
-mat2 mat2::operator + (mat2 other) const {
-    mat2 result = mat2();
-    result.m00 = this->m00 + other.m00; 
-    result.m01 = this->m01 + other.m01; 
-    result.m10 = this->m10 + other.m10; 
-    result.m11 = this->m11 + other.m11; 
-    return (result);
+inline mat2 operator - (mat2 a, mat2 b) {
+    return (mat2Sub(a, b));
 }
 
 
-mat2 mat2::operator - (mat2 other) const {
-    mat2 result = mat2();
-    result.m00 = this->m00 - other.m00; 
-    result.m01 = this->m01 - other.m01; 
-    result.m10 = this->m10 - other.m10; 
-    result.m11 = this->m11 - other.m11; 
-    return (result);
+inline mat2 operator * (mat2 a, mat2 b) {
+    return (mat2Mul(a, b));
 }
 
 
-mat2 mat2::operator * (mat2 other) const {
-    mat2 result = mat2();
-    result.m00 = this->m00 * other.m00 + this->m10 * other.m01; 
-    result.m01 = this->m01 * other.m00 + this->m11 * other.m01; 
-    result.m10 = this->m00 * other.m10 + this->m10 * other.m11; 
-    result.m11 = this->m01 * other.m10 + this->m11 * other.m11; 
-    return (result);
+inline mat2 operator * (mat2 m, float f) {
+    return (mat2Mulf(m, f));
 }
 
 
-mat2 mat2::operator * (float f) const {
-    mat2 result = mat2();
-    result.m00 = this->m00 * f; 
-    result.m01 = this->m01 * f; 
-    result.m10 = this->m10 * f; 
-    result.m11 = this->m11 * f; 
-    return (result);
+inline vec2 operator * (mat2 m, vec2 v) {
+    return (mat2Mulv(m, v));
 }
 
 
-vec2 mat2::operator * (vec2 v) const {
-    return (vec2(this->m00 * v.x + this->m10 * v.y,
-                 this->m01 * v.x + this->m11 * v.y));
+inline mat2 &operator += (mat2 &a, mat2 b) {
+    a = mat2Add(a, b);
+    return (a);
 }
 
 
-mat2 &mat2::operator += (mat2 other) {
-    *this = *this + other;
-    return (*this);
+inline mat2 &operator -= (mat2 &a, mat2 b) {
+    a = mat2Sub(a, b);
+    return (a);
 }
 
 
-mat2 &mat2::operator -= (mat2 other) {
-    *this = *this - other;
-    return (*this);
+inline mat2 &operator *= (mat2 &a, mat2 b) {
+    a = mat2Mul(a, b);
+    return (a);
 }
 
-
-mat2 &mat2::operator *= (mat2 other) {
-    *this = *this * other;
-    return (*this);
-}
-
-
-mat2 &mat2::operator *= (float f) {
-    *this = *this * f;
-    return (*this);
-}
-
-
-float mat2::det(void) const {
-    return (this->m00 * this->m11 - this->m10 * this->m01);
-}
-
-# endif /* ALGEBRA_IMPLEMENTATION */
+# endif /* __cplusplus */
 #endif /* _mat2_hpp_ */

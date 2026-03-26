@@ -33,14 +33,14 @@ extern float mat2Det(mat2);
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 extern mat2 mat2Zero(void) {
-    return ((mat2) {{ 0.0, 0.0,
-                      0.0, 0.0 }} );
+    return ((mat2) {{ 0.0f, 0.0f,
+                      0.0f, 0.0f }} );
 }
 
 
 extern mat2 mat2Init(float s) {
-    return ((mat2) {{ 1.0 * s, 0.0,
-                      0.0,     1.0 * s }} );
+    return ((mat2) {{ 1.0f * s, 0.0f,
+                      0.0f,     1.0f * s }} );
 }
 
 

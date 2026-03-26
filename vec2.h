@@ -80,32 +80,32 @@ extern vec2 vec2Normalize(vec2);
 #  include "./mat2.h"
 
 extern vec2 vec2Zero(void) {
-    return ((vec2) { .x = 0.0, .y = 0.0 } );
+    return ((vec2) { .x = 0.0f, .y = 0.0f } );
 }
 
 
 extern vec2 vec2One(void) {
-    return ((vec2) { .x = 1.0, .y = 1.0 } );
+    return ((vec2) { .x = 1.0f, .y = 1.0f } );
 }
 
 
 extern vec2 vec2Right(void) {
-    return ((vec2) { .x = 1.0, .y = 0.0 } );
+    return ((vec2) { .x = 1.0f, .y = 0.0f } );
 }
 
 
 extern vec2 vec2Left(void) {
-    return ((vec2) { .x = -1.0, .y = 0.0 } );
+    return ((vec2) { .x = -1.0f, .y = 0.0f } );
 }
 
 
 extern vec2 vec2Up(void) {
-    return ((vec2) { .x = 0.0, .y = 1.0 } );
+    return ((vec2) { .x = 0.0f, .y = 1.0f } );
 }
 
 
 extern vec2 vec2Down(void) {
-    return ((vec2) { .x = 0.0, .y = -1.0 } );
+    return ((vec2) { .x = 0.0f, .y = -1.0f } );
 }
 
 
@@ -128,8 +128,8 @@ extern vec2 vec2Mul(vec2 a, vec2 b) {
 
 
 extern vec2 vec2Div(vec2 a, vec2 b) {
-    return ((vec2) { .x = b.x != 0.0 ? a.x / b.x : 0.0,
-                     .y = b.y != 0.0 ? a.y / b.y : 0.0 } );
+    return ((vec2) { .x = b.x != 0.0f ? a.x / b.x : 0.0f,
+                     .y = b.y != 0.0f ? a.y / b.y : 0.0f } );
 }
 
 
@@ -152,8 +152,8 @@ extern vec2 vec2Mulf(vec2 a, float f) {
 
 
 extern vec2 vec2Divf(vec2 a, float f) {
-    return ((vec2) { .x = f != 0.0 ? a.x / f : 0.0,
-                     .y = f != 0.0 ? a.y / f : 0.0 } );
+    return ((vec2) { .x = f != 0.0f ? a.x / f : 0.0f,
+                     .y = f != 0.0f ? a.y / f : 0.0f } );
 }
 
 
@@ -224,8 +224,8 @@ extern vec2 vec2Normalize(vec2 a) {
     float len = vec2Length(a);
 
     vec2 vec = a;
-    if (len != 0.0) {
-        vec = vec2Mulf(vec, 1.0 / len);
+    if (len != 0.0f) {
+        vec = vec2Mulf(vec, 1.0f / len);
     }
     return (vec);
 }
