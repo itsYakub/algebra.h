@@ -428,7 +428,7 @@ mat4 mat4::scale(vec3 v) {
 }
 
 
-mat4 mat4::frust(float left, float right, float top, float down, float near, float far) {
+mat4 mat4::frust(float left, float right, float down, float top, float near, float far) {
     mat4 mat =   mat4();
     mat.m00  =  (near * 2.0) / (right - left);
     mat.m11  =  (near * 2.0) / (top   - down);
@@ -441,7 +441,7 @@ mat4 mat4::frust(float left, float right, float top, float down, float near, flo
 }
 
 
-mat4 mat4::ortho(float left, float right, float top, float down, float near, float far) {
+mat4 mat4::ortho(float left, float right, float down, float top, float near, float far) {
     mat4 mat = mat4();
     mat.m00 =  2.0 / (right - left);
     mat.m11 =  2.0 / (top   - down);
@@ -457,7 +457,7 @@ mat4 mat4::ortho(float left, float right, float top, float down, float near, flo
 mat4 mat4::persp(float fieldOfView, float aspect, float near, float far) {
     float top   = near * tan(fieldOfView * 0.5);
     float right = top * aspect;
-    return (mat4::frust(-right, right, top, -top, near, far));
+    return (mat4::frust(-right, right, -top, top, near, far));
 }
     
 mat4 mat4::transpose(mat4 a) {
