@@ -158,8 +158,8 @@ extern vec2 vec2Divf(vec2 a, float f) {
 
 
 extern vec2 vec2Mulm(vec2 v, mat2 m) {
-    return ((vec2) { .x = m.m00 * v.x + m.m01 * v.y,
-                     .y = m.m10 * v.x + m.m11 * v.y } );
+    return ((vec2) { .x = m.m00 * v.x + m.m10 * v.y,
+                     .y = m.m01 * v.x + m.m11 * v.y } );
 }
 
 

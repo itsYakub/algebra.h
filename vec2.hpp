@@ -203,8 +203,8 @@ vec2 vec2::operator / (float f) const {
 
 
 vec2 vec2::operator * (mat2 m) const {
-    return (vec2(m.m00 * this->x + m.m01 * this->y,
-                 m.m10 * this->x + m.m11 * this->y));
+    return (vec2(m.m00 * this->x + m.m10 * this->y,
+                 m.m01 * this->x + m.m11 * this->y));
 }
 
 

@@ -182,9 +182,9 @@ extern vec3 vec3Divf(vec3 a, float f) {
 
 
 extern vec3 vec3Mulm(vec3 v, mat3 m) {
-    return ((vec3) { .x = m.m00 * v.x + m.m01 * v.y + m.m02 * v.z,
-                     .y = m.m10 * v.x + m.m11 * v.y + m.m12 * v.z,
-                     .z = m.m20 * v.x + m.m21 * v.y + m.m22 * v.z } );
+    return ((vec3) { .x = m.m00 * v.x + m.m10 * v.y + m.m20 * v.z,
+                     .y = m.m01 * v.x + m.m11 * v.y + m.m21 * v.z,
+                     .z = m.m02 * v.x + m.m12 * v.y + m.m22 * v.z } );
 }
 
 

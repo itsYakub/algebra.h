@@ -71,8 +71,8 @@ extern mat2 mat2Mulf(mat2 a, float f) {
 
 
 extern vec2 mat2Mulv(mat2 m, vec2 v) {
-    return ((vec2) { .x = m.m00 * v.x + m.m01 * v.y,
-                     .y = m.m10 * v.x + m.m11 * v.y } );
+    return ((vec2) { .x = m.m00 * v.x + m.m10 * v.y,
+                     .y = m.m01 * v.x + m.m11 * v.y } );
 }
 
 

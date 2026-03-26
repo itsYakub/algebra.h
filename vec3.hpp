@@ -224,9 +224,9 @@ vec3 vec3::operator / (float f) const {
 
 
 vec3 vec3::operator * (mat3 m) const {
-    return (vec3(m.m00 * this->x + m.m01 * this->y + m.m02 * this->z,
-                 m.m10 * this->x + m.m11 * this->y + m.m12 * this->z,
-                 m.m20 * this->x + m.m21 * this->y + m.m22 * this->z));
+    return (vec3(m.m00 * this->x + m.m10 * this->y + m.m20 * this->z,
+                 m.m01 * this->x + m.m11 * this->y + m.m21 * this->z,
+                 m.m02 * this->x + m.m12 * this->y + m.m22 * this->z));
 }
 
 

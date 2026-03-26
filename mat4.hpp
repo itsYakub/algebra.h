@@ -255,10 +255,10 @@ mat4 mat4::operator * (float f) const {
 
 
 vec4 mat4::operator * (vec4 v) const {
-    return (vec4(this->m00 * v.x + this->m01 * v.y + this->m02 * v.z + this->m03 * v.w,
-                 this->m10 * v.x + this->m11 * v.y + this->m12 * v.z + this->m13 * v.w,
-                 this->m20 * v.x + this->m21 * v.y + this->m22 * v.z + this->m23 * v.w,
-                 this->m30 * v.x + this->m31 * v.y + this->m32 * v.z + this->m33 * v.w));
+    return (vec4(this->m00 * v.x + this->m10 * v.y + this->m20 * v.z + this->m30 * v.w,
+                 this->m01 * v.x + this->m11 * v.y + this->m21 * v.z + this->m31 * v.w,
+                 this->m02 * v.x + this->m12 * v.y + this->m22 * v.z + this->m32 * v.w,
+                 this->m03 * v.x + this->m13 * v.y + this->m23 * v.z + this->m33 * v.w));
 }
 
 
