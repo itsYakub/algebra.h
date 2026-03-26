@@ -136,5 +136,5 @@ inline vec2 &operator /= (vec2 &v, float f) {
 }
 
 
-# endif /* ALGEBRA_IMPLEMENTATION */
+# endif /* __cplusplus */
 #endif /* _vec2_hpp_ */

@@ -86,47 +86,48 @@ extern vec4 vec4Normalize(vec4);
 #  include "./mat4.h"
 
 extern vec4 vec4Zero(void) {
-    return ((vec4) { .x = 0.0, .y = 0.0, .z = 0.0, .w = 0.0 } );
+    return ((vec4) { .x = 0.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4One(void) {
-    return ((vec4) { .x = 1.0, .y = 1.0, .z = 1.0, .w = 1.0 } );
+    return ((vec4) { .x = 1.0f, .y = 1.0f, .z = 1.0f, .w = 1.0f } );
 }
 
 
 extern vec4 vec4Right(void) {
-    return ((vec4) { .x = 1.0, .y = 0.0, .z = 0.0, .w = 0.0 } );
+    return ((vec4) { .x = 1.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4Left(void) {
-    return ((vec4) { .x = -1.0, .y = 0.0, .z = 0.0, .w = 0.0 } );
+    return ((vec4) { .x = -1.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4Up(void) {
-    return ((vec4) { .x = 0.0, .y = 1.0, .z = 0.0, .w = 0.0 } );
+    return ((vec4) { .x = 0.0f, .y = 1.0f, .z = 0.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4Down(void) {
-    return ((vec4) { .x = 0.0, .y = -1.0, .z = 0.0, .w = 0.0 } );
+    return ((vec4) { .x = 0.0f, .y = -1.0f, .z = 0.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4Front(void) {
-    return ((vec4) { .x = 0.0, .y = 0.0, .z = 1.0, .w = 0.0 } );
+    return ((vec4) { .x = 0.0f, .y = 0.0f, .z = 1.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4Back(void) {
-    return ((vec4) { .x = 0.0, .y = 0.0, .z = -1.0, .w = 0.0 } );
+    return ((vec4) { .x = 0.0f, .y = 0.0f, .z = -1.0f, .w = 0.0f } );
 }
 
 
 extern vec4 vec4Add(vec4 a, vec4 b) {
     return ((vec4) { .x = a.x + b.x,
+                     .y = a.y + b.y,
                      .z = a.z + b.z,
                      .w = a.w + b.w } );
 }
@@ -149,10 +150,10 @@ extern vec4 vec4Mul(vec4 a, vec4 b) {
 
 
 extern vec4 vec4Div(vec4 a, vec4 b) {
-    return ((vec4) { .x = b.x != 0.0 ? a.x / b.x : 0.0,
-                     .y = b.y != 0.0 ? a.y / b.y : 0.0,
-                     .z = b.z != 0.0 ? a.z / b.z : 0.0,
-                     .w = b.w != 0.0 ? a.w / b.w : 0.0 } );
+    return ((vec4) { .x = b.x != 0.0f ? a.x / b.x : 0.0f,
+                     .y = b.y != 0.0f ? a.y / b.y : 0.0f,
+                     .z = b.z != 0.0f ? a.z / b.z : 0.0f,
+                     .w = b.w != 0.0f ? a.w / b.w : 0.0f } );
 }
 
 
@@ -181,10 +182,10 @@ extern vec4 vec4Mulf(vec4 a, float f) {
 
 
 extern vec4 vec4Divf(vec4 a, float f) {
-    return ((vec4) { .x = f != 0.0 ? a.x / f : 0.0,
-                     .y = f != 0.0 ? a.y / f : 0.0,
-                     .z = f != 0.0 ? a.z / f : 0.0,
-                     .w = f != 0.0 ? a.w / f : 0.0 } );
+    return ((vec4) { .x = f != 0.0f ? a.x / f : 0.0f,
+                     .y = f != 0.0f ? a.y / f : 0.0f,
+                     .z = f != 0.0f ? a.z / f : 0.0f,
+                     .w = f != 0.0f ? a.w / f : 0.0f } );
 }
 
 
@@ -266,8 +267,8 @@ extern vec4 vec4Normalize(vec4 a) {
     float len = vec4Length(a);
 
     vec4 vec = a;
-    if (len != 0.0) {
-        vec = vec4Mulf(vec, 1.0 / len);
+    if (len != 0.0f) {
+        vec = vec4Mulf(vec, 1.0f / len);
     }
     return (vec);
 }

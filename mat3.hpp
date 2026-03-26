@@ -1,205 +1,59 @@
 #if !defined (_mat3_hpp_)
 # define _mat3_hpp_ 1
+#
+# if defined (__cplusplus)
 
-struct mat3 {
-    union {
-        struct {
-            float m00, m01, m02,
-                  m10, m11, m12,
-                  m20, m21, m22;
-        };
+extern "C" {
 
-        float ptr[9];
-    };
-   
-    /* constructors... */
+# endif
+#
+# include "./mat3.h"
+#
+# if defined (__cplusplus)
 
-    mat3(void);
+}
 
-    mat3(float);
-    
-    mat3(float, float, float,
-         float, float, float,
-         float, float, float);
-
-    mat3(const mat3 &);
-   
-    /* operator overloading... */
-
-    mat3 &operator = (const mat3 &);
-
-    mat3 operator + (mat3) const;
-
-    mat3 operator - (mat3) const;
-
-    mat3 operator * (mat3) const;
-    
-    mat3 operator * (float) const;
-    
-    vec3 operator * (vec3) const;
-    
-    mat3 &operator += (mat3);
-    
-    mat3 &operator -= (mat3);
-    
-    mat3 &operator *= (mat3);
-    
-    mat3 &operator *= (float);
-   
-    /* public methods... */
-
-    float det(void) const;
-};
-
-# if defined (ALGEBRA_IMPLEMENTATION)
-
-mat3::mat3(void) :
-    m00(0.0), m01(0.0), m02(0.0),
-    m10(0.0), m11(0.0), m12(0.0),
-    m20(0.0), m21(0.0), m22(0.0) { }
-
-
-mat3::mat3(float s) :
-    m00(1.0 * s), m01(0.0),     m02(0.0),
-    m10(0.0),     m11(1.0 * s), m12(0.0),
-    m20(0.0),     m21(0.0),     m22(1.0 * s) { }
-
-    
-mat3::mat3(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) :
-    m00(m00), m01(m01), m02(m02),
-    m10(m10), m11(m11), m12(m12),
-    m20(m20), m21(m21), m22(m22) { }
-
-
-mat3::mat3(const mat3 &other) :
-    m00(other.m00), m01(other.m01), m02(other.m02),
-    m10(other.m10), m11(other.m11), m12(other.m12),
-    m20(other.m20), m21(other.m21), m22(other.m22) { }
-
-
-mat3 &mat3::operator = (const mat3 &other) {
-    this->m00 = other.m00; 
-    this->m01 = other.m01; 
-    this->m02 = other.m02;
-    
-    this->m10 = other.m10; 
-    this->m11 = other.m11; 
-    this->m12 = other.m12;
-    
-    this->m20 = other.m20; 
-    this->m21 = other.m21; 
-    this->m22 = other.m22;
-    return (*this);
+inline mat3 operator + (mat3 a, mat3 b) {
+    return (mat3Add(a, b));
 }
 
 
-mat3 mat3::operator + (mat3 other) const {
-    mat3 result = mat3();
-    result.m00 = this->m00 + other.m00; 
-    result.m01 = this->m01 + other.m01; 
-    result.m02 = this->m02 + other.m02; 
-    
-    result.m10 = this->m10 + other.m10; 
-    result.m11 = this->m11 + other.m11; 
-    result.m12 = this->m12 + other.m12; 
-    
-    result.m20 = this->m20 + other.m20; 
-    result.m21 = this->m21 + other.m21; 
-    result.m22 = this->m22 + other.m22; 
-    return (result);
+inline mat3 operator - (mat3 a, mat3 b) {
+    return (mat3Sub(a, b));
 }
 
 
-mat3 mat3::operator - (mat3 other) const {
-    mat3 result = mat3();
-    result.m00 = this->m00 - other.m00; 
-    result.m01 = this->m01 - other.m01; 
-    result.m02 = this->m02 - other.m02; 
-    
-    result.m10 = this->m10 - other.m10; 
-    result.m11 = this->m11 - other.m11; 
-    result.m12 = this->m12 - other.m12; 
-    
-    result.m20 = this->m20 - other.m20; 
-    result.m21 = this->m21 - other.m21; 
-    result.m22 = this->m22 - other.m22; 
-    return (result);
+inline mat3 operator * (mat3 a, mat3 b) {
+    return (mat3Mul(a, b));
 }
 
 
-mat3 mat3::operator * (mat3 other) const {
-    mat3 result = mat3();
-    result.m00 = this->m00 * other.m00 + this->m10 * other.m01 + this->m20 * other.m02;
-    result.m01 = this->m01 * other.m00 + this->m11 * other.m01 + this->m21 * other.m02;
-    result.m02 = this->m02 * other.m00 + this->m12 * other.m01 + this->m22 * other.m02;
-
-    result.m10 = this->m00 * other.m10 + this->m10 * other.m11 + this->m20 * other.m12;
-    result.m11 = this->m01 * other.m10 + this->m11 * other.m11 + this->m21 * other.m12;
-    result.m12 = this->m02 * other.m10 + this->m12 * other.m11 + this->m22 * other.m12;
-
-    result.m20 = this->m00 * other.m20 + this->m10 * other.m21 + this->m20 * other.m22;
-    result.m21 = this->m01 * other.m20 + this->m11 * other.m21 + this->m21 * other.m22;
-    result.m22 = this->m02 * other.m20 + this->m12 * other.m21 + this->m22 * other.m22;
-    return (result);
+inline mat3 operator * (mat3 m, float f) {
+    return (mat3Mulf(m, f));
 }
 
 
-mat3 mat3::operator * (float f) const {
-    mat3 result = mat3();
-    result.m00 = this->m00 * f; 
-    result.m01 = this->m01 * f; 
-    result.m02 = this->m02 * f; 
-    
-    result.m10 = this->m10 * f; 
-    result.m11 = this->m11 * f; 
-    result.m12 = this->m12 * f; 
-    
-    result.m20 = this->m20 * f; 
-    result.m21 = this->m21 * f; 
-    result.m22 = this->m22 * f; 
-    return (result);
+inline vec3 operator * (mat3 m, vec3 v) {
+    return (mat3Mulv(m, v));
 }
 
 
-vec3 mat3::operator * (vec3 v) const {
-    return (vec3(this->m00 * v.x + this->m10 * v.y + this->m20 * v.z,
-                 this->m01 * v.x + this->m11 * v.y + this->m21 * v.z,
-                 this->m02 * v.x + this->m12 * v.y + this->m22 * v.z));
+inline mat3 &operator += (mat3 &a, mat3 b) {
+    a = mat3Add(a, b);
+    return (a);
 }
 
 
-mat3 &mat3::operator += (mat3 other) {
-    *this = *this + other;
-    return (*this);
+inline mat3 &operator -= (mat3 &a, mat3 b) {
+    a = mat3Sub(a, b);
+    return (a);
 }
 
 
-mat3 &mat3::operator -= (mat3 other) {
-    *this = *this - other;
-    return (*this);
+inline mat3 &operator *= (mat3 &a, mat3 b) {
+    a = mat3Mul(a, b);
+    return (a);
 }
 
-
-mat3 &mat3::operator *= (mat3 other) {
-    *this = *this * other;
-    return (*this);
-}
-
-
-mat3 &mat3::operator *= (float f) {
-    *this = *this * f;
-    return (*this);
-}
-
-
-float mat3::det(void) const {
-    return (this->m00 * this->m11 * this->m22 +
-            this->m01 * this->m12 * this->m20 +
-            this->m02 * this->m10 * this->m21 -
-            this->m20 * this->m11 * this->m02 -
-            this->m21 * this->m12 * this->m00 -
-            this->m22 * this->m10 * this->m01);
-}
-
-# endif /* ALGEBRA_IMPLEMENTATION */
+# endif /* __cplusplus */
 #endif /* _mat3_hpp_ */

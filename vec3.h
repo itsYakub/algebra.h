@@ -86,42 +86,42 @@ extern vec3 vec3Normalize(vec3);
 #  include "./mat3.h"
 
 extern vec3 vec3Zero(void) {
-    return ((vec3) { .x = 0.0, .y = 0.0, .z = 0.0 } );
+    return ((vec3) { .x = 0.0f, .y = 0.0f, .z = 0.0f } );
 }
 
 
 extern vec3 vec3One(void) {
-    return ((vec3) { .x = 1.0, .y = 1.0, .z = 1.0 } );
+    return ((vec3) { .x = 1.0f, .y = 1.0f, .z = 1.0f } );
 }
 
 
 extern vec3 vec3Right(void) {
-    return ((vec3) { .x = 1.0, .y = 0.0, .z = 0.0 } );
+    return ((vec3) { .x = 1.0f, .y = 0.0f, .z = 0.0f } );
 }
 
 
 extern vec3 vec3Left(void) {
-    return ((vec3) { .x = -1.0, .y = 0.0, .z = 0.0 } );
+    return ((vec3) { .x = -1.0f, .y = 0.0f, .z = 0.0f } );
 }
 
 
 extern vec3 vec3Up(void) {
-    return ((vec3) { .x = 0.0, .y = 1.0, .z = 0.0 } );
+    return ((vec3) { .x = 0.0f, .y = 1.0f, .z = 0.0f } );
 }
 
 
 extern vec3 vec3Down(void) {
-    return ((vec3) { .x = 0.0, .y = -1.0, .z = 0.0 } );
+    return ((vec3) { .x = 0.0f, .y = -1.0f, .z = 0.0f } );
 }
 
 
 extern vec3 vec3Front(void) {
-    return ((vec3) { .x = 0.0, .y = 0.0, .z = 1.0 } );
+    return ((vec3) { .x = 0.0f, .y = 0.0f, .z = 1.0f } );
 }
 
 
 extern vec3 vec3Back(void) {
-    return ((vec3) { .x = 0.0, .y = 0.0, .z = -1.0 } );
+    return ((vec3) { .x = 0.0f, .y = 0.0f, .z = -1.0f } );
 }
 
 
@@ -147,9 +147,9 @@ extern vec3 vec3Mul(vec3 a, vec3 b) {
 
 
 extern vec3 vec3Div(vec3 a, vec3 b) {
-    return ((vec3) { .x = b.x != 0.0 ? a.x / b.x : 0.0,
-                     .y = b.y != 0.0 ? a.y / b.y : 0.0,
-                     .z = b.z != 0.0 ? a.z / b.z : 0.0 } );
+    return ((vec3) { .x = b.x != 0.0f ? a.x / b.x : 0.0f,
+                     .y = b.y != 0.0f ? a.y / b.y : 0.0f,
+                     .z = b.z != 0.0f ? a.z / b.z : 0.0f } );
 }
 
 
@@ -175,9 +175,9 @@ extern vec3 vec3Mulf(vec3 a, float f) {
 
 
 extern vec3 vec3Divf(vec3 a, float f) {
-    return ((vec3) { .x = f != 0.0 ? a.x / f : 0.0,
-                     .y = f != 0.0 ? a.y / f : 0.0,
-                     .z = f != 0.0 ? a.z / f : 0.0 } );
+    return ((vec3) { .x = f != 0.0f ? a.x / f : 0.0f,
+                     .y = f != 0.0f ? a.y / f : 0.0f,
+                     .z = f != 0.0f ? a.z / f : 0.0f } );
 }
 
 
@@ -261,8 +261,8 @@ extern vec3 vec3Normalize(vec3 a) {
     float len = vec3Length(a);
 
     vec3 vec = a;
-    if (len != 0.0) {
-        vec = vec3Mulf(vec, 1.0 / len);
+    if (len != 0.0f) {
+        vec = vec3Mulf(vec, 1.0f / len);
     }
     return (vec);
 }

@@ -34,16 +34,16 @@ extern float mat3Det(mat3);
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 extern mat3 mat3Zero(void) {
-    return ((mat3) {{ 0.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0 }} );
+    return ((mat3) {{ 0.0f, 0.0f, 0.0f,
+                      0.0f, 0.0f, 0.0f,
+                      0.0f, 0.0f, 0.0f }} );
 }
 
 
 extern mat3 mat3Init(float s) {
-    return ((mat3) {{ 1.0 * s, 0.0,     0.0,
-                      0.0,     1.0 * s, 0.0,
-                      0.0,     0.0,     1.0 * s }} );
+    return ((mat3) {{ 1.0f * s, 0.0f,     0.0f,
+                      0.0f,     1.0f * s, 0.0f,
+                      0.0f,     0.0f,     1.0f * s }} );
 }
 
 

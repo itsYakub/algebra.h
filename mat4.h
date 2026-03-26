@@ -72,20 +72,20 @@ extern mat4 mat4Transpose(mat4);
 #  include "./mat3.h"
 
 extern mat4 mat4Zero(void) {
-    return (mat4Init(0.0));
+    return (mat4Init(0.0f));
 }
 
 
 extern mat4 mat4Identity(void) {
-    return (mat4Init(1.0));
+    return (mat4Init(1.0f));
 }
 
 
 extern mat4 mat4Init(float s) {
-    return ((mat4) {{ 1.0 * s, 0.0,     0.0,     0.0,
-                      0.0,     1.0 * s, 0.0,     0.0,
-                      0.0,     0.0,     1.0 * s, 0.0,
-                      0.0,     0.0,     0.0,     1.0 * s }} );
+    return ((mat4) {{ 1.0f * s, 0.0f,     0.0f,     0.0f,
+                      0.0f,     1.0f * s, 0.0f,     0.0f,
+                      0.0f,     0.0f,     1.0f * s, 0.0f,
+                      0.0f,     0.0f,     0.0f,     1.0f * s }} );
 }
 
 
@@ -145,8 +145,8 @@ extern vec4 mat4Mulv(mat4 m, vec4 v) {
 
 
 extern float mat4Det(mat4 a) {
-    float result = 0.0;
-    mat3 mat = mat3Init(1.0);
+    float result = 0.0f;
+    mat3 mat = mat3Init(1.0f);
    
     mat.m00 = a.m11; mat.m01 = a.m12; mat.m02 = a.m13;
     mat.m10 = a.m21; mat.m11 = a.m22; mat.m12 = a.m23;
@@ -178,7 +178,7 @@ extern float mat4Trace(mat4 a) {
 
 
 extern mat4 mat4Translate(vec3 v) {
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
     mat.m30 = v.x;
     mat.m31 = v.y;
     mat.m32 = v.z;
@@ -196,7 +196,7 @@ extern mat4 mat4Rotate(vec3 axis, float angle) {
           y = axisn.y,
           z = axisn.z;
 
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
     mat.m00 = t*x*x + c;
     mat.m01 = t*y*x + s*z;
     mat.m02 = t*z*x - s*y;
@@ -213,10 +213,10 @@ extern mat4 mat4Rotate(vec3 axis, float angle) {
 
 
 extern mat4 mat4RotateAt(vec3 pivot, vec3 axis, float angle) {
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
          mat = mat4Mul(mat4Translate(pivot), mat);
          mat = mat4Mul(mat4Rotate(axis, angle), mat);
-         mat = mat4Mul(mat4Translate(vec3Mulf(pivot, -1.0)), mat);
+         mat = mat4Mul(mat4Translate(vec3Mulf(pivot, -1.0f)), mat);
     return (mat);
 }
 
@@ -225,7 +225,7 @@ extern mat4 mat4RotateX(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
     mat.m11  = cosres;
     mat.m21  = sinres;
     mat.m12  = -sinres;
@@ -238,7 +238,7 @@ extern mat4 mat4RotateY(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
     mat.m00  = cosres;
     mat.m20  = -sinres;
     mat.m02  = sinres;
@@ -251,7 +251,7 @@ extern mat4 mat4RotateZ(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
     mat.m00  = cosres;
     mat.m10  = sinres;
     mat.m01  = -sinres;
@@ -265,7 +265,7 @@ extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
     vec3 s = vec3Normalize(vec3Cross(f, up));
     vec3 u = vec3Cross(s, f);
 
-    mat4 mat =  mat4Init(1.0);
+    mat4 mat =  mat4Init(1.0f);
     mat.m00  =  s.x; mat.m10 =  s.y; mat.m20 =  s.z;
     mat.m01  =  u.x; mat.m11 =  u.y; mat.m21 =  u.z;
     mat.m02  = -f.x; mat.m12 = -f.y; mat.m22 = -f.z;
@@ -277,7 +277,7 @@ extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
 
 
 extern mat4 mat4Scale(vec3 v) {
-    mat4 mat = mat4Init(1.0);
+    mat4 mat = mat4Init(1.0f);
     mat.m00 = v.x;
     mat.m11 = v.y;
     mat.m22 = v.z;
@@ -287,12 +287,12 @@ extern mat4 mat4Scale(vec3 v) {
 
 extern mat4 mat4Frust(float left, float right, float down, float top, float near, float far) {
     mat4 mat = mat4Zero();
-    mat.m00  =  (near * 2.0) / (right - left);
-    mat.m11  =  (near * 2.0) / (top   - down);
+    mat.m00  =  (near * 2.0f) / (right - left);
+    mat.m11  =  (near * 2.0f) / (top   - down);
     mat.m20  =  (right + left) / (right - left);
     mat.m21  =  (top + down) / (top - down);
     mat.m22  = -(far + near) / (far - near);
-    mat.m23  = -(1.0);
+    mat.m23  = -(1.0f);
     mat.m32  = -(2 * far * near) / (far - near);
     return (mat);
 }
@@ -300,19 +300,19 @@ extern mat4 mat4Frust(float left, float right, float down, float top, float near
 
 extern mat4 mat4Ortho(float left, float right, float down, float top, float near, float far) {
     mat4 mat = mat4Zero();
-    mat.m00 =  2.0 / (right - left);
-    mat.m11 =  2.0 / (top   - down);
-    mat.m22 = -2.0 / (far   - near);
+    mat.m00 =  2.0f / (right - left);
+    mat.m11 =  2.0f / (top   - down);
+    mat.m22 = -2.0f / (far   - near);
     mat.m03 = -(left  + right) / (right - left);
     mat.m13 = -(top   + down)  / (top   - down);
     mat.m23 = -(far   + near)  / (far   - near);
-    mat.m33 =  1.0;
+    mat.m33 =  1.0f;
     return (mat);
 }
 
 
 extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
-    float top   = near * tan(fieldOfView * 0.5);
+    float top   = near * tan(fieldOfView * 0.5f);
     float right = top * aspect;
     return (mat4Frust(-right, right, -top, top, near, far));
 }
