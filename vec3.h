@@ -2,10 +2,8 @@
 # define _vec3_h_ 1
 #
 # include <stdbool.h>
-#
-# include <math.h>
-#
-# include "./mat3.h"
+
+typedef union u_mat3 mat3;
 
 typedef union u_vec3 vec3;
 
@@ -82,6 +80,10 @@ extern vec3 vec3Cross(vec3, vec3);
 extern vec3 vec3Normalize(vec3);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include <math.h>
+#
+#  include "./mat3.h"
 
 extern vec3 vec3Zero(void) {
     return ((vec3) { .x = 0.0, .y = 0.0, .z = 0.0 } );
@@ -182,7 +184,7 @@ extern vec3 vec3Divf(vec3 a, float f) {
 extern vec3 vec3Mulm(vec3 v, mat3 m) {
     return ((vec3) { .x = m.m00 * v.x + m.m01 * v.y + m.m02 * v.z,
                      .y = m.m10 * v.x + m.m11 * v.y + m.m12 * v.z,
-                     .z = m.m20 * v.x + m.m21 * v.y + m.m22 * v.z} );
+                     .z = m.m20 * v.x + m.m21 * v.y + m.m22 * v.z } );
 }
 
 

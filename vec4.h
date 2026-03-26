@@ -2,10 +2,8 @@
 # define _vec4_h_ 1
 #
 # include <stdbool.h>
-#
-# include <math.h>
-#
-# include "./mat4.h"
+
+typedef union u_mat4 mat4;
 
 typedef union u_vec4 vec4;
 
@@ -82,6 +80,10 @@ extern float vec4Distance(vec4, vec4);
 extern vec4 vec4Normalize(vec4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include <math.h>
+#
+#  include "./mat4.h"
 
 extern vec4 vec4Zero(void) {
     return ((vec4) { .x = 0.0, .y = 0.0, .z = 0.0, .w = 0.0 } );

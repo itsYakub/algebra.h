@@ -33,6 +33,8 @@ struct mat2 {
     
     mat2 operator * (float) const;
     
+    vec2 operator * (vec2) const;
+    
     mat2 &operator += (mat2);
     
     mat2 &operator -= (mat2);
@@ -114,6 +116,12 @@ mat2 mat2::operator * (float f) const {
     result.m10 = this->m10 * f; 
     result.m11 = this->m11 * f; 
     return (result);
+}
+
+
+vec2 mat2::operator * (vec2 v) const {
+    return (vec2(this->m00 * v.x + this->m01 * v.y,
+                 this->m10 * v.x + this->m11 * v.y));
 }
 
 

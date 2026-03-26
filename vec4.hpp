@@ -1,9 +1,7 @@
 #if !defined (_vec4_hpp_)
 # define _vec4_hpp_ 1
-#
-# include <cmath>
-#
-# include "./mat4.hpp"
+
+struct mat4;
 
 struct vec4 {
     union {
@@ -116,6 +114,10 @@ struct vec4 {
 };
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include <cmath>
+#
+#  include "./mat4.hpp"
 
 /* constructors... */
 

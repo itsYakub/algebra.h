@@ -36,6 +36,8 @@ struct mat3 {
     
     mat3 operator * (float) const;
     
+    vec3 operator * (vec3) const;
+    
     mat3 &operator += (mat3);
     
     mat3 &operator -= (mat3);
@@ -156,6 +158,13 @@ mat3 mat3::operator * (float f) const {
     result.m21 = this->m21 * f; 
     result.m22 = this->m22 * f; 
     return (result);
+}
+
+
+vec3 mat3::operator * (vec3 v) const {
+    return (vec3(this->m00 * v.x + this->m01 * v.y + this->m02 * v.z,
+                 this->m10 * v.x + this->m11 * v.y + this->m12 * v.z,
+                 this->m20 * v.x + this->m21 * v.y + this->m22 * v.z));
 }
 
 

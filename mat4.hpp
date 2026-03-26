@@ -49,6 +49,8 @@ struct mat4 {
     
     mat4 operator * (float) const;
     
+    vec4 operator * (vec4) const;
+    
     mat4 &operator += (mat4);
     
     mat4 &operator -= (mat4);
@@ -249,6 +251,14 @@ mat4 mat4::operator * (float f) const {
     result.m32 = this->m32 * f; 
     result.m33 = this->m33 * f; 
     return (result);
+}
+
+
+vec4 mat4::operator * (vec4 v) const {
+    return (vec4(this->m00 * v.x + this->m01 * v.y + this->m02 * v.z + this->m03 * v.w,
+                 this->m10 * v.x + this->m11 * v.y + this->m12 * v.z + this->m13 * v.w,
+                 this->m20 * v.x + this->m21 * v.y + this->m22 * v.z + this->m23 * v.w,
+                 this->m30 * v.x + this->m31 * v.y + this->m32 * v.z + this->m33 * v.w));
 }
 
 

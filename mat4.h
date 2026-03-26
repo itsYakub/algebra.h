@@ -1,12 +1,11 @@
 #if !defined (_mat4_h_)
 # define _mat4_h_ 1
-#
-# include <stdbool.h>
-#
-# include <math.h>
-#
-# include "./vec3.h"
-# include "./mat3.h"
+
+typedef union u_vec3 vec3;
+
+typedef union u_vec4 vec4;
+
+typedef union u_mat3 mat3;
 
 typedef union u_mat4 mat4;
 
@@ -34,6 +33,8 @@ extern mat4 mat4Sub(mat4, mat4);
 extern mat4 mat4Mul(mat4, mat4);
 
 extern mat4 mat4Mulf(mat4, float);
+
+extern vec4 mat4Mulv(mat4, vec4);
 
 extern float mat4Det(mat4);
 
@@ -64,6 +65,11 @@ extern mat4 mat4Persp(float, float, float, float);
 extern mat4 mat4Transpose(mat4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include <math.h>
+#
+#  include "./vec3.h"
+#  include "./mat3.h"
 
 extern mat4 mat4Zero(void) {
     return (mat4Init(0.0));
@@ -127,6 +133,14 @@ extern mat4 mat4Mulf(mat4 a, float f) {
                       a.m10 * f, a.m11 * f, a.m12 * f, a.m13 * f,
                       a.m20 * f, a.m21 * f, a.m22 * f, a.m23 * f,
                       a.m30 * f, a.m31 * f, a.m32 * f, a.m33 * f }} );
+}
+
+
+extern vec4 mat4Mulv(mat4 m, vec4 v) {
+    return ((vec4) { .x = m.m00 * v.x + m.m01 * v.y + m.m02 * v.z + m.m03 * v.w,
+                     .y = m.m10 * v.x + m.m11 * v.y + m.m12 * v.z + m.m13 * v.w,
+                     .z = m.m20 * v.x + m.m21 * v.y + m.m22 * v.z + m.m23 * v.w,
+                     .w = m.m30 * v.x + m.m31 * v.y + m.m32 * v.z + m.m33 * v.w } );
 }
 
 

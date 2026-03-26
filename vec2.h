@@ -2,10 +2,8 @@
 # define _vec2_h_ 1
 #
 # include <stdbool.h>
-#
-# include <math.h>
-#
-# include "./mat2.h"
+
+typedef union u_mat2 mat2;
 
 typedef union u_vec2 vec2;
 
@@ -76,6 +74,10 @@ extern float vec2Cross(vec2, vec2);
 extern vec2 vec2Normalize(vec2);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include <math.h>
+#
+#  include "./mat2.h"
 
 extern vec2 vec2Zero(void) {
     return ((vec2) { .x = 0.0, .y = 0.0 } );
