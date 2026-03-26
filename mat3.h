@@ -11,6 +11,21 @@ union u_mat3 {
               m10, m11, m12,
               m20, m21, m22;
     };
+
+# if defined (__cplusplus)
+
+    u_mat3(void);
+
+    u_mat3(float);
+
+    u_mat3(float, float, float, float, float, float, float, float, float);
+
+    u_mat3(const u_mat3 &); 
+
+    u_mat3 &operator = (const u_mat3 &);
+
+# endif /* __cplusplus */
+
 };
 
 extern mat3 mat3Zero(void);
@@ -34,6 +49,51 @@ extern float mat3Trace(mat3);
 extern mat3 mat3Trans(mat3); 
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./vec3.h"
+#
+#  if defined (__cplusplus)
+
+u_mat3::u_mat3(void) :
+    m00(0.0), m01(0.0), m02(0.0),
+    m10(0.0), m11(0.0), m12(0.0),
+    m20(0.0), m21(0.0), m22(0.0) { }
+
+
+u_mat3::u_mat3(float s) :
+    m00(1.0 * s), m01(0.0),     m02(0.0),
+    m10(0.0),     m11(1.0 * s), m12(0.0),
+    m20(0.0),     m21(0.0),     m22(1.0 * s) { }
+
+    
+u_mat3::u_mat3(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) :
+    m00(m00), m01(m01), m02(m02),
+    m10(m10), m11(m11), m12(m12),
+    m20(m20), m21(m21), m22(m22) { }
+
+
+u_mat3::u_mat3(const u_mat3 &other) :
+    m00(other.m00), m01(other.m01), m02(other.m02),
+    m10(other.m10), m11(other.m11), m12(other.m12),
+    m20(other.m20), m21(other.m21), m22(other.m22) { }
+
+
+u_mat3 &u_mat3::operator = (const u_mat3 &other) {
+    this->m00 = other.m00; 
+    this->m01 = other.m01; 
+    this->m02 = other.m02;
+    
+    this->m10 = other.m10; 
+    this->m11 = other.m11; 
+    this->m12 = other.m12;
+    
+    this->m20 = other.m20; 
+    this->m21 = other.m21; 
+    this->m22 = other.m22;
+    return (*this);
+}
+
+#  endif /* __cplusplus */
 
 extern mat3 mat3Zero(void) {
     return ((mat3) { 0.0f, 0.0f, 0.0f,
@@ -86,9 +146,9 @@ extern mat3 mat3Mulf(mat3 a, float f) {
 
 
 extern vec3 mat3Mulv(mat3 m, vec3 v) {
-    return ((vec3) { .x = m.m00 * v.x + m.m01 * v.y + m.m02 * v.z,
-                     .y = m.m10 * v.x + m.m11 * v.y + m.m12 * v.z,
-                     .z = m.m20 * v.x + m.m21 * v.y + m.m22 * v.z } );
+    return ((vec3) { m.m00 * v.x + m.m01 * v.y + m.m02 * v.z,
+                     m.m10 * v.x + m.m11 * v.y + m.m12 * v.z,
+                     m.m20 * v.x + m.m21 * v.y + m.m22 * v.z } );
 }
 
 

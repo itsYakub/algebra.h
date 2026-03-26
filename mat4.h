@@ -84,7 +84,7 @@ extern mat4 mat4Trans(mat4);
 #  include "./vec3.h"
 #  include "./mat3.h"
 #
-# if defined (__cplusplus)
+#  if defined (__cplusplus)
 
 u_mat4::u_mat4(void) :
     m00(0.0), m01(0.0), m02(0.0), m03(0.0),
@@ -137,7 +137,7 @@ u_mat4 &u_mat4::operator = (const u_mat4 &other) {
     return (*this);
 }
 
-# endif /* __cplusplus */
+#  endif /* __cplusplus */
 
 extern mat4 mat4Zero(void) {
     return (mat4Init(0.0f));
@@ -205,10 +205,10 @@ extern mat4 mat4Mulf(mat4 a, float f) {
 
 
 extern vec4 mat4Mulv(mat4 m, vec4 v) {
-    return ((vec4) { .x = m.m00 * v.x + m.m10 * v.y + m.m20 * v.z + m.m30 * v.w,
-                     .y = m.m01 * v.x + m.m11 * v.y + m.m21 * v.z + m.m31 * v.w,
-                     .z = m.m02 * v.x + m.m12 * v.y + m.m22 * v.z + m.m32 * v.w,
-                     .w = m.m03 * v.x + m.m13 * v.y + m.m23 * v.z + m.m33 * v.w } );
+    return ((vec4) { m.m00 * v.x + m.m10 * v.y + m.m20 * v.z + m.m30 * v.w,
+                     m.m01 * v.x + m.m11 * v.y + m.m21 * v.z + m.m31 * v.w,
+                     m.m02 * v.x + m.m12 * v.y + m.m22 * v.z + m.m32 * v.w,
+                     m.m03 * v.x + m.m13 * v.y + m.m23 * v.z + m.m33 * v.w } );
 }
 
 

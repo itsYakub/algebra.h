@@ -10,6 +10,21 @@ union u_mat2 {
         float m00, m01,
               m10, m11;
     };
+
+# if defined (__cplusplus)
+
+    u_mat2(void);
+
+    u_mat2(float);
+
+    u_mat2(float, float, float, float);
+
+    u_mat2(const u_mat2 &); 
+
+    u_mat2 &operator = (const u_mat2 &);
+
+# endif /* __cplusplus */
+
 };
 
 extern mat2 mat2Zero(void);
@@ -33,6 +48,40 @@ extern float mat2Trace(mat2);
 extern mat2 mat2Trans(mat2); 
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./vec3.h"
+#
+#  if defined (__cplusplus)
+
+u_mat2::u_mat2(void) :
+    m00(0.0), m01(0.0),
+    m10(0.0), m11(0.0) { }
+
+
+u_mat2::u_mat2(float s) :
+    m00(1.0 * s), m01(0.0),
+    m10(0.0),     m11(1.0 * s) { }
+
+
+u_mat2::u_mat2(float m00, float m01, float m10, float m11) :
+    m00(m00), m01(m01),
+    m10(m10), m11(m11) { }
+
+
+u_mat2::u_mat2(const u_mat2 &other) :
+    m00(other.m00), m01(other.m01),
+    m10(other.m10), m11(other.m11) { }
+
+
+u_mat2 &u_mat2::operator = (const u_mat2 &other) {
+    this->m00 = other.m00; 
+    this->m01 = other.m01; 
+    this->m10 = other.m10; 
+    this->m11 = other.m11; 
+    return (*this);
+}
+
+#  endif /* __cplusplus */
 
 extern mat2 mat2Zero(void) {
     return ((mat2) { 0.0f, 0.0f,
@@ -73,8 +122,8 @@ extern mat2 mat2Mulf(mat2 a, float f) {
 
 
 extern vec2 mat2Mulv(mat2 m, vec2 v) {
-    return ((vec2) { .x = m.m00 * v.x + m.m10 * v.y,
-                     .y = m.m01 * v.x + m.m11 * v.y } );
+    return ((vec2) { m.m00 * v.x + m.m10 * v.y,
+                     m.m01 * v.x + m.m11 * v.y } );
 }
 
 

@@ -21,6 +21,21 @@ union u_vec4 {
         float b;
         float a;
     };
+
+# if defined (__cplusplus)
+
+    u_vec4(void);
+
+    u_vec4(float);
+
+    u_vec4(float, float, float, float);
+
+    u_vec4(const u_vec4 &); 
+
+    u_vec4 &operator = (const u_vec4 &);
+
+# endif /* __cplusplus */
+
 };
 
 extern vec4 vec4Zero(void);
@@ -82,116 +97,140 @@ extern vec4 vec4Normalize(vec4);
 #  include <math.h>
 #
 #  include "./mat4.h"
+#
+#  if defined (__cplusplus)
+
+u_vec4::u_vec4(void) : x(0.0), y(0.0), z(0.0), w(0.0) { }
+
+
+u_vec4::u_vec4(float v) : x(v), y(v), z(v), w(v) { }
+
+
+u_vec4::u_vec4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) { }
+
+
+u_vec4::u_vec4(const u_vec4 &other) : x(other.x), y(other.y), z(other.z), w(other.w) { }
+
+
+u_vec4 &u_vec4::operator = (const u_vec4 &other) {
+    this->x = other.x;
+    this->y = other.y;
+    this->z = other.z;
+    this->w = other.w;
+    return (*this);
+}
+
+#  endif /* __cplusplus */
 
 extern vec4 vec4Zero(void) {
-    return ((vec4) { .x = 0.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f } );
+    return ((vec4) { 0.0f, 0.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec4 vec4One(void) {
-    return ((vec4) { .x = 1.0f, .y = 1.0f, .z = 1.0f, .w = 1.0f } );
+    return ((vec4) { 1.0f, 1.0f, 1.0f, 1.0f } );
 }
 
 
 extern vec4 vec4Right(void) {
-    return ((vec4) { .x = 1.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f } );
+    return ((vec4) { 1.0f, 0.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec4 vec4Left(void) {
-    return ((vec4) { .x = -1.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f } );
+    return ((vec4) { -1.0f, 0.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec4 vec4Up(void) {
-    return ((vec4) { .x = 0.0f, .y = 1.0f, .z = 0.0f, .w = 0.0f } );
+    return ((vec4) { 0.0f, 1.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec4 vec4Down(void) {
-    return ((vec4) { .x = 0.0f, .y = -1.0f, .z = 0.0f, .w = 0.0f } );
+    return ((vec4) { 0.0f, -1.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec4 vec4Front(void) {
-    return ((vec4) { .x = 0.0f, .y = 0.0f, .z = 1.0f, .w = 0.0f } );
+    return ((vec4) { 0.0f, 0.0f, 1.0f, 0.0f } );
 }
 
 
 extern vec4 vec4Back(void) {
-    return ((vec4) { .x = 0.0f, .y = 0.0f, .z = -1.0f, .w = 0.0f } );
+    return ((vec4) { 0.0f, 0.0f, -1.0f, 0.0f } );
 }
 
 
 extern vec4 vec4Add(vec4 a, vec4 b) {
-    return ((vec4) { .x = a.x + b.x,
-                     .y = a.y + b.y,
-                     .z = a.z + b.z,
-                     .w = a.w + b.w } );
+    return ((vec4) { a.x + b.x,
+                     a.y + b.y,
+                     a.z + b.z,
+                     a.w + b.w } );
 }
 
 
 extern vec4 vec4Sub(vec4 a, vec4 b) {
-    return ((vec4) { .x = a.x - b.x,
-                     .y = a.y - b.y,
-                     .z = a.z - b.z,
-                     .w = a.w - b.w } );
+    return ((vec4) { a.x - b.x,
+                     a.y - b.y,
+                     a.z - b.z,
+                     a.w - b.w } );
 }
 
 
 extern vec4 vec4Mul(vec4 a, vec4 b) {
-    return ((vec4) { .x = a.x * b.x,
-                     .y = a.y * b.y,
-                     .z = a.z * b.z,
-                     .w = a.w * b.w } );
+    return ((vec4) { a.x * b.x,
+                     a.y * b.y,
+                     a.z * b.z,
+                     a.w * b.w } );
 }
 
 
 extern vec4 vec4Div(vec4 a, vec4 b) {
-    return ((vec4) { .x = b.x != 0.0f ? a.x / b.x : 0.0f,
-                     .y = b.y != 0.0f ? a.y / b.y : 0.0f,
-                     .z = b.z != 0.0f ? a.z / b.z : 0.0f,
-                     .w = b.w != 0.0f ? a.w / b.w : 0.0f } );
+    return ((vec4) { b.x != 0.0f ? a.x / b.x : 0.0f,
+                     b.y != 0.0f ? a.y / b.y : 0.0f,
+                     b.z != 0.0f ? a.z / b.z : 0.0f,
+                     b.w != 0.0f ? a.w / b.w : 0.0f } );
 }
 
 
 extern vec4 vec4Addf(vec4 a, float f) {
-    return ((vec4) { .x = a.x + f,
-                     .y = a.y + f,
-                     .z = a.z + f,
-                     .w = a.w + f } );
+    return ((vec4) { a.x + f,
+                     a.y + f,
+                     a.z + f,
+                     a.w + f } );
 }
 
 
 extern vec4 vec4Subf(vec4 a, float f) {
-    return ((vec4) { .x = a.x + f,
-                     .y = a.y + f,
-                     .z = a.z + f,
-                     .w = a.w + f } );
+    return ((vec4) { a.x + f,
+                     a.y + f,
+                     a.z + f,
+                     a.w + f } );
 }
 
 
 extern vec4 vec4Mulf(vec4 a, float f) {
-    return ((vec4) { .x = a.x + f,
-                     .y = a.y + f,
-                     .z = a.z + f,
-                     .w = a.w + f } );
+    return ((vec4) { a.x + f,
+                     a.y + f,
+                     a.z + f,
+                     a.w + f } );
 }
 
 
 extern vec4 vec4Divf(vec4 a, float f) {
-    return ((vec4) { .x = f != 0.0f ? a.x / f : 0.0f,
-                     .y = f != 0.0f ? a.y / f : 0.0f,
-                     .z = f != 0.0f ? a.z / f : 0.0f,
-                     .w = f != 0.0f ? a.w / f : 0.0f } );
+    return ((vec4) { f != 0.0f ? a.x / f : 0.0f,
+                     f != 0.0f ? a.y / f : 0.0f,
+                     f != 0.0f ? a.z / f : 0.0f,
+                     f != 0.0f ? a.w / f : 0.0f } );
 }
 
 
 extern vec4 vec4Mulm(vec4 v, mat4 m) {
-    return ((vec4) { .x = m.m00 * v.x + m.m10 * v.y + m.m20 * v.z + m.m30 * v.w,
-                     .y = m.m01 * v.x + m.m11 * v.y + m.m21 * v.z + m.m31 * v.w,
-                     .z = m.m02 * v.x + m.m12 * v.y + m.m22 * v.z + m.m32 * v.w,
-                     .w = m.m03 * v.x + m.m13 * v.y + m.m23 * v.z + m.m33 * v.w } );
+    return ((vec4) { m.m00 * v.x + m.m10 * v.y + m.m20 * v.z + m.m30 * v.w,
+                     m.m01 * v.x + m.m11 * v.y + m.m21 * v.z + m.m31 * v.w,
+                     m.m02 * v.x + m.m12 * v.y + m.m22 * v.z + m.m32 * v.w,
+                     m.m03 * v.x + m.m13 * v.y + m.m23 * v.z + m.m33 * v.w } );
 }
 
 

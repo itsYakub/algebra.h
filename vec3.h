@@ -19,6 +19,21 @@ union u_vec3 {
         float g;
         float b;
     };
+
+# if defined (__cplusplus)
+
+    u_vec3(void);
+
+    u_vec3(float);
+
+    u_vec3(float, float, float);
+
+    u_vec3(const u_vec3 &); 
+
+    u_vec3 &operator = (const u_vec3 &);
+
+# endif /* __cplusplus */
+
 };
 
 extern vec3 vec3Zero(void);
@@ -82,107 +97,130 @@ extern vec3 vec3Normalize(vec3);
 #  include <math.h>
 #
 #  include "./mat3.h"
+#
+#  if defined (__cplusplus)
+
+u_vec3::u_vec3(void) : x(0.0), y(0.0), z(0.0) { }
+
+
+u_vec3::u_vec3(float v) : x(v), y(v), z(v) { }
+
+
+u_vec3::u_vec3(float x, float y, float z) : x(x), y(y), z(z) { }
+
+
+u_vec3::u_vec3(const u_vec3 &other) : x(other.x), y(other.y), z(other.z) { }
+
+
+u_vec3 &u_vec3::operator = (const u_vec3 &other) {
+    this->x = other.x;
+    this->y = other.y;
+    this->z = other.z;
+    return (*this);
+}
+
+#  endif /* __cplusplus */
 
 extern vec3 vec3Zero(void) {
-    return ((vec3) { .x = 0.0f, .y = 0.0f, .z = 0.0f } );
+    return ((vec3) { 0.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec3 vec3One(void) {
-    return ((vec3) { .x = 1.0f, .y = 1.0f, .z = 1.0f } );
+    return ((vec3) { 1.0f, 1.0f, 1.0f } );
 }
 
 
 extern vec3 vec3Right(void) {
-    return ((vec3) { .x = 1.0f, .y = 0.0f, .z = 0.0f } );
+    return ((vec3) { 1.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec3 vec3Left(void) {
-    return ((vec3) { .x = -1.0f, .y = 0.0f, .z = 0.0f } );
+    return ((vec3) { -1.0f, 0.0f, 0.0f } );
 }
 
 
 extern vec3 vec3Up(void) {
-    return ((vec3) { .x = 0.0f, .y = 1.0f, .z = 0.0f } );
+    return ((vec3) { 0.0f, 1.0f, 0.0f } );
 }
 
 
 extern vec3 vec3Down(void) {
-    return ((vec3) { .x = 0.0f, .y = -1.0f, .z = 0.0f } );
+    return ((vec3) { 0.0f, -1.0f, 0.0f } );
 }
 
 
 extern vec3 vec3Front(void) {
-    return ((vec3) { .x = 0.0f, .y = 0.0f, .z = 1.0f } );
+    return ((vec3) { 0.0f, 0.0f, 1.0f } );
 }
 
 
 extern vec3 vec3Back(void) {
-    return ((vec3) { .x = 0.0f, .y = 0.0f, .z = -1.0f } );
+    return ((vec3) { 0.0f, 0.0f, -1.0f } );
 }
 
 
 extern vec3 vec3Add(vec3 a, vec3 b) {
-    return ((vec3) { .x = a.x + b.x,
-                     .y = a.y + b.y,
-                     .z = a.z + b.z } );
+    return ((vec3) { a.x + b.x,
+                     a.y + b.y,
+                     a.z + b.z } );
 }
 
 
 extern vec3 vec3Sub(vec3 a, vec3 b) {
-    return ((vec3) { .x = a.x - b.x,
-                     .y = a.y - b.y,
-                     .z = a.z - b.z } );
+    return ((vec3) { a.x - b.x,
+                     a.y - b.y,
+                     a.z - b.z } );
 }
 
 
 extern vec3 vec3Mul(vec3 a, vec3 b) {
-    return ((vec3) { .x = a.x * b.x,
-                     .y = a.y * b.y,
-                     .z = a.z * b.z } );
+    return ((vec3) { a.x * b.x,
+                     a.y * b.y,
+                     a.z * b.z } );
 }
 
 
 extern vec3 vec3Div(vec3 a, vec3 b) {
-    return ((vec3) { .x = b.x != 0.0f ? a.x / b.x : 0.0f,
-                     .y = b.y != 0.0f ? a.y / b.y : 0.0f,
-                     .z = b.z != 0.0f ? a.z / b.z : 0.0f } );
+    return ((vec3) { b.x != 0.0f ? a.x / b.x : 0.0f,
+                     b.y != 0.0f ? a.y / b.y : 0.0f,
+                     b.z != 0.0f ? a.z / b.z : 0.0f } );
 }
 
 
 extern vec3 vec3Addf(vec3 a, float f) {
-    return ((vec3) { .x = a.x + f,
-                     .y = a.y + f,
-                     .z = a.z + f } );
+    return ((vec3) { a.x + f,
+                     a.y + f,
+                     a.z + f } );
 }
 
 
 extern vec3 vec3Subf(vec3 a, float f) {
-    return ((vec3) { .x = a.x - f,
-                     .y = a.y - f,
-                     .z = a.z - f } );
+    return ((vec3) { a.x - f,
+                     a.y - f,
+                     a.z - f } );
 }
 
 
 extern vec3 vec3Mulf(vec3 a, float f) {
-    return ((vec3) { .x = a.x * f,
-                     .y = a.y * f,
-                     .z = a.z * f } );
+    return ((vec3) { a.x * f,
+                     a.y * f,
+                     a.z * f } );
 }
 
 
 extern vec3 vec3Divf(vec3 a, float f) {
-    return ((vec3) { .x = f != 0.0f ? a.x / f : 0.0f,
-                     .y = f != 0.0f ? a.y / f : 0.0f,
-                     .z = f != 0.0f ? a.z / f : 0.0f } );
+    return ((vec3) { f != 0.0f ? a.x / f : 0.0f,
+                     f != 0.0f ? a.y / f : 0.0f,
+                     f != 0.0f ? a.z / f : 0.0f } );
 }
 
 
 extern vec3 vec3Mulm(vec3 v, mat3 m) {
-    return ((vec3) { .x = m.m00 * v.x + m.m10 * v.y + m.m20 * v.z,
-                     .y = m.m01 * v.x + m.m11 * v.y + m.m21 * v.z,
-                     .z = m.m02 * v.x + m.m12 * v.y + m.m22 * v.z } );
+    return ((vec3) { m.m00 * v.x + m.m10 * v.y + m.m20 * v.z,
+                     m.m01 * v.x + m.m11 * v.y + m.m21 * v.z,
+                     m.m02 * v.x + m.m12 * v.y + m.m22 * v.z } );
 }
 
 
