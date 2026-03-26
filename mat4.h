@@ -62,7 +62,7 @@ extern mat4 mat4Ortho(float, float, float, float, float, float);
 
 extern mat4 mat4Persp(float, float, float, float);
 
-extern mat4 mat4Transpose(mat4);
+extern mat4 mat4Trans(mat4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -172,8 +172,8 @@ extern float mat4Det(mat4 a) {
 }
 
 
-extern float mat4Trace(mat4 a) {
-    return (a.m00 + a.m11 + a.m22 + a.m33);
+extern float mat4Trace(mat4 m) {
+    return (m.m00 + m.m11 + m.m22 + m.m33);
 }
 
 
@@ -318,12 +318,12 @@ extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
 }
 
 
-extern mat4 mat4Transpose(mat4 a) {
+extern mat4 mat4Trans(mat4 m) {
     mat4 mat = mat4Zero();
-    mat.m00  = a.m00; mat.m01 = a.m10; mat.m02 = a.m20; mat.m03 = a.m30;
-    mat.m10  = a.m10; mat.m11 = a.m11; mat.m12 = a.m21; mat.m13 = a.m31;
-    mat.m20  = a.m20; mat.m21 = a.m12; mat.m22 = a.m22; mat.m23 = a.m32;
-    mat.m30  = a.m30; mat.m31 = a.m13; mat.m32 = a.m23; mat.m33 = a.m33;
+    mat.m00  = m.m00; mat.m01 = m.m10; mat.m02 = m.m20; mat.m03 = m.m30;
+    mat.m10  = m.m10; mat.m11 = m.m11; mat.m12 = m.m21; mat.m13 = m.m31;
+    mat.m20  = m.m20; mat.m21 = m.m12; mat.m22 = m.m22; mat.m23 = m.m32;
+    mat.m30  = m.m30; mat.m31 = m.m13; mat.m32 = m.m23; mat.m33 = m.m33;
     return (mat);
 }
 

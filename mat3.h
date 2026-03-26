@@ -31,6 +31,10 @@ extern vec3 mat3Mulv(mat3, vec3);
 
 extern float mat3Det(mat3);
 
+extern float mat3Trace(mat3);
+
+extern mat3 mat3Trans(mat3); 
+
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 extern mat3 mat3Zero(void) {
@@ -98,6 +102,18 @@ extern float mat3Det(mat3 a) {
             a.m21 * a.m12 * a.m00 -
             a.m22 * a.m10 * a.m01);
 }
+
+extern float mat3Trace(mat3 m) {
+    return (m.m00 + m.m11 + m.m22);
+}
+
+extern mat3 mat3Trans(mat3 m) {
+    mat3 mat = mat3Zero();
+    mat.m00  = m.m00; mat.m01 = m.m10; mat.m02 = m.m20;
+    mat.m10  = m.m10; mat.m11 = m.m11; mat.m12 = m.m21;
+    mat.m20  = m.m20; mat.m21 = m.m12; mat.m22 = m.m22;
+    return (mat);
+} 
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _mat3_h_ */

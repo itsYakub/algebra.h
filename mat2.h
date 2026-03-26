@@ -30,6 +30,10 @@ extern vec2 mat2Mulv(mat2, vec2);
 
 extern float mat2Det(mat2);
 
+extern float mat2Trace(mat2);
+
+extern mat2 mat2Trans(mat2); 
+
 # if defined (ALGEBRA_IMPLEMENTATION)
 
 extern mat2 mat2Zero(void) {
@@ -79,6 +83,17 @@ extern vec2 mat2Mulv(mat2 m, vec2 v) {
 extern float mat2Det(mat2 a) {
     return (a.m00 * a.m11 - a.m10 * a.m01);
 }
+
+extern float mat2Trace(mat2 m) {
+    return (m.m00 + m.m11);
+}
+
+extern mat2 mat2Trans(mat2 m) {
+    mat2 mat = mat2Zero();
+    mat.m00  = m.m00; mat.m01 = m.m10;
+    mat.m10  = m.m10; mat.m11 = m.m11;
+    return (mat);
+} 
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _mat2_h_ */
