@@ -13,6 +13,30 @@ extern "C" {
 
 }
 
+# endif /* __cplusplus */
+
+typedef union u_vec4 vec4;
+
+inline mat4 operator + (mat4, mat4);
+
+inline mat4 operator - (mat4, mat4);
+
+inline mat4 operator * (mat4, mat4);
+
+inline mat4 operator * (mat4, float);
+
+inline vec4 operator * (mat4, vec4);
+
+inline mat4 &operator += (mat4 &, mat4);
+
+inline mat4 &operator -= (mat4 &, mat4);
+
+inline mat4 &operator *= (mat4 &, mat4);
+
+# if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./vec4.hpp"
+
 inline mat4 operator + (mat4 a, mat4 b) {
     return (mat4Add(a, b));
 }

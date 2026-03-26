@@ -13,6 +13,60 @@ extern "C" {
 
 }
 
+# endif /* __cplusplus */
+
+typedef union u_mat4 mat4;
+
+inline vec4 operator + (vec4, vec4);
+
+inline vec4 operator - (vec4, vec4);
+
+inline vec4 operator * (vec4, vec4);
+
+inline vec4 operator / (vec4, vec4);
+
+inline vec4 operator + (vec4, float);
+
+inline vec4 operator - (vec4, float);
+
+inline vec4 operator * (vec4, float);
+
+inline vec4 operator / (vec4, float);
+
+inline vec4 operator * (vec4, mat4);
+
+inline bool operator == (vec4, vec4);
+
+inline bool operator != (vec4, vec4);
+
+inline bool operator > (vec4, vec4);
+
+inline bool operator >= (vec4, vec4);
+
+inline bool operator < (vec4, vec4);
+
+inline bool operator <= (vec4, vec4);
+
+inline vec4 &operator += (vec4 &, vec4);
+
+inline vec4 &operator -= (vec4 &, vec4);
+
+inline vec4 &operator *= (vec4 &, vec4);
+
+inline vec4 &operator /= (vec4 &, vec4);
+
+inline vec4 &operator += (vec4 &, float);
+
+inline vec4 &operator -= (vec4 &, float);
+
+inline vec4 &operator *= (vec4 &, float);
+
+inline vec4 &operator /= (vec4 &, float);
+
+# if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./mat4.hpp"
+
 inline vec4 operator + (vec4 a, vec4 b) {
     return (vec4Add(a, b));
 }
@@ -135,6 +189,5 @@ inline vec4 &operator /= (vec4 &v, float f) {
     return (v);
 }
 
-
-# endif /* __cplusplus */
+# endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec4_hpp_ */

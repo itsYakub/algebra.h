@@ -13,6 +13,60 @@ extern "C" {
 
 }
 
+# endif /* __cplusplus */
+
+typedef union u_mat2 mat2;
+
+inline vec2 operator + (vec2, vec2);
+
+inline vec2 operator - (vec2, vec2);
+
+inline vec2 operator * (vec2, vec2);
+
+inline vec2 operator / (vec2, vec2);
+
+inline vec2 operator + (vec2, float);
+
+inline vec2 operator - (vec2, float);
+
+inline vec2 operator * (vec2, float);
+
+inline vec2 operator / (vec2, float);
+
+inline vec2 operator * (vec2, mat2);
+
+inline bool operator == (vec2, vec2);
+
+inline bool operator != (vec2, vec2);
+
+inline bool operator > (vec2, vec2);
+
+inline bool operator >= (vec2, vec2);
+
+inline bool operator < (vec2, vec2);
+
+inline bool operator <= (vec2, vec2);
+
+inline vec2 &operator += (vec2 &, vec2);
+
+inline vec2 &operator -= (vec2 &, vec2);
+
+inline vec2 &operator *= (vec2 &, vec2);
+
+inline vec2 &operator /= (vec2 &, vec2);
+
+inline vec2 &operator += (vec2 &, float);
+
+inline vec2 &operator -= (vec2 &, float);
+
+inline vec2 &operator *= (vec2 &, float);
+
+inline vec2 &operator /= (vec2 &, float);
+
+# if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./mat2.hpp"
+
 inline vec2 operator + (vec2 a, vec2 b) {
     return (vec2Add(a, b));
 }
@@ -135,6 +189,5 @@ inline vec2 &operator /= (vec2 &v, float f) {
     return (v);
 }
 
-
-# endif /* __cplusplus */
+# endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec2_hpp_ */

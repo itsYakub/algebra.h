@@ -13,6 +13,60 @@ extern "C" {
 
 }
 
+# endif /* __cplusplus */
+
+typedef union u_mat3 mat3;
+
+inline vec3 operator + (vec3, vec3);
+
+inline vec3 operator - (vec3, vec3);
+
+inline vec3 operator * (vec3, vec3);
+
+inline vec3 operator / (vec3, vec3);
+
+inline vec3 operator + (vec3, float);
+
+inline vec3 operator - (vec3, float);
+
+inline vec3 operator * (vec3, float);
+
+inline vec3 operator / (vec3, float);
+
+inline vec3 operator * (vec3, mat3);
+
+inline bool operator == (vec3, vec3);
+
+inline bool operator != (vec3, vec3);
+
+inline bool operator > (vec3, vec3);
+
+inline bool operator >= (vec3, vec3);
+
+inline bool operator < (vec3, vec3);
+
+inline bool operator <= (vec3, vec3);
+
+inline vec3 &operator += (vec3 &, vec3);
+
+inline vec3 &operator -= (vec3 &, vec3);
+
+inline vec3 &operator *= (vec3 &, vec3);
+
+inline vec3 &operator /= (vec3 &, vec3);
+
+inline vec3 &operator += (vec3 &, float);
+
+inline vec3 &operator -= (vec3 &, float);
+
+inline vec3 &operator *= (vec3 &, float);
+
+inline vec3 &operator /= (vec3 &, float);
+
+# if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./mat3.hpp"
+
 inline vec3 operator + (vec3 a, vec3 b) {
     return (vec3Add(a, b));
 }
@@ -135,6 +189,5 @@ inline vec3 &operator /= (vec3 &v, float f) {
     return (v);
 }
 
-
-# endif /* __cplusplus */
+# endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec3_hpp_ */

@@ -13,6 +13,30 @@ extern "C" {
 
 }
 
+# endif /* __cplusplus */
+
+typedef union u_vec2 vec2;
+
+inline mat2 operator + (mat2, mat2);
+
+inline mat2 operator - (mat2, mat2);
+
+inline mat2 operator * (mat2, mat2);
+
+inline mat2 operator * (mat2, float);
+
+inline vec2 operator * (mat2, vec2);
+
+inline mat2 &operator += (mat2 &, mat2);
+
+inline mat2 &operator -= (mat2 &, mat2);
+
+inline mat2 &operator *= (mat2 &, mat2);
+
+# if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include "./vec2.hpp"
+
 inline mat2 operator + (mat2 a, mat2 b) {
     return (mat2Add(a, b));
 }
