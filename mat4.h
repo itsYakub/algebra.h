@@ -16,6 +16,21 @@ union u_mat4 {
               m20, m21, m22, m23,
               m30, m31, m32, m33;
     };
+
+# if defined (__cplusplus)
+
+    u_mat4(void);
+
+    u_mat4(float);
+
+    u_mat4(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
+
+    u_mat4(const u_mat4 &); 
+
+    u_mat4 &operator = (const u_mat4 &);
+
+# endif /* __cplusplus */
+
 };
 
 extern mat4 mat4Zero(void);
@@ -68,6 +83,61 @@ extern mat4 mat4Trans(mat4);
 #
 #  include "./vec3.h"
 #  include "./mat3.h"
+#
+# if defined (__cplusplus)
+
+u_mat4::u_mat4(void) :
+    m00(0.0), m01(0.0), m02(0.0), m03(0.0),
+    m10(0.0), m11(0.0), m12(0.0), m13(0.0),
+    m20(0.0), m21(0.0), m22(0.0), m23(0.0),
+    m30(0.0), m31(0.0), m32(0.0), m33(0.0) { }
+
+
+u_mat4::u_mat4(float s) :
+    m00(1.0 * s), m01(0.0),     m02(0.0),     m03(0.0),
+    m10(0.0),     m11(1.0 * s), m12(0.0),     m13(0.0),
+    m20(0.0),     m21(0.0),     m22(1.0 * s), m23(0.0),
+    m30(0.0),     m31(0.0),     m32(0.0),     m33(1.0 * s) { }
+
+    
+u_mat4::u_mat4(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22, float m23, float m30, float m31, float m32, float m33) :
+    m00(m00), m01(m01), m02(m02), m03(m03),
+    m10(m10), m11(m11), m12(m12), m13(m13),
+    m20(m20), m21(m21), m22(m22), m23(m23),
+    m30(m30), m31(m31), m32(m32), m33(m33) { }
+
+
+u_mat4::u_mat4(const u_mat4 &other) :
+    m00(other.m00), m01(other.m01), m02(other.m02), m03(other.m03),
+    m10(other.m10), m11(other.m11), m12(other.m12), m13(other.m13),
+    m20(other.m20), m21(other.m21), m22(other.m22), m23(other.m23),
+    m30(other.m30), m31(other.m31), m32(other.m32), m33(other.m33) { }
+
+
+u_mat4 &u_mat4::operator = (const u_mat4 &other) {
+    this->m00 = other.m00;
+    this->m01 = other.m01;
+    this->m02 = other.m02;
+    this->m03 = other.m03;
+
+    this->m10 = other.m10;
+    this->m11 = other.m11;
+    this->m12 = other.m12;
+    this->m13 = other.m13;
+
+    this->m20 = other.m20;
+    this->m21 = other.m21;
+    this->m22 = other.m22;
+    this->m23 = other.m23;
+
+    this->m30 = other.m30;
+    this->m31 = other.m31;
+    this->m32 = other.m32;
+    this->m33 = other.m33;
+    return (*this);
+}
+
+# endif /* __cplusplus */
 
 extern mat4 mat4Zero(void) {
     return (mat4Init(0.0f));
