@@ -79,17 +79,10 @@ u_mat3::u_mat3(const u_mat3 &other) :
 
 
 u_mat3 &u_mat3::operator = (const u_mat3 &other) {
-    this->m00 = other.m00; 
-    this->m01 = other.m01; 
-    this->m02 = other.m02;
+    *this = { other.m00, other.m01, other.m02,
+              other.m10, other.m11, other.m12,
+              other.m20, other.m21, other.m22 };
     
-    this->m10 = other.m10; 
-    this->m11 = other.m11; 
-    this->m12 = other.m12;
-    
-    this->m20 = other.m20; 
-    this->m21 = other.m21; 
-    this->m22 = other.m22;
     return (*this);
 }
 
@@ -138,10 +131,10 @@ extern mat3 mat3Mul(mat3 a, mat3 b) {
 }
 
 
-extern mat3 mat3Mulf(mat3 a, float f) {
-    return ((mat3) { a.m00 * f, a.m01 * f, a.m02 * f,
-                     a.m10 * f, a.m11 * f, a.m12 * f,
-                     a.m20 * f, a.m21 * f, a.m22 * f } );
+extern mat3 mat3Mulf(mat3 m, float f) {
+    return ((mat3) { m.m00 * f, m.m01 * f, m.m02 * f,
+                     m.m10 * f, m.m11 * f, m.m12 * f,
+                     m.m20 * f, m.m21 * f, m.m22 * f } );
 }
 
 
@@ -152,13 +145,13 @@ extern vec3 mat3Mulv(mat3 m, vec3 v) {
 }
 
 
-extern float mat3Det(mat3 a) {
-    return (a.m00 * a.m11 * a.m22 +
-            a.m01 * a.m12 * a.m20 +
-            a.m02 * a.m10 * a.m21 -
-            a.m20 * a.m11 * a.m02 -
-            a.m21 * a.m12 * a.m00 -
-            a.m22 * a.m10 * a.m01);
+extern float mat3Det(mat3 m) {
+    return (m.m00 * m.m11 * m.m22 +
+            m.m01 * m.m12 * m.m20 +
+            m.m02 * m.m10 * m.m21 -
+            m.m20 * m.m11 * m.m02 -
+            m.m21 * m.m12 * m.m00 -
+            m.m22 * m.m10 * m.m01);
 }
 
 extern float mat3Trace(mat3 m) {
@@ -166,11 +159,9 @@ extern float mat3Trace(mat3 m) {
 }
 
 extern mat3 mat3Trans(mat3 m) {
-    mat3 mat = mat3Zero();
-    mat.m00  = m.m00; mat.m01 = m.m10; mat.m02 = m.m20;
-    mat.m10  = m.m10; mat.m11 = m.m11; mat.m12 = m.m21;
-    mat.m20  = m.m20; mat.m21 = m.m12; mat.m22 = m.m22;
-    return (mat);
+    return ((mat3) { m.m00, m.m10, m.m20,
+                     m.m01, m.m11, m.m21,
+                     m.m02, m.m12, m.m22 } );
 } 
 
 # endif /* ALGEBRA_IMPLEMENTATION */

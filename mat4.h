@@ -115,25 +115,11 @@ u_mat4::u_mat4(const u_mat4 &other) :
 
 
 u_mat4 &u_mat4::operator = (const u_mat4 &other) {
-    this->m00 = other.m00;
-    this->m01 = other.m01;
-    this->m02 = other.m02;
-    this->m03 = other.m03;
-
-    this->m10 = other.m10;
-    this->m11 = other.m11;
-    this->m12 = other.m12;
-    this->m13 = other.m13;
-
-    this->m20 = other.m20;
-    this->m21 = other.m21;
-    this->m22 = other.m22;
-    this->m23 = other.m23;
-
-    this->m30 = other.m30;
-    this->m31 = other.m31;
-    this->m32 = other.m32;
-    this->m33 = other.m33;
+    *this = { other.m00, other.m01, other.m02, other.m03,
+              other.m10, other.m11, other.m12, other.m13,
+              other.m20, other.m21, other.m22, other.m23,
+              other.m20, other.m21, other.m22, other.m33 };
+    
     return (*this);
 }
 
@@ -212,29 +198,27 @@ extern vec4 mat4Mulv(mat4 m, vec4 v) {
 }
 
 
-extern float mat4Det(mat4 a) {
+extern float mat4Det(mat4 m) {
     float result = 0.0f;
-    mat3 mat = mat3Init(1.0f);
-   
-    mat.m00 = a.m11; mat.m01 = a.m12; mat.m02 = a.m13;
-    mat.m10 = a.m21; mat.m11 = a.m22; mat.m12 = a.m23;
-    mat.m20 = a.m31; mat.m21 = a.m32; mat.m22 = a.m33;
-    result += a.m00 * mat3Det(mat);
+    mat3 mat = (mat3) { m.m11, m.m12, m.m13,
+                        m.m21, m.m22, m.m23,
+                        m.m31, m.m32, m.m33 }; 
+    result += m.m00 * mat3Det(mat);
 
-    mat.m00 = a.m10; mat.m01 = a.m12; mat.m02 = a.m13;
-    mat.m10 = a.m20; mat.m11 = a.m22; mat.m12 = a.m23;
-    mat.m20 = a.m30; mat.m21 = a.m32; mat.m22 = a.m33;
-    result -= a.m01 * mat3Det(mat);
+    mat = (mat3) { m.m10, m.m12, m.m13,
+                   m.m20, m.m22, m.m23,
+                   m.m30, m.m32, m.m33 }; 
+    result -= m.m01 * mat3Det(mat);
 
-    mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m13;
-    mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m23;
-    mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m33;
-    result += a.m02 * mat3Det(mat);
+    mat = (mat3) { m.m10, m.m11, m.m13,
+                   m.m20, m.m21, m.m23,
+                   m.m30, m.m31, m.m33 }; 
+    result += m.m02 * mat3Det(mat);
 
-    mat.m00 = a.m10; mat.m01 = a.m11; mat.m02 = a.m12;
-    mat.m10 = a.m20; mat.m11 = a.m21; mat.m12 = a.m22;
-    mat.m20 = a.m30; mat.m21 = a.m31; mat.m22 = a.m32;
-    result -= a.m03 * mat3Det(mat);
+    mat = (mat3) { m.m10, m.m11, m.m12,
+                   m.m20, m.m21, m.m22,
+                   m.m30, m.m31, m.m32 }; 
+    result -= m.m03 * mat3Det(mat);
 
     return (result);
 }
@@ -246,11 +230,10 @@ extern float mat4Trace(mat4 m) {
 
 
 extern mat4 mat4Translate(vec3 v) {
-    mat4 mat = mat4Init(1.0f);
-    mat.m30 = v.x;
-    mat.m31 = v.y;
-    mat.m32 = v.z;
-    return (mat);
+    return ((mat4) { 1.0, 0.0, 0.0, 0.0,
+                     0.0, 1.0, 0.0, 0.0,
+                     0.0, 0.0, 1.0, 0.0,
+                     v.x, v.y, v.z, 1.0 } );
 }
 
 
@@ -345,11 +328,10 @@ extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
 
 
 extern mat4 mat4Scale(vec3 v) {
-    mat4 mat = mat4Init(1.0f);
-    mat.m00 = v.x;
-    mat.m11 = v.y;
-    mat.m22 = v.z;
-    return (mat);
+    return ((mat4) { v.x, 0.0, 0.0, 0.0,
+                     0.0, v.y, 0.0, 0.0,
+                     0.0, 0.0, v.z, 0.0,
+                     0.0, 0.0, 0.0, 1.0 } );
 }
 
 
@@ -387,12 +369,10 @@ extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
 
 
 extern mat4 mat4Trans(mat4 m) {
-    mat4 mat = mat4Zero();
-    mat.m00  = m.m00; mat.m01 = m.m10; mat.m02 = m.m20; mat.m03 = m.m30;
-    mat.m10  = m.m10; mat.m11 = m.m11; mat.m12 = m.m21; mat.m13 = m.m31;
-    mat.m20  = m.m20; mat.m21 = m.m12; mat.m22 = m.m22; mat.m23 = m.m32;
-    mat.m30  = m.m30; mat.m31 = m.m13; mat.m32 = m.m23; mat.m33 = m.m33;
-    return (mat);
+    return ((mat3) { m.m00, m.m10, m.m20, m.m30,
+                     m.m01, m.m11, m.m21, m.m31,
+                     m.m02, m.m12, m.m22, m.m32,
+                     m.m03, m.m13, m.m23, m.m33 } );
 }
 
 # endif /* ALGEBRA_IMPLEMENTATION */

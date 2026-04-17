@@ -74,10 +74,11 @@ u_mat2::u_mat2(const u_mat2 &other) :
 
 
 u_mat2 &u_mat2::operator = (const u_mat2 &other) {
-    this->m00 = other.m00; 
-    this->m01 = other.m01; 
-    this->m10 = other.m10; 
-    this->m11 = other.m11; 
+    *this = {
+        other.m00, other.m01,
+        other.m10, other.m11
+    };
+    
     return (*this);
 }
 
@@ -127,8 +128,8 @@ extern vec2 mat2Mulv(mat2 m, vec2 v) {
 }
 
 
-extern float mat2Det(mat2 a) {
-    return (a.m00 * a.m11 - a.m10 * a.m01);
+extern float mat2Det(mat2 m) {
+    return (m.m00 * m.m11 - m.m10 * m.m01);
 }
 
 extern float mat2Trace(mat2 m) {
@@ -136,10 +137,8 @@ extern float mat2Trace(mat2 m) {
 }
 
 extern mat2 mat2Trans(mat2 m) {
-    mat2 mat = mat2Zero();
-    mat.m00  = m.m00; mat.m01 = m.m10;
-    mat.m10  = m.m10; mat.m11 = m.m11;
-    return (mat);
+    return ((mat3) { m.m00, m.m10,
+                     m.m01, m.m11 }
 } 
 
 # endif /* ALGEBRA_IMPLEMENTATION */
