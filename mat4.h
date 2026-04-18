@@ -369,7 +369,7 @@ extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
 
 
 extern mat4 mat4Trans(mat4 m) {
-    return ((mat3) { m.m00, m.m10, m.m20, m.m30,
+    return ((mat4) { m.m00, m.m10, m.m20, m.m30,
                      m.m01, m.m11, m.m21, m.m31,
                      m.m02, m.m12, m.m22, m.m32,
                      m.m03, m.m13, m.m23, m.m33 } );

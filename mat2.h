@@ -137,8 +137,8 @@ extern float mat2Trace(mat2 m) {
 }
 
 extern mat2 mat2Trans(mat2 m) {
-    return ((mat3) { m.m00, m.m10,
-                     m.m01, m.m11 }
+    return ((mat2) { m.m00, m.m10,
+                     m.m01, m.m11 } );
 } 
 
 # endif /* ALGEBRA_IMPLEMENTATION */
