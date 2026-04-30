@@ -33,49 +33,49 @@ union u_mat4 {
 
 };
 
-extern mat4 mat4Zero(void);
+extern mat4 mat4zero(void);
 
-extern mat4 mat4Identity(void);
+extern mat4 mat4identity(void);
 
-extern mat4 mat4Init(float);
+extern mat4 mat4init(float);
 
-extern mat4 mat4Add(mat4, mat4);
+extern mat4 mat4add(mat4, mat4);
 
-extern mat4 mat4Sub(mat4, mat4);
+extern mat4 mat4sub(mat4, mat4);
 
-extern mat4 mat4Mul(mat4, mat4);
+extern mat4 mat4mul(mat4, mat4);
 
-extern mat4 mat4Mulf(mat4, float);
+extern mat4 mat4mulf(mat4, float);
 
-extern vec4 mat4Mulv(mat4, vec4);
+extern vec4 mat4mulv(mat4, vec4);
 
-extern float mat4Det(mat4);
+extern float mat4det(mat4);
 
-extern float mat4Trace(mat4);
+extern float mat4trace(mat4);
 
-extern mat4 mat4Translate(vec3);
+extern mat4 mat4translate(vec3);
 
-extern mat4 mat4Rotate(vec3, float);
+extern mat4 mat4rotate(vec3, float);
 
-extern mat4 mat4RotateAt(vec3, vec3, float);
+extern mat4 mat4rotateat(vec3, vec3, float);
 
-extern mat4 mat4RotateX(float);
+extern mat4 mat4rotatex(float);
 
-extern mat4 mat4RotateY(float);
+extern mat4 mat4rotatey(float);
 
-extern mat4 mat4RotateZ(float);
+extern mat4 mat4rotatez(float);
 
-extern mat4 mat4LookAt(vec3, vec3, vec3);
+extern mat4 mat4lookat(vec3, vec3, vec3);
 
-extern mat4 mat4Scale(vec3);
+extern mat4 mat4scale(vec3);
 
-extern mat4 mat4Frust(float, float, float, float, float, float);
+extern mat4 mat4frust(float, float, float, float, float, float);
 
-extern mat4 mat4Ortho(float, float, float, float, float, float);
+extern mat4 mat4ortho(float, float, float, float, float, float);
 
-extern mat4 mat4Persp(float, float, float, float);
+extern mat4 mat4persp(float, float, float, float);
 
-extern mat4 mat4Trans(mat4);
+extern mat4 mat4transpose(mat4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -125,17 +125,17 @@ u_mat4 &u_mat4::operator = (const u_mat4 &other) {
 
 #  endif /* __cplusplus */
 
-extern mat4 mat4Zero(void) {
-    return (mat4Init(0.0f));
+extern mat4 mat4zero(void) {
+    return (mat4init(0.0f));
 }
 
 
-extern mat4 mat4Identity(void) {
-    return (mat4Init(1.0f));
+extern mat4 mat4identity(void) {
+    return (mat4init(1.0f));
 }
 
 
-extern mat4 mat4Init(float s) {
+extern mat4 mat4init(float s) {
     return ((mat4) { 1.0f * s, 0.0f,     0.0f,     0.0f,
                      0.0f,     1.0f * s, 0.0f,     0.0f,
                      0.0f,     0.0f,     1.0f * s, 0.0f,
@@ -143,7 +143,7 @@ extern mat4 mat4Init(float s) {
 }
 
 
-extern mat4 mat4Add(mat4 a, mat4 b) {
+extern mat4 mat4add(mat4 a, mat4 b) {
     return ((mat4) { a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02, a.m03 + b.m03,
                      a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12, a.m13 + b.m13,
                      a.m20 + b.m20, a.m21 + b.m21, a.m22 + b.m22, a.m23 + b.m23,
@@ -151,7 +151,7 @@ extern mat4 mat4Add(mat4 a, mat4 b) {
 }
 
 
-extern mat4 mat4Sub(mat4 a, mat4 b) {
+extern mat4 mat4sub(mat4 a, mat4 b) {
     return ((mat4) { a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02, a.m03 - b.m03,
                      a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12, a.m13 - b.m13,
                      a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22, a.m23 - b.m23,
@@ -159,7 +159,7 @@ extern mat4 mat4Sub(mat4 a, mat4 b) {
 }
 
 
-extern mat4 mat4Mul(mat4 a, mat4 b) {
+extern mat4 mat4mul(mat4 a, mat4 b) {
     return ((mat4) { a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02 + a.m30 * b.m03,
                      a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02 + a.m31 * b.m03,
                      a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02 + a.m32 * b.m03,
@@ -182,7 +182,7 @@ extern mat4 mat4Mul(mat4 a, mat4 b) {
 }
 
 
-extern mat4 mat4Mulf(mat4 a, float f) {
+extern mat4 mat4mulf(mat4 a, float f) {
     return ((mat4) { a.m00 * f, a.m01 * f, a.m02 * f, a.m03 * f,
                      a.m10 * f, a.m11 * f, a.m12 * f, a.m13 * f,
                      a.m20 * f, a.m21 * f, a.m22 * f, a.m23 * f,
@@ -190,7 +190,7 @@ extern mat4 mat4Mulf(mat4 a, float f) {
 }
 
 
-extern vec4 mat4Mulv(mat4 m, vec4 v) {
+extern vec4 mat4mulv(mat4 m, vec4 v) {
     return ((vec4) { m.m00 * v.x + m.m10 * v.y + m.m20 * v.z + m.m30 * v.w,
                      m.m01 * v.x + m.m11 * v.y + m.m21 * v.z + m.m31 * v.w,
                      m.m02 * v.x + m.m12 * v.y + m.m22 * v.z + m.m32 * v.w,
@@ -198,38 +198,38 @@ extern vec4 mat4Mulv(mat4 m, vec4 v) {
 }
 
 
-extern float mat4Det(mat4 m) {
+extern float mat4det(mat4 m) {
     float result = 0.0f;
     mat3 mat = (mat3) { m.m11, m.m12, m.m13,
                         m.m21, m.m22, m.m23,
                         m.m31, m.m32, m.m33 }; 
-    result += m.m00 * mat3Det(mat);
+    result += m.m00 * mat3det(mat);
 
     mat = (mat3) { m.m10, m.m12, m.m13,
                    m.m20, m.m22, m.m23,
                    m.m30, m.m32, m.m33 }; 
-    result -= m.m01 * mat3Det(mat);
+    result -= m.m01 * mat3det(mat);
 
     mat = (mat3) { m.m10, m.m11, m.m13,
                    m.m20, m.m21, m.m23,
                    m.m30, m.m31, m.m33 }; 
-    result += m.m02 * mat3Det(mat);
+    result += m.m02 * mat3det(mat);
 
     mat = (mat3) { m.m10, m.m11, m.m12,
                    m.m20, m.m21, m.m22,
                    m.m30, m.m31, m.m32 }; 
-    result -= m.m03 * mat3Det(mat);
+    result -= m.m03 * mat3det(mat);
 
     return (result);
 }
 
 
-extern float mat4Trace(mat4 m) {
+extern float mat4trace(mat4 m) {
     return (m.m00 + m.m11 + m.m22 + m.m33);
 }
 
 
-extern mat4 mat4Translate(vec3 v) {
+extern mat4 mat4translate(vec3 v) {
     return ((mat4) { 1.0, 0.0, 0.0, 0.0,
                      0.0, 1.0, 0.0, 0.0,
                      0.0, 0.0, 1.0, 0.0,
@@ -237,17 +237,17 @@ extern mat4 mat4Translate(vec3 v) {
 }
 
 
-extern mat4 mat4Rotate(vec3 axis, float angle) {
+extern mat4 mat4rotate(vec3 axis, float angle) {
     float c = cos(angle);
     float s = sin(angle);
     float t = 1.0f - c;
 
-    vec3 axisn = vec3Normalize(axis);
+    vec3 axisn = vec3norm(axis);
     float x = axisn.x,
           y = axisn.y,
           z = axisn.z;
 
-    mat4 mat = mat4Init(1.0f);
+    mat4 mat = mat4init(1.0f);
     mat.m00 = t*x*x + c;
     mat.m01 = t*y*x + s*z;
     mat.m02 = t*z*x - s*y;
@@ -263,71 +263,71 @@ extern mat4 mat4Rotate(vec3 axis, float angle) {
 }
 
 
-extern mat4 mat4RotateAt(vec3 pivot, vec3 axis, float angle) {
-    mat4 mat = mat4Init(1.0f);
-         mat = mat4Mul(mat4Translate(pivot), mat);
-         mat = mat4Mul(mat4Rotate(axis, angle), mat);
-         mat = mat4Mul(mat4Translate(vec3Mulf(pivot, -1.0f)), mat);
+extern mat4 mat4rotateat(vec3 pivot, vec3 axis, float angle) {
+    mat4 mat = mat4init(1.0f);
+         mat = mat4mul(mat4trans(pivot), mat);
+         mat = mat4mul(mat4rotate(axis, angle), mat);
+         mat = mat4mul(mat4trans(vec3mulf(pivot, -1.0f)), mat);
     return (mat);
 }
 
 
-extern mat4 mat4RotateX(float f) {
+extern mat4 mat4rotatex(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
-    mat4 mat = mat4Init(1.0f);
-    mat.m11  = cosres;
-    mat.m21  = sinres;
+    mat4 mat =  mat4init(1.0f);
+    mat.m11  =  cosres;
+    mat.m21  =  sinres;
     mat.m12  = -sinres;
-    mat.m22  = cosres;
+    mat.m22  =  cosres;
     return (mat);
 }
 
 
-extern mat4 mat4RotateY(float f) {
+extern mat4 mat4rotatey(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
-    mat4 mat = mat4Init(1.0f);
-    mat.m00  = cosres;
+    mat4 mat =  mat4init(1.0f);
+    mat.m00  =  cosres;
     mat.m20  = -sinres;
-    mat.m02  = sinres;
-    mat.m22  = cosres;
+    mat.m02  =  sinres;
+    mat.m22  =  cosres;
     return (mat);
 }
 
 
-extern mat4 mat4RotateZ(float f) {
+extern mat4 mat4rotatez(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
-    mat4 mat = mat4Init(1.0f);
-    mat.m00  = cosres;
-    mat.m10  = sinres;
+    mat4 mat =  mat4init(1.0f);
+    mat.m00  =  cosres;
+    mat.m10  =  sinres;
     mat.m01  = -sinres;
-    mat.m11  = cosres;
+    mat.m11  =  cosres;
     return (mat);
 }
 
 
-extern mat4 mat4LookAt(vec3 eye, vec3 center, vec3 up) {
-    vec3 f = vec3Normalize(vec3Sub(center, eye));
-    vec3 s = vec3Normalize(vec3Cross(f, up));
-    vec3 u = vec3Cross(s, f);
+extern mat4 mat4lookat(vec3 eye, vec3 center, vec3 up) {
+    vec3 f = vec3norm(vec3sub(center, eye));
+    vec3 s = vec3norm(vec3cross(f, up));
+    vec3 u = vec3cross(s, f);
 
-    mat4 mat =  mat4Init(1.0f);
+    mat4 mat =  mat4init(1.0f);
     mat.m00  =  s.x; mat.m10 =  s.y; mat.m20 =  s.z;
     mat.m01  =  u.x; mat.m11 =  u.y; mat.m21 =  u.z;
     mat.m02  = -f.x; mat.m12 = -f.y; mat.m22 = -f.z;
-    mat.m03  = -vec3Dot(s, eye);
-    mat.m13  = -vec3Dot(u, eye);
-    mat.m23  =  vec3Dot(f, eye);
+    mat.m03  = -vec3dot(s, eye);
+    mat.m13  = -vec3dot(u, eye);
+    mat.m23  =  vec3dot(f, eye);
     return (mat);
 }
 
 
-extern mat4 mat4Scale(vec3 v) {
+extern mat4 mat4scale(vec3 v) {
     return ((mat4) { v.x, 0.0, 0.0, 0.0,
                      0.0, v.y, 0.0, 0.0,
                      0.0, 0.0, v.z, 0.0,
@@ -335,8 +335,8 @@ extern mat4 mat4Scale(vec3 v) {
 }
 
 
-extern mat4 mat4Frust(float left, float right, float down, float top, float near, float far) {
-    mat4 mat = mat4Zero();
+extern mat4 mat4frust(float left, float right, float down, float top, float near, float far) {
+    mat4 mat =  mat4zero();
     mat.m00  =  (near * 2.0f) / (right - left);
     mat.m11  =  (near * 2.0f) / (top   - down);
     mat.m20  =  (right + left) / (right - left);
@@ -348,27 +348,27 @@ extern mat4 mat4Frust(float left, float right, float down, float top, float near
 }
 
 
-extern mat4 mat4Ortho(float left, float right, float down, float top, float near, float far) {
-    mat4 mat = mat4Zero();
-    mat.m00 =  2.0f / (right - left);
-    mat.m11 =  2.0f / (top   - down);
-    mat.m22 = -2.0f / (far   - near);
-    mat.m03 = -(left  + right) / (right - left);
-    mat.m13 = -(top   + down)  / (top   - down);
-    mat.m23 = -(far   + near)  / (far   - near);
-    mat.m33 =  1.0f;
+extern mat4 mat4ortho(float left, float right, float down, float top, float near, float far) {
+    mat4 mat =  mat4zero();
+    mat.m00  =  2.0f / (right - left);
+    mat.m11  =  2.0f / (top   - down);
+    mat.m22  = -2.0f / (far   - near);
+    mat.m03  = -(left  + right) / (right - left);
+    mat.m13  = -(top   + down)  / (top   - down);
+    mat.m23  = -(far   + near)  / (far   - near);
+    mat.m33  =  1.0f;
     return (mat);
 }
 
 
-extern mat4 mat4Persp(float fieldOfView, float aspect, float near, float far) {
-    float top   = near * tan(fieldOfView * 0.5f);
-    float right = top * aspect;
-    return (mat4Frust(-right, right, -top, top, near, far));
+extern mat4 mat4persp(float fieldofview, float aspect, float near, float far) {
+    float t = near * tan(fieldofview * 0.5f);
+    float r = top * aspect;
+    return (mat4frust(-r, r, -t, t, near, far));
 }
 
 
-extern mat4 mat4Trans(mat4 m) {
+extern mat4 mat4transpose(mat4 m) {
     return ((mat4) { m.m00, m.m10, m.m20, m.m30,
                      m.m01, m.m11, m.m21, m.m31,
                      m.m02, m.m12, m.m22, m.m32,
