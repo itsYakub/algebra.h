@@ -17,6 +17,8 @@ extern "C" {
 
 typedef union u_mat2 mat2;
 
+/* Operator - overloading */
+
 inline vec2 operator + (vec2, vec2);
 
 inline vec2 operator - (vec2, vec2);

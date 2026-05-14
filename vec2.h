@@ -20,6 +20,8 @@ union u_vec2 {
 
 # if defined (__cplusplus)
 
+    /* Constructors */
+
     u_vec2(void);
 
     u_vec2(float);
@@ -34,6 +36,8 @@ union u_vec2 {
 
 };
 
+/* Properties */
+
 extern vec2 vec2zero(void);
 
 extern vec2 vec2one(void);
@@ -45,6 +49,8 @@ extern vec2 vec2left(void);
 extern vec2 vec2up(void);
 
 extern vec2 vec2down(void);
+
+/* Math operations */
 
 extern vec2 vec2add(vec2, vec2);
 
@@ -64,6 +70,8 @@ extern vec2 vec2divf(vec2, float);
 
 extern vec2 vec2mulm(vec2, mat2);
 
+/* Boolean expressions */
+
 extern bool vec2eq(vec2, vec2);
 
 extern bool vec2noeq(vec2, vec2);
@@ -76,15 +84,81 @@ extern bool vec2less(vec2, vec2);
 
 extern bool vec2lesseq(vec2, vec2);
 
-extern float vec2dot(vec2, vec2);
+/* Distance Operations */
 
 extern float vec2len(vec2);
 
+extern float vec2lensq(vec2);
+
 extern float vec2dist(vec2, vec2);
+
+extern float vec2distsq(vec2, vec2);
+
+/* Unary Arithmetics */
+
+extern float vec2dot(vec2, vec2);
 
 extern float vec2cross(vec2, vec2);
 
 extern vec2 vec2norm(vec2);
+
+extern vec2 vec2neg(vec2);
+
+extern vec2 vec2abs(vec2);
+
+extern vec2 vec2sign(vec2);
+
+extern vec2 vec2sqrt(vec2);
+
+extern vec2 vec2pow(vec2, float);
+
+extern vec2 vec2fract(vec2);
+
+extern vec2 vec2floor(vec2);
+
+extern vec2 vec2ceil(vec2);
+
+extern vec2 vec2round(vec2);
+
+extern vec2 vec2mod(vec2, float);
+
+/* Constraints */
+
+extern vec2 vec2min(vec2, vec2);
+
+extern vec2 vec2minf(vec2, float);
+
+extern vec2 vec2max(vec2, vec2);
+
+extern vec2 vec2maxf(vec2, float);
+
+extern vec2 vec2clamp(vec2, vec2, vec2);
+
+extern vec2 vec2clampf(vec2, float, float);
+
+/* Interpolation */
+
+extern vec2 vec2lerp(vec2, vec2, float);
+
+extern vec2 vec2step(vec2, vec2);
+
+extern vec2 vec2smoothstep(vec2, vec2, vec2);
+
+/* Geometric operations */
+
+extern vec2 vec2perp(vec2);
+
+extern vec2 vec2reflect(vec2);
+
+extern vec2 vec2refract(vec2, vec2, float);
+
+extern vec2 vec2project(vec2, vec2);
+
+extern vec2 vec2reject(vec2, vec2);
+
+extern vec2 vec2rotate(vec2, float);
+
+extern float vec2angle(vec2, vec2);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -93,6 +167,8 @@ extern vec2 vec2norm(vec2);
 #  include "./mat2.h"
 #
 #  if defined (__cplusplus)
+
+/* Constructors */
 
 u_vec2::u_vec2(void) : x(0.0), y(0.0) { }
 
@@ -113,6 +189,8 @@ u_vec2 &u_vec2::operator = (const u_vec2 &other) {
 }
 
 #  endif /* __cplusplus */
+
+/* Properties */
 
 extern vec2 vec2zero(void) {
     return ((vec2) { 0.0f, 0.0f } );
@@ -143,6 +221,7 @@ extern vec2 vec2down(void) {
     return ((vec2) { 0.0f, -1.0f } );
 }
 
+/* Math operations */
 
 extern vec2 vec2add(vec2 a, vec2 b) {
     return ((vec2) { a.x + b.x,
@@ -197,6 +276,7 @@ extern vec2 vec2mulm(vec2 v, mat2 m) {
                      m.m01 * v.x + m.m11 * v.y } );
 }
 
+/* Boolean expressions */
 
 extern bool vec2eq(vec2 a, vec2 b) {
     return (a.x == b.x &&
@@ -233,11 +313,7 @@ extern bool vec2lesseq(vec2 a, vec2 b) {
             a.y <= b.y);
 }
 
-
-extern float vec2dot(vec2 a, vec2 b) {
-    return (a.x * b.x + a.y * b.y);
-}
-
+/* Distance Operations */
 
 extern float vec2len(vec2 a) {
     return (sqrt(a.x * a.x + a.y * a.y));
@@ -247,6 +323,12 @@ extern float vec2len(vec2 a) {
 extern float vec2dist(vec2 a, vec2 b) {
     return (sqrt((a.x - b.x) * (a.x - b.x) +
                  (a.y - b.y) * (a.y * b.y)));
+}
+
+/* Unary Arithmetics */
+
+extern float vec2dot(vec2 a, vec2 b) {
+    return (a.x * b.x + a.y * b.y);
 }
 
 
@@ -266,6 +348,86 @@ extern vec2 vec2norm(vec2 a) {
     return (vec);
 }
 
+
+extern vec2 vec2neg(vec2 a) { }
+
+
+extern vec2 vec2abs(vec2 a) { }
+
+
+extern vec2 vec2sign(vec2 a) { }
+
+
+extern vec2 vec2sqrt(vec2 a) { }
+
+
+extern vec2 vec2pow(vec2 a, float f) { }
+
+
+extern vec2 vec2fract(vec2 a) { }
+
+
+extern vec2 vec2floor(vec2 a) { }
+
+
+extern vec2 vec2ceil(vec2 a) { }
+
+
+extern vec2 vec2round(vec2 a) { }
+
+
+extern vec2 vec2mod(vec2 a, float f) { }
+
+/* Constraints */
+
+extern vec2 vec2min(vec2 a, vec2 b) { }
+
+
+extern vec2 vec2minf(vec2 a, float f) { }
+
+
+extern vec2 vec2max(vec2 a, vec2 b) { }
+
+
+extern vec2 vec2maxf(vec2 a, float f) { }
+
+
+extern vec2 vec2clamp(vec2 a, vec2 min, vec2 max) { }
+
+
+extern vec2 vec2clampf(vec2 a, float min, float max) { }
+
+/* Interpolation */
+
+extern vec2 vec2lerp(vec2 a, vec2 b, float t) { }
+
+
+extern vec2 vec2step(vec2 a, vec2 b) { }
+
+
+extern vec2 vec2smoothstep(vec2 e0, vec2 e1, vec2 x) { }
+
+/* Geometric operations */
+
+extern vec2 vec2perp(vec2 a) { }
+
+
+extern vec2 vec2reflect(vec2 a) { }
+
+
+extern vec2 vec2refract(vec2 a, vec2 n, float eta) { }
+
+
+extern vec2 vec2project(vec2 a, vec2 b) { }
+
+
+extern vec2 vec2reject(vec2 a, vec2 b) { }
+
+
+extern vec2 vec2rotate(vec2 a, float f) { }
+
+
+extern float vec2angle(vec2 a, vec2 b) { }
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec2_h_ */
