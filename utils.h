@@ -57,6 +57,15 @@ static inline float __algebra_max(float a, float b) {
 #  define max __algebra_max
 # endif /* max */
 #
+# if !defined (fract)
+
+static inline float __algebra_fract(float a) {
+    return (a - floorf(a));
+}
+
+#  define fract __algebra_fract
+# endif /* fract */
+#
 # if !defined (clamp)
 
 static inline float __algebra_clamp(float f, float a, float b) {
