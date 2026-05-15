@@ -60,6 +60,11 @@ $ cd /path/to/your/project/algebra
 $ sudo make install
 ```
 
+## Resources
+
+Resources used in this project:
+- [Nvidia Developer Docs: stdlib index](https://developer.nvidia.com/w/cg/index_stdlib.html)
+
 ## Licence
 
 This project is licenced under [LGPL-3 Licence](./LICENCE).
