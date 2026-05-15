@@ -17,6 +17,26 @@ extern "C" {
 
 typedef union u_mat2 mat2;
 
+/* Constructors */
+
+u_vec2::u_vec2(void) : x(0.0), y(0.0) { }
+
+
+u_vec2::u_vec2(float v) : x(v), y(v) { }
+
+
+u_vec2::u_vec2(float x, float y) : x(x), y(y) { }
+
+
+u_vec2::u_vec2(const u_vec2 &other) : x(other.x), y(other.y) { }
+
+
+u_vec2 &u_vec2::operator = (const u_vec2 &other) {
+    this->x = other.x;
+    this->y = other.y;
+    return (*this);
+}
+
 /* Operator - overloading */
 
 inline vec2 operator + (vec2, vec2);
@@ -70,124 +90,124 @@ inline vec2 &operator /= (vec2 &, float);
 #  include "./mat2.hpp"
 
 inline vec2 operator + (vec2 a, vec2 b) {
-    return (vec2Add(a, b));
+    return (vec2add(a, b));
 }
 
 
 inline vec2 operator - (vec2 a, vec2 b) {
-    return (vec2Sub(a, b));
+    return (vec2sub(a, b));
 }
 
 
 inline vec2 operator * (vec2 a, vec2 b) {
-    return (vec2Mul(a, b));
+    return (vec2mul(a, b));
 }
 
 
 inline vec2 operator / (vec2 a, vec2 b) {
-    return (vec2Div(a, b));
+    return (vec2div(a, b));
 }
 
 
 inline vec2 operator + (vec2 v, float f) {
-    return (vec2Addf(v, f));
+    return (vec2addf(v, f));
 }
 
 
 inline vec2 operator - (vec2 v, float f) {
-    return (vec2Subf(v, f));
+    return (vec2subf(v, f));
 }
 
 
 inline vec2 operator * (vec2 v, float f) {
-    return (vec2Mulf(v, f));
+    return (vec2mulf(v, f));
 }
 
 
 inline vec2 operator / (vec2 v, float f) {
-    return (vec2Divf(v, f));
+    return (vec2divf(v, f));
 }
 
 
 inline vec2 operator * (vec2 v, mat2 m) {
-    return (vec2Mulm(v, m));
+    return (vec2mulm(v, m));
 }
 
 
 inline bool operator == (vec2 a, vec2 b) {
-    return (vec2Equal(a, b));
+    return (vec2eq(a, b));
 }
 
 
 inline bool operator != (vec2 a, vec2 b) {
-    return (vec2NoEqual(a, b));
+    return (vec2noeq(a, b));
 }
 
 
 inline bool operator > (vec2 a, vec2 b) {
-    return (vec2Great(a, b));
+    return (vec2great(a, b));
 }
 
 
 inline bool operator >= (vec2 a, vec2 b) {
-    return (vec2GreatEqual(a, b));
+    return (vec2greateq(a, b));
 }
 
 
 inline bool operator < (vec2 a, vec2 b) {
-    return (vec2Less(a, b));
+    return (vec2less(a, b));
 }
 
 
 inline bool operator <= (vec2 a, vec2 b) {
-    return (vec2LessEqual(a, b));
+    return (vec2lesseq(a, b));
 }
 
 
 inline vec2 &operator += (vec2 &a, vec2 b) {
-    a = vec2Add(a, b);
+    a = vec2add(a, b);
     return (a);
 }
 
 
 inline vec2 &operator -= (vec2 &a, vec2 b) {
-    a = vec2Sub(a, b);
+    a = vec2sub(a, b);
     return (a);
 }
 
 
 inline vec2 &operator *= (vec2 &a, vec2 b) {
-    a = vec2Mul(a, b);
+    a = vec2mul(a, b);
     return (a);
 }
 
 
 inline vec2 &operator /= (vec2 &a, vec2 b) {
-    a = vec2Div(a, b);
+    a = vec2div(a, b);
     return (a);
 }
 
 
 inline vec2 &operator += (vec2 &v, float f) {
-    v = vec2Addf(v, f);
+    v = vec2addf(v, f);
     return (v);
 }
 
 
 inline vec2 &operator -= (vec2 &v, float f) {
-    v = vec2Subf(v, f);
+    v = vec2subf(v, f);
     return (v);
 }
 
 
 inline vec2 &operator *= (vec2 &v, float f) {
-    v = vec2Mulf(v, f);
+    v = vec2mulf(v, f);
     return (v);
 }
 
 
 inline vec2 &operator /= (vec2 &v, float f) {
-    v = vec2Divf(v, f);
+    v = vec2divf(v, f);
     return (v);
 }
 
