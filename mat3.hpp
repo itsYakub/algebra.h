@@ -38,44 +38,44 @@ inline mat3 &operator *= (mat3 &, mat3);
 #  include "./vec3.hpp"
 
 inline mat3 operator + (mat3 a, mat3 b) {
-    return (mat3Add(a, b));
+    return (mat3add(a, b));
 }
 
 
 inline mat3 operator - (mat3 a, mat3 b) {
-    return (mat3Sub(a, b));
+    return (mat3sub(a, b));
 }
 
 
 inline mat3 operator * (mat3 a, mat3 b) {
-    return (mat3Mul(a, b));
+    return (mat3mul(a, b));
 }
 
 
 inline mat3 operator * (mat3 m, float f) {
-    return (mat3Mulf(m, f));
+    return (mat3mulf(m, f));
 }
 
 
 inline vec3 operator * (mat3 m, vec3 v) {
-    return (mat3Mulv(m, v));
+    return (mat3mulv(m, v));
 }
 
 
 inline mat3 &operator += (mat3 &a, mat3 b) {
-    a = mat3Add(a, b);
+    a = mat3add(a, b);
     return (a);
 }
 
 
 inline mat3 &operator -= (mat3 &a, mat3 b) {
-    a = mat3Sub(a, b);
+    a = mat3sub(a, b);
     return (a);
 }
 
 
 inline mat3 &operator *= (mat3 &a, mat3 b) {
-    a = mat3Mul(a, b);
+    a = mat3mul(a, b);
     return (a);
 }
 

@@ -172,93 +172,138 @@ extern float vec2angle(vec2, vec2);
 /* Properties */
 
 extern vec2 vec2zero(void) {
-    return ((vec2) { .x = 0.0f,
-                     .y = 0.0f } );
+    vec2 v;
+
+    v.x = 0.0f;
+    v.y = 0.0f;
+    return (v);
 }
 
 
 extern vec2 vec2one(void) {
-    return ((vec2) { .x = 1.0f,
-                     .y = 1.0f } );
+    vec2 v;
+
+    v.x = 1.0f;
+    v.y = 1.0f;
+    return (v);
 }
 
 
 extern vec2 vec2right(void) {
-    return ((vec2) { .x = 1.0f,
-                     .y = 0.0f } );
+    vec2 v;
+
+    v.x = 1.0f;
+    v.y = 0.0f;
+    return (v);
 }
 
 
 extern vec2 vec2left(void) {
-    return ((vec2) { .x = -1.0f,
-                     .y =  0.0f } );
+    vec2 v;
+
+    v.x = -1.0f;
+    v.y =  0.0f;
+    return (v);
 }
 
 
 extern vec2 vec2up(void) {
-    return ((vec2) { .x = 0.0f,
-                     .y = 1.0f } );
+    vec2 v;
+
+    v.x = 0.0f;
+    v.y = 1.0f;
+    return (v);
 }
 
 
 extern vec2 vec2down(void) {
-    return ((vec2) { .x =  0.0f,
-                     .y = -1.0f } );
+    vec2 v;
+
+    v.x =  0.0f;
+    v.y = -1.0f;
+    return (v);
 }
 
 /* Math operations */
 
 extern vec2 vec2add(vec2 a, vec2 b) {
-    return ((vec2) { .x = a.x + b.x,
-                     .y = a.y + b.y } );
+    vec2 v;
+
+    v.x = a.x + b.x;
+    v.y = a.y + b.y;
+    return (v);
 }
 
 
 extern vec2 vec2sub(vec2 a, vec2 b) {
-    return ((vec2) { .x = a.x - b.x,
-                     .y = a.y - b.y } );
+    vec2 v;
+
+    v.x = a.x - b.x;
+    v.y = a.y - b.y;
+    return (v);
 }
 
 
 extern vec2 vec2mul(vec2 a, vec2 b) {
-    return ((vec2) { .x = a.x * b.x,
-                     .y = a.y * b.y } );
+    vec2 v;
+
+    v.x = a.x * b.x;
+    v.y = a.y * b.y;
+    return (v);
 }
 
 
 extern vec2 vec2div(vec2 a, vec2 b) {
-    return ((vec2) { .x = b.x != 0.0f ? a.x / b.x : 0.0f,
-                     .y = b.y != 0.0f ? a.y / b.y : 0.0f } );
+    vec2 v;
+
+    v.x = b.x != 0.0f ? a.x / b.x : 0.0f;
+    v.y = b.y != 0.0f ? a.y / b.y : 0.0f;
+    return (v);
 }
 
 
 extern vec2 vec2addf(vec2 a, float f) {
-    return ((vec2) { .x = a.x + f,
-                     .y = a.y + f } );
+    vec2 v;
+
+    v.x = a.x + f;
+    v.y = a.y + f;
+    return (v);
 }
 
 
 extern vec2 vec2subf(vec2 a, float f) {
-    return ((vec2) { .x = a.x - f,
-                     .y = a.y - f } );
+    vec2 v;
+
+    v.x = a.x - f;
+    v.y = a.y - f;
+    return (v);
 }
 
 
 extern vec2 vec2mulf(vec2 a, float f) {
-    return ((vec2) { .x = a.x * f,
-                     .y = a.y * f } );
+    vec2 v;
+
+    v.x = a.x * f;
+    v.y = a.y * f;
+    return (v);
 }
 
 
 extern vec2 vec2divf(vec2 a, float f) {
-    return ((vec2) { .x = f != 0.0f ? a.x / f : 0.0f,
-                     .y = f != 0.0f ? a.y / f : 0.0f } );
+    vec2 v;
+
+    v.x = f != 0.0f ? a.x / f : 0.0f;
+    v.y = f != 0.0f ? a.y / f : 0.0f;
+    return (v);
 }
 
 
-extern vec2 vec2mulm(vec2 v, mat2 m) {
-    return ((vec2) { .x = m.m00 * v.x + m.m10 * v.y,
-                     .y = m.m01 * v.x + m.m11 * v.y } );
+extern vec2 vec2mulm(vec2 a, mat2 m) {
+    vec2 v;
+
+    v.x = m.m00 * a.x + m.m10 * a.y;
+    v.y = m.m01 * a.x + m.m11 * a.y;
+    return (v);
 }
 
 /* Boolean expressions */
@@ -301,7 +346,7 @@ extern bool vec2lesseq(vec2 a, vec2 b) {
 /* Distance Operations */
 
 extern float vec2len(vec2 a) {
-    return (sqrt(a.x * a.x + a.y * a.y));
+    return (sqrtf(a.x * a.x + a.y * a.y));
 }
 
 
@@ -311,14 +356,14 @@ extern float vec2lensq(vec2 a) {
 
 
 extern float vec2dist(vec2 a, vec2 b) {
-    return (sqrt((a.x - b.x) * (a.x - b.x) +
-                 (a.y - b.y) * (a.y * b.y)));
+    return (sqrtf((a.x - b.x) * (a.x - b.x) +
+                  (a.y - b.y) * (a.y - b.y)));
 }
 
 
 extern float vec2distsq(vec2 a, vec2 b) {
     return ((a.x - b.x) * (a.x - b.x) +
-            (a.y - b.y) * (a.y * b.y));
+            (a.y - b.y) * (a.y - b.y));
 }
 
 /* Unary Arithmetics */
@@ -336,183 +381,195 @@ extern float vec2cross(vec2 a, vec2 b) {
 extern vec2 vec2norm(vec2 a) {
     float len = vec2len(a);
 
-    vec2 vec = a;
     if (len != 0.0f) {
-        vec.x *= 1.0f / len;
-        vec.y *= 1.0f / len;
+        a.x *= 1.0f / len;
+        a.y *= 1.0f / len;
     }
-    return (vec);
+    return (a);
 }
 
 
-extern vec2 vec2neg(vec2 a) { }
+extern vec2 vec2neg(vec2 a) {
+    a.x = -a.x;
+    a.y = -a.y;
+    return (a);
+}
 
 
 extern vec2 vec2abs(vec2 a) {
-    return ((vec2) {
-                .x = fabsf(a.x),
-                .y = fabsf(a.y)
-            } );
+    a.x = fabsf(a.x);
+    a.y = fabsf(a.y);
+    return (a);
 }
 
 
-extern vec2 vec2sign(vec2 a) { }
+extern vec2 vec2sign(vec2 a) {
+    a.x = a.x > 0.0f ? 1.0f : (a.x < 0.0f ? -1.0f : 0.0f);
+    a.y = a.y > 0.0f ? 1.0f : (a.y < 0.0f ? -1.0f : 0.0f);
+    return (a);
+}
 
 
 extern vec2 vec2sqrt(vec2 a) {
-    return ((vec2) {
-                .x = sqrtf(a.x),
-                .y = sqrtf(a.y)
-            } );
+    a.x = sqrtf(a.x);
+    a.y = sqrtf(a.y);
+    return (a);
 }
 
 
 extern vec2 vec2pow(vec2 a, float f) {
-    return ((vec2) {
-                .x = powf(a.x, f),
-                .y = powf(a.y, f)
-            } );
+    a.x = powf(a.x, f);
+    a.y = powf(a.y, f);
+    return (a);
 }
 
 
 extern vec2 vec2fract(vec2 a) {
-    return ((vec2) {
-                .x = fract(a.x),
-                .y = fract(a.y)
-            } );
+    a.x = fract(a.x);
+    a.y = fract(a.y);
+    return (a);
 }
 
 
 extern vec2 vec2floor(vec2 a) {
-    return ((vec2) {
-                .x = floorf(a.x),
-                .y = floorf(a.y)
-            } );
+    a.x = floorf(a.x);
+    a.y = floorf(a.y);
+    return (a);
 }
 
 
 extern vec2 vec2ceil(vec2 a) {
-    return ((vec2) {
-                .x = ceilf(a.x),
-                .y = ceilf(a.y)
-            } );
+    a.x = ceilf(a.x);
+    a.y = ceilf(a.y);
+    return (a);
 }
 
 
 extern vec2 vec2round(vec2 a) {
-    return ((vec2) {
-                .x = roundf(a.x),
-                .y = roundf(a.y)
-            } );
+    a.x = roundf(a.x);
+    a.y = roundf(a.y);
+    return (a);
 }
 
 
 extern vec2 vec2mod(vec2 a, vec2 b) {
-    return ((vec2) {
-                .x = a.x - b.x * floorf(a.x / b.x),
-                .y = a.y - b.y * floorf(a.y / b.y)
-            } );
+    vec2 v;
+
+    v.x = a.x - b.x * floorf(a.x / b.x);
+    v.y = a.y - b.y * floorf(a.y / b.y);
+    return (v);
 }
 
 
 extern vec2 vec2modf(vec2 a, float f) {
-    return ((vec2) {
-                .x = a.x - f * floorf(a.x / f),
-                .y = a.y - f * floorf(a.y / f)
-            } );
+    vec2 v;
+
+    v.x = a.x - f * floorf(a.x / f);
+    v.y = a.y - f * floorf(a.y / f);
+    return (v);
 }
 
 /* Constraints */
 
 extern vec2 vec2min(vec2 a, vec2 b) {
-    return ((vec2) {
-                .x = min(a.x, b.x),
-                .y = min(a.y, b.y)
-            } );
+    vec2 v;
+
+    v.x = min(a.x, b.x);
+    v.y = min(a.y, b.y);
+    return (v);
 }
 
 
 extern vec2 vec2minf(vec2 a, float f) {
-    return ((vec2) {
-                .x = min(a.x, f),
-                .y = min(a.y, f)
-            } );
+    vec2 v;
+
+    v.x = min(a.x, f);
+    v.y = min(a.y, f);
+    return (v);
 }
 
 
 extern vec2 vec2max(vec2 a, vec2 b) {
-    return ((vec2) {
-                .x = max(a.x, b.x),
-                .y = max(a.y, b.y)
-            } );
+    vec2 v;
+
+    v.x = max(a.x, b.x);
+    v.y = max(a.y, b.y);
+    return (v);
 }
 
 
 extern vec2 vec2maxf(vec2 a, float f) {
-    return ((vec2) {
-                .x = max(a.x, f),
-                .y = max(a.y, f)
-            } );
+    vec2 v;
+
+    v.x = max(a.x, f);
+    v.y = max(a.y, f);
+    return (v);
 }
 
 
-extern vec2 vec2clamp(vec2 a, vec2 min, vec2 max) {
-    return ((vec2) {
-                .x = clamp(a.x, min.x, max.x),
-                .y = clamp(a.y, min.y, max.y)
-            } );
+extern vec2 vec2clamp(vec2 a, vec2 lo, vec2 hi) {
+    vec2 v;
+
+    v.x = clamp(a.x, lo.x, hi.x);
+    v.y = clamp(a.y, lo.y, hi.y);
+    return (v);
 }
 
 
-extern vec2 vec2clampf(vec2 a, float min, float max) {
-    return ((vec2) {
-                .x = clamp(a.x, min, max),
-                .y = clamp(a.y, min, max)
-            } );
+extern vec2 vec2clampf(vec2 a, float lo, float hi) {
+    vec2 v;
+
+    v.x = clamp(a.x, lo, hi);
+    v.y = clamp(a.y, lo, hi);
+    return (v);
 }
 
 /* Interpolation */
 
 extern vec2 vec2lerp(vec2 a, vec2 b, float t) {
-    return ((vec2) {
-                .x = lerp(a.x, b.x, t),
-                .y = lerp(a.y, b.y, t)
-            } );
+    vec2 v;
+
+    v.x = lerp(a.x, b.x, t);
+    v.y = lerp(a.y, b.y, t);
+    return (v);
 }
 
 
 extern vec2 vec2step(vec2 a, vec2 x) {
-    return ((vec2) {
-                .x = step(a.x, x.x),
-                .y = step(a.y, x.y)
-            } );
+    vec2 v;
+
+    v.x = step(a.x, x.x);
+    v.y = step(a.y, x.y);
+    return (v);
 }
 
 
 extern vec2 vec2smoothstep(vec2 e0, vec2 e1, vec2 x) {
-    return ((vec2) {
-                .x = smoothstep(e0.x, e1.x, x.x),
-                .y = smoothstep(e0.y, e1.y, x.y)
-            } );
+    vec2 v;
+
+    v.x = smoothstep(e0.x, e1.x, x.x);
+    v.y = smoothstep(e0.y, e1.y, x.y);
+    return (v);
 }
 
 /* Geometric operations */
 
 extern vec2 vec2perp(vec2 a) {
-    return ((vec2) {
-                .x =  a.x,
-                .y = -a.y 
-            } );
+    vec2 v;
+
+    v.x = -a.y;
+    v.y =  a.x;
+    return (v);
 }
 
 
-extern vec2 vec2reflect(vec2 a, vec2 b) {
-    float dot = vec2dot(a, b);
+extern vec2 vec2reflect(vec2 a, vec2 n) {
+    float dot = vec2dot(a, n);
+    vec2  v;
 
-    return ((vec2) {
-                .x = a.x - 2.0 * dot * b.x,
-                .y = a.y - 2.0 * dot * b.y
-            } );
+    v.x = a.x - 2.0f * dot * n.x;
+    v.y = a.y - 2.0f * dot * n.y;
+    return (v);
 }
 
 

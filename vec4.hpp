@@ -68,124 +68,124 @@ inline vec4 &operator /= (vec4 &, float);
 #  include "./mat4.hpp"
 
 inline vec4 operator + (vec4 a, vec4 b) {
-    return (vec4Add(a, b));
+    return (vec4add(a, b));
 }
 
 
 inline vec4 operator - (vec4 a, vec4 b) {
-    return (vec4Sub(a, b));
+    return (vec4sub(a, b));
 }
 
 
 inline vec4 operator * (vec4 a, vec4 b) {
-    return (vec4Mul(a, b));
+    return (vec4mul(a, b));
 }
 
 
 inline vec4 operator / (vec4 a, vec4 b) {
-    return (vec4Div(a, b));
+    return (vec4div(a, b));
 }
 
 
 inline vec4 operator + (vec4 v, float f) {
-    return (vec4Addf(v, f));
+    return (vec4addf(v, f));
 }
 
 
 inline vec4 operator - (vec4 v, float f) {
-    return (vec4Subf(v, f));
+    return (vec4subf(v, f));
 }
 
 
 inline vec4 operator * (vec4 v, float f) {
-    return (vec4Mulf(v, f));
+    return (vec4mulf(v, f));
 }
 
 
 inline vec4 operator / (vec4 v, float f) {
-    return (vec4Divf(v, f));
+    return (vec4divf(v, f));
 }
 
 
 inline vec4 operator * (vec4 v, mat4 m) {
-    return (vec4Mulm(v, m));
+    return (vec4mulm(v, m));
 }
 
 
 inline bool operator == (vec4 a, vec4 b) {
-    return (vec4Equal(a, b));
+    return (vec4eq(a, b));
 }
 
 
 inline bool operator != (vec4 a, vec4 b) {
-    return (vec4NoEqual(a, b));
+    return (vec4noeq(a, b));
 }
 
 
 inline bool operator > (vec4 a, vec4 b) {
-    return (vec4Great(a, b));
+    return (vec4great(a, b));
 }
 
 
 inline bool operator >= (vec4 a, vec4 b) {
-    return (vec4GreatEqual(a, b));
+    return (vec4greateq(a, b));
 }
 
 
 inline bool operator < (vec4 a, vec4 b) {
-    return (vec4Less(a, b));
+    return (vec4less(a, b));
 }
 
 
 inline bool operator <= (vec4 a, vec4 b) {
-    return (vec4LessEqual(a, b));
+    return (vec4lesseq(a, b));
 }
 
 
 inline vec4 &operator += (vec4 &a, vec4 b) {
-    a = vec4Add(a, b);
+    a = vec4add(a, b);
     return (a);
 }
 
 
 inline vec4 &operator -= (vec4 &a, vec4 b) {
-    a = vec4Sub(a, b);
+    a = vec4sub(a, b);
     return (a);
 }
 
 
 inline vec4 &operator *= (vec4 &a, vec4 b) {
-    a = vec4Mul(a, b);
+    a = vec4mul(a, b);
     return (a);
 }
 
 
 inline vec4 &operator /= (vec4 &a, vec4 b) {
-    a = vec4Div(a, b);
+    a = vec4div(a, b);
     return (a);
 }
 
 
 inline vec4 &operator += (vec4 &v, float f) {
-    v = vec4Addf(v, f);
+    v = vec4addf(v, f);
     return (v);
 }
 
 
 inline vec4 &operator -= (vec4 &v, float f) {
-    v = vec4Subf(v, f);
+    v = vec4subf(v, f);
     return (v);
 }
 
 
 inline vec4 &operator *= (vec4 &v, float f) {
-    v = vec4Mulf(v, f);
+    v = vec4mulf(v, f);
     return (v);
 }
 
 
 inline vec4 &operator /= (vec4 &v, float f) {
-    v = vec4Divf(v, f);
+    v = vec4divf(v, f);
     return (v);
 }
 

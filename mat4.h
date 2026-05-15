@@ -265,9 +265,9 @@ extern mat4 mat4rotate(vec3 axis, float angle) {
 
 extern mat4 mat4rotateat(vec3 pivot, vec3 axis, float angle) {
     mat4 mat = mat4init(1.0f);
-         mat = mat4mul(mat4trans(pivot), mat);
+         mat = mat4mul(mat4translate(pivot), mat);
          mat = mat4mul(mat4rotate(axis, angle), mat);
-         mat = mat4mul(mat4trans(vec3mulf(pivot, -1.0f)), mat);
+         mat = mat4mul(mat4translate(vec3mulf(pivot, -1.0f)), mat);
     return (mat);
 }
 
@@ -363,7 +363,7 @@ extern mat4 mat4ortho(float left, float right, float down, float top, float near
 
 extern mat4 mat4persp(float fieldofview, float aspect, float near, float far) {
     float t = near * tan(fieldofview * 0.5f);
-    float r = top * aspect;
+    float r = t * aspect;
     return (mat4frust(-r, r, -t, t, near, far));
 }
 

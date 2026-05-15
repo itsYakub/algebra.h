@@ -38,44 +38,44 @@ inline mat4 &operator *= (mat4 &, mat4);
 #  include "./vec4.hpp"
 
 inline mat4 operator + (mat4 a, mat4 b) {
-    return (mat4Add(a, b));
+    return (mat4add(a, b));
 }
 
 
 inline mat4 operator - (mat4 a, mat4 b) {
-    return (mat4Sub(a, b));
+    return (mat4sub(a, b));
 }
 
 
 inline mat4 operator * (mat4 a, mat4 b) {
-    return (mat4Mul(a, b));
+    return (mat4mul(a, b));
 }
 
 
 inline mat4 operator * (mat4 m, float f) {
-    return (mat4Mulf(m, f));
+    return (mat4mulf(m, f));
 }
 
 
 inline vec4 operator * (mat4 m, vec4 v) {
-    return (mat4Mulv(m, v));
+    return (mat4mulv(m, v));
 }
 
 
 inline mat4 &operator += (mat4 &a, mat4 b) {
-    a = mat4Add(a, b);
+    a = mat4add(a, b);
     return (a);
 }
 
 
 inline mat4 &operator -= (mat4 &a, mat4 b) {
-    a = mat4Sub(a, b);
+    a = mat4sub(a, b);
     return (a);
 }
 
 
 inline mat4 &operator *= (mat4 &a, mat4 b) {
-    a = mat4Mul(a, b);
+    a = mat4mul(a, b);
     return (a);
 }
 

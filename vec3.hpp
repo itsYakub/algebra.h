@@ -68,124 +68,124 @@ inline vec3 &operator /= (vec3 &, float);
 #  include "./mat3.hpp"
 
 inline vec3 operator + (vec3 a, vec3 b) {
-    return (vec3Add(a, b));
+    return (vec3add(a, b));
 }
 
 
 inline vec3 operator - (vec3 a, vec3 b) {
-    return (vec3Sub(a, b));
+    return (vec3sub(a, b));
 }
 
 
 inline vec3 operator * (vec3 a, vec3 b) {
-    return (vec3Mul(a, b));
+    return (vec3mul(a, b));
 }
 
 
 inline vec3 operator / (vec3 a, vec3 b) {
-    return (vec3Div(a, b));
+    return (vec3div(a, b));
 }
 
 
 inline vec3 operator + (vec3 v, float f) {
-    return (vec3Addf(v, f));
+    return (vec3addf(v, f));
 }
 
 
 inline vec3 operator - (vec3 v, float f) {
-    return (vec3Subf(v, f));
+    return (vec3subf(v, f));
 }
 
 
 inline vec3 operator * (vec3 v, float f) {
-    return (vec3Mulf(v, f));
+    return (vec3mulf(v, f));
 }
 
 
 inline vec3 operator / (vec3 v, float f) {
-    return (vec3Divf(v, f));
+    return (vec3divf(v, f));
 }
 
 
 inline vec3 operator * (vec3 v, mat3 m) {
-    return (vec3Mulm(v, m));
+    return (vec3mulm(v, m));
 }
 
 
 inline bool operator == (vec3 a, vec3 b) {
-    return (vec3Equal(a, b));
+    return (vec3eq(a, b));
 }
 
 
 inline bool operator != (vec3 a, vec3 b) {
-    return (vec3NoEqual(a, b));
+    return (vec3noeq(a, b));
 }
 
 
 inline bool operator > (vec3 a, vec3 b) {
-    return (vec3Great(a, b));
+    return (vec3great(a, b));
 }
 
 
 inline bool operator >= (vec3 a, vec3 b) {
-    return (vec3GreatEqual(a, b));
+    return (vec3greateq(a, b));
 }
 
 
 inline bool operator < (vec3 a, vec3 b) {
-    return (vec3Less(a, b));
+    return (vec3less(a, b));
 }
 
 
 inline bool operator <= (vec3 a, vec3 b) {
-    return (vec3LessEqual(a, b));
+    return (vec3lesseq(a, b));
 }
 
 
 inline vec3 &operator += (vec3 &a, vec3 b) {
-    a = vec3Add(a, b);
+    a = vec3add(a, b);
     return (a);
 }
 
 
 inline vec3 &operator -= (vec3 &a, vec3 b) {
-    a = vec3Sub(a, b);
+    a = vec3sub(a, b);
     return (a);
 }
 
 
 inline vec3 &operator *= (vec3 &a, vec3 b) {
-    a = vec3Mul(a, b);
+    a = vec3mul(a, b);
     return (a);
 }
 
 
 inline vec3 &operator /= (vec3 &a, vec3 b) {
-    a = vec3Div(a, b);
+    a = vec3div(a, b);
     return (a);
 }
 
 
 inline vec3 &operator += (vec3 &v, float f) {
-    v = vec3Addf(v, f);
+    v = vec3addf(v, f);
     return (v);
 }
 
 
 inline vec3 &operator -= (vec3 &v, float f) {
-    v = vec3Subf(v, f);
+    v = vec3subf(v, f);
     return (v);
 }
 
 
 inline vec3 &operator *= (vec3 &v, float f) {
-    v = vec3Mulf(v, f);
+    v = vec3mulf(v, f);
     return (v);
 }
 
 
 inline vec3 &operator /= (vec3 &v, float f) {
-    v = vec3Divf(v, f);
+    v = vec3divf(v, f);
     return (v);
 }
 

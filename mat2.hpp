@@ -38,44 +38,44 @@ inline mat2 &operator *= (mat2 &, mat2);
 #  include "./vec2.hpp"
 
 inline mat2 operator + (mat2 a, mat2 b) {
-    return (mat2Add(a, b));
+    return (mat2add(a, b));
 }
 
 
 inline mat2 operator - (mat2 a, mat2 b) {
-    return (mat2Sub(a, b));
+    return (mat2sub(a, b));
 }
 
 
 inline mat2 operator * (mat2 a, mat2 b) {
-    return (mat2Mul(a, b));
+    return (mat2mul(a, b));
 }
 
 
 inline mat2 operator * (mat2 m, float f) {
-    return (mat2Mulf(m, f));
+    return (mat2mulf(m, f));
 }
 
 
 inline vec2 operator * (mat2 m, vec2 v) {
-    return (mat2Mulv(m, v));
+    return (mat2mulv(m, v));
 }
 
 
 inline mat2 &operator += (mat2 &a, mat2 b) {
-    a = mat2Add(a, b);
+    a = mat2add(a, b);
     return (a);
 }
 
 
 inline mat2 &operator -= (mat2 &a, mat2 b) {
-    a = mat2Sub(a, b);
+    a = mat2sub(a, b);
     return (a);
 }
 
 
 inline mat2 &operator *= (mat2 &a, mat2 b) {
-    a = mat2Mul(a, b);
+    a = mat2mul(a, b);
     return (a);
 }
 
