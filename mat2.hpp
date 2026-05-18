@@ -1,11 +1,11 @@
 #if !defined (_mat2_hpp_)
 # define _mat2_hpp_ 1
 #
-# if defined (__cplusplus)
-#
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
+#
+# if defined (__cplusplus)
 
 extern "C" {
 

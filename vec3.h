@@ -6,39 +6,8 @@
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-
-typedef union u_mat3 mat3;
-
-typedef union u_vec3 vec3;
-
-union u_vec3 {
-    struct {
-        float x;
-        float y;
-        float z;
-    };
-
-    struct {
-        float r;
-        float g;
-        float b;
-    };
-
-# if defined (__cplusplus)
-
-    u_vec3(void);
-
-    u_vec3(float);
-
-    u_vec3(float, float, float);
-
-    u_vec3(const u_vec3 &);
-
-    u_vec3 &operator = (const u_vec3 &);
-
-# endif /* __cplusplus */
-
-};
+#
+#include "./types.h"
 
 /* Properties */
 

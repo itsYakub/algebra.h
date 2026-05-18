@@ -4,41 +4,8 @@
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-
-typedef union u_vec3 vec3;
-
-typedef union u_vec4 vec4;
-
-typedef union u_mat3 mat3;
-
-typedef union u_mat4 mat4;
-
-union u_mat4 {
-    struct {
-        float m00, m01, m02, m03,
-              m10, m11, m12, m13,
-              m20, m21, m22, m23,
-              m30, m31, m32, m33;
-    };
-
-# if defined (__cplusplus)
-
-    u_mat4(void);
-
-    u_mat4(float);
-
-    u_mat4(float, float, float, float,
-           float, float, float, float,
-           float, float, float, float,
-           float, float, float, float);
-
-    u_mat4(const u_mat4 &);
-
-    u_mat4 &operator = (const u_mat4 &);
-
-# endif /* __cplusplus */
-
-};
+#
+#include "./types.h"
 
 /* Properties */
 

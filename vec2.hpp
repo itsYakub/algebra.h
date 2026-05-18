@@ -15,8 +15,6 @@ extern "C" {
 
 # endif /* __cplusplus */
 
-typedef union u_mat2 mat2;
-
 /* Constructors */
 
 u_vec2::u_vec2(void) : x(0.0), y(0.0) { }
