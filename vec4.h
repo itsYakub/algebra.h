@@ -160,8 +160,6 @@ ALGAPI vec4  vec4reflect(vec4, vec4);
 
 ALGAPI vec4  vec4refract(vec4, vec4, float);
 
-ALGAPI float vec4angle(vec4, vec4);
-
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
 #  include <math.h>
@@ -695,10 +693,21 @@ ALGAPI vec4 vec4reflect(vec4 a, vec4 n) {
 }
 
 
-ALGAPI vec4 vec4refract(vec4 a, vec4 n, float eta) { }
+ALGAPI vec4 vec4refract(vec4 a, vec4 n, float eta) {
+    float dot = vec4dot(a, n);
+    float d   = 1.0f - eta * eta * (1.0 - dot * dot);
 
+    vec4 v = vec4zero();
+    if (d >= 0) {
+        d = sqrtf(d);
+        v.x = eta * a.x - (eta * dot + d) * n.x;
+        v.y = eta * a.y - (eta * dot + d) * n.y;
+        v.z = eta * a.z - (eta * dot + d) * n.z;
+        v.w = eta * a.w - (eta * dot + d) * n.w;
+    }
 
-ALGAPI float vec4angle(vec4 a, vec4 b) { }
+    return (v);
+}
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec4_h_ */
