@@ -1,6 +1,10 @@
 #if !defined (_vec2_hpp_)
 # define _vec2_hpp_ 1
 #
+# if !defined ALGAPI
+#  define ALGAPI extern inline
+# endif /* ALGAPI */
+#
 # if defined (__cplusplus)
 
 extern "C" {
@@ -14,26 +18,6 @@ extern "C" {
 }
 
 # endif /* __cplusplus */
-
-/* Constructors */
-
-u_vec2::u_vec2(void) : x(0.0), y(0.0) { }
-
-
-u_vec2::u_vec2(float v) : x(v), y(v) { }
-
-
-u_vec2::u_vec2(float x, float y) : x(x), y(y) { }
-
-
-u_vec2::u_vec2(const u_vec2 &other) : x(other.x), y(other.y) { }
-
-
-u_vec2 &u_vec2::operator = (const u_vec2 &other) {
-    this->x = other.x;
-    this->y = other.y;
-    return (*this);
-}
 
 /* Operator - overloading */
 

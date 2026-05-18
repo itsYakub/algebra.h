@@ -133,30 +133,6 @@ ALGAPI vec4  vec4refract(vec4, vec4, float);
 #
 #  include "./mat4.h"
 #  include "./utils.h"
-#
-#  if defined (__cplusplus)
-
-u_vec4::u_vec4(void) : x(0.0f), y(0.0f), z(0.0f), w(0.0f) { }
-
-
-u_vec4::u_vec4(float v) : x(v), y(v), z(v), w(v) { }
-
-
-u_vec4::u_vec4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) { }
-
-
-u_vec4::u_vec4(const u_vec4 &other) : x(other.x), y(other.y), z(other.z), w(other.w) { }
-
-
-u_vec4 &u_vec4::operator = (const u_vec4 &other) {
-    this->x = other.x;
-    this->y = other.y;
-    this->z = other.z;
-    this->w = other.w;
-    return (*this);
-}
-
-#  endif /* __cplusplus */
 
 /* Properties */
 

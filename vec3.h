@@ -143,29 +143,6 @@ ALGAPI float vec3angle(vec3, vec3);
 #
 #  include "./mat3.h"
 #  include "./utils.h"
-#
-#  if defined (__cplusplus)
-
-u_vec3::u_vec3(void) : x(0.0f), y(0.0f), z(0.0f) { }
-
-
-u_vec3::u_vec3(float v) : x(v), y(v), z(v) { }
-
-
-u_vec3::u_vec3(float x, float y, float z) : x(x), y(y), z(z) { }
-
-
-u_vec3::u_vec3(const u_vec3 &other) : x(other.x), y(other.y), z(other.z) { }
-
-
-u_vec3 &u_vec3::operator = (const u_vec3 &other) {
-    this->x = other.x;
-    this->y = other.y;
-    this->z = other.z;
-    return (*this);
-}
-
-#  endif /* __cplusplus */
 
 /* Properties */
 

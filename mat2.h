@@ -53,38 +53,6 @@ ALGAPI mat2 mat2scale(vec2);
 #
 #  include "./vec2.h"
 #  include "./utils.h"
-#
-#  if defined (__cplusplus)
-
-u_mat2::u_mat2(void) :
-    m00(0.0f), m01(0.0f),
-    m10(0.0f), m11(0.0f) { }
-
-
-u_mat2::u_mat2(float s) :
-    m00(1.0f * s), m01(0.0f),
-    m10(0.0f),     m11(1.0f * s) { }
-
-
-u_mat2::u_mat2(float m00, float m01, float m10, float m11) :
-    m00(m00), m01(m01),
-    m10(m10), m11(m11) { }
-
-
-u_mat2::u_mat2(const u_mat2 &other) :
-    m00(other.m00), m01(other.m01),
-    m10(other.m10), m11(other.m11) { }
-
-
-u_mat2 &u_mat2::operator = (const u_mat2 &other) {
-    this->m00 = other.m00;
-    this->m01 = other.m01;
-    this->m10 = other.m10;
-    this->m11 = other.m11;
-    return (*this);
-}
-
-#  endif /* __cplusplus */
 
 /* Properties */
 

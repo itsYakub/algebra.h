@@ -59,43 +59,6 @@ ALGAPI mat3 mat3scale(vec3);
 #
 #  include "./vec3.h"
 #  include "./utils.h"
-#
-#  if defined (__cplusplus)
-
-u_mat3::u_mat3(void) :
-    m00(0.0f), m01(0.0f), m02(0.0f),
-    m10(0.0f), m11(0.0f), m12(0.0f),
-    m20(0.0f), m21(0.0f), m22(0.0f) { }
-
-
-u_mat3::u_mat3(float s) :
-    m00(1.0f * s), m01(0.0f),     m02(0.0f),
-    m10(0.0f),     m11(1.0f * s), m12(0.0f),
-    m20(0.0f),     m21(0.0f),     m22(1.0f * s) { }
-
-
-u_mat3::u_mat3(float m00, float m01, float m02,
-               float m10, float m11, float m12,
-               float m20, float m21, float m22) :
-    m00(m00), m01(m01), m02(m02),
-    m10(m10), m11(m11), m12(m12),
-    m20(m20), m21(m21), m22(m22) { }
-
-
-u_mat3::u_mat3(const u_mat3 &other) :
-    m00(other.m00), m01(other.m01), m02(other.m02),
-    m10(other.m10), m11(other.m11), m12(other.m12),
-    m20(other.m20), m21(other.m21), m22(other.m22) { }
-
-
-u_mat3 &u_mat3::operator = (const u_mat3 &other) {
-    this->m00 = other.m00; this->m01 = other.m01; this->m02 = other.m02;
-    this->m10 = other.m10; this->m11 = other.m11; this->m12 = other.m12;
-    this->m20 = other.m20; this->m21 = other.m21; this->m22 = other.m22;
-    return (*this);
-}
-
-#  endif /* __cplusplus */
 
 /* Properties */
 
