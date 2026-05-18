@@ -1,5 +1,9 @@
 #if !defined (_mat2_h_)
 # define _mat2_h_ 1
+#
+# if !defined ALGAPI
+#  define ALGAPI extern inline
+# endif /* ALGAPI */
 
 typedef union u_vec2 vec2;
 
@@ -27,25 +31,25 @@ union u_mat2 {
 
 };
 
-extern mat2 mat2zero(void);
+ALGAPI mat2 mat2zero(void);
 
-extern mat2 mat2init(float);
+ALGAPI mat2 mat2init(float);
 
-extern mat2 mat2add(mat2, mat2);
+ALGAPI mat2 mat2add(mat2, mat2);
 
-extern mat2 mat2sub(mat2, mat2);
+ALGAPI mat2 mat2sub(mat2, mat2);
 
-extern mat2 mat2mul(mat2, mat2);
+ALGAPI mat2 mat2mul(mat2, mat2);
 
-extern mat2 mat2mulf(mat2, float);
+ALGAPI mat2 mat2mulf(mat2, float);
 
-extern vec2 mat2mulv(mat2, vec2);
+ALGAPI vec2 mat2mulv(mat2, vec2);
 
-extern float mat2det(mat2);
+ALGAPI float mat2det(mat2);
 
-extern float mat2trace(mat2);
+ALGAPI float mat2trace(mat2);
 
-extern mat2 mat2transpose(mat2); 
+ALGAPI mat2 mat2transpose(mat2); 
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -84,31 +88,31 @@ u_mat2 &u_mat2::operator = (const u_mat2 &other) {
 
 #  endif /* __cplusplus */
 
-extern mat2 mat2zero(void) {
+ALGAPI mat2 mat2zero(void) {
     return ((mat2) { 0.0f, 0.0f,
                      0.0f, 0.0f } );
 }
 
 
-extern mat2 mat2init(float s) {
+ALGAPI mat2 mat2init(float s) {
     return ((mat2) { 1.0f * s, 0.0f,
                      0.0f,     1.0f * s } );
 }
 
 
-extern mat2 mat2add(mat2 a, mat2 b) {
+ALGAPI mat2 mat2add(mat2 a, mat2 b) {
     return ((mat2) { a.m00 + b.m00, a.m01 + b.m01,
                      a.m10 + b.m10, a.m11 + b.m11 } );
 }
 
 
-extern mat2 mat2sub(mat2 a, mat2 b) {
+ALGAPI mat2 mat2sub(mat2 a, mat2 b) {
     return ((mat2) { a.m00 - b.m00, a.m01 - b.m01,
                      a.m10 - b.m10, a.m11 - b.m11 } );
 }
 
 
-extern mat2 mat2mul(mat2 a, mat2 b) {
+ALGAPI mat2 mat2mul(mat2 a, mat2 b) {
     return ((mat2) { a.m00 * b.m00 + a.m10 * b.m01,
                      a.m01 * b.m00 + a.m11 * b.m01,
                      a.m00 * b.m10 + a.m10 * b.m11,
@@ -116,27 +120,27 @@ extern mat2 mat2mul(mat2 a, mat2 b) {
 }
 
 
-extern mat2 mat2mulf(mat2 a, float f) {
+ALGAPI mat2 mat2mulf(mat2 a, float f) {
     return ((mat2) { a.m00 * f, a.m01 * f,
                      a.m10 * f, a.m11 * f } );
 }
 
 
-extern vec2 mat2mulv(mat2 m, vec2 v) {
+ALGAPI vec2 mat2mulv(mat2 m, vec2 v) {
     return ((vec2) { m.m00 * v.x + m.m10 * v.y,
                      m.m01 * v.x + m.m11 * v.y } );
 }
 
 
-extern float mat2det(mat2 m) {
+ALGAPI float mat2det(mat2 m) {
     return (m.m00 * m.m11 - m.m10 * m.m01);
 }
 
-extern float mat2trace(mat2 m) {
+ALGAPI float mat2trace(mat2 m) {
     return (m.m00 + m.m11);
 }
 
-extern mat2 mat2transpose(mat2 m) {
+ALGAPI mat2 mat2transpose(mat2 m) {
     return ((mat2) { m.m00, m.m10,
                      m.m01, m.m11 } );
 } 

@@ -1,5 +1,9 @@
 #if !defined (_mat4_h_)
 # define _mat4_h_ 1
+#
+# if !defined ALGAPI
+#  define ALGAPI extern inline
+# endif /* ALGAPI */
 
 typedef union u_vec3 vec3;
 
@@ -33,49 +37,49 @@ union u_mat4 {
 
 };
 
-extern mat4 mat4zero(void);
+ALGAPI mat4 mat4zero(void);
 
-extern mat4 mat4identity(void);
+ALGAPI mat4 mat4identity(void);
 
-extern mat4 mat4init(float);
+ALGAPI mat4 mat4init(float);
 
-extern mat4 mat4add(mat4, mat4);
+ALGAPI mat4 mat4add(mat4, mat4);
 
-extern mat4 mat4sub(mat4, mat4);
+ALGAPI mat4 mat4sub(mat4, mat4);
 
-extern mat4 mat4mul(mat4, mat4);
+ALGAPI mat4 mat4mul(mat4, mat4);
 
-extern mat4 mat4mulf(mat4, float);
+ALGAPI mat4 mat4mulf(mat4, float);
 
-extern vec4 mat4mulv(mat4, vec4);
+ALGAPI vec4 mat4mulv(mat4, vec4);
 
-extern float mat4det(mat4);
+ALGAPI float mat4det(mat4);
 
-extern float mat4trace(mat4);
+ALGAPI float mat4trace(mat4);
 
-extern mat4 mat4translate(vec3);
+ALGAPI mat4 mat4translate(vec3);
 
-extern mat4 mat4rotate(vec3, float);
+ALGAPI mat4 mat4rotate(vec3, float);
 
-extern mat4 mat4rotateat(vec3, vec3, float);
+ALGAPI mat4 mat4rotateat(vec3, vec3, float);
 
-extern mat4 mat4rotatex(float);
+ALGAPI mat4 mat4rotatex(float);
 
-extern mat4 mat4rotatey(float);
+ALGAPI mat4 mat4rotatey(float);
 
-extern mat4 mat4rotatez(float);
+ALGAPI mat4 mat4rotatez(float);
 
-extern mat4 mat4lookat(vec3, vec3, vec3);
+ALGAPI mat4 mat4lookat(vec3, vec3, vec3);
 
-extern mat4 mat4scale(vec3);
+ALGAPI mat4 mat4scale(vec3);
 
-extern mat4 mat4frust(float, float, float, float, float, float);
+ALGAPI mat4 mat4frust(float, float, float, float, float, float);
 
-extern mat4 mat4ortho(float, float, float, float, float, float);
+ALGAPI mat4 mat4ortho(float, float, float, float, float, float);
 
-extern mat4 mat4persp(float, float, float, float);
+ALGAPI mat4 mat4persp(float, float, float, float);
 
-extern mat4 mat4transpose(mat4);
+ALGAPI mat4 mat4transpose(mat4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -125,17 +129,17 @@ u_mat4 &u_mat4::operator = (const u_mat4 &other) {
 
 #  endif /* __cplusplus */
 
-extern mat4 mat4zero(void) {
+ALGAPI mat4 mat4zero(void) {
     return (mat4init(0.0f));
 }
 
 
-extern mat4 mat4identity(void) {
+ALGAPI mat4 mat4identity(void) {
     return (mat4init(1.0f));
 }
 
 
-extern mat4 mat4init(float s) {
+ALGAPI mat4 mat4init(float s) {
     return ((mat4) { 1.0f * s, 0.0f,     0.0f,     0.0f,
                      0.0f,     1.0f * s, 0.0f,     0.0f,
                      0.0f,     0.0f,     1.0f * s, 0.0f,
@@ -143,7 +147,7 @@ extern mat4 mat4init(float s) {
 }
 
 
-extern mat4 mat4add(mat4 a, mat4 b) {
+ALGAPI mat4 mat4add(mat4 a, mat4 b) {
     return ((mat4) { a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02, a.m03 + b.m03,
                      a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12, a.m13 + b.m13,
                      a.m20 + b.m20, a.m21 + b.m21, a.m22 + b.m22, a.m23 + b.m23,
@@ -151,7 +155,7 @@ extern mat4 mat4add(mat4 a, mat4 b) {
 }
 
 
-extern mat4 mat4sub(mat4 a, mat4 b) {
+ALGAPI mat4 mat4sub(mat4 a, mat4 b) {
     return ((mat4) { a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02, a.m03 - b.m03,
                      a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12, a.m13 - b.m13,
                      a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22, a.m23 - b.m23,
@@ -159,7 +163,7 @@ extern mat4 mat4sub(mat4 a, mat4 b) {
 }
 
 
-extern mat4 mat4mul(mat4 a, mat4 b) {
+ALGAPI mat4 mat4mul(mat4 a, mat4 b) {
     return ((mat4) { a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02 + a.m30 * b.m03,
                      a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02 + a.m31 * b.m03,
                      a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02 + a.m32 * b.m03,
@@ -182,7 +186,7 @@ extern mat4 mat4mul(mat4 a, mat4 b) {
 }
 
 
-extern mat4 mat4mulf(mat4 a, float f) {
+ALGAPI mat4 mat4mulf(mat4 a, float f) {
     return ((mat4) { a.m00 * f, a.m01 * f, a.m02 * f, a.m03 * f,
                      a.m10 * f, a.m11 * f, a.m12 * f, a.m13 * f,
                      a.m20 * f, a.m21 * f, a.m22 * f, a.m23 * f,
@@ -190,7 +194,7 @@ extern mat4 mat4mulf(mat4 a, float f) {
 }
 
 
-extern vec4 mat4mulv(mat4 m, vec4 v) {
+ALGAPI vec4 mat4mulv(mat4 m, vec4 v) {
     return ((vec4) { m.m00 * v.x + m.m10 * v.y + m.m20 * v.z + m.m30 * v.w,
                      m.m01 * v.x + m.m11 * v.y + m.m21 * v.z + m.m31 * v.w,
                      m.m02 * v.x + m.m12 * v.y + m.m22 * v.z + m.m32 * v.w,
@@ -198,7 +202,7 @@ extern vec4 mat4mulv(mat4 m, vec4 v) {
 }
 
 
-extern float mat4det(mat4 m) {
+ALGAPI float mat4det(mat4 m) {
     float result = 0.0f;
     mat3 mat = (mat3) { m.m11, m.m12, m.m13,
                         m.m21, m.m22, m.m23,
@@ -224,12 +228,12 @@ extern float mat4det(mat4 m) {
 }
 
 
-extern float mat4trace(mat4 m) {
+ALGAPI float mat4trace(mat4 m) {
     return (m.m00 + m.m11 + m.m22 + m.m33);
 }
 
 
-extern mat4 mat4translate(vec3 v) {
+ALGAPI mat4 mat4translate(vec3 v) {
     return ((mat4) { 1.0, 0.0, 0.0, 0.0,
                      0.0, 1.0, 0.0, 0.0,
                      0.0, 0.0, 1.0, 0.0,
@@ -237,7 +241,7 @@ extern mat4 mat4translate(vec3 v) {
 }
 
 
-extern mat4 mat4rotate(vec3 axis, float angle) {
+ALGAPI mat4 mat4rotate(vec3 axis, float angle) {
     float c = cos(angle);
     float s = sin(angle);
     float t = 1.0f - c;
@@ -263,7 +267,7 @@ extern mat4 mat4rotate(vec3 axis, float angle) {
 }
 
 
-extern mat4 mat4rotateat(vec3 pivot, vec3 axis, float angle) {
+ALGAPI mat4 mat4rotateat(vec3 pivot, vec3 axis, float angle) {
     mat4 mat = mat4init(1.0f);
          mat = mat4mul(mat4translate(pivot), mat);
          mat = mat4mul(mat4rotate(axis, angle), mat);
@@ -272,7 +276,7 @@ extern mat4 mat4rotateat(vec3 pivot, vec3 axis, float angle) {
 }
 
 
-extern mat4 mat4rotatex(float f) {
+ALGAPI mat4 mat4rotatex(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
@@ -285,7 +289,7 @@ extern mat4 mat4rotatex(float f) {
 }
 
 
-extern mat4 mat4rotatey(float f) {
+ALGAPI mat4 mat4rotatey(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
@@ -298,7 +302,7 @@ extern mat4 mat4rotatey(float f) {
 }
 
 
-extern mat4 mat4rotatez(float f) {
+ALGAPI mat4 mat4rotatez(float f) {
     float sinres = sin(f),
           cosres = cos(f);
 
@@ -311,7 +315,7 @@ extern mat4 mat4rotatez(float f) {
 }
 
 
-extern mat4 mat4lookat(vec3 eye, vec3 center, vec3 up) {
+ALGAPI mat4 mat4lookat(vec3 eye, vec3 center, vec3 up) {
     vec3 f = vec3norm(vec3sub(center, eye));
     vec3 s = vec3norm(vec3cross(f, up));
     vec3 u = vec3cross(s, f);
@@ -327,7 +331,7 @@ extern mat4 mat4lookat(vec3 eye, vec3 center, vec3 up) {
 }
 
 
-extern mat4 mat4scale(vec3 v) {
+ALGAPI mat4 mat4scale(vec3 v) {
     return ((mat4) { v.x, 0.0, 0.0, 0.0,
                      0.0, v.y, 0.0, 0.0,
                      0.0, 0.0, v.z, 0.0,
@@ -335,7 +339,7 @@ extern mat4 mat4scale(vec3 v) {
 }
 
 
-extern mat4 mat4frust(float left, float right, float down, float top, float near, float far) {
+ALGAPI mat4 mat4frust(float left, float right, float down, float top, float near, float far) {
     mat4 mat =  mat4zero();
     mat.m00  =  (near * 2.0f) / (right - left);
     mat.m11  =  (near * 2.0f) / (top   - down);
@@ -348,7 +352,7 @@ extern mat4 mat4frust(float left, float right, float down, float top, float near
 }
 
 
-extern mat4 mat4ortho(float left, float right, float down, float top, float near, float far) {
+ALGAPI mat4 mat4ortho(float left, float right, float down, float top, float near, float far) {
     mat4 mat =  mat4zero();
     mat.m00  =  2.0f / (right - left);
     mat.m11  =  2.0f / (top   - down);
@@ -361,14 +365,14 @@ extern mat4 mat4ortho(float left, float right, float down, float top, float near
 }
 
 
-extern mat4 mat4persp(float fieldofview, float aspect, float near, float far) {
+ALGAPI mat4 mat4persp(float fieldofview, float aspect, float near, float far) {
     float t = near * tan(fieldofview * 0.5f);
     float r = t * aspect;
     return (mat4frust(-r, r, -t, t, near, far));
 }
 
 
-extern mat4 mat4transpose(mat4 m) {
+ALGAPI mat4 mat4transpose(mat4 m) {
     return ((mat4) { m.m00, m.m10, m.m20, m.m30,
                      m.m01, m.m11, m.m21, m.m31,
                      m.m02, m.m12, m.m22, m.m32,

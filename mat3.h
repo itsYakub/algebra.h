@@ -1,5 +1,9 @@
 #if !defined (_mat3_h_)
 # define _mat3_h_ 1
+#
+# if !defined ALGAPI
+#  define ALGAPI extern inline
+# endif /* ALGAPI */
 
 typedef union u_vec3 vec3;
 
@@ -28,25 +32,25 @@ union u_mat3 {
 
 };
 
-extern mat3 mat3zero(void);
+ALGAPI mat3 mat3zero(void);
 
-extern mat3 mat3init(float);
+ALGAPI mat3 mat3init(float);
 
-extern mat3 mat3add(mat3, mat3);
+ALGAPI mat3 mat3add(mat3, mat3);
 
-extern mat3 mat3sub(mat3, mat3);
+ALGAPI mat3 mat3sub(mat3, mat3);
 
-extern mat3 mat3mul(mat3, mat3);
+ALGAPI mat3 mat3mul(mat3, mat3);
 
-extern mat3 mat3mulf(mat3, float);
+ALGAPI mat3 mat3mulf(mat3, float);
 
-extern vec3 mat3mulv(mat3, vec3);
+ALGAPI vec3 mat3mulv(mat3, vec3);
 
-extern float mat3det(mat3);
+ALGAPI float mat3det(mat3);
 
-extern float mat3trace(mat3);
+ALGAPI float mat3trace(mat3);
 
-extern mat3 mat3transpose(mat3); 
+ALGAPI mat3 mat3transpose(mat3); 
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -88,35 +92,35 @@ u_mat3 &u_mat3::operator = (const u_mat3 &other) {
 
 #  endif /* __cplusplus */
 
-extern mat3 mat3zero(void) {
+ALGAPI mat3 mat3zero(void) {
     return ((mat3) { 0.0f, 0.0f, 0.0f,
                      0.0f, 0.0f, 0.0f,
                      0.0f, 0.0f, 0.0f } );
 }
 
 
-extern mat3 mat3init(float s) {
+ALGAPI mat3 mat3init(float s) {
     return ((mat3) { 1.0f * s, 0.0f,     0.0f,
                      0.0f,     1.0f * s, 0.0f,
                      0.0f,     0.0f,     1.0f * s } );
 }
 
 
-extern mat3 mat3add(mat3 a, mat3 b) {
+ALGAPI mat3 mat3add(mat3 a, mat3 b) {
     return ((mat3) { a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02,
                      a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12,
                      a.m20 + b.m20, a.m21 + b.m21, a.m22 + b.m22 } );
 }
 
 
-extern mat3 mat3sub(mat3 a, mat3 b) {
+ALGAPI mat3 mat3sub(mat3 a, mat3 b) {
     return ((mat3) { a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02,
                      a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12,
                      a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22 } );
 }
 
 
-extern mat3 mat3mul(mat3 a, mat3 b) {
+ALGAPI mat3 mat3mul(mat3 a, mat3 b) {
     return ((mat3) { a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02,
                      a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02,
                      a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02,
@@ -131,21 +135,21 @@ extern mat3 mat3mul(mat3 a, mat3 b) {
 }
 
 
-extern mat3 mat3mulf(mat3 m, float f) {
+ALGAPI mat3 mat3mulf(mat3 m, float f) {
     return ((mat3) { m.m00 * f, m.m01 * f, m.m02 * f,
                      m.m10 * f, m.m11 * f, m.m12 * f,
                      m.m20 * f, m.m21 * f, m.m22 * f } );
 }
 
 
-extern vec3 mat3mulv(mat3 m, vec3 v) {
+ALGAPI vec3 mat3mulv(mat3 m, vec3 v) {
     return ((vec3) { m.m00 * v.x + m.m01 * v.y + m.m02 * v.z,
                      m.m10 * v.x + m.m11 * v.y + m.m12 * v.z,
                      m.m20 * v.x + m.m21 * v.y + m.m22 * v.z } );
 }
 
 
-extern float mat3det(mat3 m) {
+ALGAPI float mat3det(mat3 m) {
     return (m.m00 * m.m11 * m.m22 +
             m.m01 * m.m12 * m.m20 +
             m.m02 * m.m10 * m.m21 -
@@ -154,11 +158,11 @@ extern float mat3det(mat3 m) {
             m.m22 * m.m10 * m.m01);
 }
 
-extern float mat3trace(mat3 m) {
+ALGAPI float mat3trace(mat3 m) {
     return (m.m00 + m.m11 + m.m22);
 }
 
-extern mat3 mat3transpose(mat3 m) {
+ALGAPI mat3 mat3transpose(mat3 m) {
     return ((mat3) { m.m00, m.m10, m.m20,
                      m.m01, m.m11, m.m21,
                      m.m02, m.m12, m.m22 } );

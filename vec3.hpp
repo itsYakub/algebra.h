@@ -2,6 +2,10 @@
 # define _vec3_hpp_ 1
 #
 # if defined (__cplusplus)
+#
+# if !defined ALGAPI
+#  define ALGAPI extern inline
+# endif /* ALGAPI */
 
 extern "C" {
 
