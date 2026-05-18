@@ -39,4 +39,23 @@ install :
 remove :
 	rm -rf /usr/local/include/$(MK_NAME)
 
+.PHONY : test
+
+test :
+	# ensure that all the necessary compilers are installed
+	gcc --version
+	g++ --version
+	clang --version
+	clang++ --version
+	# Test no.0: compilation status 
+	gcc   -Wall -Wextra -Werror -std=c99 $(MK_ROOT)tests/00-compile.c -lm && ./a.out ; rm -f a.out
+	clang -Wall -Wextra -Werror -std=c99 $(MK_ROOT)tests/00-compile.c -lm && ./a.out ; rm -f a.out
+	g++     -Wall -Wextra -Werror -std=c++11 $(MK_ROOT)tests/00-compile.cc && ./a.out ; rm -f a.out
+	clang++ -Wall -Wextra -Werror -std=c++11 $(MK_ROOT)tests/00-compile.cc && ./a.out ; rm -f a.out
+	# Test no.1: vec2 module
+	gcc   -Wall -Wextra -Werror -std=c99 $(MK_ROOT)tests/01-vec2.c -lm && ./a.out ; rm -f a.out
+	clang -Wall -Wextra -Werror -std=c99 $(MK_ROOT)tests/01-vec2.c -lm && ./a.out ; rm -f a.out
+	g++     -Wall -Wextra -Werror -std=c++11 $(MK_ROOT)tests/01-vec2.cc && ./a.out ; rm -f a.out
+	clang++ -Wall -Wextra -Werror -std=c++11 $(MK_ROOT)tests/01-vec2.cc && ./a.out ; rm -f a.out
+
 # ========

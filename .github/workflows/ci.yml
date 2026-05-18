@@ -15,12 +15,30 @@ jobs:
 
       # install dependencies
       - name: "Install dependencies"
-        run:  sudo apt-get install -y build-essential
+        run: |
+          # update package manager...
+          sudo apt-get -y update ; sudo apt-get -y upgrade
+          # install gcc...
+          sudo apt-get install -y build-essential
+          # install clang...
+          sudo apt-get install -y clang
 
       # check compilation status
       - name: "Test no.0: Compilation status"
         run: |
-          # test C modules
-          gcc -Wall -Wextra -Werror -std=c99   tests/00-compile.c  -lm
-          # test C++ modules
-          g++ -Wall -Wextra -Werror -std=c++11 tests/00-compile.cc -lm
+          # test C modules...
+          gcc   -Wall -Wextra -Werror -std=c99 tests/00-compile.c -lm
+          clang -Wall -Wextra -Werror -std=c99 tests/00-compile.c -lm
+          # test C++ modules...
+          g++     -Wall -Wextra -Werror -std=c++11 tests/00-compile.cc -lm
+          clang++ -Wall -Wextra -Werror -std=c++11 tests/00-compile.cc -lm
+      
+      # check vec2 module
+      - name: "Test no.1: vec2 module"
+        run: |
+          # test C modules...
+          gcc   -Wall -Wextra -Werror -std=c99 tests/01-vec2.c -lm
+          clang -Wall -Wextra -Werror -std=c99 tests/01-vec2.c -lm
+          # test C++ modules...
+          g++     -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm
+          clang++ -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm
