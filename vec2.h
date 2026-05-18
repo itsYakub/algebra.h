@@ -158,10 +158,6 @@ ALGAPI vec2 vec2reflect(vec2, vec2);
 
 ALGAPI vec2 vec2refract(vec2, vec2, float);
 
-ALGAPI vec2 vec2project(vec2, vec2);
-
-ALGAPI vec2 vec2reject(vec2, vec2);
-
 ALGAPI vec2 vec2rotate(vec2, float);
 
 ALGAPI float vec2angle(vec2, vec2);
@@ -592,19 +588,20 @@ ALGAPI vec2 vec2refract(vec2 a, vec2 n, float eta) {
 }
 
 
-ALGAPI vec2 vec2project(vec2 a, vec2 b) { }
+ALGAPI vec2 vec2rotate(vec2 a, float f) {
+    float s = sinf(f);
+    float c = cosf(f);
+    vec2  v;
 
-
-ALGAPI vec2 vec2reject(vec2 a, vec2 b) { }
-
-
-ALGAPI vec2 vec2rotate(vec2 a, float f) { }
+    v.x = c * a.x - s * a.y;
+    v.y = s * a.x + c * a.y;
+    return (v);
+}
 
 
 ALGAPI float vec2angle(vec2 a, vec2 b) {
     float dot = vec2dot(a, b);
     float det = a.x * b.y - a.y * b.x;
-
 
     return (atan2f(det, dot));
 }

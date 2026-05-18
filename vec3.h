@@ -663,19 +663,84 @@ ALGAPI vec3 vec3reflect(vec3 a, vec3 n) {
 }
 
 
-ALGAPI vec3 vec3refract(vec3 a, vec3 n, float eta) { }
+ALGAPI vec3 vec3refract(vec3 a, vec3 n, float eta) {
+    float dot = vec3dot(a, n);
+    float d   = 1.0f - eta * eta * (1.0 - dot * dot);
+
+    vec3 v = vec3zero();
+    if (d >= 0) {
+        d = sqrtf(d);
+        v.x = eta * a.x - (eta * dot + d) * n.x;
+        v.y = eta * a.y - (eta * dot + d) * n.y;
+        v.z = eta * a.z - (eta * dot + d) * n.z;
+    }
+
+    return (v);
+}
 
 
-ALGAPI vec3 vec3project(vec3 a, vec3 b) { }
+ALGAPI vec3 vec3project(vec3 a, vec3 b) {
+    float len0 = vec3lensq(a, b);
+    float len1 = vec3lensq(b, b);
+    float mag  = len0 / len1;
+
+    vec3 v;
+    v.x = b.x * mag;
+    v.y = b.y * mag;
+    v.z = b.z * mag;
+    return (v);
+}
 
 
-ALGAPI vec3 vec3reject(vec3 a, vec3 b) { }
+ALGAPI vec3 vec3reject(vec3 a, vec3 b) {
+    float len0 = vec3lensq(a, b);
+    float len1 = vec3lensq(b, b);
+    float mag  = len0 / len1;
+
+    vec3 v;
+    v.x = a.x - b.x * mag;
+    v.y = a.y - b.y * mag;
+    v.z = a.z - b.z * mag;
+    return (v);
+}
 
 
-ALGAPI vec3 vec3rotate(vec3 a, vec3 axis, float angle) { }
+/* Euler-Rodrigues Formula:
+ *      
+ *      v' = v + 2a(w * x) + 2(w * (w * x))
+ *
+ * - https://en.wikipedia.org/w/index.php?title=Euler%E2%80%93Rodrigues_formula
+ * - https://en.wikipedia.org/w/index.php?title=Euler%E2%80%93Rodrigues_formula#Vector_formulation
+ * */
+ALGAPI vec3 vec3rotate(vec3 a, vec3 axis, float angle) {
+    float a = cosf(angle / 2.0);
+
+    vec3  v = vec3norm(axis);
+    float s = sinf(angle / 2.0);
+    float b = v.x * s;
+    float c = v.y * s;
+    float d = v.z * s;
+
+    vec3 w;
+    w.x = b, w.y = c, w.z = d;
+    
+    vec3 v;
+    v.x = a.x + 2.0 * a * (w.x * a.x) + 2.0 * (w.x * (w.x * a.x));
+    v.y = a.y + 2.0 * a * (w.y * a.y) + 2.0 * (w.y * (w.y * a.y));
+    v.z = a.z + 2.0 * a * (w.z * a.z) + 2.0 * (w.z * (w.z * a.z));
+    return (v);
+}
 
 
-ALGAPI float vec3angle(vec3 a, vec3 b) { }
+ALGAPI float vec3angle(vec3 a, vec3 b) {
+    vec3 cross = vec3cross(a, b);
+
+    float len = vec3len(cross);
+    float dot = vec3dot(a, b);
+
+    return (atan2f(len, dot));
+
+}
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec3_h_ */

@@ -160,10 +160,6 @@ ALGAPI vec4  vec4reflect(vec4, vec4);
 
 ALGAPI vec4  vec4refract(vec4, vec4, float);
 
-ALGAPI vec4  vec4project(vec4, vec4);
-
-ALGAPI vec4  vec4reject(vec4, vec4);
-
 ALGAPI float vec4angle(vec4, vec4);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
@@ -700,12 +696,6 @@ ALGAPI vec4 vec4reflect(vec4 a, vec4 n) {
 
 
 ALGAPI vec4 vec4refract(vec4 a, vec4 n, float eta) { }
-
-
-ALGAPI vec4 vec4project(vec4 a, vec4 b) { }
-
-
-ALGAPI vec4 vec4reject(vec4 a, vec4 b) { }
 
 
 ALGAPI float vec4angle(vec4 a, vec4 b) { }
