@@ -38,7 +38,11 @@ jobs:
         run: |
           # test C modules...
           gcc   -Wall -Wextra -Werror -std=c99 tests/01-vec2.c -lm
+          ./a.out && rm -f a.out
           clang -Wall -Wextra -Werror -std=c99 tests/01-vec2.c -lm
+          ./a.out && rm -f a.out
           # test C++ modules...
           g++     -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm
+          ./a.out && rm -f a.out
           clang++ -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm
+          ./a.out && rm -f a.out
