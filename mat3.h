@@ -22,9 +22,11 @@ union u_mat3 {
 
     u_mat3(float);
 
-    u_mat3(float, float, float, float, float, float, float, float, float);
+    u_mat3(float, float, float,
+           float, float, float,
+           float, float, float);
 
-    u_mat3(const u_mat3 &); 
+    u_mat3(const u_mat3 &);
 
     u_mat3 &operator = (const u_mat3 &);
 
@@ -32,9 +34,15 @@ union u_mat3 {
 
 };
 
+/* Properties */
+
 ALGAPI mat3 mat3zero(void);
 
+ALGAPI mat3 mat3identity(void);
+
 ALGAPI mat3 mat3init(float);
+
+/* Math operations */
 
 ALGAPI mat3 mat3add(mat3, mat3);
 
@@ -46,31 +54,56 @@ ALGAPI mat3 mat3mulf(mat3, float);
 
 ALGAPI vec3 mat3mulv(mat3, vec3);
 
+/* Unary operations */
+
+ALGAPI mat3 mat3neg(mat3);
+
+ALGAPI mat3 mat3transpose(mat3);
+
+ALGAPI mat3 mat3inv(mat3);
+
+/* Scalar operations */
+
 ALGAPI float mat3det(mat3);
 
 ALGAPI float mat3trace(mat3);
 
-ALGAPI mat3 mat3transpose(mat3); 
+/* Construction */
+
+ALGAPI mat3 mat3rotatex(float);
+
+ALGAPI mat3 mat3rotatey(float);
+
+ALGAPI mat3 mat3rotatez(float);
+
+ALGAPI mat3 mat3rotate(vec3, float);
+
+ALGAPI mat3 mat3scale(vec3);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
+#  include <math.h>
+#
 #  include "./vec3.h"
+#  include "./utils.h"
 #
 #  if defined (__cplusplus)
 
 u_mat3::u_mat3(void) :
-    m00(0.0), m01(0.0), m02(0.0),
-    m10(0.0), m11(0.0), m12(0.0),
-    m20(0.0), m21(0.0), m22(0.0) { }
+    m00(0.0f), m01(0.0f), m02(0.0f),
+    m10(0.0f), m11(0.0f), m12(0.0f),
+    m20(0.0f), m21(0.0f), m22(0.0f) { }
 
 
 u_mat3::u_mat3(float s) :
-    m00(1.0 * s), m01(0.0),     m02(0.0),
-    m10(0.0),     m11(1.0 * s), m12(0.0),
-    m20(0.0),     m21(0.0),     m22(1.0 * s) { }
+    m00(1.0f * s), m01(0.0f),     m02(0.0f),
+    m10(0.0f),     m11(1.0f * s), m12(0.0f),
+    m20(0.0f),     m21(0.0f),     m22(1.0f * s) { }
 
-    
-u_mat3::u_mat3(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22) :
+
+u_mat3::u_mat3(float m00, float m01, float m02,
+               float m10, float m11, float m12,
+               float m20, float m21, float m22) :
     m00(m00), m01(m01), m02(m02),
     m10(m10), m11(m11), m12(m12),
     m20(m20), m21(m21), m22(m22) { }
@@ -83,90 +116,228 @@ u_mat3::u_mat3(const u_mat3 &other) :
 
 
 u_mat3 &u_mat3::operator = (const u_mat3 &other) {
-    *this = { other.m00, other.m01, other.m02,
-              other.m10, other.m11, other.m12,
-              other.m20, other.m21, other.m22 };
-    
+    this->m00 = other.m00; this->m01 = other.m01; this->m02 = other.m02;
+    this->m10 = other.m10; this->m11 = other.m11; this->m12 = other.m12;
+    this->m20 = other.m20; this->m21 = other.m21; this->m22 = other.m22;
     return (*this);
 }
 
 #  endif /* __cplusplus */
 
+/* Properties */
+
 ALGAPI mat3 mat3zero(void) {
-    return ((mat3) { 0.0f, 0.0f, 0.0f,
-                     0.0f, 0.0f, 0.0f,
-                     0.0f, 0.0f, 0.0f } );
+    mat3 m;
+
+    m.m00 = 0.0f; m.m01 = 0.0f; m.m02 = 0.0f;
+    m.m10 = 0.0f; m.m11 = 0.0f; m.m12 = 0.0f;
+    m.m20 = 0.0f; m.m21 = 0.0f; m.m22 = 0.0f;
+    return (m);
+}
+
+
+ALGAPI mat3 mat3identity(void) {
+    mat3 m;
+
+    m.m00 = 1.0f; m.m01 = 0.0f; m.m02 = 0.0f;
+    m.m10 = 0.0f; m.m11 = 1.0f; m.m12 = 0.0f;
+    m.m20 = 0.0f; m.m21 = 0.0f; m.m22 = 1.0f;
+    return (m);
 }
 
 
 ALGAPI mat3 mat3init(float s) {
-    return ((mat3) { 1.0f * s, 0.0f,     0.0f,
-                     0.0f,     1.0f * s, 0.0f,
-                     0.0f,     0.0f,     1.0f * s } );
+    mat3 m;
+
+    m.m00 = 1.0f * s; m.m01 = 0.0f;     m.m02 = 0.0f;
+    m.m10 = 0.0f;     m.m11 = 1.0f * s; m.m12 = 0.0f;
+    m.m20 = 0.0f;     m.m21 = 0.0f;     m.m22 = 1.0f * s;
+    return (m);
 }
 
+/* Math operations */
 
 ALGAPI mat3 mat3add(mat3 a, mat3 b) {
-    return ((mat3) { a.m00 + b.m00, a.m01 + b.m01, a.m02 + b.m02,
-                     a.m10 + b.m10, a.m11 + b.m11, a.m12 + b.m12,
-                     a.m20 + b.m20, a.m21 + b.m21, a.m22 + b.m22 } );
+    mat3 m;
+
+    m.m00 = a.m00 + b.m00; m.m01 = a.m01 + b.m01; m.m02 = a.m02 + b.m02;
+    m.m10 = a.m10 + b.m10; m.m11 = a.m11 + b.m11; m.m12 = a.m12 + b.m12;
+    m.m20 = a.m20 + b.m20; m.m21 = a.m21 + b.m21; m.m22 = a.m22 + b.m22;
+    return (m);
 }
 
 
 ALGAPI mat3 mat3sub(mat3 a, mat3 b) {
-    return ((mat3) { a.m00 - b.m00, a.m01 - b.m01, a.m02 - b.m02,
-                     a.m10 - b.m10, a.m11 - b.m11, a.m12 - b.m12,
-                     a.m20 - b.m20, a.m21 - b.m21, a.m22 - b.m22 } );
+    mat3 m;
+
+    m.m00 = a.m00 - b.m00; m.m01 = a.m01 - b.m01; m.m02 = a.m02 - b.m02;
+    m.m10 = a.m10 - b.m10; m.m11 = a.m11 - b.m11; m.m12 = a.m12 - b.m12;
+    m.m20 = a.m20 - b.m20; m.m21 = a.m21 - b.m21; m.m22 = a.m22 - b.m22;
+    return (m);
 }
 
 
 ALGAPI mat3 mat3mul(mat3 a, mat3 b) {
-    return ((mat3) { a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02,
-                     a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02,
-                     a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02,
+    mat3 m;
 
-                     a.m00 * b.m10 + a.m10 * b.m11 + a.m20 * b.m12,
-                     a.m01 * b.m10 + a.m11 * b.m11 + a.m21 * b.m12,
-                     a.m02 * b.m10 + a.m12 * b.m11 + a.m22 * b.m12,
+    m.m00 = a.m00 * b.m00 + a.m10 * b.m01 + a.m20 * b.m02;
+    m.m01 = a.m01 * b.m00 + a.m11 * b.m01 + a.m21 * b.m02;
+    m.m02 = a.m02 * b.m00 + a.m12 * b.m01 + a.m22 * b.m02;
 
-                     a.m00 * b.m20 + a.m10 * b.m21 + a.m20 * b.m22,
-                     a.m01 * b.m20 + a.m11 * b.m21 + a.m21 * b.m22,
-                     a.m02 * b.m20 + a.m12 * b.m21 + a.m22 * b.m22 } );
+    m.m10 = a.m00 * b.m10 + a.m10 * b.m11 + a.m20 * b.m12;
+    m.m11 = a.m01 * b.m10 + a.m11 * b.m11 + a.m21 * b.m12;
+    m.m12 = a.m02 * b.m10 + a.m12 * b.m11 + a.m22 * b.m12;
+
+    m.m20 = a.m00 * b.m20 + a.m10 * b.m21 + a.m20 * b.m22;
+    m.m21 = a.m01 * b.m20 + a.m11 * b.m21 + a.m21 * b.m22;
+    m.m22 = a.m02 * b.m20 + a.m12 * b.m21 + a.m22 * b.m22;
+    return (m);
 }
 
 
-ALGAPI mat3 mat3mulf(mat3 m, float f) {
-    return ((mat3) { m.m00 * f, m.m01 * f, m.m02 * f,
-                     m.m10 * f, m.m11 * f, m.m12 * f,
-                     m.m20 * f, m.m21 * f, m.m22 * f } );
+ALGAPI mat3 mat3mulf(mat3 a, float f) {
+    mat3 m;
+
+    m.m00 = a.m00 * f; m.m01 = a.m01 * f; m.m02 = a.m02 * f;
+    m.m10 = a.m10 * f; m.m11 = a.m11 * f; m.m12 = a.m12 * f;
+    m.m20 = a.m20 * f; m.m21 = a.m21 * f; m.m22 = a.m22 * f;
+    return (m);
 }
 
 
-ALGAPI vec3 mat3mulv(mat3 m, vec3 v) {
-    return ((vec3) { m.m00 * v.x + m.m01 * v.y + m.m02 * v.z,
-                     m.m10 * v.x + m.m11 * v.y + m.m12 * v.z,
-                     m.m20 * v.x + m.m21 * v.y + m.m22 * v.z } );
+ALGAPI vec3 mat3mulv(mat3 a, vec3 b) {
+    vec3 v;
+
+    v.x = a.m00 * b.x + a.m10 * b.y + a.m20 * b.z;
+    v.y = a.m01 * b.x + a.m11 * b.y + a.m21 * b.z;
+    v.z = a.m02 * b.x + a.m12 * b.y + a.m22 * b.z;
+    return (v);
 }
 
+/* Unary operations */
+
+ALGAPI mat3 mat3neg(mat3 a) {
+    a.m00 = -a.m00; a.m01 = -a.m01; a.m02 = -a.m02;
+    a.m10 = -a.m10; a.m11 = -a.m11; a.m12 = -a.m12;
+    a.m20 = -a.m20; a.m21 = -a.m21; a.m22 = -a.m22;
+    return (a);
+}
+
+
+ALGAPI mat3 mat3transpose(mat3 a) {
+    mat3 m;
+
+    m.m00 = a.m00; m.m01 = a.m10; m.m02 = a.m20;
+    m.m10 = a.m01; m.m11 = a.m11; m.m12 = a.m21;
+    m.m20 = a.m02; m.m21 = a.m12; m.m22 = a.m22;
+    return (m);
+}
+
+
+ALGAPI mat3 mat3inv(mat3 a) {
+    float det = mat3det(a);
+    mat3  m;
+
+    if (det == 0.0f)
+        return (mat3zero());
+
+    det = 1.0f / det;
+
+    m.m00 =  (a.m11 * a.m22 - a.m21 * a.m12) * det;
+    m.m01 = -(a.m01 * a.m22 - a.m21 * a.m02) * det;
+    m.m02 =  (a.m01 * a.m12 - a.m11 * a.m02) * det;
+
+    m.m10 = -(a.m10 * a.m22 - a.m20 * a.m12) * det;
+    m.m11 =  (a.m00 * a.m22 - a.m20 * a.m02) * det;
+    m.m12 = -(a.m00 * a.m12 - a.m10 * a.m02) * det;
+
+    m.m20 =  (a.m10 * a.m21 - a.m20 * a.m11) * det;
+    m.m21 = -(a.m00 * a.m21 - a.m20 * a.m01) * det;
+    m.m22 =  (a.m00 * a.m11 - a.m10 * a.m01) * det;
+    return (m);
+}
+
+/* Scalar operations */
 
 ALGAPI float mat3det(mat3 m) {
-    return (m.m00 * m.m11 * m.m22 +
-            m.m01 * m.m12 * m.m20 +
-            m.m02 * m.m10 * m.m21 -
-            m.m20 * m.m11 * m.m02 -
-            m.m21 * m.m12 * m.m00 -
-            m.m22 * m.m10 * m.m01);
+    return (m.m00 * (m.m11 * m.m22 - m.m21 * m.m12) -
+            m.m10 * (m.m01 * m.m22 - m.m21 * m.m02) +
+            m.m20 * (m.m01 * m.m12 - m.m11 * m.m02));
 }
+
 
 ALGAPI float mat3trace(mat3 m) {
     return (m.m00 + m.m11 + m.m22);
 }
 
-ALGAPI mat3 mat3transpose(mat3 m) {
-    return ((mat3) { m.m00, m.m10, m.m20,
-                     m.m01, m.m11, m.m21,
-                     m.m02, m.m12, m.m22 } );
-} 
+/* Construction */
+
+ALGAPI mat3 mat3rotatex(float angle) {
+    float c = cosf(angle);
+    float s = sinf(angle);
+    mat3  m;
+
+    m.m00 = 1.0f; m.m01 = 0.0f; m.m02 = 0.0f;
+    m.m10 = 0.0f; m.m11 =    c; m.m12 =    s;
+    m.m20 = 0.0f; m.m21 =   -s; m.m22 =    c;
+    return (m);
+}
+
+
+ALGAPI mat3 mat3rotatey(float angle) {
+    float c = cosf(angle);
+    float s = sinf(angle);
+    mat3  m;
+
+    m.m00 =    c; m.m01 = 0.0f; m.m02 =   -s;
+    m.m10 = 0.0f; m.m11 = 1.0f; m.m12 = 0.0f;
+    m.m20 =    s; m.m21 = 0.0f; m.m22 =    c;
+    return (m);
+}
+
+
+ALGAPI mat3 mat3rotatez(float angle) {
+    float c = cosf(angle);
+    float s = sinf(angle);
+    mat3  m;
+
+    m.m00 =    c; m.m01 =    s; m.m02 = 0.0f;
+    m.m10 =   -s; m.m11 =    c; m.m12 = 0.0f;
+    m.m20 = 0.0f; m.m21 = 0.0f; m.m22 = 1.0f;
+    return (m);
+}
+
+
+ALGAPI mat3 mat3rotate(vec3 axis, float angle) {
+    float c   = cosf(angle);
+    float s   = sinf(angle);
+    float t   = 1.0f - c;
+    vec3  n   = vec3norm(axis);
+    mat3  m;
+
+    m.m00 = t * n.x * n.x + c;
+    m.m01 = t * n.x * n.y + s * n.z;
+    m.m02 = t * n.x * n.z - s * n.y;
+
+    m.m10 = t * n.x * n.y - s * n.z;
+    m.m11 = t * n.y * n.y + c;
+    m.m12 = t * n.y * n.z + s * n.x;
+
+    m.m20 = t * n.x * n.z + s * n.y;
+    m.m21 = t * n.y * n.z - s * n.x;
+    m.m22 = t * n.z * n.z + c;
+    return (m);
+}
+
+
+ALGAPI mat3 mat3scale(vec3 s) {
+    mat3 m;
+
+    m.m00 = s.x;  m.m01 = 0.0f; m.m02 = 0.0f;
+    m.m10 = 0.0f; m.m11 = s.y;  m.m12 = 0.0f;
+    m.m20 = 0.0f; m.m21 = 0.0f; m.m22 = s.z;
+    return (m);
+}
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _mat3_h_ */

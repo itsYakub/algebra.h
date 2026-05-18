@@ -32,13 +32,15 @@ union u_vec3 {
 
     u_vec3(float, float, float);
 
-    u_vec3(const u_vec3 &); 
+    u_vec3(const u_vec3 &);
 
     u_vec3 &operator = (const u_vec3 &);
 
 # endif /* __cplusplus */
 
 };
+
+/* Properties */
 
 ALGAPI vec3 vec3zero(void);
 
@@ -55,6 +57,8 @@ ALGAPI vec3 vec3down(void);
 ALGAPI vec3 vec3front(void);
 
 ALGAPI vec3 vec3back(void);
+
+/* Math operations */
 
 ALGAPI vec3 vec3add(vec3, vec3);
 
@@ -74,6 +78,8 @@ ALGAPI vec3 vec3divf(vec3, float);
 
 ALGAPI vec3 vec3mulm(vec3, mat3);
 
+/* Boolean expressions */
+
 ALGAPI bool vec3eq(vec3, vec3);
 
 ALGAPI bool vec3noeq(vec3, vec3);
@@ -86,25 +92,92 @@ ALGAPI bool vec3less(vec3, vec3);
 
 ALGAPI bool vec3lesseq(vec3, vec3);
 
-ALGAPI float vec3dot(vec3, vec3);
+/* Distance operations */
 
 ALGAPI float vec3len(vec3);
 
+ALGAPI float vec3lensq(vec3);
+
 ALGAPI float vec3dist(vec3, vec3);
 
-ALGAPI vec3 vec3cross(vec3, vec3);
+ALGAPI float vec3distsq(vec3, vec3);
 
-ALGAPI vec3 vec3norm(vec3);
+/* Unary arithmetics */
+
+ALGAPI float vec3dot(vec3, vec3);
+
+ALGAPI vec3  vec3cross(vec3, vec3);
+
+ALGAPI vec3  vec3norm(vec3);
+
+ALGAPI vec3  vec3neg(vec3);
+
+ALGAPI vec3  vec3abs(vec3);
+
+ALGAPI vec3  vec3sign(vec3);
+
+ALGAPI vec3  vec3sqrt(vec3);
+
+ALGAPI vec3  vec3pow(vec3, float);
+
+ALGAPI vec3  vec3fract(vec3);
+
+ALGAPI vec3  vec3floor(vec3);
+
+ALGAPI vec3  vec3ceil(vec3);
+
+ALGAPI vec3  vec3round(vec3);
+
+ALGAPI vec3  vec3mod(vec3, vec3);
+
+ALGAPI vec3  vec3modf(vec3, float);
+
+/* Constraints */
+
+ALGAPI vec3 vec3min(vec3, vec3);
+
+ALGAPI vec3 vec3minf(vec3, float);
+
+ALGAPI vec3 vec3max(vec3, vec3);
+
+ALGAPI vec3 vec3maxf(vec3, float);
+
+ALGAPI vec3 vec3clamp(vec3, vec3, vec3);
+
+ALGAPI vec3 vec3clampf(vec3, float, float);
+
+/* Interpolation */
+
+ALGAPI vec3 vec3lerp(vec3, vec3, float);
+
+ALGAPI vec3 vec3step(vec3, vec3);
+
+ALGAPI vec3 vec3smoothstep(vec3, vec3, vec3);
+
+/* Geometric operations */
+
+ALGAPI vec3  vec3reflect(vec3, vec3);
+
+ALGAPI vec3  vec3refract(vec3, vec3, float);
+
+ALGAPI vec3  vec3project(vec3, vec3);
+
+ALGAPI vec3  vec3reject(vec3, vec3);
+
+ALGAPI vec3  vec3rotate(vec3, vec3, float);
+
+ALGAPI float vec3angle(vec3, vec3);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
 #  include <math.h>
 #
 #  include "./mat3.h"
+#  include "./utils.h"
 #
 #  if defined (__cplusplus)
 
-u_vec3::u_vec3(void) : x(0.0), y(0.0), z(0.0) { }
+u_vec3::u_vec3(void) : x(0.0f), y(0.0f), z(0.0f) { }
 
 
 u_vec3::u_vec3(float v) : x(v), y(v), z(v) { }
@@ -125,108 +198,179 @@ u_vec3 &u_vec3::operator = (const u_vec3 &other) {
 
 #  endif /* __cplusplus */
 
+/* Properties */
+
 ALGAPI vec3 vec3zero(void) {
-    return ((vec3) { 0.0f, 0.0f, 0.0f } );
+    vec3 v;
+
+    v.x = 0.0f;
+    v.y = 0.0f;
+    v.z = 0.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3one(void) {
-    return ((vec3) { 1.0f, 1.0f, 1.0f } );
+    vec3 v;
+
+    v.x = 1.0f;
+    v.y = 1.0f;
+    v.z = 1.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3right(void) {
-    return ((vec3) { 1.0f, 0.0f, 0.0f } );
+    vec3 v;
+
+    v.x = 1.0f;
+    v.y = 0.0f;
+    v.z = 0.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3left(void) {
-    return ((vec3) { -1.0f, 0.0f, 0.0f } );
+    vec3 v;
+
+    v.x = -1.0f;
+    v.y =  0.0f;
+    v.z =  0.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3up(void) {
-    return ((vec3) { 0.0f, 1.0f, 0.0f } );
+    vec3 v;
+
+    v.x = 0.0f;
+    v.y = 1.0f;
+    v.z = 0.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3down(void) {
-    return ((vec3) { 0.0f, -1.0f, 0.0f } );
+    vec3 v;
+
+    v.x =  0.0f;
+    v.y = -1.0f;
+    v.z =  0.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3front(void) {
-    return ((vec3) { 0.0f, 0.0f, 1.0f } );
+    vec3 v;
+
+    v.x = 0.0f;
+    v.y = 0.0f;
+    v.z = 1.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3back(void) {
-    return ((vec3) { 0.0f, 0.0f, -1.0f } );
+    vec3 v;
+
+    v.x =  0.0f;
+    v.y =  0.0f;
+    v.z = -1.0f;
+    return (v);
 }
 
+/* Math operations */
 
 ALGAPI vec3 vec3add(vec3 a, vec3 b) {
-    return ((vec3) { a.x + b.x,
-                     a.y + b.y,
-                     a.z + b.z } );
+    vec3 v;
+
+    v.x = a.x + b.x;
+    v.y = a.y + b.y;
+    v.z = a.z + b.z;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3sub(vec3 a, vec3 b) {
-    return ((vec3) { a.x - b.x,
-                     a.y - b.y,
-                     a.z - b.z } );
+    vec3 v;
+
+    v.x = a.x - b.x;
+    v.y = a.y - b.y;
+    v.z = a.z - b.z;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3mul(vec3 a, vec3 b) {
-    return ((vec3) { a.x * b.x,
-                     a.y * b.y,
-                     a.z * b.z } );
+    vec3 v;
+
+    v.x = a.x * b.x;
+    v.y = a.y * b.y;
+    v.z = a.z * b.z;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3div(vec3 a, vec3 b) {
-    return ((vec3) { b.x != 0.0f ? a.x / b.x : 0.0f,
-                     b.y != 0.0f ? a.y / b.y : 0.0f,
-                     b.z != 0.0f ? a.z / b.z : 0.0f } );
+    vec3 v;
+
+    v.x = b.x != 0.0f ? a.x / b.x : 0.0f;
+    v.y = b.y != 0.0f ? a.y / b.y : 0.0f;
+    v.z = b.z != 0.0f ? a.z / b.z : 0.0f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3addf(vec3 a, float f) {
-    return ((vec3) { a.x + f,
-                     a.y + f,
-                     a.z + f } );
+    vec3 v;
+
+    v.x = a.x + f;
+    v.y = a.y + f;
+    v.z = a.z + f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3subf(vec3 a, float f) {
-    return ((vec3) { a.x - f,
-                     a.y - f,
-                     a.z - f } );
+    vec3 v;
+
+    v.x = a.x - f;
+    v.y = a.y - f;
+    v.z = a.z - f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3mulf(vec3 a, float f) {
-    return ((vec3) { a.x * f,
-                     a.y * f,
-                     a.z * f } );
+    vec3 v;
+
+    v.x = a.x * f;
+    v.y = a.y * f;
+    v.z = a.z * f;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3divf(vec3 a, float f) {
-    return ((vec3) { f != 0.0f ? a.x / f : 0.0f,
-                     f != 0.0f ? a.y / f : 0.0f,
-                     f != 0.0f ? a.z / f : 0.0f } );
+    vec3 v;
+
+    v.x = f != 0.0f ? a.x / f : 0.0f;
+    v.y = f != 0.0f ? a.y / f : 0.0f;
+    v.z = f != 0.0f ? a.z / f : 0.0f;
+    return (v);
 }
 
 
-ALGAPI vec3 vec3mulm(vec3 v, mat3 m) {
-    return ((vec3) { m.m00 * v.x + m.m10 * v.y + m.m20 * v.z,
-                     m.m01 * v.x + m.m11 * v.y + m.m21 * v.z,
-                     m.m02 * v.x + m.m12 * v.y + m.m22 * v.z } );
+ALGAPI vec3 vec3mulm(vec3 a, mat3 m) {
+    vec3 v;
+
+    v.x = m.m00 * a.x + m.m10 * a.y + m.m20 * a.z;
+    v.y = m.m01 * a.x + m.m11 * a.y + m.m21 * a.z;
+    v.z = m.m02 * a.x + m.m12 * a.y + m.m22 * a.z;
+    return (v);
 }
 
+/* Boolean expressions */
 
 ALGAPI bool vec3eq(vec3 a, vec3 b) {
     return (a.x == b.x &&
@@ -269,45 +413,269 @@ ALGAPI bool vec3lesseq(vec3 a, vec3 b) {
             a.z <= b.z);
 }
 
+/* Distance operations */
+
+ALGAPI float vec3len(vec3 a) {
+    return (sqrtf(a.x * a.x + a.y * a.y + a.z * a.z));
+}
+
+
+ALGAPI float vec3lensq(vec3 a) {
+    return (a.x * a.x + a.y * a.y + a.z * a.z);
+}
+
+
+ALGAPI float vec3dist(vec3 a, vec3 b) {
+    return (sqrtf((a.x - b.x) * (a.x - b.x) +
+                  (a.y - b.y) * (a.y - b.y) +
+                  (a.z - b.z) * (a.z - b.z)));
+}
+
+
+ALGAPI float vec3distsq(vec3 a, vec3 b) {
+    return ((a.x - b.x) * (a.x - b.x) +
+            (a.y - b.y) * (a.y - b.y) +
+            (a.z - b.z) * (a.z - b.z));
+}
+
+/* Unary arithmetics */
 
 ALGAPI float vec3dot(vec3 a, vec3 b) {
     return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 
-ALGAPI float vec3len(vec3 a) {
-    return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
-}
-
-
-ALGAPI float vec3dist(vec3 a, vec3 b) {
-    return (sqrt((a.x - b.x) * (a.x - b.x) +
-                 (a.y - b.y) * (a.y * b.y) +
-                 (a.z - b.z) * (a.z * b.z)));
-}
-
-
 ALGAPI vec3 vec3cross(vec3 a, vec3 b) {
-    vec3 vec;
+    vec3 v;
 
-    vec.x = a.y * b.z - a.z * b.y;
-    vec.y = a.z * b.x - a.x * b.z;
-    vec.z = a.x * b.y - a.y * b.x;
-    return (vec);
+    v.x = a.y * b.z - a.z * b.y;
+    v.y = a.z * b.x - a.x * b.z;
+    v.z = a.x * b.y - a.y * b.x;
+    return (v);
 }
 
 
 ALGAPI vec3 vec3norm(vec3 a) {
     float len = vec3len(a);
 
-    vec3 vec = a;
     if (len != 0.0f) {
-        vec.x *= 1.0f / len;
-        vec.y *= 1.0f / len;
-        vec.z *= 1.0f / len;
+        a.x *= 1.0f / len;
+        a.y *= 1.0f / len;
+        a.z *= 1.0f / len;
     }
-    return (vec);
+    return (a);
 }
+
+
+ALGAPI vec3 vec3neg(vec3 a) {
+    a.x = -a.x;
+    a.y = -a.y;
+    a.z = -a.z;
+    return (a);
+}
+
+
+ALGAPI vec3 vec3abs(vec3 a) {
+    a.x = fabsf(a.x);
+    a.y = fabsf(a.y);
+    a.z = fabsf(a.z);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3sign(vec3 a) {
+    a.x = a.x > 0.0f ? 1.0f : (a.x < 0.0f ? -1.0f : 0.0f);
+    a.y = a.y > 0.0f ? 1.0f : (a.y < 0.0f ? -1.0f : 0.0f);
+    a.z = a.z > 0.0f ? 1.0f : (a.z < 0.0f ? -1.0f : 0.0f);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3sqrt(vec3 a) {
+    a.x = sqrtf(a.x);
+    a.y = sqrtf(a.y);
+    a.z = sqrtf(a.z);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3pow(vec3 a, float f) {
+    a.x = powf(a.x, f);
+    a.y = powf(a.y, f);
+    a.z = powf(a.z, f);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3fract(vec3 a) {
+    a.x = fract(a.x);
+    a.y = fract(a.y);
+    a.z = fract(a.z);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3floor(vec3 a) {
+    a.x = floorf(a.x);
+    a.y = floorf(a.y);
+    a.z = floorf(a.z);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3ceil(vec3 a) {
+    a.x = ceilf(a.x);
+    a.y = ceilf(a.y);
+    a.z = ceilf(a.z);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3round(vec3 a) {
+    a.x = roundf(a.x);
+    a.y = roundf(a.y);
+    a.z = roundf(a.z);
+    return (a);
+}
+
+
+ALGAPI vec3 vec3mod(vec3 a, vec3 b) {
+    vec3 v;
+
+    v.x = a.x - b.x * floorf(a.x / b.x);
+    v.y = a.y - b.y * floorf(a.y / b.y);
+    v.z = a.z - b.z * floorf(a.z / b.z);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3modf(vec3 a, float f) {
+    vec3 v;
+
+    v.x = a.x - f * floorf(a.x / f);
+    v.y = a.y - f * floorf(a.y / f);
+    v.z = a.z - f * floorf(a.z / f);
+    return (v);
+}
+
+/* Constraints */
+
+ALGAPI vec3 vec3min(vec3 a, vec3 b) {
+    vec3 v;
+
+    v.x = min(a.x, b.x);
+    v.y = min(a.y, b.y);
+    v.z = min(a.z, b.z);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3minf(vec3 a, float f) {
+    vec3 v;
+
+    v.x = min(a.x, f);
+    v.y = min(a.y, f);
+    v.z = min(a.z, f);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3max(vec3 a, vec3 b) {
+    vec3 v;
+
+    v.x = max(a.x, b.x);
+    v.y = max(a.y, b.y);
+    v.z = max(a.z, b.z);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3maxf(vec3 a, float f) {
+    vec3 v;
+
+    v.x = max(a.x, f);
+    v.y = max(a.y, f);
+    v.z = max(a.z, f);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3clamp(vec3 a, vec3 lo, vec3 hi) {
+    vec3 v;
+
+    v.x = clamp(a.x, lo.x, hi.x);
+    v.y = clamp(a.y, lo.y, hi.y);
+    v.z = clamp(a.z, lo.z, hi.z);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3clampf(vec3 a, float lo, float hi) {
+    vec3 v;
+
+    v.x = clamp(a.x, lo, hi);
+    v.y = clamp(a.y, lo, hi);
+    v.z = clamp(a.z, lo, hi);
+    return (v);
+}
+
+/* Interpolation */
+
+ALGAPI vec3 vec3lerp(vec3 a, vec3 b, float t) {
+    vec3 v;
+
+    v.x = lerp(a.x, b.x, t);
+    v.y = lerp(a.y, b.y, t);
+    v.z = lerp(a.z, b.z, t);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3step(vec3 a, vec3 x) {
+    vec3 v;
+
+    v.x = step(a.x, x.x);
+    v.y = step(a.y, x.y);
+    v.z = step(a.z, x.z);
+    return (v);
+}
+
+
+ALGAPI vec3 vec3smoothstep(vec3 e0, vec3 e1, vec3 x) {
+    vec3 v;
+
+    v.x = smoothstep(e0.x, e1.x, x.x);
+    v.y = smoothstep(e0.y, e1.y, x.y);
+    v.z = smoothstep(e0.z, e1.z, x.z);
+    return (v);
+}
+
+/* Geometric operations */
+
+ALGAPI vec3 vec3reflect(vec3 a, vec3 n) {
+    float dot = vec3dot(a, n);
+    vec3  v;
+
+    v.x = a.x - 2.0f * dot * n.x;
+    v.y = a.y - 2.0f * dot * n.y;
+    v.z = a.z - 2.0f * dot * n.z;
+    return (v);
+}
+
+
+ALGAPI vec3 vec3refract(vec3 a, vec3 n, float eta) { }
+
+
+ALGAPI vec3 vec3project(vec3 a, vec3 b) { }
+
+
+ALGAPI vec3 vec3reject(vec3 a, vec3 b) { }
+
+
+ALGAPI vec3 vec3rotate(vec3 a, vec3 axis, float angle) { }
+
+
+ALGAPI float vec3angle(vec3 a, vec3 b) { }
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec3_h_ */
