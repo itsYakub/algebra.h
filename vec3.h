@@ -680,8 +680,8 @@ ALGAPI vec3 vec3refract(vec3 a, vec3 n, float eta) {
 
 
 ALGAPI vec3 vec3project(vec3 a, vec3 b) {
-    float len0 = vec3lensq(a, b);
-    float len1 = vec3lensq(b, b);
+    float len0 = vec3lensq(a);
+    float len1 = vec3lensq(b);
     float mag  = len0 / len1;
 
     vec3 v;
@@ -693,8 +693,8 @@ ALGAPI vec3 vec3project(vec3 a, vec3 b) {
 
 
 ALGAPI vec3 vec3reject(vec3 a, vec3 b) {
-    float len0 = vec3lensq(a, b);
-    float len1 = vec3lensq(b, b);
+    float len0 = vec3lensq(a);
+    float len1 = vec3lensq(b);
     float mag  = len0 / len1;
 
     vec3 v;
@@ -712,22 +712,22 @@ ALGAPI vec3 vec3reject(vec3 a, vec3 b) {
  * - https://en.wikipedia.org/w/index.php?title=Euler%E2%80%93Rodrigues_formula
  * - https://en.wikipedia.org/w/index.php?title=Euler%E2%80%93Rodrigues_formula#Vector_formulation
  * */
-ALGAPI vec3 vec3rotate(vec3 a, vec3 axis, float angle) {
+ALGAPI vec3 vec3rotate(vec3 x, vec3 axis, float angle) {
     float a = cosf(angle / 2.0);
 
-    vec3  v = vec3norm(axis);
+    vec3  n = vec3norm(axis);
     float s = sinf(angle / 2.0);
-    float b = v.x * s;
-    float c = v.y * s;
-    float d = v.z * s;
+    float b = n.x * s;
+    float c = n.y * s;
+    float d = n.z * s;
 
     vec3 w;
     w.x = b, w.y = c, w.z = d;
     
     vec3 v;
-    v.x = a.x + 2.0 * a * (w.x * a.x) + 2.0 * (w.x * (w.x * a.x));
-    v.y = a.y + 2.0 * a * (w.y * a.y) + 2.0 * (w.y * (w.y * a.y));
-    v.z = a.z + 2.0 * a * (w.z * a.z) + 2.0 * (w.z * (w.z * a.z));
+    v.x = x.x + 2.0 * a * (w.x * x.x) + 2.0 * (w.x * (w.x * x.x));
+    v.y = x.y + 2.0 * a * (w.y * x.y) + 2.0 * (w.y * (w.y * x.y));
+    v.z = x.z + 2.0 * a * (w.z * x.z) + 2.0 * (w.z * (w.z * x.z));
     return (v);
 }
 
