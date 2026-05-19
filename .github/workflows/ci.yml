@@ -45,5 +45,45 @@ jobs:
         run: |
           set -x
           
-          g++ -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm -lgtest
+          g++ -Wall -Wextra -Werror tests/01-vec2.cc -lm -lgtest
+          ./a.out && rm -f a.out
+      
+      # check vec3 module
+      - name: "Test no.2: vec3 module"
+        run: |
+          set -x
+          
+          g++ -Wall -Wextra -Werror tests/02-vec3.cc -lm -lgtest
+          ./a.out && rm -f a.out
+      
+      # check vec2 module
+      - name: "Test no.3: vec4 module"
+        run: |
+          set -x
+          
+          g++ -Wall -Wextra -Werror tests/03-vec4.cc -lm -lgtest
+          ./a.out && rm -f a.out
+      
+      # check vec2 module
+      - name: "Test no.4: mat2 module"
+        run: |
+          set -x
+          
+          g++ -Wall -Wextra -Werror tests/04-mat2.cc -lm -lgtest
+          ./a.out && rm -f a.out
+      
+      # check vec2 module
+      - name: "Test no.5: mat3 module"
+        run: |
+          set -x
+          
+          g++ -Wall -Wextra -Werror tests/05-mat3.cc -lm -lgtest
+          ./a.out && rm -f a.out
+      
+      # check vec2 module
+      - name: "Test no.6: vec4 module"
+        run: |
+          set -x
+          
+          g++ -Wall -Wextra -Werror tests/01-vec2.cc -lm -lgtest
           ./a.out && rm -f a.out

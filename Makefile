@@ -48,9 +48,28 @@ test :
 	clang --version
 	clang++ --version
 	# Test no.0: compilation status 
+	gcc   -Wall -Wextra -Werror $(MK_ROOT)tests/00-compile.c -lm && ./a.out ; rm -f a.out
+	clang -Wall -Wextra -Werror $(MK_ROOT)tests/00-compile.c -lm && ./a.out ; rm -f a.out
+
 	g++     -Wall -Wextra -Werror $(MK_ROOT)tests/00-compile.cc && ./a.out ; rm -f a.out
 	clang++ -Wall -Wextra -Werror $(MK_ROOT)tests/00-compile.cc && ./a.out ; rm -f a.out
+	
 	# Test no.1: vec2 module
-	g++     -Wall -Wextra -Werror $(MK_ROOT)tests/01-vec2.cc -lgtest && ./a.out ; rm -f a.out
+	g++ -Wall -Wextra -Werror $(MK_ROOT)tests/01-vec2.cc -lgtest && ./a.out ; rm -f a.out
+	
+	# Test no.2: vec3 module
+	g++ -Wall -Wextra -Werror $(MK_ROOT)tests/02-vec3.cc -lgtest && ./a.out ; rm -f a.out
+	
+	# Test no.3: vec4 module
+	g++ -Wall -Wextra -Werror $(MK_ROOT)tests/03-vec4.cc -lgtest && ./a.out ; rm -f a.out
+	
+	# Test no.4: mat2 module
+	g++ -Wall -Wextra -Werror $(MK_ROOT)tests/04-mat2.cc -lgtest && ./a.out ; rm -f a.out
+	
+	# Test no.5: mat3 module
+	g++ -Wall -Wextra -Werror $(MK_ROOT)tests/05-mat3.cc -lgtest && ./a.out ; rm -f a.out
+	
+	# Test no.6: mat4 module
+	g++ -Wall -Wextra -Werror $(MK_ROOT)tests/06-mat4.cc -lgtest && ./a.out ; rm -f a.out
 
 # ========
