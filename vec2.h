@@ -51,11 +51,11 @@ ALGAPI bool vec2noeq(vec2, vec2);
 
 ALGAPI bool vec2great(vec2, vec2);
 
-ALGAPI bool vec2greateq(vec2, vec2);
+ALGAPI bool vec2greq(vec2, vec2);
 
 ALGAPI bool vec2less(vec2, vec2);
 
-ALGAPI bool vec2lesseq(vec2, vec2);
+ALGAPI bool vec2lseq(vec2, vec2);
 
 /* Distance Operations */
 
@@ -278,14 +278,14 @@ ALGAPI vec2 vec2mulm(vec2 a, mat2 m) {
 /* Boolean expressions */
 
 ALGAPI bool vec2eq(vec2 a, vec2 b) {
-    return (a.x == b.x &&
-            a.y == b.y);
+    return (fabsf(a.x - b.x) < 1e-6f &&
+            fabsf(a.y - b.y) < 1e-6f);
 }
 
 
 ALGAPI bool vec2noeq(vec2 a, vec2 b) {
-    return (a.x != b.x ||
-            a.y != b.y);
+    return (fabsf(a.x - b.x) >= 1e-6f ||
+            fabsf(a.y - b.y) >= 1e-6f);
 }
 
 
@@ -295,7 +295,7 @@ ALGAPI bool vec2great(vec2 a, vec2 b) {
 }
 
 
-ALGAPI bool vec2greateq(vec2 a, vec2 b) {
+ALGAPI bool vec2greq(vec2 a, vec2 b) {
     return (a.x >= b.x ||
             a.y >= b.y);
 }
@@ -307,7 +307,7 @@ ALGAPI bool vec2less(vec2 a, vec2 b) {
 }
 
 
-ALGAPI bool vec2lesseq(vec2 a, vec2 b) {
+ALGAPI bool vec2lseq(vec2 a, vec2 b) {
     return (a.x <= b.x ||
             a.y <= b.y);
 }
