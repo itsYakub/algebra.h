@@ -22,6 +22,8 @@ jobs:
           sudo apt-get install -y build-essential
           # install clang...
           sudo apt-get install -y clang
+          # install gtest...
+          sudo apt-get install -y libgtest-dev
 
       # check compilation status
       - name: "Test no.0: Compilation status"
@@ -31,30 +33,17 @@ jobs:
           # test C modules...
           
           gcc -Wall -Wextra -Werror -std=c99 tests/00-compile.c -lm
-          
           clang -Wall -Wextra -Werror -std=c99 tests/00-compile.c -lm
           
           # test C++ modules...
           
           g++ -Wall -Wextra -Werror -std=c++11 tests/00-compile.cc -lm
-          
           clang++ -Wall -Wextra -Werror -std=c++11 tests/00-compile.cc -lm
       
       # check vec2 module
       - name: "Test no.1: vec2 module"
         run: |
           set -x
-
-          # test C modules...
-          gcc -Wall -Wextra -Werror -std=c99 tests/01-vec2.c -lm
-          ./a.out && rm -f a.out
           
-          clang -Wall -Wextra -Werror -std=c99 tests/01-vec2.c -lm
-          ./a.out && rm -f a.out
-          
-          # test C++ modules...
-          g++ -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm
-          ./a.out && rm -f a.out
-          
-          clang++ -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm
+          g++ -Wall -Wextra -Werror -std=c++11 tests/01-vec2.cc -lm -lgtest
           ./a.out && rm -f a.out

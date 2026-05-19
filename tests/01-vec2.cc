@@ -1,18 +1,21 @@
+#include <gtest/gtest.h>
+#
 #define ALGEBRA_IMPLEMENTATION
-#include "./../vec2.h"
-#
-#include <stdio.h>
-#include <stdlib.h>
-#
-#include <math.h>
-#
-#define NORMAL "\033[0m"
-#define BOLD   "\033[1m"
-#define RED    "\033[91m"
-#define GREEN  "\033[92m"
+#include "./../vec2.hpp"
 
-/* main */
-
-int main(void) {
-    printf("%s%s=== 'ALL 'vec2' TESTS PASSED ===%s\n", BOLD, GREEN, NORMAL); exit(EXIT_SUCCESS);
+int main(int ac, char **av) {
+    ::testing::InitGoogleTest(&ac, av);
+    return (RUN_ALL_TESTS());
 }
+
+/* vec2add */
+
+GTEST_TEST(vec2add, zero_identity) {
+    vec2 a = { .x = 0.0, .y = 0.0 },
+         b = { .x = 0.0, .y = 0.0 };
+    vec2 expect = { .x = 0.0, .y = 0.0 };
+    
+    EXPECT_TRUE(vec2eq(expect, vec2add(a, b)));
+}
+
+/* more tests here... */
