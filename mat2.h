@@ -27,6 +27,12 @@ ALGAPI mat2 mat2mulf(mat2, float);
 
 ALGAPI vec2 mat2mulv(mat2, vec2);
 
+/* Boolean expressions */
+
+ALGAPI bool mat2eq(mat2, mat2);
+
+ALGAPI bool mat2noeq(mat2, mat2);
+
 /* Unary operations */
 
 ALGAPI mat2 mat2neg(mat2);
@@ -128,6 +134,18 @@ ALGAPI vec2 mat2mulv(mat2 a, vec2 b) {
     v.x = a.m00 * b.x + a.m10 * b.y;
     v.y = a.m01 * b.x + a.m11 * b.y;
     return (v);
+}
+
+/* Boolean expressions */
+
+ALGAPI bool mat2eq(mat2 a, mat2 b) {
+    return (fabsf(a.m00 - b.m00) < 1e-6f && fabsf(a.m01 - b.m01) < 1e-6f &&
+            fabsf(a.m10 - b.m10) < 1e-6f && fabsf(a.m11 - b.m11) < 1e-6f);
+}
+
+
+ALGAPI bool mat2noeq(mat2 a, mat2 b) {
+    return (!mat2eq(a, b));
 }
 
 /* Unary operations */

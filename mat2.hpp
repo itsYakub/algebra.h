@@ -31,11 +31,16 @@ inline mat2 operator * (mat2, float);
 
 inline vec2 operator * (mat2, vec2);
 
+inline bool operator == (mat2, mat2);
+
+inline bool operator != (mat2, mat2);
+
 inline mat2 &operator += (mat2 &, mat2);
 
 inline mat2 &operator -= (mat2 &, mat2);
 
 inline mat2 &operator *= (mat2 &, mat2);
+
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -63,6 +68,16 @@ inline mat2 operator * (mat2 m, float f) {
 
 inline vec2 operator * (mat2 m, vec2 v) {
     return (mat2mulv(m, v));
+}
+
+
+inline bool operator == (mat2 a, mat2 b) {
+    return (mat2eq(a, b));
+}
+
+
+inline bool operator != (mat2 a, mat2 b) {
+    return (mat2noeq(a, b));
 }
 
 
