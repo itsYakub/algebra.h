@@ -55,11 +55,11 @@ ALGAPI bool vec3noeq(vec3, vec3);
 
 ALGAPI bool vec3great(vec3, vec3);
 
-ALGAPI bool vec3greateq(vec3, vec3);
+ALGAPI bool vec3greq(vec3, vec3);
 
 ALGAPI bool vec3less(vec3, vec3);
 
-ALGAPI bool vec3lesseq(vec3, vec3);
+ALGAPI bool vec3lseq(vec3, vec3);
 
 /* Distance operations */
 
@@ -339,7 +339,7 @@ ALGAPI bool vec3great(vec3 a, vec3 b) {
 }
 
 
-ALGAPI bool vec3greateq(vec3 a, vec3 b) {
+ALGAPI bool vec3greq(vec3 a, vec3 b) {
     return (a.x >= b.x ||
             a.y >= b.y ||
             a.z >= b.z);
@@ -353,7 +353,7 @@ ALGAPI bool vec3less(vec3 a, vec3 b) {
 }
 
 
-ALGAPI bool vec3lesseq(vec3 a, vec3 b) {
+ALGAPI bool vec3lseq(vec3 a, vec3 b) {
     return (a.x <= b.x ||
             a.y <= b.y ||
             a.z <= b.z);

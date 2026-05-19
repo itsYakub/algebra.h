@@ -55,11 +55,11 @@ ALGAPI bool vec4noeq(vec4, vec4);
 
 ALGAPI bool vec4great(vec4, vec4);
 
-ALGAPI bool vec4greateq(vec4, vec4);
+ALGAPI bool vec4greq(vec4, vec4);
 
 ALGAPI bool vec4less(vec4, vec4);
 
-ALGAPI bool vec4lesseq(vec4, vec4);
+ALGAPI bool vec4lseq(vec4, vec4);
 
 /* Distance operations */
 
@@ -349,7 +349,7 @@ ALGAPI bool vec4great(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4greateq(vec4 a, vec4 b) {
+ALGAPI bool vec4greq(vec4 a, vec4 b) {
     return (a.x >= b.x ||
             a.y >= b.y ||
             a.z >= b.z ||
@@ -365,7 +365,7 @@ ALGAPI bool vec4less(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4lesseq(vec4 a, vec4 b) {
+ALGAPI bool vec4lseq(vec4 a, vec4 b) {
     return (a.x <= b.x ||
             a.y <= b.y ||
             a.z <= b.z ||

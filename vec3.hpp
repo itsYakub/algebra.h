@@ -132,7 +132,7 @@ inline bool operator > (vec3 a, vec3 b) {
 
 
 inline bool operator >= (vec3 a, vec3 b) {
-    return (vec3greateq(a, b));
+    return (vec3greq(a, b));
 }
 
 
@@ -142,7 +142,7 @@ inline bool operator < (vec3 a, vec3 b) {
 
 
 inline bool operator <= (vec3 a, vec3 b) {
-    return (vec3lesseq(a, b));
+    return (vec3lseq(a, b));
 }
 
 

@@ -132,7 +132,7 @@ inline bool operator > (vec4 a, vec4 b) {
 
 
 inline bool operator >= (vec4 a, vec4 b) {
-    return (vec4greateq(a, b));
+    return (vec4greq(a, b));
 }
 
 
@@ -142,7 +142,7 @@ inline bool operator < (vec4 a, vec4 b) {
 
 
 inline bool operator <= (vec4 a, vec4 b) {
-    return (vec4lesseq(a, b));
+    return (vec4lseq(a, b));
 }
 
 
