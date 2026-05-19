@@ -29,6 +29,8 @@ inline vec2 operator * (vec2, vec2);
 
 inline vec2 operator / (vec2, vec2);
 
+inline vec2 operator % (vec2, vec2);
+
 inline vec2 operator + (vec2, float);
 
 inline vec2 operator - (vec2, float);
@@ -36,6 +38,8 @@ inline vec2 operator - (vec2, float);
 inline vec2 operator * (vec2, float);
 
 inline vec2 operator / (vec2, float);
+
+inline vec2 operator % (vec2, float);
 
 inline vec2 operator * (vec2, mat2);
 
@@ -59,6 +63,8 @@ inline vec2 &operator *= (vec2 &, vec2);
 
 inline vec2 &operator /= (vec2 &, vec2);
 
+inline vec2 &operator %= (vec2 &, vec2);
+
 inline vec2 &operator += (vec2 &, float);
 
 inline vec2 &operator -= (vec2 &, float);
@@ -66,6 +72,8 @@ inline vec2 &operator -= (vec2 &, float);
 inline vec2 &operator *= (vec2 &, float);
 
 inline vec2 &operator /= (vec2 &, float);
+
+inline vec2 &operator %= (vec2 &, float);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
@@ -91,6 +99,11 @@ inline vec2 operator / (vec2 a, vec2 b) {
 }
 
 
+inline vec2 operator % (vec2 a, vec2 b) {
+    return (vec2mod(a, b));
+}
+
+
 inline vec2 operator + (vec2 v, float f) {
     return (vec2addf(v, f));
 }
@@ -108,6 +121,11 @@ inline vec2 operator * (vec2 v, float f) {
 
 inline vec2 operator / (vec2 v, float f) {
     return (vec2divf(v, f));
+}
+
+
+inline vec2 operator % (vec2 v, float f) {
+    return (vec2modf(v, f));
 }
 
 
@@ -170,6 +188,12 @@ inline vec2 &operator /= (vec2 &a, vec2 b) {
 }
 
 
+inline vec2 &operator %= (vec2 &a, vec2 b) {
+    a = vec2mod(a, b);
+    return (a);
+}
+
+
 inline vec2 &operator += (vec2 &v, float f) {
     v = vec2addf(v, f);
     return (v);
@@ -190,6 +214,12 @@ inline vec2 &operator *= (vec2 &v, float f) {
 
 inline vec2 &operator /= (vec2 &v, float f) {
     v = vec2divf(v, f);
+    return (v);
+}
+
+
+inline vec2 &operator %= (vec2 &v, float f) {
+    v = vec2modf(v, f);
     return (v);
 }
 
