@@ -31,6 +31,10 @@ inline mat3 operator * (mat3, float);
 
 inline vec3 operator * (mat3, vec3);
 
+inline bool operator == (mat3, mat3);
+
+inline bool operator != (mat3, mat3);
+
 inline mat3 &operator += (mat3 &, mat3);
 
 inline mat3 &operator -= (mat3 &, mat3);
@@ -63,6 +67,16 @@ inline mat3 operator * (mat3 m, float f) {
 
 inline vec3 operator * (mat3 m, vec3 v) {
     return (mat3mulv(m, v));
+}
+
+
+inline bool operator == (mat3 a, mat3 b) {
+    return (mat3eq(a, b));
+}
+
+
+inline bool operator != (mat3 a, mat3 b) {
+    return (mat3noeq(a, b));
 }
 
 

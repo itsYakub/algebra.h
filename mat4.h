@@ -27,6 +27,12 @@ ALGAPI mat4 mat4mulf(mat4, float);
 
 ALGAPI vec4 mat4mulv(mat4, vec4);
 
+/* Boolean expressions */
+
+ALGAPI bool mat4eq(mat4, mat4);
+
+ALGAPI bool mat4noeq(mat4, mat4);
+
 /* Unary operations */
 
 ALGAPI mat4 mat4neg(mat4);
@@ -176,6 +182,20 @@ ALGAPI vec4 mat4mulv(mat4 a, vec4 b) {
     v.z = a.m02 * b.x + a.m12 * b.y + a.m22 * b.z + a.m32 * b.w;
     v.w = a.m03 * b.x + a.m13 * b.y + a.m23 * b.z + a.m33 * b.w;
     return (v);
+}
+
+/* Boolean expressions */
+
+ALGAPI bool mat4eq(mat4 a, mat4 b) {
+    return (fabsf(a.m00 - b.m00) < 1e-6f && fabsf(a.m01 - b.m01) < 1e-6f && fabsf(a.m02 - b.m02) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f &&
+            fabsf(a.m10 - b.m10) < 1e-6f && fabsf(a.m11 - b.m11) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f &&
+            fabsf(a.m20 - b.m20) < 1e-6f && fabsf(a.m21 - b.m21) < 1e-6f && fabsf(a.m22 - b.m22) < 1e-6f && fabsf(a.m22 - b.m22) < 1e-6f &&
+            fabsf(a.m30 - b.m30) < 1e-6f && fabsf(a.m31 - b.m31) < 1e-6f && fabsf(a.m32 - b.m32) < 1e-6f && fabsf(a.m32 - b.m32) < 1e-6f);
+}
+
+
+ALGAPI bool mat4noeq(mat4 a, mat4 b) {
+    return (!mat4eq(a, b));
 }
 
 /* Unary operations */

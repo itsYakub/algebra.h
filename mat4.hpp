@@ -31,6 +31,10 @@ inline mat4 operator * (mat4, float);
 
 inline vec4 operator * (mat4, vec4);
 
+inline bool operator == (mat4, mat4);
+
+inline bool operator != (mat4, mat4);
+
 inline mat4 &operator += (mat4 &, mat4);
 
 inline mat4 &operator -= (mat4 &, mat4);
@@ -63,6 +67,16 @@ inline mat4 operator * (mat4 m, float f) {
 
 inline vec4 operator * (mat4 m, vec4 v) {
     return (mat4mulv(m, v));
+}
+
+
+inline bool operator == (mat4 a, mat4 b) {
+    return (mat4eq(a, b));
+}
+
+
+inline bool operator != (mat4 a, mat4 b) {
+    return (mat4noeq(a, b));
 }
 
 

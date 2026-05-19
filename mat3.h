@@ -27,6 +27,12 @@ ALGAPI mat3 mat3mulf(mat3, float);
 
 ALGAPI vec3 mat3mulv(mat3, vec3);
 
+/* Boolean expressions */
+
+ALGAPI bool mat3eq(mat3, mat3);
+
+ALGAPI bool mat3noeq(mat3, mat3);
+
 /* Unary operations */
 
 ALGAPI mat3 mat3neg(mat3);
@@ -148,6 +154,19 @@ ALGAPI vec3 mat3mulv(mat3 a, vec3 b) {
     v.y = a.m01 * b.x + a.m11 * b.y + a.m21 * b.z;
     v.z = a.m02 * b.x + a.m12 * b.y + a.m22 * b.z;
     return (v);
+}
+
+/* Boolean expressions */
+
+ALGAPI bool mat3eq(mat3 a, mat3 b) {
+    return (fabsf(a.m00 - b.m00) < 1e-6f && fabsf(a.m01 - b.m01) < 1e-6f && fabsf(a.m02 - b.m02) < 1e-6f &&
+            fabsf(a.m10 - b.m10) < 1e-6f && fabsf(a.m11 - b.m11) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f &&
+            fabsf(a.m20 - b.m20) < 1e-6f && fabsf(a.m21 - b.m21) < 1e-6f && fabsf(a.m22 - b.m22) < 1e-6f);
+}
+
+
+ALGAPI bool mat3noeq(mat3 a, mat3 b) {
+    return (!mat3eq(a, b));
 }
 
 /* Unary operations */
