@@ -284,8 +284,7 @@ ALGAPI bool vec2eq(vec2 a, vec2 b) {
 
 
 ALGAPI bool vec2noeq(vec2 a, vec2 b) {
-    return (fabsf(a.x - b.x) >= 1e-6f ||
-            fabsf(a.y - b.y) >= 1e-6f);
+    return (!vec2eq(a, b));
 }
 
 
