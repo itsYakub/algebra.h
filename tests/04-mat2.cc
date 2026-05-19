@@ -11,9 +11,9 @@ int main(int ac, char **av) {
 /* mat2add */
 
 GTEST_TEST(mat2add, zero_identity) {
-    mat2 a = { 0 },
-         b = { 0 };
-    mat2 expect = { 0 };
+    mat2 a = mat2zero(),
+         b = mat2zero();
+    mat2 expect = mat2zero();
     
     EXPECT_TRUE(mat2eq(expect, mat2add(a, b)));
 }

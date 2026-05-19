@@ -11,9 +11,9 @@ int main(int ac, char **av) {
 /* mat4add */
 
 GTEST_TEST(mat4add, zero_identity) {
-    mat4 a = { 0 },
-         b = { 0 };
-    mat4 expect = { 0 };
+    mat4 a = mat4zero(),
+         b = mat4zero();
+    mat4 expect = mat4zero();
     
     EXPECT_TRUE(mat4eq(expect, mat4add(a, b)));
 }
