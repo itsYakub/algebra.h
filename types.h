@@ -1,5 +1,8 @@
 #if !defined (_types_h_)
 # define _types_h_ 1
+#
+# if !defined (ALGEBRA_TYPE_VEC2)
+#  define ALGEBRA_TYPE_VEC2 1
 
 typedef union u_vec2 vec2;
 
@@ -15,6 +18,10 @@ union u_vec2 {
     };
 };
 
+# endif /* ALGEBRA_TYPE_VEC2 */
+#
+# if !defined (ALGEBRA_TYPE_VEC3)
+#  define ALGEBRA_TYPE_VEC3
 
 typedef union u_vec3 vec3;
 
@@ -32,6 +39,10 @@ union u_vec3 {
     };
 };
 
+# endif /* ALGEBRA_TYPE_VEC3 */
+#
+# if !defined (ALGEBRA_TYPE_VEC4)
+#  define ALGEBRA_TYPE_VEC4
 
 typedef union u_vec4 vec4;
 
@@ -51,6 +62,10 @@ union u_vec4 {
     };
 };
 
+# endif /* ALGEBRA_TYPE_VEC4 */
+#
+# if !defined (ALGEBRA_TYPE_MAT2)
+#  define ALGEBRA_TYPE_MAT2
 
 typedef union u_mat2 mat2;
 
@@ -61,6 +76,10 @@ union u_mat2 {
     };
 };
 
+# endif /* ALGEBRA_TYPE_MAT2 */
+#
+# if !defined (ALGEBRA_TYPE_MAT3)
+#  define ALGEBRA_TYPE_MAT3
 
 typedef union u_mat3 mat3;
 
@@ -72,6 +91,10 @@ union u_mat3 {
     };
 };
 
+# endif /* ALGEBRA_TYPE_MAT3 */
+#
+# if !defined (ALGEBRA_TYPE_MAT4)
+#  define ALGEBRA_TYPE_MAT4
 
 typedef union u_mat4 mat4;
 
@@ -84,4 +107,5 @@ union u_mat4 {
     };
 };
 
+# endif /* ALGEBRA_TYPE_MAT4 */
 #endif /* _types_h_ */
