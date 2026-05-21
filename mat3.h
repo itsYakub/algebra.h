@@ -1,11 +1,12 @@
 #if !defined (_mat3_h_)
 # define _mat3_h_ 1
 #
+# include "./type/vec3.h"
+# include "./type/mat3.h"
+#
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-#
-#include "./types.h"
 
 /* Properties */
 
@@ -29,9 +30,9 @@ ALGAPI vec3 mat3mulv(mat3, vec3);
 
 /* Boolean expressions */
 
-ALGAPI bool mat3eq(mat3, mat3);
+ALGAPI int mat3eq(mat3, mat3);
 
-ALGAPI bool mat3noeq(mat3, mat3);
+ALGAPI int mat3noeq(mat3, mat3);
 
 /* Unary operations */
 
@@ -158,14 +159,14 @@ ALGAPI vec3 mat3mulv(mat3 a, vec3 b) {
 
 /* Boolean expressions */
 
-ALGAPI bool mat3eq(mat3 a, mat3 b) {
+ALGAPI int mat3eq(mat3 a, mat3 b) {
     return (fabsf(a.m00 - b.m00) < 1e-6f && fabsf(a.m01 - b.m01) < 1e-6f && fabsf(a.m02 - b.m02) < 1e-6f &&
             fabsf(a.m10 - b.m10) < 1e-6f && fabsf(a.m11 - b.m11) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f &&
             fabsf(a.m20 - b.m20) < 1e-6f && fabsf(a.m21 - b.m21) < 1e-6f && fabsf(a.m22 - b.m22) < 1e-6f);
 }
 
 
-ALGAPI bool mat3noeq(mat3 a, mat3 b) {
+ALGAPI int mat3noeq(mat3 a, mat3 b) {
     return (!mat3eq(a, b));
 }
 

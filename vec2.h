@@ -1,13 +1,12 @@
 #if !defined (_vec2_h_)
 # define _vec2_h_ 1
 #
-# include <stdbool.h>
+# include "./type/vec2.h"
+# include "./type/mat2.h"
 #
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-#
-#include "./types.h"
 
 /* Properties */
 
@@ -45,17 +44,17 @@ ALGAPI vec2 vec2mulm(vec2, mat2);
 
 /* Boolean expressions */
 
-ALGAPI bool vec2eq(vec2, vec2);
+ALGAPI int vec2eq(vec2, vec2);
 
-ALGAPI bool vec2noeq(vec2, vec2);
+ALGAPI int vec2noeq(vec2, vec2);
 
-ALGAPI bool vec2great(vec2, vec2);
+ALGAPI int vec2great(vec2, vec2);
 
-ALGAPI bool vec2greq(vec2, vec2);
+ALGAPI int vec2greq(vec2, vec2);
 
-ALGAPI bool vec2less(vec2, vec2);
+ALGAPI int vec2less(vec2, vec2);
 
-ALGAPI bool vec2lseq(vec2, vec2);
+ALGAPI int vec2lseq(vec2, vec2);
 
 /* Distance Operations */
 
@@ -135,7 +134,6 @@ ALGAPI float vec2angle(vec2, vec2);
 #
 #  include <math.h>
 #
-#  include "./mat2.h"
 #  include "./utils.h"
 
 /* Properties */
@@ -277,36 +275,36 @@ ALGAPI vec2 vec2mulm(vec2 a, mat2 m) {
 
 /* Boolean expressions */
 
-ALGAPI bool vec2eq(vec2 a, vec2 b) {
+ALGAPI int vec2eq(vec2 a, vec2 b) {
     return (fabsf(a.x - b.x) < 1e-6f &&
             fabsf(a.y - b.y) < 1e-6f);
 }
 
 
-ALGAPI bool vec2noeq(vec2 a, vec2 b) {
+ALGAPI int vec2noeq(vec2 a, vec2 b) {
     return (!vec2eq(a, b));
 }
 
 
-ALGAPI bool vec2great(vec2 a, vec2 b) {
+ALGAPI int vec2great(vec2 a, vec2 b) {
     return (a.x > b.x ||
             a.y > b.y);
 }
 
 
-ALGAPI bool vec2greq(vec2 a, vec2 b) {
+ALGAPI int vec2greq(vec2 a, vec2 b) {
     return (a.x >= b.x ||
             a.y >= b.y);
 }
 
 
-ALGAPI bool vec2less(vec2 a, vec2 b) {
+ALGAPI int vec2less(vec2 a, vec2 b) {
     return (a.x < b.x ||
             a.y < b.y);
 }
 
 
-ALGAPI bool vec2lseq(vec2 a, vec2 b) {
+ALGAPI int vec2lseq(vec2 a, vec2 b) {
     return (a.x <= b.x ||
             a.y <= b.y);
 }

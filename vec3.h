@@ -1,13 +1,12 @@
 #if !defined (_vec3_h_)
 # define _vec3_h_ 1
 #
-# include <stdbool.h>
+# include "./type/vec3.h"
+# include "./type/mat3.h"
 #
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-#
-#include "./types.h"
 
 /* Properties */
 
@@ -49,17 +48,17 @@ ALGAPI vec3 vec3mulm(vec3, mat3);
 
 /* Boolean expressions */
 
-ALGAPI bool vec3eq(vec3, vec3);
+ALGAPI int vec3eq(vec3, vec3);
 
-ALGAPI bool vec3noeq(vec3, vec3);
+ALGAPI int vec3noeq(vec3, vec3);
 
-ALGAPI bool vec3great(vec3, vec3);
+ALGAPI int vec3great(vec3, vec3);
 
-ALGAPI bool vec3greq(vec3, vec3);
+ALGAPI int vec3greq(vec3, vec3);
 
-ALGAPI bool vec3less(vec3, vec3);
+ALGAPI int vec3less(vec3, vec3);
 
-ALGAPI bool vec3lseq(vec3, vec3);
+ALGAPI int vec3lseq(vec3, vec3);
 
 /* Distance operations */
 
@@ -141,7 +140,6 @@ ALGAPI float vec3angle(vec3, vec3);
 #
 #  include <math.h>
 #
-#  include "./mat3.h"
 #  include "./utils.h"
 
 /* Properties */
@@ -318,42 +316,42 @@ ALGAPI vec3 vec3mulm(vec3 a, mat3 m) {
 
 /* Boolean expressions */
 
-ALGAPI bool vec3eq(vec3 a, vec3 b) {
+ALGAPI int vec3eq(vec3 a, vec3 b) {
     return (a.x == b.x &&
             a.y == b.y &&
             a.z == b.z);
 }
 
 
-ALGAPI bool vec3noeq(vec3 a, vec3 b) {
+ALGAPI int vec3noeq(vec3 a, vec3 b) {
     return (a.x != b.x ||
             a.y != b.y ||
             a.z != b.z);
 }
 
 
-ALGAPI bool vec3great(vec3 a, vec3 b) {
+ALGAPI int vec3great(vec3 a, vec3 b) {
     return (a.x > b.x ||
             a.y > b.y ||
             a.z > b.z);
 }
 
 
-ALGAPI bool vec3greq(vec3 a, vec3 b) {
+ALGAPI int vec3greq(vec3 a, vec3 b) {
     return (a.x >= b.x ||
             a.y >= b.y ||
             a.z >= b.z);
 }
 
 
-ALGAPI bool vec3less(vec3 a, vec3 b) {
+ALGAPI int vec3less(vec3 a, vec3 b) {
     return (a.x < b.x ||
             a.y < b.y ||
             a.z < b.z);
 }
 
 
-ALGAPI bool vec3lseq(vec3 a, vec3 b) {
+ALGAPI int vec3lseq(vec3 a, vec3 b) {
     return (a.x <= b.x ||
             a.y <= b.y ||
             a.z <= b.z);

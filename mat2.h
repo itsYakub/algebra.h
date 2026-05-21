@@ -1,11 +1,12 @@
 #if !defined (_mat2_h_)
 # define _mat2_h_ 1
 #
+# include "./type/vec2.h"
+# include "./type/mat2.h"
+#
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-#
-#include "./types.h"
 
 /* Properties */
 
@@ -29,9 +30,9 @@ ALGAPI vec2 mat2mulv(mat2, vec2);
 
 /* Boolean expressions */
 
-ALGAPI bool mat2eq(mat2, mat2);
+ALGAPI int mat2eq(mat2, mat2);
 
-ALGAPI bool mat2noeq(mat2, mat2);
+ALGAPI int mat2noeq(mat2, mat2);
 
 /* Unary operations */
 
@@ -138,13 +139,13 @@ ALGAPI vec2 mat2mulv(mat2 a, vec2 b) {
 
 /* Boolean expressions */
 
-ALGAPI bool mat2eq(mat2 a, mat2 b) {
+ALGAPI int mat2eq(mat2 a, mat2 b) {
     return (fabsf(a.m00 - b.m00) < 1e-6f && fabsf(a.m01 - b.m01) < 1e-6f &&
             fabsf(a.m10 - b.m10) < 1e-6f && fabsf(a.m11 - b.m11) < 1e-6f);
 }
 
 
-ALGAPI bool mat2noeq(mat2 a, mat2 b) {
+ALGAPI int mat2noeq(mat2 a, mat2 b) {
     return (!mat2eq(a, b));
 }
 

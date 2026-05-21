@@ -9,7 +9,6 @@
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
 #
-# include "./types.hpp"
 # include "./vec2.hpp"
 # include "./vec3.hpp"
 # include "./vec4.hpp"

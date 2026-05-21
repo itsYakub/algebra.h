@@ -1,11 +1,13 @@
 #if !defined (_mat4_h_)
 # define _mat4_h_ 1
 #
+# include "./type/vec3.h"
+# include "./type/vec4.h"
+# include "./type/mat4.h"
+#
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-#
-#include "./types.h"
 
 /* Properties */
 
@@ -29,9 +31,9 @@ ALGAPI vec4 mat4mulv(mat4, vec4);
 
 /* Boolean expressions */
 
-ALGAPI bool mat4eq(mat4, mat4);
+ALGAPI int mat4eq(mat4, mat4);
 
-ALGAPI bool mat4noeq(mat4, mat4);
+ALGAPI int mat4noeq(mat4, mat4);
 
 /* Unary operations */
 
@@ -76,6 +78,7 @@ ALGAPI mat4 mat4persp(float, float, float, float);
 #  include <math.h>
 #
 #  include "./vec3.h"
+#  include "./vec4.h"
 #  include "./mat3.h"
 #  include "./utils.h"
 
@@ -186,7 +189,7 @@ ALGAPI vec4 mat4mulv(mat4 a, vec4 b) {
 
 /* Boolean expressions */
 
-ALGAPI bool mat4eq(mat4 a, mat4 b) {
+ALGAPI int mat4eq(mat4 a, mat4 b) {
     return (fabsf(a.m00 - b.m00) < 1e-6f && fabsf(a.m01 - b.m01) < 1e-6f && fabsf(a.m02 - b.m02) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f &&
             fabsf(a.m10 - b.m10) < 1e-6f && fabsf(a.m11 - b.m11) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f && fabsf(a.m12 - b.m12) < 1e-6f &&
             fabsf(a.m20 - b.m20) < 1e-6f && fabsf(a.m21 - b.m21) < 1e-6f && fabsf(a.m22 - b.m22) < 1e-6f && fabsf(a.m22 - b.m22) < 1e-6f &&
@@ -194,7 +197,7 @@ ALGAPI bool mat4eq(mat4 a, mat4 b) {
 }
 
 
-ALGAPI bool mat4noeq(mat4 a, mat4 b) {
+ALGAPI int mat4noeq(mat4 a, mat4 b) {
     return (!mat4eq(a, b));
 }
 

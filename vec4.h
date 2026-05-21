@@ -1,13 +1,12 @@
 #if !defined (_vec4_h_)
 # define _vec4_h_ 1
 #
-# include <stdbool.h>
+# include "./type/vec4.h"
+# include "./type/mat4.h"
 #
 # if !defined ALGAPI
 #  define ALGAPI extern inline
 # endif /* ALGAPI */
-#
-#include "./types.h"
 
 /* Properties */
 
@@ -49,17 +48,17 @@ ALGAPI vec4 vec4mulm(vec4, mat4);
 
 /* Boolean expressions */
 
-ALGAPI bool vec4eq(vec4, vec4);
+ALGAPI int vec4eq(vec4, vec4);
 
-ALGAPI bool vec4noeq(vec4, vec4);
+ALGAPI int vec4noeq(vec4, vec4);
 
-ALGAPI bool vec4great(vec4, vec4);
+ALGAPI int vec4great(vec4, vec4);
 
-ALGAPI bool vec4greq(vec4, vec4);
+ALGAPI int vec4greq(vec4, vec4);
 
-ALGAPI bool vec4less(vec4, vec4);
+ALGAPI int vec4less(vec4, vec4);
 
-ALGAPI bool vec4lseq(vec4, vec4);
+ALGAPI int vec4lseq(vec4, vec4);
 
 /* Distance operations */
 
@@ -131,7 +130,6 @@ ALGAPI vec4  vec4refract(vec4, vec4, float);
 #
 #  include <math.h>
 #
-#  include "./mat4.h"
 #  include "./utils.h"
 
 /* Properties */
@@ -325,7 +323,7 @@ ALGAPI vec4 vec4mulm(vec4 a, mat4 m) {
 
 /* Boolean expressions */
 
-ALGAPI bool vec4eq(vec4 a, vec4 b) {
+ALGAPI int vec4eq(vec4 a, vec4 b) {
     return (a.x == b.x &&
             a.y == b.y &&
             a.z == b.z &&
@@ -333,7 +331,7 @@ ALGAPI bool vec4eq(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4noeq(vec4 a, vec4 b) {
+ALGAPI int vec4noeq(vec4 a, vec4 b) {
     return (a.x != b.x ||
             a.y != b.y ||
             a.z != b.z ||
@@ -341,7 +339,7 @@ ALGAPI bool vec4noeq(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4great(vec4 a, vec4 b) {
+ALGAPI int vec4great(vec4 a, vec4 b) {
     return (a.x > b.x ||
             a.y > b.y ||
             a.z > b.z ||
@@ -349,7 +347,7 @@ ALGAPI bool vec4great(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4greq(vec4 a, vec4 b) {
+ALGAPI int vec4greq(vec4 a, vec4 b) {
     return (a.x >= b.x ||
             a.y >= b.y ||
             a.z >= b.z ||
@@ -357,7 +355,7 @@ ALGAPI bool vec4greq(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4less(vec4 a, vec4 b) {
+ALGAPI int vec4less(vec4 a, vec4 b) {
     return (a.x < b.x ||
             a.y < b.y ||
             a.z < b.z ||
@@ -365,7 +363,7 @@ ALGAPI bool vec4less(vec4 a, vec4 b) {
 }
 
 
-ALGAPI bool vec4lseq(vec4 a, vec4 b) {
+ALGAPI int vec4lseq(vec4 a, vec4 b) {
     return (a.x <= b.x ||
             a.y <= b.y ||
             a.z <= b.z ||
