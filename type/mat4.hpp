@@ -1,7 +1,7 @@
-#if !defined (_type_mat4_h_)
-# define _type_mat4_h_ 1
+#if !defined (_type_mat4_hpp_)
+# define _type_mat4_hpp_ 1
 
-typedef union u_mat4 mat4;
+using mat4 = union u_mat4;
 
 union u_mat4 {
     struct {
@@ -12,4 +12,4 @@ union u_mat4 {
     };
 };
 
-#endif /* _type_mat4_h_ */
+#endif /* _type_mat4_hpp_ */

@@ -10,4 +10,4 @@ union u_mat2 {
     };
 };
 
-#endif /* _type_mat2_h */
+#endif /* _type_mat2_h_ */
