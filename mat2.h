@@ -57,9 +57,6 @@ ALGAPI mat2 mat2scale(vec2);
 # if defined (ALGEBRA_IMPLEMENTATION)
 #
 #  include <math.h>
-#
-#  include "./vec2.h"
-#  include "./utils.h"
 
 /* Properties */
 
