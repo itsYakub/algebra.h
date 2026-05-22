@@ -28,7 +28,19 @@ inline mat3 &operator -= (mat3 &, mat3);
 
 inline mat3 &operator *= (mat3 &, mat3);
 
+namespace alg {
+
+    /* ... */
+
+};
+
 # if defined (ALGEBRA_IMPLEMENTATION)
+
+namespace alg {
+
+    /* ... */
+
+};
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _mat3_hpp_ */

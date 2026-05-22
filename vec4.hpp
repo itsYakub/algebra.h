@@ -54,7 +54,19 @@ inline vec4 &operator *= (vec4 &, float);
 
 inline vec4 &operator /= (vec4 &, float);
 
+namespace alg {
+
+    /* ... */
+
+};
+
 # if defined (ALGEBRA_IMPLEMENTATION)
+
+namespace alg {
+
+    /* ... */
+
+};
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec4_hpp_ */

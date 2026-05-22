@@ -54,7 +54,19 @@ inline vec3 &operator *= (vec3 &, float);
 
 inline vec3 &operator /= (vec3 &, float);
 
+namespace alg {
+
+    /* ... */
+
+};
+
 # if defined (ALGEBRA_IMPLEMENTATION)
+
+namespace alg {
+
+    /* ... */
+
+};
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec3_hpp_ */

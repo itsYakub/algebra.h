@@ -64,7 +64,19 @@ inline vec2 &operator /= (vec2 &, float);
 
 inline vec2 &operator %= (vec2 &, float);
 
+namespace alg {
+
+    /* ... */
+
+};
+
 # if defined (ALGEBRA_IMPLEMENTATION)
+
+namespace alg {
+
+    /* ... */
+
+};
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _vec2_hpp_ */

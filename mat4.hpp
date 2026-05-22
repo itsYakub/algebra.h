@@ -28,7 +28,19 @@ inline mat4 &operator -= (mat4 &, mat4);
 
 inline mat4 &operator *= (mat4 &, mat4);
 
+namespace alg {
+
+    /* ... */
+
+};
+
 # if defined (ALGEBRA_IMPLEMENTATION)
+
+namespace alg {
+
+    /* ... */
+
+};
 
 # endif /* ALGEBRA_IMPLEMENTATION */
 #endif /* _mat4_hpp_ */
