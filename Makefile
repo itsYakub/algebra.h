@@ -5,22 +5,38 @@ MK_NAME		= algebra
 
 # ========
 
-MODULES		= $(MK_ROOT)algebra.h 	\
-			  $(MK_ROOT)algebra.hpp \
-			  $(MK_ROOT)vec2.h 		\
-			  $(MK_ROOT)vec2.hpp 	\
-			  $(MK_ROOT)vec3.h 		\
-			  $(MK_ROOT)vec3.hpp 	\
-			  $(MK_ROOT)vec4.h 		\
-			  $(MK_ROOT)vec4.hpp	\
-			  $(MK_ROOT)mat2.h 		\
-			  $(MK_ROOT)mat2.hpp 	\
-			  $(MK_ROOT)mat3.h 		\
-			  $(MK_ROOT)mat3.hpp 	\
-			  $(MK_ROOT)mat4.h 		\
-			  $(MK_ROOT)mat4.hpp	\
-			  $(MK_ROOT)utils.h 	\
+TYPES		= $(MK_ROOT)type/vec2.h 	\
+			  $(MK_ROOT)type/vec2.hpp 	\
+			  $(MK_ROOT)type/vec3.h 	\
+			  $(MK_ROOT)type/vec3.hpp 	\
+			  $(MK_ROOT)type/vec4.h 	\
+			  $(MK_ROOT)type/vec4.hpp	\
+			  $(MK_ROOT)type/mat2.h 	\
+			  $(MK_ROOT)type/mat2.hpp 	\
+			  $(MK_ROOT)type/mat3.h 	\
+			  $(MK_ROOT)type/mat3.hpp 	\
+			  $(MK_ROOT)type/mat4.h 	\
+			  $(MK_ROOT)type/mat4.hpp
+
+MODULES		= $(MK_ROOT)algebra.h 		\
+			  $(MK_ROOT)algebra.hpp 	\
+			  $(MK_ROOT)algebra-fwd.hpp \
+			  $(MK_ROOT)vec2.h 			\
+			  $(MK_ROOT)vec2.hpp 		\
+			  $(MK_ROOT)vec3.h 			\
+			  $(MK_ROOT)vec3.hpp 		\
+			  $(MK_ROOT)vec4.h 			\
+			  $(MK_ROOT)vec4.hpp		\
+			  $(MK_ROOT)mat2.h 			\
+			  $(MK_ROOT)mat2.hpp 		\
+			  $(MK_ROOT)mat3.h 			\
+			  $(MK_ROOT)mat3.hpp 		\
+			  $(MK_ROOT)mat4.h 			\
+			  $(MK_ROOT)mat4.hpp		\
+			  $(MK_ROOT)utils.h 		\
+			  $(MK_ROOT)utils.hpp		\
 			  $(MK_ROOT)utils.hpp
+
 
 # ========
 
@@ -31,8 +47,12 @@ all : install
 .PHONY : install
 
 install :
+	# copy all the modules
 	mkdir -p /usr/local/include/$(MK_NAME)/
 	cp -f $(MODULES) /usr/local/include/$(MK_NAME)/
+	# copy all the data types
+	mkdir -p /usr/local/include/$(MK_NAME)/type
+	cp -f $(TYPES) /usr/local/include/$(MK_NAME)/type
 
 .PHONY : remove
 
