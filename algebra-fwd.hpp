@@ -13,6 +13,24 @@ namespace alg {
     template <typename T>
 	T init(float, float);
 
+    template <typename T>
+	T init(float, float, float);
+
+    template <typename T>
+	T init(float, float, float, float);
+ 
+    template <typename T>
+	T rotate(float);
+    
+    template <typename T, typename U>
+	T rotate(U, float);
+   
+    template <typename T>
+	T rotate(T, float);
+   
+    template <typename T>
+	T rotate(T, T, float);
+
     /* vector functions */
 
     template <typename T>
@@ -30,8 +48,8 @@ namespace alg {
     template <typename T>
 	float dot(T, T);
 
-    template <typename T>
-	float cross(T, T);
+    template <typename T, typename U>
+	T cross(U, U);
 
     template <typename T>
 	T norm(T);
@@ -100,9 +118,6 @@ namespace alg {
 	T refract(T, T, float);
 
     template <typename T>
-	T rotate(T, float);
-
-    template <typename T>
 	float angle(T, T);
     
     /* matrix functions */
@@ -130,12 +145,6 @@ namespace alg {
     
     template <typename T>
 	T rotatez(float);
-    
-    template <typename T>
-	T rotate(float);
-    
-    template <typename T, typename U>
-	T rotate(U, float);
 
     template <typename T, typename U>
 	T rotateat(U, U, float);

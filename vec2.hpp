@@ -85,7 +85,7 @@ namespace alg {
 	float dot<vec2>(vec2, vec2);
 
     template <>
-	float cross<vec2>(vec2, vec2);
+	float cross(vec2, vec2);
 
     template <>
 	vec2 norm<vec2>(vec2);
@@ -363,11 +363,11 @@ inline vec2 &operator %= (vec2 &a, float f) {
 namespace alg {
 
     template <>
-	vec2 init<vec2>(float f) {
+	vec2 init<vec2>(float x) {
         vec2 v;
 
-        v.x = f;
-        v.y = f;
+        v.x = x;
+        v.y = 0.0f;
         return (v);
 	}
 
@@ -415,7 +415,7 @@ namespace alg {
 
 
     template <>
-	float cross<vec2>(vec2 a, vec2 b) {
+	float cross(vec2 a, vec2 b) {
         return (a.x * b.y - a.y * b.x);
 	}
 
