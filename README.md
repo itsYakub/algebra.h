@@ -92,8 +92,6 @@ It must be defined only once before the header file inclusion:
 *Note:
 If you declare ALGEBRA_IMPLEMENTATION more than once, it can cause multiple-definitions compilation error.*
 
-- `#define ALGEBRA_TYPE_FLOAT32`
-
 
 ## Resources
 
