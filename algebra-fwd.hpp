@@ -10,6 +10,9 @@ namespace alg {
     template <typename T>
 	T init(float);
 
+    template <typename T>
+	T init(float, float);
+
     /* vector functions */
 
     template <typename T>
@@ -59,12 +62,6 @@ namespace alg {
 
     template <typename T>
 	T round(T);
-
-    template <typename T>
-	T mod(T, T);
-
-    template <typename T>
-	T modf(T, float);
 
     template <typename T>
 	T min(T, T);
