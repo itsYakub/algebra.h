@@ -26,36 +26,68 @@ Structure of library is as follows:
 
 ```
 algebra.h/
+│
 ├── type/
-│   ├── mat2.h
-│   ├── mat2.hpp
-│   ├── mat3.h
-│   ├── mat3.hpp
-│   ├── mat4.h
-│   ├── mat4.hpp
+│   │
+│   │   # C data types...
+│   ├── bvec2.h
+│   ├── bvec3.h
+│   ├── bvec4.h
+│   ├── dvec2.h
+│   ├── dvec3.h
+│   ├── dvec4.h
+│   ├── ivec2.h
+│   ├── ivec3.h
+│   ├── ivec4.h
 │   ├── vec2.h
-│   ├── vec2.hpp
 │   ├── vec3.h
-│   ├── vec3.hpp
 │   ├── vec4.h
+│   ├── dmat2.h
+│   ├── dmat3.h
+│   ├── dmat4.h
+│   ├── mat2.h
+│   ├── mat3.h
+│   ├── mat4.h
+│   │
+│   │   # C++ data types...
+│   ├── dmat2.hpp
+│   ├── dmat3.hpp
+│   ├── dmat4.hpp
+│   ├── mat2.hpp
+│   ├── mat3.hpp
+│   ├── mat4.hpp
+│   ├── bvec2.hpp
+│   ├── bvec3.hpp
+│   ├── bvec4.hpp
+│   ├── dvec2.hpp
+│   ├── dvec3.hpp
+│   ├── dvec4.hpp
+│   ├── ivec2.hpp
+│   ├── ivec3.hpp
+│   ├── ivec4.hpp
+│   ├── vec2.hpp
+│   ├── vec3.hpp
 │   └── vec4.hpp
 │
-├── algebra-fwd.hpp
+│   # C modules...
 ├── algebra.h
-├── algebra.hpp
 ├── utils.h
-├── utils.hpp
 ├── mat2.h
-├── mat2.hpp
 ├── mat3.h
-├── mat3.hpp
 ├── mat4.h
-├── mat4.hpp
 ├── vec2.h
-├── vec2.hpp
 ├── vec3.h
-├── vec3.hpp
 ├── vec4.h
+│
+│   # C++ modules...
+├── algebra.hpp
+├── algebra-fwd.hpp
+├── utils.hpp
+├── mat2.hpp
+├── mat3.hpp
+├── mat4.hpp
+├── vec2.hpp
+├── vec3.hpp
 ├── vec4.hpp
 └── Makefile
 ```
@@ -97,6 +129,7 @@ If you declare ALGEBRA_IMPLEMENTATION more than once, it can cause multiple-defi
 
 Resources used in this project:
 - [Nvidia Developer Docs: stdlib index](https://developer.nvidia.com/w/cg/index_stdlib.html)
+- [Data Type (GLSL)](https://wikis.khronos.org/opengl/Data_Type_(GLSL))
 
 ## Licence
 
