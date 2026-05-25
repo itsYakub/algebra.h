@@ -46,6 +46,8 @@ ALGAPI float alg_step(float, float);
 ALGAPI float alg_smoothstep(float, float, float);
 
 # if defined (ALGEBRA_IMPLEMENTATION)
+#
+#  include <math.h>
 
 ALGAPI float alg_deg2rad(float f) {
     return (f * PI / 180.0);
@@ -73,7 +75,7 @@ ALGAPI float alg_fract(float a) {
 
 
 ALGAPI float alg_clamp(float f, float a, float b) {
-    return (min(max(f, a), b));
+    return (alg_min(alg_max(f, a), b));
 }
 
 
@@ -83,7 +85,7 @@ ALGAPI float alg_lerp(float a, float b, float t) {
 
 
 ALGAPI float alg_saturate(float a) { 
-    return (max(0.0, min(1.0, a)));
+    return (alg_max(0.0, alg_min(1.0, a)));
 }
 
 
@@ -93,7 +95,7 @@ ALGAPI float alg_step(float a, float x) {
 
 
 ALGAPI float alg_smoothstep(float e0, float e1, float x) {
-    float t = saturate((x - e0) / (e1 - e0));
+    float t = alg_saturate((x - e0) / (e1 - e0));
 
     return (t * t * (3.0 - (2.0 * t)));
 }
