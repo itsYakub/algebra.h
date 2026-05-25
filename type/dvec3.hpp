@@ -5,15 +5,15 @@ using vec3 = union u_vec3;
 
 union u_vec3 {
     struct {
-        float x;
-        float y;
-        float z;
+        double x;
+        double y;
+        double z;
     };
 
     struct {
-        float r;
-        float g;
-        float b;
+        double r;
+        double g;
+        double b;
     };
 };
 
