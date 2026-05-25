@@ -1,11 +1,11 @@
-#if !defined (_type_vec2_h_)
-# define _type_vec2_h_ 1
+#if !defined (_type_bvec2_h_)
+# define _type_bvec2_h_ 1
 #
 # include <stdbool.h>
 
-typedef union u_vec2 vec2;
+typedef union u_bvec2 bvec2;
 
-union u_vec2 {
+union u_bvec2 {
     struct {
         bool x;
         bool y;
@@ -17,4 +17,4 @@ union u_vec2 {
     };
 };
 
-#endif /* _type_vec2_h_ */
+#endif /* _type_bvec2_h_ */

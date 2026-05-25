@@ -1,9 +1,9 @@
-#if !defined (_type_mat4_h_)
-# define _type_mat4_h_ 1
+#if !defined (_type_dmat4_h_)
+# define _type_dmat4_h_ 1
 
-typedef union u_mat4 mat4;
+typedef union u_dmat4 dmat4;
 
-union u_mat4 {
+union u_dmat4 {
     struct {
         double m00, m01, m02, m03,
                m10, m11, m12, m13,
@@ -12,4 +12,4 @@ union u_mat4 {
     };
 };
 
-#endif /* _type_mat4_h_ */
+#endif /* _type_dmat4_h_ */

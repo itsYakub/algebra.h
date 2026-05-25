@@ -1,9 +1,9 @@
-#if !defined (_type_vec4_hpp_)
-# define _type_vec4_hpp_ 1
+#if !defined (_type_dvec4_hpp_)
+# define _type_dvec4_hpp_ 1
 
-using vec4 = union u_vec4;
+using dvec4 = union u_dvec4;
 
-union u_vec4 {
+union u_dvec4 {
     struct {
         double x;
         double y;
@@ -19,4 +19,4 @@ union u_vec4 {
     };
 };
 
-#endif /* _type_vec4_hpp_ */
+#endif /* _type_dvec4_hpp_ */

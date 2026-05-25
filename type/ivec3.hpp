@@ -1,9 +1,9 @@
-#if !defined (_type_vec3_hpp_)
-# define _type_vec3_hpp_ 1
+#if !defined (_type_ivec3_hpp_)
+# define _type_ivec3_hpp_ 1
 
-using vec3 = union u_vec3;
+using ivec3 = union u_ivec3;
 
-union u_vec3 {
+union u_ivec3 {
     struct {
         int x;
         int y;
@@ -17,4 +17,4 @@ union u_vec3 {
     };
 };
 
-#endif /* _type_vec3_hpp_ */
+#endif /* _type_ivec3_hpp_ */

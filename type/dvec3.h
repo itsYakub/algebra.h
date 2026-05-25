@@ -1,9 +1,9 @@
-#if !defined (_type_vec3_h_)
-# define _type_vec3_h_ 1
+#if !defined (_type_dvec3_h_)
+# define _type_dvec3_h_ 1
 
-typedef union u_vec3 vec3;
+typedef union u_dvec3 dvec3;
 
-union u_vec3 {
+union u_dvec3 {
     struct {
         double x;
         double y;
@@ -17,4 +17,4 @@ union u_vec3 {
     };
 };
 
-#endif /* _type_vec3_h_ */
+#endif /* _type_dvec3_h_ */

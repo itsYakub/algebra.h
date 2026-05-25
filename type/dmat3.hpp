@@ -1,9 +1,9 @@
-#if !defined (_type_mat3_hpp_)
-# define _type_mat3_hpp_ 1
+#if !defined (_type_dmat3_hpp_)
+# define _type_dmat3_hpp_ 1
 
-using mat3 = union u_mat3;
+using dmat3 = union u_dmat3;
 
-union u_mat3 {
+union u_dmat3 {
     struct {
         double m00, m01, m02,
                m10, m11, m12,
@@ -11,4 +11,4 @@ union u_mat3 {
     };
 };
 
-#endif /* _type_mat3_hpp_ */
+#endif /* _type_dmat3_hpp_ */
