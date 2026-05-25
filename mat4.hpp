@@ -2,6 +2,7 @@
 # define _mat4_hpp_ 1
 #
 # include "./algebra-fwd.hpp"
+# include "./type/vec3.hpp"
 # include "./type/vec4.hpp"
 # include "./type/mat4.hpp"
 
@@ -229,7 +230,7 @@ namespace alg {
         mat4  m;
 
         if (det == 0.0f)
-            return (alg::init<mat4>(0.0));
+            return (alg::init<mat4>(0.0f));
 
         det = 1.0f / det;
 
@@ -339,7 +340,7 @@ namespace alg {
         float s   = sinf(angle);
         float t   = 1.0f - c;
         vec3  n   = alg::norm<vec3>(axis);
-        mat4  m   = alg::init<mat4>(1.0);
+        mat4  m   = alg::init<mat4>(1.0f);
 
         m.m00 = t * n.x * n.x + c;
         m.m01 = t * n.y * n.x + s * n.z;
@@ -358,11 +359,11 @@ namespace alg {
 
     template <>
 	mat4 rotateat<mat4>(vec3 pivot, vec3 axis, float angle) {
-        mat4 m = alg::init<mat4>(1.0);
+        mat4 m = alg::init<mat4>(1.0f);
 
         m  = alg::translate<mat4>(pivot);           /* move to pivot */
         m *= alg::rotate<mat4>(axis, angle);        /* rotate by angle with axis */
-        m *= alg::translate<mat4>(pivot * -1.0);    /* move back from pivot */
+        m *= alg::translate<mat4>(pivot * -1.0f);    /* move back from pivot */
         return (m);
     }
 
@@ -372,7 +373,7 @@ namespace alg {
         vec3 f = alg::norm<vec3>(center - eye);
         vec3 s = alg::norm<vec3>(alg::cross<vec3>(f, up));
         vec3 u = alg::cross<vec3>(s, f);
-        mat4 m = alg::init<mat4>(1.0);
+        mat4 m = alg::init<mat4>(1.0f);
 
         m.m00 =  s.x; m.m10 =  s.y; m.m20 =  s.z;
         m.m01 =  u.x; m.m11 =  u.y; m.m21 =  u.z;
@@ -410,7 +411,7 @@ namespace alg {
 
     template <>
 	mat4 frust<mat4>(float left, float right, float down, float top, float near, float far) {
-        mat4 m = alg::init<mat4>(1.0);
+        mat4 m = alg::init<mat4>(1.0f);
 
         m.m00 =  (near * 2.0f) / (right - left);
         m.m11 =  (near * 2.0f) / (top   - down);
@@ -425,7 +426,7 @@ namespace alg {
 
     template <>
 	mat4 ortho<mat4>(float left, float right, float down, float top, float near, float far) {
-        mat4 m = alg::init<mat4>(1.0);
+        mat4 m = alg::init<mat4>(1.0f);
 
         m.m00 =  2.0f / (right - left);
         m.m11 =  2.0f / (top   - down);
