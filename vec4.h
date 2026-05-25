@@ -463,10 +463,10 @@ ALGAPI vec4 vec4pow(vec4 a, float f) {
 
 
 ALGAPI vec4 vec4fract(vec4 a) {
-    a.x = fract(a.x);
-    a.y = fract(a.y);
-    a.z = fract(a.z);
-    a.w = fract(a.w);
+    a.x = alg_fract(a.x);
+    a.y = alg_fract(a.y);
+    a.z = alg_fract(a.z);
+    a.w = alg_fract(a.w);
     return (a);
 }
 
@@ -524,10 +524,10 @@ ALGAPI vec4 vec4modf(vec4 a, float f) {
 ALGAPI vec4 vec4min(vec4 a, vec4 b) {
     vec4 v;
 
-    v.x = min(a.x, b.x);
-    v.y = min(a.y, b.y);
-    v.z = min(a.z, b.z);
-    v.w = min(a.w, b.w);
+    v.x = alg_min(a.x, b.x);
+    v.y = alg_min(a.y, b.y);
+    v.z = alg_min(a.z, b.z);
+    v.w = alg_min(a.w, b.w);
     return (v);
 }
 
@@ -535,10 +535,10 @@ ALGAPI vec4 vec4min(vec4 a, vec4 b) {
 ALGAPI vec4 vec4minf(vec4 a, float f) {
     vec4 v;
 
-    v.x = min(a.x, f);
-    v.y = min(a.y, f);
-    v.z = min(a.z, f);
-    v.w = min(a.w, f);
+    v.x = alg_min(a.x, f);
+    v.y = alg_min(a.y, f);
+    v.z = alg_min(a.z, f);
+    v.w = alg_min(a.w, f);
     return (v);
 }
 
@@ -546,10 +546,10 @@ ALGAPI vec4 vec4minf(vec4 a, float f) {
 ALGAPI vec4 vec4max(vec4 a, vec4 b) {
     vec4 v;
 
-    v.x = max(a.x, b.x);
-    v.y = max(a.y, b.y);
-    v.z = max(a.z, b.z);
-    v.w = max(a.w, b.w);
+    v.x = alg_max(a.x, b.x);
+    v.y = alg_max(a.y, b.y);
+    v.z = alg_max(a.z, b.z);
+    v.w = alg_max(a.w, b.w);
     return (v);
 }
 
@@ -557,10 +557,10 @@ ALGAPI vec4 vec4max(vec4 a, vec4 b) {
 ALGAPI vec4 vec4maxf(vec4 a, float f) {
     vec4 v;
 
-    v.x = max(a.x, f);
-    v.y = max(a.y, f);
-    v.z = max(a.z, f);
-    v.w = max(a.w, f);
+    v.x = alg_max(a.x, f);
+    v.y = alg_max(a.y, f);
+    v.z = alg_max(a.z, f);
+    v.w = alg_max(a.w, f);
     return (v);
 }
 
@@ -568,10 +568,10 @@ ALGAPI vec4 vec4maxf(vec4 a, float f) {
 ALGAPI vec4 vec4clamp(vec4 a, vec4 lo, vec4 hi) {
     vec4 v;
 
-    v.x = clamp(a.x, lo.x, hi.x);
-    v.y = clamp(a.y, lo.y, hi.y);
-    v.z = clamp(a.z, lo.z, hi.z);
-    v.w = clamp(a.w, lo.w, hi.w);
+    v.x = alg_clamp(a.x, lo.x, hi.x);
+    v.y = alg_clamp(a.y, lo.y, hi.y);
+    v.z = alg_clamp(a.z, lo.z, hi.z);
+    v.w = alg_clamp(a.w, lo.w, hi.w);
     return (v);
 }
 
@@ -579,10 +579,10 @@ ALGAPI vec4 vec4clamp(vec4 a, vec4 lo, vec4 hi) {
 ALGAPI vec4 vec4clampf(vec4 a, float lo, float hi) {
     vec4 v;
 
-    v.x = clamp(a.x, lo, hi);
-    v.y = clamp(a.y, lo, hi);
-    v.z = clamp(a.z, lo, hi);
-    v.w = clamp(a.w, lo, hi);
+    v.x = alg_clamp(a.x, lo, hi);
+    v.y = alg_clamp(a.y, lo, hi);
+    v.z = alg_clamp(a.z, lo, hi);
+    v.w = alg_clamp(a.w, lo, hi);
     return (v);
 }
 
@@ -591,10 +591,10 @@ ALGAPI vec4 vec4clampf(vec4 a, float lo, float hi) {
 ALGAPI vec4 vec4lerp(vec4 a, vec4 b, float t) {
     vec4 v;
 
-    v.x = lerp(a.x, b.x, t);
-    v.y = lerp(a.y, b.y, t);
-    v.z = lerp(a.z, b.z, t);
-    v.w = lerp(a.w, b.w, t);
+    v.x = alg_lerp(a.x, b.x, t);
+    v.y = alg_lerp(a.y, b.y, t);
+    v.z = alg_lerp(a.z, b.z, t);
+    v.w = alg_lerp(a.w, b.w, t);
     return (v);
 }
 
@@ -602,10 +602,10 @@ ALGAPI vec4 vec4lerp(vec4 a, vec4 b, float t) {
 ALGAPI vec4 vec4step(vec4 a, vec4 x) {
     vec4 v;
 
-    v.x = step(a.x, x.x);
-    v.y = step(a.y, x.y);
-    v.z = step(a.z, x.z);
-    v.w = step(a.w, x.w);
+    v.x = alg_step(a.x, x.x);
+    v.y = alg_step(a.y, x.y);
+    v.z = alg_step(a.z, x.z);
+    v.w = alg_step(a.w, x.w);
     return (v);
 }
 
@@ -613,10 +613,10 @@ ALGAPI vec4 vec4step(vec4 a, vec4 x) {
 ALGAPI vec4 vec4smoothstep(vec4 e0, vec4 e1, vec4 x) {
     vec4 v;
 
-    v.x = smoothstep(e0.x, e1.x, x.x);
-    v.y = smoothstep(e0.y, e1.y, x.y);
-    v.z = smoothstep(e0.z, e1.z, x.z);
-    v.w = smoothstep(e0.w, e1.w, x.w);
+    v.x = alg_smoothstep(e0.x, e1.x, x.x);
+    v.y = alg_smoothstep(e0.y, e1.y, x.y);
+    v.z = alg_smoothstep(e0.z, e1.z, x.z);
+    v.w = alg_smoothstep(e0.w, e1.w, x.w);
     return (v);
 }
 

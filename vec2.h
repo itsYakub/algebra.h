@@ -391,8 +391,8 @@ ALGAPI vec2 vec2pow(vec2 a, float f) {
 
 
 ALGAPI vec2 vec2fract(vec2 a) {
-    a.x = fract(a.x);
-    a.y = fract(a.y);
+    a.x = alg_fract(a.x);
+    a.y = alg_fract(a.y);
     return (a);
 }
 
@@ -440,8 +440,8 @@ ALGAPI vec2 vec2modf(vec2 a, float f) {
 ALGAPI vec2 vec2min(vec2 a, vec2 b) {
     vec2 v;
 
-    v.x = min(a.x, b.x);
-    v.y = min(a.y, b.y);
+    v.x = alg_min(a.x, b.x);
+    v.y = alg_min(a.y, b.y);
     return (v);
 }
 
@@ -449,8 +449,8 @@ ALGAPI vec2 vec2min(vec2 a, vec2 b) {
 ALGAPI vec2 vec2minf(vec2 a, float f) {
     vec2 v;
 
-    v.x = min(a.x, f);
-    v.y = min(a.y, f);
+    v.x = alg_min(a.x, f);
+    v.y = alg_min(a.y, f);
     return (v);
 }
 
@@ -458,8 +458,8 @@ ALGAPI vec2 vec2minf(vec2 a, float f) {
 ALGAPI vec2 vec2max(vec2 a, vec2 b) {
     vec2 v;
 
-    v.x = max(a.x, b.x);
-    v.y = max(a.y, b.y);
+    v.x = alg_max(a.x, b.x);
+    v.y = alg_max(a.y, b.y);
     return (v);
 }
 
@@ -467,8 +467,8 @@ ALGAPI vec2 vec2max(vec2 a, vec2 b) {
 ALGAPI vec2 vec2maxf(vec2 a, float f) {
     vec2 v;
 
-    v.x = max(a.x, f);
-    v.y = max(a.y, f);
+    v.x = alg_max(a.x, f);
+    v.y = alg_max(a.y, f);
     return (v);
 }
 
@@ -476,8 +476,8 @@ ALGAPI vec2 vec2maxf(vec2 a, float f) {
 ALGAPI vec2 vec2clamp(vec2 a, vec2 lo, vec2 hi) {
     vec2 v;
 
-    v.x = clamp(a.x, lo.x, hi.x);
-    v.y = clamp(a.y, lo.y, hi.y);
+    v.x = alg_clamp(a.x, lo.x, hi.x);
+    v.y = alg_clamp(a.y, lo.y, hi.y);
     return (v);
 }
 
@@ -485,8 +485,8 @@ ALGAPI vec2 vec2clamp(vec2 a, vec2 lo, vec2 hi) {
 ALGAPI vec2 vec2clampf(vec2 a, float lo, float hi) {
     vec2 v;
 
-    v.x = clamp(a.x, lo, hi);
-    v.y = clamp(a.y, lo, hi);
+    v.x = alg_clamp(a.x, lo, hi);
+    v.y = alg_clamp(a.y, lo, hi);
     return (v);
 }
 
@@ -495,8 +495,8 @@ ALGAPI vec2 vec2clampf(vec2 a, float lo, float hi) {
 ALGAPI vec2 vec2lerp(vec2 a, vec2 b, float t) {
     vec2 v;
 
-    v.x = lerp(a.x, b.x, t);
-    v.y = lerp(a.y, b.y, t);
+    v.x = alg_lerp(a.x, b.x, t);
+    v.y = alg_lerp(a.y, b.y, t);
     return (v);
 }
 
@@ -504,8 +504,8 @@ ALGAPI vec2 vec2lerp(vec2 a, vec2 b, float t) {
 ALGAPI vec2 vec2step(vec2 a, vec2 x) {
     vec2 v;
 
-    v.x = step(a.x, x.x);
-    v.y = step(a.y, x.y);
+    v.x = alg_step(a.x, x.x);
+    v.y = alg_step(a.y, x.y);
     return (v);
 }
 
@@ -513,8 +513,8 @@ ALGAPI vec2 vec2step(vec2 a, vec2 x) {
 ALGAPI vec2 vec2smoothstep(vec2 e0, vec2 e1, vec2 x) {
     vec2 v;
 
-    v.x = smoothstep(e0.x, e1.x, x.x);
-    v.y = smoothstep(e0.y, e1.y, x.y);
+    v.x = alg_smoothstep(e0.x, e1.x, x.x);
+    v.y = alg_smoothstep(e0.y, e1.y, x.y);
     return (v);
 }
 

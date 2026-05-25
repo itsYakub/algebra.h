@@ -452,9 +452,9 @@ ALGAPI vec3 vec3pow(vec3 a, float f) {
 
 
 ALGAPI vec3 vec3fract(vec3 a) {
-    a.x = fract(a.x);
-    a.y = fract(a.y);
-    a.z = fract(a.z);
+    a.x = alg_fract(a.x);
+    a.y = alg_fract(a.y);
+    a.z = alg_fract(a.z);
     return (a);
 }
 
@@ -507,9 +507,9 @@ ALGAPI vec3 vec3modf(vec3 a, float f) {
 ALGAPI vec3 vec3min(vec3 a, vec3 b) {
     vec3 v;
 
-    v.x = min(a.x, b.x);
-    v.y = min(a.y, b.y);
-    v.z = min(a.z, b.z);
+    v.x = alg_min(a.x, b.x);
+    v.y = alg_min(a.y, b.y);
+    v.z = alg_min(a.z, b.z);
     return (v);
 }
 
@@ -517,9 +517,9 @@ ALGAPI vec3 vec3min(vec3 a, vec3 b) {
 ALGAPI vec3 vec3minf(vec3 a, float f) {
     vec3 v;
 
-    v.x = min(a.x, f);
-    v.y = min(a.y, f);
-    v.z = min(a.z, f);
+    v.x = alg_min(a.x, f);
+    v.y = alg_min(a.y, f);
+    v.z = alg_min(a.z, f);
     return (v);
 }
 
@@ -527,9 +527,9 @@ ALGAPI vec3 vec3minf(vec3 a, float f) {
 ALGAPI vec3 vec3max(vec3 a, vec3 b) {
     vec3 v;
 
-    v.x = max(a.x, b.x);
-    v.y = max(a.y, b.y);
-    v.z = max(a.z, b.z);
+    v.x = alg_max(a.x, b.x);
+    v.y = alg_max(a.y, b.y);
+    v.z = alg_max(a.z, b.z);
     return (v);
 }
 
@@ -537,9 +537,9 @@ ALGAPI vec3 vec3max(vec3 a, vec3 b) {
 ALGAPI vec3 vec3maxf(vec3 a, float f) {
     vec3 v;
 
-    v.x = max(a.x, f);
-    v.y = max(a.y, f);
-    v.z = max(a.z, f);
+    v.x = alg_max(a.x, f);
+    v.y = alg_max(a.y, f);
+    v.z = alg_max(a.z, f);
     return (v);
 }
 
@@ -547,9 +547,9 @@ ALGAPI vec3 vec3maxf(vec3 a, float f) {
 ALGAPI vec3 vec3clamp(vec3 a, vec3 lo, vec3 hi) {
     vec3 v;
 
-    v.x = clamp(a.x, lo.x, hi.x);
-    v.y = clamp(a.y, lo.y, hi.y);
-    v.z = clamp(a.z, lo.z, hi.z);
+    v.x = alg_clamp(a.x, lo.x, hi.x);
+    v.y = alg_clamp(a.y, lo.y, hi.y);
+    v.z = alg_clamp(a.z, lo.z, hi.z);
     return (v);
 }
 
@@ -557,9 +557,9 @@ ALGAPI vec3 vec3clamp(vec3 a, vec3 lo, vec3 hi) {
 ALGAPI vec3 vec3clampf(vec3 a, float lo, float hi) {
     vec3 v;
 
-    v.x = clamp(a.x, lo, hi);
-    v.y = clamp(a.y, lo, hi);
-    v.z = clamp(a.z, lo, hi);
+    v.x = alg_clamp(a.x, lo, hi);
+    v.y = alg_clamp(a.y, lo, hi);
+    v.z = alg_clamp(a.z, lo, hi);
     return (v);
 }
 
@@ -568,9 +568,9 @@ ALGAPI vec3 vec3clampf(vec3 a, float lo, float hi) {
 ALGAPI vec3 vec3lerp(vec3 a, vec3 b, float t) {
     vec3 v;
 
-    v.x = lerp(a.x, b.x, t);
-    v.y = lerp(a.y, b.y, t);
-    v.z = lerp(a.z, b.z, t);
+    v.x = alg_lerp(a.x, b.x, t);
+    v.y = alg_lerp(a.y, b.y, t);
+    v.z = alg_lerp(a.z, b.z, t);
     return (v);
 }
 
@@ -578,9 +578,9 @@ ALGAPI vec3 vec3lerp(vec3 a, vec3 b, float t) {
 ALGAPI vec3 vec3step(vec3 a, vec3 x) {
     vec3 v;
 
-    v.x = step(a.x, x.x);
-    v.y = step(a.y, x.y);
-    v.z = step(a.z, x.z);
+    v.x = alg_step(a.x, x.x);
+    v.y = alg_step(a.y, x.y);
+    v.z = alg_step(a.z, x.z);
     return (v);
 }
 
@@ -588,9 +588,9 @@ ALGAPI vec3 vec3step(vec3 a, vec3 x) {
 ALGAPI vec3 vec3smoothstep(vec3 e0, vec3 e1, vec3 x) {
     vec3 v;
 
-    v.x = smoothstep(e0.x, e1.x, x.x);
-    v.y = smoothstep(e0.y, e1.y, x.y);
-    v.z = smoothstep(e0.z, e1.z, x.z);
+    v.x = alg_smoothstep(e0.x, e1.x, x.x);
+    v.y = alg_smoothstep(e0.y, e1.y, x.y);
+    v.z = alg_smoothstep(e0.z, e1.z, x.z);
     return (v);
 }
 
