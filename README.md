@@ -6,7 +6,7 @@
 
 `algebra.h` is a header-only linear algebra library written for C/C++.
 It collects common algebraic data types with friendly and easy-to-use interface.
-`algebra.h` target specification versions are C99 and C++98.
+`algebra.h` target specification versions are C99 and C++11.
 
 ## Usage
 
@@ -17,47 +17,72 @@ $ cd /path/to/your/project/
 $ git clone https://github.com/itsYakub/algebra.h.git algebra
 ```
 
-That's it, you can now start working with all the `algebra.h` provides!
+Library is constructed in the following way:
+```
+algebra.h/
+├── type/
+│   ├── mat2.h
+│   ├── mat2.hpp
+│   ├── mat3.h
+│   ├── mat3.hpp
+│   ├── mat4.h
+│   ├── mat4.hpp
+│   ├── vec2.h
+│   ├── vec2.hpp
+│   ├── vec3.h
+│   ├── vec3.hpp
+│   ├── vec4.h
+│   └── vec4.hpp
+│
+├── algebra-fwd.hpp
+├── algebra.h
+├── algebra.hpp
+├── utils.h
+├── utils.hpp
+├── mat2.h
+├── mat2.hpp
+├── mat3.h
+├── mat3.hpp
+├── mat4.h
+├── mat4.hpp
+├── vec2.h
+├── vec2.hpp
+├── vec3.h
+├── vec3.hpp
+├── vec4.h
+└── vec4.hpp
+```
+`type/` directory contains all the type definitions available in `algebra.h`. They're just bare-bones definitions, without any functions, constructors, methods etc.
+By that you should be able to just copy-and-paste `type/` directory into your project and provide your own implementations, API etc.
+But if you'd like to use standard-defined functions, you should look into repo's root directory.
 
-*NOTE: all the components of the library are position-dependent; all the components must be present in the root of the library.*
+For C modules, you should look for the `.h` header files.
+Correspondingly, `.hpp` header files are reserved for C++.
 
-To compile the program with the library include `algebra.h` with the `ALGEBRA_IMPLEMENTATION` macro:
-```c
-/* ... */
+By design you should be able to use C modules without C++ and vice versa, C++ modules without C.
+Only difference is for the `utils` module which is actually commedy gold.
 
+Header-only design forces us to work with macro-definitions to provide implementation for each module.
+To do that, you should provide `ALGEBRA_IMPLEMENTATION` definition:
+```
 #define ALGEBRA_IMPLEMENTATION
 #include "algebra/algebra.h"
 
 /* ... */
 ```
 
-...accordingly, for C++ implementation:
-```cpp
-/* ... */
+*NOTE:
+This can be defined only once. Otherwise, multiple definition to the same function can cause complation errors*
 
-#define ALGEBRA_IMPLEMENTATION
-#include "algebra/algebra.hpp"
-
-/* ... */
-```
-
-...or if you want to copile just the specific parts of the library:
-```c
-/* ... */
-
-#define ALGEBRA_IMPLEMENTATION
-#include "algebra/vec2.h" /* include vec2's declarations and definitions... */
-#include "algebra/mat3.h" /* include mat3's declarations and definitions... */
-
-/* ... */
-```
-
-Lastly, you can install the library simply by running:
-```
-$ cd /path/to/your/project/algebra
-
-# install the library on the root-level at '/usr/local/include/algebra'
+Lastly, you can install the library globally onto your system.
+`Makefile` provide several rules for handling such cases:
+```tty
+# install library globally...
+# this installs algebra.h into /usr/local/include ...
 $ sudo make install
+
+# and to remove the library...
+$ sudo make remove
 ```
 
 ## Resources
