@@ -1,12 +1,9 @@
 #if !defined (_mat2_hpp_)
 # define _mat2_hpp_ 1
 #
+# include "./algebra-fwd.hpp"
 # include "./type/vec2.hpp"
 # include "./type/mat2.hpp"
-#
-# if !defined ALGAPI
-#  define ALGAPI extern inline
-# endif /* ALGAPI */
 
 inline mat2 operator + (mat2, mat2);
 
@@ -30,21 +27,29 @@ inline mat2 &operator *= (mat2 &, mat2);
 
 namespace alg {
 
-    ALGAPI mat2 init(float);
+    template <>
+	mat2 init<mat2>(float);
     
-    ALGAPI mat2 neg(mat2);
+    template <>
+	mat2 neg<mat2>(mat2);
     
-    ALGAPI mat2 transpose(mat2);
+    template <>
+	mat2 transpose<mat2>(mat2);
     
-    ALGAPI mat2 inv(mat2);
+    template <>
+	mat2 inv<mat2>(mat2);
     
-    ALGAPI float det(mat2);
+    template <>
+	float det<mat2>(mat2);
     
-    ALGAPI float trace(mat2);
-
-    ALGAPI mat2 rotate(float);
+    template <>
+	float trace<mat2>(mat2);
     
-    ALGAPI mat2 scale(vec2);
+    template <>
+	mat2 rotate<mat2>(float);
+    
+    template <>
+	mat2 scale<mat2>(vec2);
 
 };
 
@@ -129,7 +134,8 @@ inline mat2 &operator *= (mat2 &a, mat2 b) {
 
 namespace alg {
 
-    ALGAPI mat2 init(float s) {
+    template <>
+	mat2 init<mat2>(float s) {
         mat2 m;
 
         m.m00 = s;   m.m01 = 0.0;
@@ -138,14 +144,16 @@ namespace alg {
     }
     
    
-    ALGAPI mat2 neg(mat2 a) {
+    template <>
+	mat2 neg<mat2>(mat2 a) {
         a.m00 = -a.m00; a.m01 = -a.m01;
         a.m10 = -a.m10; a.m11 = -a.m11;
         return (a);
 	}
    
 
-    ALGAPI mat2 transpose(mat2 a) {
+    template <>
+	mat2 transpose<mat2>(mat2 a) {
         mat2 m;
 
         m.m00 = a.m00; m.m01 = a.m10;
@@ -154,12 +162,13 @@ namespace alg {
 	}
    
 
-    ALGAPI mat2 inv(mat2 a) {
-        float det = alg::det(a);
+    template <>
+	mat2 inv<mat2>(mat2 a) {
+        float det = alg::det<mat2>(a);
         mat2  m;
 
         if (det == 0.0f)
-            return (alg::init(0.0));
+            return (alg::init<mat2>(0.0));
 
         det = 1.0f / det;
 
@@ -169,17 +178,20 @@ namespace alg {
 	}
    
 
-    ALGAPI float det(mat2 m) {
+    template <>
+	float det<mat2>(mat2 m) {
         return (m.m00 * m.m11 - m.m10 * m.m01);
 	}
    
 
-    ALGAPI float trace(mat2 m) {
+    template <>
+	float trace<mat2>(mat2 m) {
         return (m.m00 + m.m11);
 	}
 
 
-    ALGAPI mat2 rotate(float angle) {
+    template <>
+	mat2 rotate<mat2>(float angle) {
         float c = cosf(angle);
         float s = sinf(angle);
         mat2  m;
@@ -190,7 +202,8 @@ namespace alg {
 	}
     
 
-    ALGAPI mat2 scale(vec2 s) {
+    template <>
+	mat2 scale<mat2>(vec2 s) {
         mat2 m;
 
         m.m00 = s.x;  m.m01 = 0.0f;
