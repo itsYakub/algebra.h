@@ -5,19 +5,25 @@
 </div>
 
 `algebra.h` is a header-only linear algebra library written for C/C++.
-It collects common algebraic data types with friendly and easy-to-use interface.
+
+`algebra.h` aggregates common linear algebra data types and operations.
+
 `algebra.h` target specification versions are C99 and C++11.
 
 ## Usage
 
 `algebra.h` can be included to the project either by cloning this repository or by using an installed intance of the library.
-To start working with `algebra.h` clone this repository to your project:
+
+
+To start working with `algebra.h` clone this repository:
+
 ```tty
-$ cd /path/to/your/project/
 $ git clone https://github.com/itsYakub/algebra.h.git algebra
 ```
 
-Library is constructed in the following way:
+
+Structure of library is as follows:
+
 ```
 algebra.h/
 ├── type/
@@ -50,40 +56,44 @@ algebra.h/
 ├── vec3.h
 ├── vec3.hpp
 ├── vec4.h
-└── vec4.hpp
+├── vec4.hpp
+└── Makefile
 ```
-`type/` directory contains all the type definitions available in `algebra.h`. They're just bare-bones definitions, without any functions, constructors, methods etc.
-By that you should be able to just copy-and-paste `type/` directory into your project and provide your own implementations, API etc.
-But if you'd like to use standard-defined functions, you should look into repo's root directory.
 
-For C modules, you should look for the `.h` header files.
-Correspondingly, `.hpp` header files are reserved for C++.
+Core library elements are placed in the root directory.
 
-By design you should be able to use C modules without C++ and vice versa, C++ modules without C.
-Only difference is for the `utils` module which is actually commedy gold.
+Data types are defined in the `type/` directory.
 
-Header-only design forces us to work with macro-definitions to provide implementation for each module.
-To do that, you should provide `ALGEBRA_IMPLEMENTATION` definition:
-```
+Library comes with `Makefile` file for working with library:
+- building.
+- installing system-wide.
+- removing system-wide.
+
+Library is conducted of both `.h` and `.hpp` files:
+- `.h` - C language modules.
+- `.hpp` - C++ language modules.
+
+The aim of this project is to provide both C and C++ interface that does not require any linking between them.
+
+## Configuration
+
+**Header-only** nature of `algebra.h` allows user to configure it using compile-time preprocessor definitions:
+
+- `#define ALGEBRA_IMPLEMENTATION`:
+Mandatory definition used to include function definitions of the library.
+It must be defined only once before the header file inclusion:
+
+```c
 #define ALGEBRA_IMPLEMENTATION
-#include "algebra/algebra.h"
-
-/* ... */
+#include "algebra/vec2.h"       /* include module directly... */
+#include "algebra/algebra.h"    /* or include the whole library... */
 ```
 
-*NOTE:
-This can be defined only once. Otherwise, multiple definition to the same function can cause complation errors*
+*Note:
+If you declare ALGEBRA_IMPLEMENTATION more than once, it can cause multiple-definitions compilation error.*
 
-Lastly, you can install the library globally onto your system.
-`Makefile` provide several rules for handling such cases:
-```tty
-# install library globally...
-# this installs algebra.h into /usr/local/include ...
-$ sudo make install
+- `#define ALGEBRA_TYPE_FLOAT32`
 
-# and to remove the library...
-$ sudo make remove
-```
 
 ## Resources
 
